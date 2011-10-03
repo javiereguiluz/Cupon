@@ -1,0 +1,32 @@
+{% set expirada = oferta.fechaExpiracion|date('YmdHis') < 'now'|date('YmdHis') %}
+{% set comprada = comprada|default(false) %}
+
+<section class="oferta mini">
+    <div class="descripcion">
+        <h2><a href="{{ path('oferta', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}">{{ oferta.nombre }}</a></h2>
+        
+        {{ oferta.descripcion | mostrar_como_lista }}
+        
+        {% if not expirada and not comprada %}
+        <a class="boton" href="{{ path('comprar', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}">{{ "Comprar" | trans }}</a>
+        {% endif %}
+        
+        <div class="estado {{ expirada ? 'expirada' : '' }} {{ comprada ? 'comprada' : '' }}">
+            {% if comprada %}
+            Comprada el {{ fechaCompra|fecha('long', 'medium') }}
+            {% elseif not expirada %}
+            <strong>Faltan</strong>: {{ oferta.fechaExpiracion | cuenta_atras }}
+            {% else %}
+            Finalizada el {{ oferta.fechaExpiracion|fecha('long') }}
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="galeria">
+        <img alt="Fotografía de la oferta" src="{{ asset('uploads/images/' ~ oferta.foto) }}">
+        
+        <p class="precio">{{ oferta.precio }} &euro; <span>{{ descuento(oferta.precio, oferta.descuento) }}</span></p>
+        
+        <p>Disfruta de esta oferta en <a href="{{ path('tienda_portada', { 'ciudad': oferta.ciudad.slug, 'tienda' : oferta.tienda.slug }) }}">{{ oferta.tienda.nombre }}</a></p>
+    </div>
+</section>

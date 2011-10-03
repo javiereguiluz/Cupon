@@ -1,0 +1,4 @@
+# Ruta que muestra la portada de cada tienda
+tienda_portada:
+    pattern:  /{ciudad}/tiendas/{tienda}
+    defaults: { _controller: TiendaBundle:Default:portada }

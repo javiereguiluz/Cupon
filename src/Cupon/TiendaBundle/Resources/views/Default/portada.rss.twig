@@ -1,0 +1,13 @@
+{% extends '::base.rss.twig' %}
+
+{% block title %}Cupon - Las ofertas más recientes de {{ tienda.nombre }}{% endblock %}
+
+{% block url %}{{ url('tienda_portada', { 'ciudad': tienda.ciudad.slug, 'tienda': tienda.slug }) }}{% endblock %}
+
+{% block descripcion %}Las ofertas más recientes de {{ tienda.nombre }}{% endblock %}
+
+{% block self %}{{ url('tienda_portada', { 'ciudad': tienda.ciudad.slug, 'tienda': tienda.slug, '_format': 'rss' }) }}{% endblock %}
+
+{% block items %}
+    {% include ':includes:listado.rss.twig' %}
+{% endblock %}

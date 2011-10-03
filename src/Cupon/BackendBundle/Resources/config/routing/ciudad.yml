@@ -1,0 +1,32 @@
+# Rutas para gestionar todas las acciones de las entidades de tipo Ciudad
+# Generado automáticamente por el comando generate:doctrine:crud
+backend_ciudad:
+    pattern:  /
+    defaults: { _controller: "BackendBundle:Ciudad:index" }
+
+backend_ciudad_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackendBundle:Ciudad:show" }
+
+backend_ciudad_new:
+    pattern:  /new
+    defaults: { _controller: "BackendBundle:Ciudad:new" }
+
+backend_ciudad_create:
+    pattern:  /create
+    defaults: { _controller: "BackendBundle:Ciudad:create" }
+    requirements: { _method: post }
+
+backend_ciudad_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendBundle:Ciudad:edit" }
+
+backend_ciudad_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendBundle:Ciudad:update" }
+    requirements: { _method: post }
+
+backend_ciudad_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendBundle:Ciudad:delete" }
+    requirements: { _method: post }

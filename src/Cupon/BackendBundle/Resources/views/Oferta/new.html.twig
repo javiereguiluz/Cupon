@@ -1,0 +1,23 @@
+{% extends '::backend.html.twig' %}
+
+{% block id 'oferta' %}
+{% block title %}Añadir una nueva oferta{% endblock %}
+
+{% block article %}
+<h1>{{ block('title') }}</h1>
+
+<form action="{{ path('backend_oferta_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button class="boton" type="submit">Añadir oferta</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('backend_oferta') }}">
+            Volver al listado
+        </a>
+    </li>
+</ul>
+{% endblock %}

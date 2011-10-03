@@ -1,0 +1,78 @@
+<?php
+
+/*
+ * (c) Javier Eguiluz <javier.eguiluz@gmail.com>
+ *
+ * This file is part of the Cupon sample application.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * Este archivo pertenece a la aplicación de prueba Cupon.
+ * El código fuente de la aplicación incluye un archivo llamado LICENSE
+ * con toda la información sobre el copyright y la licencia.
+ */
+
+namespace Cupon\OfertaBundle\Tests\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+
+/**
+ * Test funcional de la portada del sitio y de la acción de comprar una oferta
+ * por parte de un usuario anónimo.
+ *
+ * También asegura el rendimiento de la aplicación obligando a que la portada
+ * requiera menos de cuatro consultas a la base de datos y se genere en menos
+ * de medio segundo.
+ */
+class DefaultControllerTest extends WebTestCase
+{
+    public function testPortada()
+    {
+        $client = static::createClient();
+        
+        $crawler = $client->request('GET', '/');
+        
+        $this->assertEquals(302, $client->getResponse()->getStatusCode(),
+            'La portada redirige a la portada de una ciudad (status 302)'
+        );
+        
+        $crawler = $client->followRedirect();
+        
+        $this->assertEquals(1, $crawler->filter('article.oferta section.descripcion a:contains("Comprar")')->count(),
+            'La portada muestra una única oferta activa que se puede comprar'
+        );
+        
+        $this->assertGreaterThan(0, $crawler->filter('html:contains("Regístrate")')->count(),
+            'La portada muestra al menos un enlace o botón para registrarse'
+        );
+        
+        $this->assertEquals(
+            $client->getContainer()->getParameter('cupon.ciudad_por_defecto'),
+            $crawler->filter('header nav select option[selected="selected"]')->attr('value'),
+            'La ciudad seleccionada en la portada de un usuario anónimo es la ciudad por defecto'
+        );
+        
+        $comprar = $crawler->selectLink('Comprar')->link();
+        $client->click($comprar);
+        $this->assertTrue($client->getResponse()->isRedirect(),
+            'Cuando un usuario anónimo intenta comprar, se le redirige al formulario de login'
+        );
+        
+        $crawler = $client->followRedirect();
+        
+        $this->assertRegExp(
+            '/.*\/usuario\/login_check/',
+            $crawler->filter('article form')->attr('action'),
+            'Después de pulsar el botón de comprar, el usuario anónimo ve el formulario de login'
+        );
+        
+        if ($profiler = $client->getProfile()) {
+            $this->assertLessThan(4, count($profiler->getCollector('db')->getQueries()),
+                'La portada requiere menos de 4 consultas a la base de datos'
+            );
+            $this->assertLessThan(0.5, $profiler->getCollector('timer')->getTime(),
+                'La portada se genera en menos de medio segundo'
+            );
+        }
+    }
+}

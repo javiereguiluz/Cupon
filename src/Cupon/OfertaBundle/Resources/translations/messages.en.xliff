@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="es" datatype="plaintext" original="file.ext">
+        <body>
+            <trans-unit id="1">
+                <source>Oferta del día</source>
+                <target>Daily deal</target>
+            </trans-unit>
+            <trans-unit id="2">
+                <source>Ofertas recientes</source>
+                <target>Recent offers</target>
+            </trans-unit>
+            <trans-unit id="3">
+                <source>Mis ofertas</source>
+                <target>My offers</target>
+            </trans-unit>
+            
+            <trans-unit id="4">
+                <source>Comprar</source>
+                <target>Buy now</target>
+            </trans-unit>
+            
+            <trans-unit id="5">
+                <source>Accede a tu cuenta</source>
+                <target>Account login</target>
+            </trans-unit>
+            <trans-unit id="6">
+                <source>Email</source>
+                <target>Email</target>
+            </trans-unit>
+            <trans-unit id="7">
+                <source>Contraseña</source>
+                <target>Password</target>
+            </trans-unit>
+            <trans-unit id="8">
+                <source>Entrar</source>
+                <target>Login</target>
+            </trans-unit>
+            <trans-unit id="9">
+                <source>No cerrar sesión</source>
+                <target>Keep me logged in</target>
+            </trans-unit>
+            
+            <trans-unit id="10">
+                <source>Ayuda</source>
+                <target>Help</target>
+            </trans-unit>
+            <trans-unit id="11">
+                <source>Contacto</source>
+                <target>Contact</target>
+            </trans-unit>
+            <trans-unit id="12">
+                <source>Privacidad</source>
+                <target>Privacy</target>
+            </trans-unit>
+            <trans-unit id="13">
+                <source>Sobre nosotros</source>
+                <target>About us</target>
+            </trans-unit>
+            
+            <trans-unit id="14">
+                <source>Regístrate</source>
+                <target>Sign up</target>
+            </trans-unit>
+            <trans-unit id="15">
+                <source>Regístrate ya</source>
+                <target>Sign up now</target>
+            </trans-unit>
+            
+            <trans-unit id="16">
+                <source><![CDATA[<strong>Faltan</strong>: %tiempo%]]></source>
+                <target><![CDATA[%tiempo% <strong>left</strong>]]></target>
+            </trans-unit>
+            
+            <trans-unit id="17">
+                <source><![CDATA[{1} ¡<strong>Una sola compra más</strong> <br/> activa la oferta!|[1, 9] ¡<strong>Sólo faltan %faltan% compras</strong> <br/> para activar la oferta!|]9,Inf] Faltan <strong>%faltan% compras</strong> <br/> para activar la oferta]]></source>
+                <target><![CDATA[{1} <strong>Just one more purchase</strong> needed <br/> to get the deal!|[1, 9] <strong>Just %faltan% more</strong> needed <br/> to get the deal!|]9,Inf] <strong>%faltan% more</strong> needed <br/> to get the deal]]></target>
+            </trans-unit>
+            
+            <trans-unit id="18">
+                <source>Compras</source>
+                <target>Purchases</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>

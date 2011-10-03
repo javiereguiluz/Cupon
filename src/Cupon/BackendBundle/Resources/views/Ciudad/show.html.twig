@@ -1,0 +1,44 @@
+{% extends '::backend.html.twig' %}
+
+{% block id 'ciudad' %}
+{% block title %}Datos de la ciudad {{ entity }}{% endblock %}
+
+{% block article %}
+<h1>{{ block('title') }}</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td>{{ entity.nombre }}</td>
+        </tr>
+        <tr>
+            <th>Slug</th>
+            <td>{{ entity.slug }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('backend_ciudad') }}">
+            Volver al listado
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('backend_ciudad_edit', { 'id': entity.id }) }}">
+            Modificar ciudad
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('backend_ciudad_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Borrar ciudad</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

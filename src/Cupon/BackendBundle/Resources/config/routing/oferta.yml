@@ -1,0 +1,32 @@
+# Rutas para gestionar todas las acciones de las entidades de tipo Oferta
+# Generado automáticamente por el comando generate:doctrine:crud
+backend_oferta:
+    pattern:  /
+    defaults: { _controller: "BackendBundle:Oferta:index" }
+
+backend_oferta_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackendBundle:Oferta:show" }
+
+backend_oferta_new:
+    pattern:  /new
+    defaults: { _controller: "BackendBundle:Oferta:new" }
+
+backend_oferta_create:
+    pattern:  /create
+    defaults: { _controller: "BackendBundle:Oferta:create" }
+    requirements: { _method: post }
+
+backend_oferta_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendBundle:Oferta:edit" }
+
+backend_oferta_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendBundle:Oferta:update" }
+    requirements: { _method: post }
+
+backend_oferta_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendBundle:Oferta:delete" }
+    requirements: { _method: post }

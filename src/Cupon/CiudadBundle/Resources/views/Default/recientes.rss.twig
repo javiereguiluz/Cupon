@@ -1,0 +1,13 @@
+{% extends '::base.rss.twig' %}
+
+{% block title %}Cupon - Ofertas recientes en {{ ciudad.nombre }}{% endblock %}
+
+{% block url %}{{ url('ciudad_recientes', { 'ciudad': ciudad.slug}) }}{% endblock %}
+
+{% block descripcion %}Las ofertas más recientes publicadas por Cupon en {{ ciudad.nombre }}{% endblock %}
+
+{% block self %}{{ url('ciudad_recientes', { 'ciudad': ciudad.slug, '_format': 'rss' }) }}{% endblock %}
+
+{% block items %}
+    {% include ':includes:listado.rss.twig' %}
+{% endblock %}

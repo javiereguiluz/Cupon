@@ -1,0 +1,9 @@
+# Ruta de la página de detalle de una oferta
+oferta:
+    pattern:  /{ciudad}/ofertas/{slug}
+    defaults: { _controller: OfertaBundle:Default:oferta }
+
+# Ruta para comprar una oferta
+comprar:
+    pattern:  /{ciudad}/ofertas/{slug}/comprar
+    defaults: { _controller: UsuarioBundle:Default:comprar }

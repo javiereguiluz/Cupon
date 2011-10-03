@@ -1,0 +1,81 @@
+{% extends '::backend.html.twig' %}
+
+{% block id 'usuario' %}
+{% block title %}Datos del usuario {{ entity }}{% endblock %}
+
+{% block article %}
+<h1>{{ block('title') }}</h1>
+
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td>{{ entity.nombre }}</td>
+        </tr>
+        <tr>
+            <th>Apellidos</th>
+            <td>{{ entity.apellidos }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ entity.email }}</td>
+        </tr>
+        <tr>
+            <th>Contraseña</th>
+            <td>{{ entity.password }}</td>
+        </tr>
+        <tr>
+            <th>Salt</th>
+            <td>{{ entity.salt }}</td>
+        </tr>
+        <tr>
+            <th>Dirección</th>
+            <td>{{ entity.direccion }}</td>
+        </tr>
+        <tr>
+            <th>¿Permite email?</th>
+            <td>{{ entity.permiteemail ? 'si' : 'no' }}</td>
+        </tr>
+        <tr>
+            <th>Fecha alta</th>
+            <td>{{ entity.fechaalta|fecha('long', 'medium') }}</td>
+        </tr>
+        <tr>
+            <th>Fecha nacimiento</th>
+            <td>{{ entity.fechanacimiento|fecha('long') }}</td>
+        </tr>
+        <tr>
+            <th>DNI</th>
+            <td>{{ entity.dni }}</td>
+        </tr>
+        <tr>
+            <th>Número tarjeta</th>
+            <td>{{ entity.numerotarjeta }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('backend_usuario') }}">
+            Volver al listado
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('backend_usuario_edit', { 'id': entity.id }) }}">
+            Modificar usuario
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('backend_usuario_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Borrar usuario</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

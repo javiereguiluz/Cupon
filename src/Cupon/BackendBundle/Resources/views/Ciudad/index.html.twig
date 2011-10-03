@@ -1,0 +1,39 @@
+{% extends '::backend.html.twig' %}
+
+{% block id 'ciudad' %}
+{% block title %}Listado de ciudades{% endblock %}
+
+{% block article %}
+<h1>{{ block('title') }}</h1>
+
+<table class="records_list estrecha">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.nombre }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('backend_ciudad_edit', { 'id': entity.id }) }}">Modificar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a class="boton" href="{{ path('backend_ciudad_new') }}">
+            Añadir una nueva ciudad
+        </a>
+    </li>
+</ul>
+{% endblock %}

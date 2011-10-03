@@ -1,0 +1,7 @@
+{% if app.session.getFlashes() | length > 0 %}
+    {% set tipoMensajeFlash = app.session.hasFlash('error') ? 'error' : 'info' %}
+    <p id="flash" class="{{ tipoMensajeFlash }}">
+        {{ tipoMensajeFlash == 'error' ? '<strong>Error</strong> ' : '' | raw }}
+        {{ app.session.getFlash(tipoMensajeFlash) }}
+    </p>
+{% endif %}

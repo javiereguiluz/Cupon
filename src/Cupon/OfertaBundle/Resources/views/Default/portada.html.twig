@@ -1,0 +1,24 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}Cupon, cada día ofertas increíbles en tu ciudad con descuentos de hasta el 90%{% endblock %}
+{% block id 'portada' %}
+
+{% block anuncio %}
+    {% if not is_granted('ROLE_USUARIO') %}
+        <div id="anuncio"><a href="{{ path('portada') }}">CUPON</a> publica cada día una oferta increíble en tu ciudad con descuentos de hasta el 90% <a class="boton" href="{{ path('usuario_registro') }}">{{ "Regístrate ya" | trans }}</a></div>
+    {% endif %}
+{% endblock %}
+
+{% block article %}
+    {% include 'OfertaBundle:Default:includes/oferta.html.twig' %}
+{% endblock %}
+
+{% block aside %}
+    {{ parent() }}
+    
+    <section id="nosotros">
+        <h2>{{ "Sobre nosotros" | trans }}</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+{% endblock %}

@@ -1,0 +1,32 @@
+# Rutas para gestionar todas las acciones de las entidades de tipo Tienda
+# Generado automáticamente por el comando generate:doctrine:crud
+backend_tienda:
+    pattern:  /
+    defaults: { _controller: "BackendBundle:Tienda:index" }
+
+backend_tienda_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackendBundle:Tienda:show" }
+
+backend_tienda_new:
+    pattern:  /new
+    defaults: { _controller: "BackendBundle:Tienda:new" }
+
+backend_tienda_create:
+    pattern:  /create
+    defaults: { _controller: "BackendBundle:Tienda:create" }
+    requirements: { _method: post }
+
+backend_tienda_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendBundle:Tienda:edit" }
+
+backend_tienda_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendBundle:Tienda:update" }
+    requirements: { _method: post }
+
+backend_tienda_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendBundle:Tienda:delete" }
+    requirements: { _method: post }

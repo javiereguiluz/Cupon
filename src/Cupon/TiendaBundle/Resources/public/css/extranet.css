@@ -1,0 +1,147 @@
+/*
+
+ ,adPPYba,  88       88  8b,dPPYba,    ,adPPYba,   8b,dPPYba, 
+a8"     ""  88       88  88P'    "8a  a8"     "8a  88P'   `"8a
+8b          88       88  88       d8  8b       d8  88       88
+"8a,   ,aa  "8a,   ,a88  88b,   ,a8"  "8a,   ,a8"  88       88
+ `"Ybbd8"'   `"YbbdP'Y8  88`YbbdP"'    `"YbbdP"'   88       88
+                         88                                   
+                         88                                   
+
+-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
+
+                           ,d                                                        ,d     
+                           88                                                        88     
+ ,adPPYba,  8b,     ,d8  MM88MMM  8b,dPPYba,  ,adPPYYba,  8b,dPPYba,    ,adPPYba,  MM88MMM  
+a8P_____88   `Y8, ,8P'     88     88P'   "Y8  ""     `Y8  88P'   `"8a  a8P_____88    88     
+8PP"""""""     )888(       88     88          ,adPPPPP88  88       88  8PP"""""""    88     
+"8b,   ,aa   ,d8" "8b,     88,    88          88,    ,88  88       88  "8b,   ,aa    88,    
+ `"Ybbd8"'  8P'     `Y8    "Y888  88          `"8bbdP"Y8  88       88   `"Ybbd8"'    "Y888
+
+-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-o-
+
+
+  Objetivo de esta hoja de estilos
+  --------------------------------------------------------------
+   Incluye solamente los estilos particulares de la extranet a
+   la que acceden las tiendas, lo que permite aplicar estilos
+   particulares a esta zona de administración que no es el
+   verdadero backend.
+
+  Se aplica a
+  --------------------------------------------------------------
+   extranet
+
+*/
+
+/* =============================================================================
+   Estructura
+   ========================================================================== */
+article {
+    float: left;
+    padding: 0 10px 0 20px;
+    width: 700px;
+}
+article > section {
+    margin-bottom: 1em;
+}
+
+section:before, section:after { content: ""; display: table; }
+section:after { clear: both; }
+section { zoom: 1; }
+
+aside {
+    float: right;
+    padding: 0 20px 0 10px;
+    width: 200px;
+}
+
+/* =============================================================================
+   Cabecera y menú de navegación
+   ========================================================================== */
+nav ul {
+    left: 300px;
+}
+
+header p {
+    position: absolute;
+    right: 30px;
+    top: 10px;
+    font-size: 13px;
+    line-height: 1;
+    text-align: center;
+    text-transform: lowercase;
+    width: 180px;
+}
+header p strong {
+    display: block;
+    font-size: 28px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#portada nav li:nth-child(1) a,
+#oferta nav li:nth-child(1) a,
+#tienda nav li:nth-child(2) a {
+    border: none;
+    color: #FF3385 !important;
+    font-size: 21px;
+    font-weight: normal;
+    text-decoration: none;
+}
+
+/* =============================================================================
+   Zona lateral
+   ========================================================================== */
+aside a.boton {
+    display: block;
+    font-size: 21px;
+    margin-bottom: 1em;
+    text-align: center;
+}
+aside:hover a.boton {
+    text-decoration: none;
+}
+
+aside dl {
+    margin-top: 0;
+}
+
+/* =============================================================================
+   Tablas
+   ========================================================================== */
+table tr, table td, table th {
+    border-width: 1px 0;
+}
+
+table thead th {
+    color: #C06;
+    font-weight: bold;
+}
+
+table td ul {
+    font-size: 14px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+table td ul li {
+    display: inline;
+    padding-right: 1em;
+}
+
+/* =============================================================================
+   Formularios
+   ========================================================================== */
+form label {
+    width: 120px;
+}
+
+form p.ayuda {
+    margin-left: 125px;
+}
+
+form img {
+    max-width: 250px;
+}

@@ -1,0 +1,35 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}Últimas ofertas que has comprado{% endblock %}
+{% block id 'compras' %}
+
+{% block article %}
+    <h1>{{ block('title') }}</h1>
+    
+    {% for compra in compras %}
+        {% include 'OfertaBundle:Default:includes/minioferta.html.twig' with {
+            'oferta':      compra.oferta,
+            'comprada':    true,
+            'fechaCompra': compra.fecha
+        } %}
+    {% endfor %}
+{% endblock %}
+
+{% block aside %}
+    {{ parent() }}
+
+    <section id="cercanas">
+        <h2>Ofertas en otras ciudades</h2>
+        <ul>
+            {% for ciudad in cercanas %}
+            <li><a href="{{ path('ciudad_cambiar', { 'ciudad': ciudad.slug }) }}">{{ ciudad.nombre }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="nosotros">
+        <h2>Sobre nosotros</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+{% endblock %}

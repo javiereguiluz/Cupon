@@ -1,0 +1,23 @@
+{% extends '::backend.html.twig' %}
+
+{% block id 'ciudad' %}
+{% block title %}Añadir una nueva ciudad{% endblock %}
+
+{% block article %}
+<h1>{{ block('title') }}</h1>
+
+<form action="{{ path('backend_ciudad_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button class="boton" type="submit">Añadir ciudad</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('backend_ciudad') }}">
+            Volver al listado
+        </a>
+    </li>
+</ul>
+{% endblock %}

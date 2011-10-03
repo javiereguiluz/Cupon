@@ -1,0 +1,52 @@
+{% extends '::extranet.html.twig' %}
+
+{% block id 'portada' %}
+{% block title %}Administración de {{ app.user.nombre }}{% endblock %}
+
+{% block article %}
+<h1>Ofertas más recientes</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Revisada</th>
+            <th>Se publica</th>
+            <th>Finaliza</th>
+            <th>Nombre</th>
+            <th>Ventas</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        {% for oferta in ofertas %}
+        <tr>
+            <td>{{ oferta.revisada ? '<span class="si">&#10004;</span>' : '<span class="no">&#10008;</span>' }}</td>
+            {% if oferta.revisada %}
+                <td>{{ oferta.fechaPublicacion | fecha('medium', 'short') }}</td>
+                <td>{{ oferta.fechaExpiracion  | fecha('medium', 'short') }}</td>
+            {% else %}
+                <td colspan="2">Pendiente de revisión</td>
+            {% endif %}
+            <td>{{ oferta.nombre }}</td>
+            <td>{{ oferta.compras }}</td>
+            <td>
+                <ul>
+                    {% if oferta.compras > 0 %}
+                    <li>
+                        <a href="{{ path('extranet_oferta_ventas', { 'id': oferta.id }) }}">Lista de ventas</a>
+                    </li>
+                    {% endif %}
+                    
+                    {% if not oferta.revisada %}
+                    <li>
+                        <a href="{{ path('extranet_oferta_editar', { 'id': oferta.id }) }}">Modificar</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

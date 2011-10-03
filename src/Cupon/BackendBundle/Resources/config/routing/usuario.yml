@@ -1,0 +1,32 @@
+# Rutas para gestionar todas las acciones de las entidades de tipo Usuario
+# Generado automáticamente por el comando generate:doctrine:crud
+backend_usuario:
+    pattern:  /
+    defaults: { _controller: "BackendBundle:Usuario:index" }
+
+backend_usuario_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "BackendBundle:Usuario:show" }
+
+backend_usuario_new:
+    pattern:  /new
+    defaults: { _controller: "BackendBundle:Usuario:new" }
+
+backend_usuario_create:
+    pattern:  /create
+    defaults: { _controller: "BackendBundle:Usuario:create" }
+    requirements: { _method: post }
+
+backend_usuario_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "BackendBundle:Usuario:edit" }
+
+backend_usuario_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "BackendBundle:Usuario:update" }
+    requirements: { _method: post }
+
+backend_usuario_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "BackendBundle:Usuario:delete" }
+    requirements: { _method: post }

@@ -1,0 +1,64 @@
+{% set expirada = oferta.fechaExpiracion|date('YmdHis') < 'now'|date('YmdHis') %}
+<section class="descripcion">
+    <h1><a href="{{ path('oferta', { 'ciudad': oferta.ciudad.slug, 'slug' : oferta.slug }) }}">{{ oferta.nombre }}</a></h1>
+    
+    {{ oferta.descripcion | mostrar_como_lista }}
+    
+    {% if not expirada %}
+    <a class="boton" href="{{ path('comprar', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}">{{ "Comprar" | trans }}</a>
+    {% endif %}
+</section>
+
+<section class="galeria">
+    <img alt="Fotografía de la oferta" src="{{ asset('uploads/images/' ~ oferta.foto) }}">
+    
+    <p class="precio">{{ oferta.precio }} &euro; <span>{{ descuento(oferta.precio, oferta.descuento) }}</span></p>
+    
+    <p><strong>Condiciones:</strong> {{ oferta.condiciones }}</p>
+</section>
+
+<section class="estado {{ expirada ? 'expirada' : '' }}">
+{% if not expirada %}
+    <div class="tiempo">
+        {% trans with {'%tiempo%': oferta.fechaExpiracion | cuenta_atras } %}
+        <strong>Faltan</strong>: %tiempo%
+        {% endtrans %}
+    </div>
+    
+    <div class="compras">
+        <strong>{{ "Compras" | trans }}</strong>: {{ oferta.compras }}
+    </div>
+    
+    <div class="faltan">
+        {% set faltan = oferta.umbral - oferta.compras %}
+        {% if faltan > 0 %}
+            {% transchoice faltan with {'%faltan%': faltan} %}
+            {1} ¡<strong>Una sola compra más</strong> <br/> activa la oferta!|[1, 9] ¡<strong>Sólo faltan %faltan% compras</strong> <br/> para activar la oferta!|]9,Inf] Faltan <strong>%faltan% compras</strong> <br/> para activar la oferta
+            {% endtranschoice %}
+        {% else %}
+        <strong>Oferta activada</strong> por superar las <strong>{{ oferta.umbral }}</strong> compras necesarias
+        {% endif %}
+    </div>
+{% else %}
+    <div class="tiempo">
+        <strong>Finalizada</strong> el {{ oferta.fechaExpiracion|fecha('long') }}
+    </div>
+    
+    <div class="compras">
+        <strong>{{ "Compras" | trans }}</strong>: {{ oferta.compras }}
+    </div>
+{% endif %}
+</section>
+
+<section class="direccion">
+    <h2>Disfruta de la oferta en</h2>
+    <p>
+        <a href="{{ path('tienda_portada', { 'ciudad': oferta.ciudad.slug, 'tienda': oferta.tienda.slug }) }}">{{ oferta.tienda.nombre }}</a>
+        {{ oferta.tienda.direccion | nl2br }}
+    </p>
+</section>
+
+<section class="tienda">
+    <h2>Sobre la tienda</h2>
+    {{ oferta.tienda.descripcion }}
+</section>

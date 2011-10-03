@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>{% block title %}Cupon{% endblock %}</title>
+        
+        <link>{% block url %}{% endblock %}</link>
+        
+        <description>{% block descripcion %}{% endblock %}</description>
+        
+        <language>{{ app.request.session.locale }}</language>
+        
+        <pubDate>{{ 'now'|date('r') }}</pubDate>
+        
+        <lastBuildDate>{{ 'now'|date('r') }}</lastBuildDate>
+        
+        <generator>Symfony2</generator>
+        
+        <atom:link href="{% block self %}{% endblock %}" rel="self" type="application/rss+xml" />
+        
+        {% block items %}{% endblock %}
+    </channel>
+</rss>

@@ -1,0 +1,101 @@
+{% extends '::frontend.html.twig' %}
+
+{% block id 'usuario' %}
+{% block title %}Regístrate gratis como usuario{% endblock %}
+
+{% block article %}
+<h1>{{ block('title') }}</h1>
+
+<form action="{{ path('usuario_registro') }}" method="post" {{ form_enctype(formulario) }}>
+    <div>
+    {{ form_errors(formulario) }}
+    
+    <div>
+        {{ form_label(formulario.nombre) }}
+        {{ form_errors(formulario.nombre) }}
+        {{ form_widget(formulario.nombre) }}
+    </div>
+    
+    <div>
+        {{ form_label(formulario.apellidos) }}
+        {{ form_errors(formulario.apellidos) }}
+        {{ form_widget(formulario.apellidos, { 'attr': { 'class': 'largo' } }) }}
+    </div>
+    
+    <div>
+        {{ form_label(formulario.email) }}
+        {{ form_errors(formulario.email) }}
+        {{ form_widget(formulario.email, { 'attr': { 'class': 'largo' } }) }}
+    </div>
+    
+    <div>
+        {{ form_errors(formulario.password) }}
+        {{ form_widget(formulario.password) }}
+        
+        <p class="ayuda">Escribe dos veces la misma contraseña.</p>
+    </div>
+    
+    <div>
+        {{ form_label(formulario.direccion, 'Dirección postal') }}
+        {{ form_errors(formulario.direccion) }}
+        {{ form_widget(formulario.direccion, { 'attr': { 'class': 'mediana' } }) }}
+    </div>
+    
+    <div>
+        {{ form_label(formulario.fecha_nacimiento, 'Fecha de nacimiento') }}
+        {{ form_errors(formulario.fecha_nacimiento) }}
+        {{ form_widget(formulario.fecha_nacimiento) }}
+        
+        <p class="ayuda">Debes tener más de 18 años para registrarte como cliente</p>
+    </div>
+    
+    <div>
+        {{ form_label(formulario.dni, 'DNI') }}
+        {{ form_errors(formulario.dni) }}
+        {{ form_widget(formulario.dni, { 'attr': { 'class': 'corto' } }) }}
+        
+        <p class="ayuda">Escribe las 8 cifras y la letra sin dejar ningún espacio en blanco</p>
+    </div>
+    
+    <div>
+        {{ form_label(formulario.numero_tarjeta, 'Número de tarjeta de crédito') }}
+        {{ form_errors(formulario.numero_tarjeta) }}
+        {{ form_widget(formulario.numero_tarjeta) }}
+    </div>
+    
+    <div>
+        {{ form_label(formulario.ciudad) }}
+        {{ form_errors(formulario.ciudad) }}
+        {{ form_widget(formulario.ciudad) }}
+        
+        <p class="ayuda">Una vez registrado puedes comprar cualquier oferta de cualquier ciudad, pero la ciudad que elijas será tu opción preferente.</p>
+    </div>
+    
+    <div>
+        {{ form_errors(formulario.permite_email) }}
+        {{ form_widget(formulario.permite_email) }}
+        <span>Me gustaría recibir el boletín de ofertas de Cupon</span>
+    </div>
+    
+    {{ form_rest(formulario) }}
+
+    <input class="boton" type="submit" value="Registrarme" />
+    
+    </div>
+</form>
+{% endblock %}
+
+{% block aside %}
+<section id="faq">
+    <h2>Preguntas frecuentes</h2>
+
+    <dl>
+        <dt>¿Lorem ipsum dolor sit amet?</dt>
+        <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dd>
+        <dt>¿Ut enim ad minim veniam?</dt>
+        <dd>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dd>
+        <dt>¿Excepteur sint occaecat cupidatat non proident?</dt>
+        <dd>Sunt in culpa qui officia deserunt mollit anim id est laborum.</dd>
+    </dl>
+</section>
+{% endblock %}

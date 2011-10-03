@@ -1,0 +1,27 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}{{ oferta.nombre }}{% endblock %}
+{% block id 'oferta' %}
+
+{% block article %}
+    {% include 'OfertaBundle:Default:includes/oferta.html.twig' %}
+{% endblock %}
+
+{% block aside %}
+    {{ parent() }}
+
+    <section id="relacionadas">
+        <h2>Ofertas en otras ciudades</h2>
+        <ul>
+            {% for oferta in cercanas %}
+            <li>{{ oferta.ciudad.nombre }}: <a href="{{ path('oferta', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}">{{ oferta.nombre }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="condiciones">
+        <h2>Condiciones generales</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+{% endblock %}

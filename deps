@@ -1,0 +1,76 @@
+[symfony]
+    git=http://github.com/symfony/symfony.git
+    version=v2.0.2
+
+[twig]
+    git=http://github.com/fabpot/Twig.git
+    version=v1.1.2
+
+[monolog]
+    git=http://github.com/Seldaek/monolog.git
+    version=1.0.1
+
+[doctrine-common]
+    git=http://github.com/doctrine/common.git
+    version=2.1.1
+
+[doctrine-dbal]
+    git=http://github.com/doctrine/dbal.git
+    version=2.1.2
+
+[doctrine]
+    git=http://github.com/doctrine/doctrine2.git
+    version=2.1.1
+
+[swiftmailer]
+    git=http://github.com/swiftmailer/swiftmailer.git
+    version=v4.1.2
+
+[assetic]
+    git=http://github.com/kriswallsmith/assetic.git
+    version=v1.0.2
+
+[twig-extensions]
+    git=http://github.com/fabpot/Twig-extensions.git
+
+[metadata]
+    git=http://github.com/schmittjoh/metadata.git
+    version=1.0.0
+
+[SensioFrameworkExtraBundle]
+    git=http://github.com/sensio/SensioFrameworkExtraBundle.git
+    target=/bundles/Sensio/Bundle/FrameworkExtraBundle
+
+[JMSSecurityExtraBundle]
+    git=http://github.com/schmittjoh/JMSSecurityExtraBundle.git
+    target=/bundles/JMS/SecurityExtraBundle
+    version=origin/1.0.x
+
+[SensioDistributionBundle]
+    git=http://github.com/sensio/SensioDistributionBundle.git
+    target=/bundles/Sensio/Bundle/DistributionBundle
+
+[SensioGeneratorBundle]
+    git=http://github.com/sensio/SensioGeneratorBundle.git
+    target=/bundles/Sensio/Bundle/GeneratorBundle
+
+[AsseticBundle]
+    git=http://github.com/symfony/AsseticBundle.git
+    target=/bundles/Symfony/Bundle/AsseticBundle
+    version=v1.0.1
+
+; En adelante sólo se incluyen las dependencias propias
+
+[doctrine-fixtures]
+    git=http://github.com/doctrine/data-fixtures.git
+
+[DoctrineFixturesBundle]
+    git=http://github.com/symfony/DoctrineFixturesBundle.git
+    target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
+
+[doctrine-extensions]
+    git=https://github.com/beberlei/DoctrineExtensions.git
+
+[IdeupSimplePaginatorBundle]
+    git=https://github.com/javiacei/IdeupSimplePaginatorBundle
+    target=/bundles/Ideup/SimplePaginatorBundle

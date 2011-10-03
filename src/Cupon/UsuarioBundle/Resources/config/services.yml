@@ -1,0 +1,11 @@
+parameters:
+#    usuario.example.class: Cupon\UsuarioBundle\Example
+
+services:
+    login_listener:
+        class: Cupon\UsuarioBundle\Listener\LoginListener
+        scope: request
+        arguments: [@security.context, @router]
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }
+            - { name: kernel.event_listener, event: kernel.response }

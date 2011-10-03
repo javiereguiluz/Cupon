@@ -1,0 +1,7 @@
+parameters:
+#    oferta.example.class: Cupon\OfertaBundle\Example
+
+services:
+#    oferta.example:
+#        class: %oferta.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

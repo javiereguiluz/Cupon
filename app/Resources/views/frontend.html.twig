@@ -1,0 +1,51 @@
+{% extends '::base.html.twig' %}
+
+{% set ciudadSeleccionada = app.request.attributes.has('ciudad') ?
+                                app.request.attributes.get('ciudad')
+                                :
+                                ciudad_por_defecto
+%}
+
+{% block stylesheets %}
+{% stylesheets '@OfertaBundle/Resources/public/css/normalizar.css'
+               '@OfertaBundle/Resources/public/css/comun.css'
+               '@OfertaBundle/Resources/public/css/frontend.css'
+               output='css/frontend.css' %}
+<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
+{% endstylesheets %}
+{% endblock %}
+
+{% block javascripts %}
+{% javascripts '@OfertaBundle/Resources/public/js/*' output='js/frontend.js' %}
+<script src="{{ asset('bundles/oferta/js/frontend.js') }}" type="text/javascript"></script>
+{% endjavascripts %}
+{% endblock %}
+
+{% block body %}
+<header>
+    <h1><a href="{{ path('portada', { 'ciudad': ciudadSeleccionada }) }}">CUPON</a></h1>
+    <nav>
+        <ul>
+            <li><a href="{{ path('portada', { 'ciudad': ciudadSeleccionada }) }}">{{ "Oferta del día" | trans }}</a></li>
+            <li><a href="{{ path('ciudad_recientes', { 'ciudad': ciudadSeleccionada }) }}">{{ "Ofertas recientes" | trans }}</a></li>
+            <li><a href="{{ path('usuario_compras') }}">{{ "Mis ofertas" | trans }}</a></li>
+            
+            <li>{% render "CiudadBundle:Default:listaCiudades" with { 'ciudad': ciudadSeleccionada } %}</li>
+        </ul>
+    </nav>
+</header>
+
+{% block anuncio %}{% endblock %}
+
+<article {{ block('id') in ['portada', 'oferta'] ? ' class="oferta"' : '' }}>
+    {% block article %}{% endblock %}
+</article>
+
+<aside>
+    {% block aside %}
+    <section id="login">
+        {% render 'UsuarioBundle:Default:cajaLogin' with { 'id': block('id') }, { 'standalone': true } %}
+    </section>
+    {% endblock %}
+</aside>
+{% endblock %}

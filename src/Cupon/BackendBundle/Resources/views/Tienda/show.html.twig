@@ -1,0 +1,64 @@
+{% extends '::backend.html.twig' %}
+
+{% block id 'tienda' %}
+{% block title %}Datos de la tienda {{ entity }}{% endblock %}
+
+{% block article %}
+<h1>{{ block('title') }}</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Nombre</th>
+            <td>{{ entity.nombre }}</td>
+        </tr>
+        <tr>
+            <th>Slug</th>
+            <td>{{ entity.slug }}</td>
+        </tr>
+        <tr>
+            <th>Login</th>
+            <td>{{ entity.login }}</td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>{{ entity.password }}</td>
+        </tr>
+        <tr>
+            <th>Salt</th>
+            <td>{{ entity.salt }}</td>
+        </tr>
+        <tr>
+            <th>Descripción</th>
+            <td>{{ entity.descripcion }}</td>
+        </tr>
+        <tr>
+            <th>Dirección</th>
+            <td>{{ entity.direccion }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('backend_tienda') }}">
+            Volver al listado
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('backend_tienda_edit', { 'id': entity.id }) }}">
+            Modificar tienda
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('backend_tienda_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Borrar tienda</button>
+        </form>
+    </li>
+</ul>
+{% endblock %}

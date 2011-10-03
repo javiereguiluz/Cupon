@@ -1,0 +1,37 @@
+# Ruta de la portada de la extranet
+extranet_portada:
+    pattern:  /
+    defaults: { _controller: TiendaBundle:Extranet:portada }
+
+# Ruta para crear una nueva oferta
+extranet_oferta_nueva:
+    pattern:  /oferta/nueva
+    defaults: { _controller: TiendaBundle:Extranet:ofertaNueva }
+
+# Ruta para modificar los datos de una oferta
+extranet_oferta_editar:
+    pattern:  /oferta/editar/{id}
+    defaults: { _controller: TiendaBundle:Extranet:ofertaEditar }
+
+# Ruta para mostrar las ventas de una oferta
+extranet_oferta_ventas:
+    pattern:  /oferta/ventas/{id}
+    defaults: { _controller: TiendaBundle:Extranet:ofertaVentas }
+
+# Ruta para mostrar el perfil de una tienda
+extranet_perfil:
+    pattern:  /perfil
+    defaults: { _controller: TiendaBundle:Extranet:perfil }
+
+# Ruta para la acción de login de la extranet
+extranet_login:
+    pattern:   /login
+    defaults:  { _controller: TiendaBundle:Extranet:login }
+
+# Ruta para la acción que comprueba el login de la extranet
+extranet_login_check:
+    pattern:   /login_check
+
+# Ruta para la acción de logout de la extranet
+extranet_logout:
+    pattern:   /logout

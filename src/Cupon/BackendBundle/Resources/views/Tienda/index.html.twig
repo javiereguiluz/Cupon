@@ -1,0 +1,42 @@
+{% extends '::backend.html.twig' %}
+
+{% block id 'tienda' %}
+{% block title %}Listado de tiendas{% endblock %}
+
+{% block article %}
+<h1>{{ block('title') }}</h1>
+
+<table class="records_list estrecha">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td>{{ entity.nombre }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('backend_tienda_show', { 'id': entity.id }) }}">Detalles</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('backend_tienda_edit', { 'id': entity.id }) }}">Modificar</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a class="boton" href="{{ path('backend_tienda_new') }}">
+            Añadir una nueva tienda
+        </a>
+    </li>
+</ul>
+{% endblock %}

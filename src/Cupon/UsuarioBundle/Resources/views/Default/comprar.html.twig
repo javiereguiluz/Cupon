@@ -1,0 +1,16 @@
+{% extends '::frontend.html.twig' %}
+
+{% block id 'usuario' %}
+{% block title %}Comprar {{ oferta.nombre }}{% endblock %}
+
+{% block article %}
+<h1>La compra se ha realizado con éxito</h1>
+
+<p>En unos instantes aparecerá un cargo en tu tarjeta <strong>{{ _self.enmascara(usuario.numeroTarjeta) }}</strong> por importe de <strong>{{ oferta.precio }}</strong> euros.</p>
+
+<p>Ahora puedes <a href="{{ path('portada') }}">seguir comprando</a> o <a href="{{ path('usuario_compras') }}">ver tus compras recientes</a></p>
+{% endblock %}
+
+{% macro enmascara(numero) %}
+    {{ numero | replace({'1': '&bull;', '2': '&bull;', '3': '&bull;', '9': '&bull;', '0': '&bull;'}) | raw }}
+{% endmacro %}

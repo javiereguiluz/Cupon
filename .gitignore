@@ -1,0 +1,14 @@
+app/bootstrap.php.cache
+app/bootstrap_cache.php.cache
+app/phpunit.xml
+app/cache/*
+app/logs/*
+
+vendor/*
+!vendor/bundles/Cupon/
+!vendor/bundles/Cupon/*
+
+web/bundles/*
+web/uploads/*
+web/css/*
+web/js/*
