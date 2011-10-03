@@ -25,8 +25,6 @@ class AppKernel extends Kernel
             new Cupon\OfertaBundle\OfertaBundle(),
             new Cupon\BackendBundle\BackendBundle(),
             
-            new Cupon\ComunBundle\CuponComunBundle(),
-            
             new Ideup\SimplePaginatorBundle\IdeupSimplePaginatorBundle(),
         );
         

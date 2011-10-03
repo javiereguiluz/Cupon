@@ -5,8 +5,6 @@ app/cache/*
 app/logs/*
 
 vendor/*
-!vendor/bundles/Cupon/
-!vendor/bundles/Cupon/*
 
 web/bundles/*
 web/uploads/*

@@ -15,7 +15,7 @@
 namespace Cupon\CiudadBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Cupon\ComunBundle\Util\Util;
+use Cupon\OfertaBundle\Util\Util;
 
 /**
  * @ORM\Entity(repositoryClass="Cupon\CiudadBundle\Entity\CiudadRepository")

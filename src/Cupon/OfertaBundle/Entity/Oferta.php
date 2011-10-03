@@ -16,7 +16,7 @@ namespace Cupon\OfertaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-use Cupon\ComunBundle\Util\Util;
+use Cupon\OfertaBundle\Util\Util;
 
 /**
  * @ORM\Entity(repositoryClass="Cupon\OfertaBundle\Entity\OfertaRepository")

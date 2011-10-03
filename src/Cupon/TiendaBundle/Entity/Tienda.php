@@ -16,7 +16,7 @@ namespace Cupon\TiendaBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
-use Cupon\ComunBundle\Util\Util;
+use Cupon\OfertaBundle\Util\Util;
 
 /**
  * @ORM\Entity(repositoryClass="Cupon\TiendaBundle\Entity\TiendaRepository")
