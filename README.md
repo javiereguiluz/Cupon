@@ -10,8 +10,9 @@ If you find a bug, please fill in a bug report in the Github issues page.
   2. `git clone git@github.com:javiereguiluz/Cupon.git cupon`
   3. `cd cupon`
   4. `php bin/vendors install`
-  5. `chmod -R 777 app/cache app/logs`
-  5. Configure your web server
+  5. `chmod -R 777 app/cache app/logs` (read [Setting up Permissions](http://symfony.com/doc/2.0/book/installation.html#configuration-and-setup) for a more elegant way to do this)
+  6. Configure your web server
+  7. Ensure that APC is installed and configured (it's used on the production environment)
 
 ## How to use ##
 
@@ -67,8 +68,9 @@ Si descubres algún error, por favor utiliza la página de issues de Github para
   2. `git clone git@github.com:javiereguiluz/Cupon.git cupon`
   3. `cd cupon`
   4. `php bin/vendors install`
-  5. `chmod -R 777 app/cache app/logs`
-  5. Configura bien tu servidor web
+  5. `chmod -R 777 app/cache app/logs` (lee la sección [Setting up Permissions](http://symfony.com/doc/2.0/book/installation.html#configuration-and-setup) para hacer esto de forma más elegante)
+  6. Configura bien tu servidor web
+  7. Asegúrate de que tienes APC instalado y configurado (se usa en el entorno de producción)
 
 ## Uso ##
 
