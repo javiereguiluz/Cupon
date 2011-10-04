@@ -19,8 +19,9 @@ Before trying the application:
 
   1. Create a new sample database and configure its credentials in `app/config/parameters.ini` file
   2. Create the schema: `php app/console doctrine:schema:create`
-  3. Load data fixtures: `php app/console doctrine:fixtures:load`
-  4. Dump web assets with Assetic: `php app/console assetic:dump --env=prod --no-debug`
+  3. Initialize the ACL tables: `php app/console init:acl`
+  4. Load data fixtures: `php app/console doctrine:fixtures:load`
+  5. Dump web assets with Assetic: `php app/console assetic:dump --env=prod --no-debug`
 
 In case of error, don't forget to clear de cache:
 
@@ -75,8 +76,9 @@ Para poder probar bien la aplicación:
 
   1. Crea una nueva base de datos de prueba y configura sus datos de acceso en el archivo de configuración `app/config/parameters.ini`
   2. Crea el esquema de la base de datos con el comando: `php app/console doctrine:schema:create`
-  3. Carga los datos de pruebas con el siguiente comando: `php app/console doctrine:fixtures:load`
-  4. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
+  3. Crea las tablas de la ACL: `php app/console init:acl`
+  4. Carga los datos de pruebas con el siguiente comando: `php app/console doctrine:fixtures:load`
+  5. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
 
 Si tienes algún problema, limpia la cache:
 
