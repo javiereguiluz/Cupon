@@ -135,7 +135,6 @@ class Tienda implements UserInterface
     public function getNombre()
     {
         return $this->nombre;
-        $this->slug = Util::getSlug($nombre);
     }
 
     /**
