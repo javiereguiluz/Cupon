@@ -23,6 +23,7 @@ Before trying the application:
   3. Initialize the ACL tables: `php app/console init:acl`
   4. Load data fixtures: `php app/console doctrine:fixtures:load` (if you get *Truncating table with foreign keys fails* exception, execute the following command: `php app/console doctrine:fixtures:load --append`)
   5. Dump web assets with Assetic: `php app/console assetic:dump --env=prod --no-debug`
+  6. Ensure that `web/uploads/images/` directory has write permissions.
 
 In case of error, don't forget to clear de cache:
 
@@ -81,6 +82,7 @@ Para poder probar bien la aplicación:
   3. Crea las tablas de la ACL: `php app/console init:acl`
   4. Carga los datos de pruebas con el siguiente comando: `php app/console doctrine:fixtures:load` (si se muestra una excepción de tipo *Truncating table with foreign keys fails* , ejecuta el siguiente comando: `php app/console doctrine:fixtures:load --append`)
   5. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
+  6. Asegúrate de que el directorio `web/uploads/images/` tiene permisos de escritura.
 
 Si tienes algún problema, limpia la cache:
 
