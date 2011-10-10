@@ -24,6 +24,7 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         ciudad_por_defecto:  %cupon.ciudad_por_defecto%
+        directorio_imagenes: '/uploads/images/'
 
 # Configuración de Assetic
 assetic:
