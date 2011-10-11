@@ -26,53 +26,118 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class DefaultControllerTest extends WebTestCase
 {
-    public function testPortada()
+    /** @test */
+    public function la_portada_redirige_a_la_portada_de_una_ciudad()
     {
         $client = static::createClient();
-        
+        //SUT
         $crawler = $client->request('GET', '/');
         
         $this->assertEquals(302, $client->getResponse()->getStatusCode(),
             'La portada redirige a la portada de una ciudad (status 302)'
         );
+    }
+    
+    /** @test */
+    public function la_portada_muestra_una_unica_oferta_activa_que_se_puede_comprar()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
+        //SUT        
+        $ofertasActivas = $crawler->filter(
+            'article.oferta section.descripcion a:contains("Comprar")'
+        )->count();
         
+        $this->assertEquals(1, $ofertasActivas,
+            'La portada muestra una única oferta activa que se puede comprar'
+        );
+    }
+    
+    /** @test */
+    public function la_portada_muestra_al_menos_un_enlace_o_boton_para_registrarse()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
+        //SUT
+        $numeroEnlacesRegistrarse = $crawler->filter('html:contains("Regístrate")')->count();
+        
+        $this->assertGreaterThan(0, $numeroEnlacesRegistrarse,
+            'La portada muestra al menos un enlace o botón para registrarse'
+        );
+    }
+    
+    /** @test */
+    public function a_los_usuarios_anonimos_se_les_muestra_la_ciudad_por_defecto()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
+        //SUT
+        $ciudadPorDefecto = $client->getContainer()->getParameter('cupon.ciudad_por_defecto');
+        $ciudadPortada = $crawler->filter('header nav select option[selected="selected"]')->attr('value');
+        
+        $this->assertEquals($ciudadPorDefecto, $ciudadPortada,
+            'La ciudad seleccionada en la portada de un usuario anónimo es la ciudad por defecto'
+        );
+    }
+    
+    /** @test */
+    public function los_usuarios_anonimos_no_pueden_comprar()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
+        //SUT
+        $comprar = $crawler->selectLink('Comprar')->link();
+        $client->click($comprar);
+        
+        $this->assertTrue($client->getResponse()->isRedirect(),
+            'Cuando un usuario anónimo intenta comprar, se le redirige al formulario de login'
+        );
+    }
+    
+    /** @test */
+    public function cuando_un_usuario_anonimo_intenta_comprar_ve_el_formulario_de_login()
+    {
+        $pathLogin = '/.*\/usuario\/login_check/';
+        $client = static::createClient();
+        $client->request('GET', '/');
+        $crawler = $client->followRedirect();
+        //SUT
+        $comprar = $crawler->selectLink('Comprar')->link();
+        $client->click($comprar);
+        $crawler = $client->followRedirect();
+        
+        $this->assertRegExp($pathLogin, $crawler->filter('article form')->attr('action'),
+            'Después de pulsar el botón de comprar, el usuario anónimo ve el formulario de login'
+        );
+    }
+    
+    /** @test */
+    public function la_portada_requiere_menos_de_cuatro_consultas_a_bd()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/');
+        //SUT
         if ($profiler = $client->getProfile()) {
             $this->assertLessThan(4, count($profiler->getCollector('db')->getQueries()),
                 'La portada requiere menos de 4 consultas a la base de datos'
             );
+        }
+    }
+    
+    /** @test */
+    public function la_portada_se_genera_en_menos_de_medio_segundo()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/');
+        
+        if ($profiler = $client->getProfile()) {
             $this->assertLessThan(0.5, $profiler->getCollector('timer')->getTime(),
                 'La portada se genera en menos de medio segundo'
             );
         }
-        
-        $crawler = $client->followRedirect();
-        
-        $this->assertEquals(1, $crawler->filter('article.oferta section.descripcion a:contains("Comprar")')->count(),
-            'La portada muestra una única oferta activa que se puede comprar'
-        );
-        
-        $this->assertGreaterThan(0, $crawler->filter('html:contains("Regístrate")')->count(),
-            'La portada muestra al menos un enlace o botón para registrarse'
-        );
-        
-        $this->assertEquals(
-            $client->getContainer()->getParameter('cupon.ciudad_por_defecto'),
-            $crawler->filter('header nav select option[selected="selected"]')->attr('value'),
-            'La ciudad seleccionada en la portada de un usuario anónimo es la ciudad por defecto'
-        );
-        
-        $comprar = $crawler->selectLink('Comprar')->link();
-        $client->click($comprar);
-        $this->assertTrue($client->getResponse()->isRedirect(),
-            'Cuando un usuario anónimo intenta comprar, se le redirige al formulario de login'
-        );
-        
-        $crawler = $client->followRedirect();
-        
-        $this->assertRegExp(
-            '/.*\/usuario\/login_check/',
-            $crawler->filter('article form')->attr('action'),
-            'Después de pulsar el botón de comprar, el usuario anónimo ve el formulario de login'
-        );
     }
 }

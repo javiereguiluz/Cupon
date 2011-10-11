@@ -12,7 +12,7 @@
  * con toda la información sobre el copyright y la licencia.
  */
 
-namespace Cupon\OfertaBundle\Tests\Entity;
+namespace Cupon\OfertaBundle\Tests;
 
 use Symfony\Component\Validator\ValidatorFactory;
 use Cupon\OfertaBundle\Entity\Oferta;
@@ -23,7 +23,7 @@ use Cupon\TiendaBundle\Entity\Tienda;
  * Test unitario para asegurar que la validación de la entidad Oferta
  * funciona correctamente 
  */
-class ValidacionOfertaTest extends \PHPUnit_Framework_TestCase {
+class OfertaTest extends \PHPUnit_Framework_TestCase {
 
     private $validator;
 

@@ -1,6 +1,5 @@
 app/bootstrap.php.cache
 app/bootstrap_cache.php.cache
-app/phpunit.xml
 app/cache/*
 app/logs/*
 

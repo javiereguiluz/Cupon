@@ -30,7 +30,21 @@ In case of error, don't forget to clear de cache:
   * Development environment: `php app/console cache:clear`
   * Production environment: `php app/console cache:clear --env=prod`
 
-### Frontend ###
+## How to test ##
+
+Cupon application includes several unit and functional tests. In order to run the tests, you must have [PHPUnit](https://github.com/sebastianbergmann/phpunit/) installed on your machine. Then, execute the following command on the project's root directory:
+
+~~~
+$ phpunit -c app
+~~~
+
+If you don't want to run the full test suite, include an specific directory as argument:
+
+~~~
+$ phpunit -c app src/Cupon/OfertaBundle/
+~~~
+
+## Frontend ##
 
   * URL:
     * Development environment: `http://cupon/app_dev.php`
@@ -39,7 +53,7 @@ In case of error, don't forget to clear de cache:
     * Login: `usuarioN@localhost` being `N` an integer ranging from `1` to `500`
     * Password: `usuarioN` being `N` the number used in login
 
-### Extranet ###
+## Extranet ##
 
   * URL:
     * Development environment: `http://cupon/app_dev.php/extranet`
@@ -48,7 +62,7 @@ In case of error, don't forget to clear de cache:
     * Login: `tiendaN` being `N` an integer ranging from `1` to `80` approximately (the upper bound is randomly generated)
     * Password: same as login
 
-### Backend ###
+## Backend ##
 
   * URL:
     * Development environment: `http://cupon/app_dev.php/backend`
@@ -89,7 +103,21 @@ Si tienes algún problema, limpia la cache:
   * Entorno de desarrollo: `php app/console cache:clear`
   * Entorno de producción: `php app/console cache:clear --env=prod`
 
-### Frontend ###
+## Test unitarios y funcionales ##
+
+La aplicación incluye varios test unitarios y funcionales de ejemplo. Para ejecutarlos debes tener la herramienta [PHPUnit](https://github.com/sebastianbergmann/phpunit/) instalada. Después, ejecuta el siguiente comando en el directorio raíz del proyecto:
+
+~~~
+$ phpunit -c app
+~~~
+
+Si no quieres ejecutar todos los test, puedes indicar como argumento la ruta de un directorio para ejecutar solamente los test que se encuentren en esa ruta:
+
+~~~
+$ phpunit -c app src/Cupon/OfertaBundle/
+~~~
+
+## Frontend ##
 
   * URL:
     * Entorno de desarrollo: `http://cupon/app_dev.php`
@@ -98,7 +126,7 @@ Si tienes algún problema, limpia la cache:
     * Nombre de usuario: `usuarioN@localhost` siendo `N` un número entre `1` y `500`
     * Contraseña: `usuarioN` siendo `N` el mismo valor que el del nombre de usuario
 
-### Extranet ###
+## Extranet ##
 
   * URL:
     * Entorno de desarrollo: `http://cupon/app_dev.php/extranet`
@@ -107,7 +135,7 @@ Si tienes algún problema, limpia la cache:
     * Nombre de usuario: `tiendaN` siendo `N` un número entre `1` y `80` aproximadamente (el límite superior es aleatorio)
     * Contraseña: la misma que el nombre de usuario
 
-### Backend ###
+## Backend ##
 
   * URL:
     * Entorno de desarrollo: `http://cupon/app_dev.php/backend`
