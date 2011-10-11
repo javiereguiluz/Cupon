@@ -36,6 +36,15 @@ class DefaultControllerTest extends WebTestCase
             'La portada redirige a la portada de una ciudad (status 302)'
         );
         
+        if ($profiler = $client->getProfile()) {
+            $this->assertLessThan(4, count($profiler->getCollector('db')->getQueries()),
+                'La portada requiere menos de 4 consultas a la base de datos'
+            );
+            $this->assertLessThan(0.5, $profiler->getCollector('timer')->getTime(),
+                'La portada se genera en menos de medio segundo'
+            );
+        }
+        
         $crawler = $client->followRedirect();
         
         $this->assertEquals(1, $crawler->filter('article.oferta section.descripcion a:contains("Comprar")')->count(),
@@ -65,14 +74,5 @@ class DefaultControllerTest extends WebTestCase
             $crawler->filter('article form')->attr('action'),
             'Después de pulsar el botón de comprar, el usuario anónimo ve el formulario de login'
         );
-        
-        if ($profiler = $client->getProfile()) {
-            $this->assertLessThan(4, count($profiler->getCollector('db')->getQueries()),
-                'La portada requiere menos de 4 consultas a la base de datos'
-            );
-            $this->assertLessThan(0.5, $profiler->getCollector('timer')->getTime(),
-                'La portada se genera en menos de medio segundo'
-            );
-        }
     }
 }
