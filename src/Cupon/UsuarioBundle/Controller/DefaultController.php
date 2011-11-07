@@ -55,12 +55,10 @@ class DefaultController extends Controller
     public function cajaLoginAction($id = '')
     {
         $usuario = $this->get('security.context')->getToken()->getUser();
-        $tieneRolUsuario = $this->get('security.context')->isGranted('ROLE_USUARIO');
         
         $respuesta = $this->render('UsuarioBundle:Default:cajaLogin.html.twig', array(
             'id'      => $id,
-            'usuario' => $usuario,
-            'tieneRolUsuario' => $tieneRolUsuario
+            'usuario' => $usuario
         ));
         $respuesta->setSharedMaxAge(10);
         $respuesta->setPrivate();

@@ -1,4 +1,4 @@
-{% if tieneRolUsuario %} {# el usuario está logueado #}
+{% if is_granted('ROLE_USUARIO') %} {# el usuario está logueado #}
 
     {% include ':includes:flashes.html.twig' %}
     
