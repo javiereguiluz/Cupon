@@ -16,6 +16,7 @@ namespace Cupon\UsuarioBundle\Listener;
 
 use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -26,35 +27,33 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class LoginListener
 {
-    private $usuario, $esTienda, $router, $ciudad = null;
-
+    private $contexto, $router, $ciudad = null;
+    
     public function __construct(SecurityContext $context, Router $router)
     {
         $this->contexto = $context;
-        $this->router = $router;
+        $this->router   = $router;
     }
     
-    public function onSecurityInteractiveLogin(Event $event)
+    public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
-        if (null != $this->contexto) {
-            $this->ciudad = $this->contexto->getToken()->getUser()->getCiudad()->getSlug();
-        }
+        $token = $event->getAuthenticationToken();
+        $this->ciudad = $token->getUser()->getCiudad()->getSlug();
     }
     
     public function onKernelResponse(FilterResponseEvent $event)
     {
         if (null != $this->ciudad) {
             if($this->contexto->isGranted('ROLE_TIENDA')) {
-                $event->setResponse(
-                    new RedirectResponse($this->router->generate('extranet_portada'))
-                );
+                $portada = $this->router->generate('extranet_portada');
             }
             else {
-                $event->setResponse(
-                    new RedirectResponse($this->router->generate('portada', array('ciudad' => $this->ciudad)))
-                );
+                $portada = $this->router->generate('portada', array(
+                    'ciudad' => $this->ciudad
+                ));
             }
             
+            $event->setResponse(new RedirectResponse($portada));
             $event->stopPropagation();
         }
     }
