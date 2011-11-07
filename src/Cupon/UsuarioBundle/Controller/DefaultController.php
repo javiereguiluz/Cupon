@@ -151,10 +151,6 @@ class DefaultController extends Controller
                 $em->persist($usuario);
                 $em->flush();
                 
-                // Guardar en la sesión el slug de la ciudad del usuario, por si
-                // la ha cambiado mediante el formulario
-                $peticion->getSession()->set('ciudad', $usuario->getCiudad()->getSlug());
-                
                 $this->get('session')->setFlash('info',
                     'Los datos de tu perfil se han actualizado correctamente'
                 );
