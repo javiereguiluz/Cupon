@@ -58,7 +58,7 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         
-        $oferta   = $em->getRepository('OfertaBundle:Oferta')->findOneBySlug($slug);
+        $oferta   = $em->getRepository('OfertaBundle:Oferta')->findOferta($ciudad, $slug);
         $cercanas = $em->getRepository('OfertaBundle:Oferta')->findCercanas($ciudad);
         
         if (!$oferta) {

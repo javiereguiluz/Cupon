@@ -19,6 +19,23 @@ use Doctrine\ORM\EntityRepository;
 class OfertaRepository extends EntityRepository
 {
     /**
+     * Encuentra la oferta cuyo slug y ciudad coinciden con los indicados
+     *
+     * @param string $ciudad El slug de la ciudad
+     * @param string $slug El slug de la oferta
+     */
+    public function findOferta($ciudad, $slug)
+    {
+        $em = $this->getEntityManager();
+        
+        $consulta = $em->createQuery('SELECT o, c, t FROM OfertaBundle:Oferta o JOIN o.ciudad c JOIN o.tienda t WHERE o.revisada = true AND c.slug = :ciudad');
+        $consulta->setParameter('ciudad', $ciudad);
+        $consulta->setMaxResults(1);
+        
+        return $consulta->getSingleResult();
+    }
+    
+    /**
      * Encuentra la oferta del día en la ciudad indicada
      *
      * @param string $ciudad El slug de la ciudad
