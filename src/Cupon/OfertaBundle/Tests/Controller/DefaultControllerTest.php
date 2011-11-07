@@ -27,7 +27,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class DefaultControllerTest extends WebTestCase
 {
     /** @test */
-    public function la_portada_redirige_a_la_portada_de_una_ciudad()
+    public function laPortadaSimpleRedirigeAUnaCiudad()
     {
         $client = static::createClient();
         //SUT
@@ -39,7 +39,7 @@ class DefaultControllerTest extends WebTestCase
     }
     
     /** @test */
-    public function la_portada_muestra_una_unica_oferta_activa_que_se_puede_comprar()
+    public function laPortadaSoloMuestraUnaOfertaActiva()
     {
         $client = static::createClient();
         $client->request('GET', '/');
@@ -55,7 +55,7 @@ class DefaultControllerTest extends WebTestCase
     }
     
     /** @test */
-    public function la_portada_muestra_al_menos_un_enlace_o_boton_para_registrarse()
+    public function losUsuariosPuedenRegistrarseDesdeLaPortada()
     {
         $client = static::createClient();
         $client->request('GET', '/');
@@ -69,7 +69,7 @@ class DefaultControllerTest extends WebTestCase
     }
     
     /** @test */
-    public function a_los_usuarios_anonimos_se_les_muestra_la_ciudad_por_defecto()
+    public function losUsuariosAnonimosVenLaCiudadPorDefecto()
     {
         $client = static::createClient();
         $client->request('GET', '/');
@@ -84,7 +84,7 @@ class DefaultControllerTest extends WebTestCase
     }
     
     /** @test */
-    public function los_usuarios_anonimos_no_pueden_comprar()
+    public function losUsuariosAnonimosNoPuedenComprar()
     {
         $client = static::createClient();
         $client->request('GET', '/');
@@ -99,7 +99,7 @@ class DefaultControllerTest extends WebTestCase
     }
     
     /** @test */
-    public function cuando_un_usuario_anonimo_intenta_comprar_ve_el_formulario_de_login()
+    public function losUsuariosAnonimosDebenLoguearseParaPoderComprar()
     {
         $pathLogin = '/.*\/usuario\/login_check/';
         $client = static::createClient();
@@ -116,7 +116,7 @@ class DefaultControllerTest extends WebTestCase
     }
     
     /** @test */
-    public function la_portada_requiere_menos_de_cuatro_consultas_a_bd()
+    public function laPortadaRequierePocasConsultasDeBaseDeDatos()
     {
         $client = static::createClient();
         $client->request('GET', '/');
@@ -129,7 +129,7 @@ class DefaultControllerTest extends WebTestCase
     }
     
     /** @test */
-    public function la_portada_se_genera_en_menos_de_medio_segundo()
+    public function laPortadaSeGeneraMuyRapido()
     {
         $client = static::createClient();
         $client->request('GET', '/');
