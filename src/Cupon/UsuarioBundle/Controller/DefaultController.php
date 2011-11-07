@@ -261,4 +261,27 @@ class DefaultController extends Controller
             'usuario' => $usuario
         ));
     }
+    
+    /**
+     * Da de baja al usurario actualmente conectado borrando su información
+     * de la base de datos
+     */
+    public function bajaAction()
+    {
+        $usuario = $this->get('security.context')->getToken()->getUser();
+        
+        if (null == $usuario || 
+            !$this->get('security.context')->isGranted('ROLE_USUARIO')) {
+            $this->get('session')->setFlash('info',
+                'Para darte de baja primero tienes que conectarte.'
+            );
+            return $this->redirect($this->generateUrl('usuario_login'));
+        }
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $em->remove($usuario);
+        $em->flush();
+        
+        return $this->redirect($this->generateUrl('portada'));
+    }
 }
