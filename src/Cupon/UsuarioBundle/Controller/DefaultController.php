@@ -101,7 +101,7 @@ class DefaultController extends Controller
                 $em->flush();
                 
                 // Loguear al usuario automáticamente
-                $token = new UsernamePasswordToken($usuario, $usuario->getPassword(), 'cupon1234', $usuario->getRoles());
+                $token = new UsernamePasswordToken($usuario, $usuario->getPassword(), 'usuarios', $usuario->getRoles());
                 $this->container->get('security.context')->setToken($token);
                 
                 return $this->redirect($this->generateUrl('portada'));
