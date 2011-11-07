@@ -8,3 +8,10 @@ vendor/*
 web/bundles/*
 web/css/*
 web/js/*
+
+# ignorar archivos de Eclipse, Zend Studio, Netbeans y PHPStorm
+.buildpath
+.project
+.settings
+nbproject
+.idea
