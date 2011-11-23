@@ -272,6 +272,9 @@ class DefaultController extends Controller
             return $this->redirect($this->generateUrl('usuario_login'));
         }
         
+        $this->get('request')->getSession()->invalidate();
+        $this->get('security.context')->setToken(null);
+        
         $em = $this->getDoctrine()->getEntityManager();
         $em->remove($usuario);
         $em->flush();
