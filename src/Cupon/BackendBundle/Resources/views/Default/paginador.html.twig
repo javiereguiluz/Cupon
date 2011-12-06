@@ -1,21 +1,17 @@
-<ul class="paginador">
-    {% if paginador.currentPage > 1 %}
-        <li><a href="{{ path(ruta, {'page': paginador.previousPage}) }}">Anterior</a></li>
-    {% else %}
-        <li>Anterior</li>
-    {% endif %}
+{{ simple_paginator_render(ruta, null, {
+    'container_class':    'paginador',
     
-    {% for page in paginador.minPageInRange..paginador.maxPageInRange %}
-        {% if page == paginador.currentPage %}
-            <li class="actual">{{ page }}</li>
-        {% else %}
-            <li><a href="{{ path(ruta, {'page': page}) }}">{{ page }}</a></li>
-        {% endif %}
-    {% endfor %}
+    'previousPageText':   'Anterior',
     
-    {% if paginador.currentPage < paginador.lastPage %}
-        <li><a href="{{ path(ruta, {'page': paginador.nextPage}) }}">Siguiente</a></li>
-    {% else %}
-        <li>Siguiente</li>
-    {% endif %}
-</ul>
+    'nextPageText':       'Siguiente',
+    
+    'currentClass':       'actual',
+    
+    'firstPageText':      'Primera',
+    'firstEnabledClass':  'oculto',
+    'firstDisabledClass': 'oculto',
+    
+    'lastPageText':       'Última',
+    'lastEnabledClass':   'oculto',
+    'lastDisabledClass':  'oculto',
+}) }}
