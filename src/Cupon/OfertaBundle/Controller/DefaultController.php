@@ -42,8 +42,7 @@ class DefaultController extends Controller
         $respuesta = $this->render('OfertaBundle:Default:portada.html.twig', array(
             'oferta' => $oferta
         ));
-        $respuesta->setSharedMaxAge(3600);
-        $respuesta->setPublic();
+        $respuesta->setSharedMaxAge(60);
         
         return $respuesta;
     }
@@ -65,9 +64,13 @@ class DefaultController extends Controller
             throw $this->createNotFoundException('No se ha encontrado la oferta solicitada');
         }
         
-        return $this->render('OfertaBundle:Default:detalle.html.twig', array(
+        $respuesta = $this->render('OfertaBundle:Default:detalle.html.twig', array(
             'cercanas' => $cercanas,
             'oferta'   => $oferta
         ));
+        
+        $respuesta->setSharedMaxAge(60);
+        
+        return $respuesta;
     }
 }

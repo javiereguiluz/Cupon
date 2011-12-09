@@ -60,8 +60,8 @@ class DefaultController extends Controller
             'id'      => $id,
             'usuario' => $usuario
         ));
-        $respuesta->setSharedMaxAge(10);
-        $respuesta->setPrivate();
+        
+        $respuesta->setMaxAge(30);
         
         return $respuesta;
     }

@@ -54,7 +54,6 @@ class DefaultController extends Controller
         ));
         
         $respuesta->setSharedMaxAge(3600);
-        $respuesta->setPublic();
         
         return $respuesta;
     }
