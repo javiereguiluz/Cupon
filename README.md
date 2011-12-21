@@ -4,6 +4,27 @@ Cupon is a sample application designed to learn Symfony2 development. It's a Gro
 
 If you find a bug, please fill in a bug report in the Github issues page.
 
+## Screenshots ##
+
+Click on each image to see it full-size
+
+### Frontend ###
+
+[![Homepage](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-portada.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-portada.png)
+[![Offer details](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-oferta.png)
+[![Recent offers](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-recientes.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-recientes.png)
+[![Login form](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-login.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-login.png)
+
+### Extranet ###
+
+[![Listing](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-extranet-listado.png)](http://javiereguiluz.com/cupon/screenshots/cupon-extranet-listado.png)
+[![Offer edit action](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-extranet-modificar-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-extranet-modificar-oferta.png)
+
+### Backend ###
+
+[![Listing](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-backend-listado.png)](http://javiereguiluz.com/cupon/screenshots/cupon-backend-listado.png)
+[![Offer show action](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-backend-ver-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-backend-ver-oferta.png)
+
 ## How to install ##
 
   1. `mkdir cupon`
@@ -76,6 +97,27 @@ $ phpunit -c app src/Cupon/OfertaBundle/
 Cupon es una aplicación de prueba desarrollada para aprender a programar con Symfony2. Se trata de un clon simplificado de Groupon, de ahí el nombre. Esta aplicación es la base del próximo libro sobre Symfony2 que publicará Javier Eguiluz.
 
 Si descubres algún error, por favor utiliza la página de issues de Github para avisarnos.
+
+## Pantallazos ##
+
+Pincha en cada imagen para verla a tamaño natural
+
+### Frontend ###
+
+[![Portada](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-portada.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-portada.png)
+[![Página de detalle de la oferta](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-oferta.png)
+[![Página de ofertas recientes en una ciudad](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-recientes.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-recientes.png)
+[![Formulario de login](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-login.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-login.png)
+
+### Extranet ###
+
+[![Listado de ofertas](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-extranet-listado.png)](http://javiereguiluz.com/cupon/screenshots/cupon-extranet-listado.png)
+[![Formulario para modificar oferta](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-extranet-modificar-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-extranet-modificar-oferta.png)
+
+### Backend ###
+
+[![Listing](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-backend-listado.png)](http://javiereguiluz.com/cupon/screenshots/cupon-backend-listado.png)
+[![Página de detalle de la oferta](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-backend-ver-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-backend-ver-oferta.png)
 
 ## Instalación ##
 
