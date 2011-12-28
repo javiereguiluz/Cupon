@@ -1,8 +1,11 @@
 # Cupon sample application #
 
-Cupon is a sample application designed to learn Symfony2 development. It's a Groupon inspired clone, hence its name. Cupon application is explained in the upcoming book about Symfony2 written by Javier Eguiluz from [symfony.es](http://symfony.es).
+Cupon is a sample application designed to learn Symfony2 development. It's a 
+Groupon inspired clone, hence its name. Cupon application is explained in the 
+book *[Desarrollo web ágil con Symfony2](http://www.symfony.es/libro-symfony2/)* 
+published by Javier Eguiluz from [symfony.es](http://symfony.es).
 
-If you find a bug, please fill in a bug report in the Github issues page.
+If you find a bug, please fill in a bug report in the [Github issues page](https://github.com/javiereguiluz/Cupon/issues).
 
 ## Screenshots ##
 
@@ -94,9 +97,11 @@ $ phpunit -c app src/Cupon/OfertaBundle/
 
 # Aplicación de prueba Cupon #
 
-Cupon es una aplicación de prueba desarrollada para aprender a programar con Symfony2. Se trata de un clon simplificado de Groupon, de ahí el nombre. Esta aplicación es la base del próximo libro sobre Symfony2 que publicará Javier Eguiluz.
+Cupon es una aplicación de prueba desarrollada para aprender a programar con 
+Symfony2. Se trata de un clon simplificado de Groupon, de ahí el nombre. Esta 
+aplicación es la base del libro **[Desarrollo web ágil con Symfony2](http://www.symfony.es/libro-symfony2/)** publicado por Javier Eguiluz.
 
-Si descubres algún error, por favor utiliza la página de issues de Github para avisarnos.
+Si descubres algún error, por favor utiliza [la página de issues de Github](https://github.com/javiereguiluz/Cupon/issues) para avisarnos.
 
 ## Pantallazos ##
 
