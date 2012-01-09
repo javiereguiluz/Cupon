@@ -22,7 +22,7 @@ use Cupon\CiudadBundle\Entity\Ciudad;
  * Fixtures de la entidad Ciudad.
  * Crea 25 ciudades para poder probar la aplicación.
  */
-class ciudades extends AbstractFixture implements OrderedFixtureInterface
+class Ciudades extends AbstractFixture implements OrderedFixtureInterface
 {
     public function getOrder()
     {

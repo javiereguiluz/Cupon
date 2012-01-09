@@ -29,7 +29,7 @@ use Cupon\TiendaBundle\Entity\Tienda;
  * Fixtures de la entidad Oferta.
  * Crea para cada ciudad 20 ofertas con información muy realista.
  */
-class ofertas extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Ofertas extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     public function getOrder()
     {

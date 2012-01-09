@@ -25,7 +25,7 @@ use Cupon\TiendaBundle\Entity\Tienda;
  * Fixtures de la entidad Tienda.
  * Crea para cada ciudad entre 2 y 5 tiendas con información muy realista.
  */
-class tiendas extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Tiendas extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     public function getOrder()
     {

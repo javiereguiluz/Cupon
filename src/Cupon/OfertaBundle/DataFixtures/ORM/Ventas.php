@@ -24,7 +24,7 @@ use Cupon\OfertaBundle\Entity\Oferta,
  * Fixtures de la entidad Venta.
  * Crea para cada usuario registrado entre 0 y 10 ventas.
  */
-class ventas extends AbstractFixture implements OrderedFixtureInterface
+class Ventas extends AbstractFixture implements OrderedFixtureInterface
 {
     public function getOrder()
     {

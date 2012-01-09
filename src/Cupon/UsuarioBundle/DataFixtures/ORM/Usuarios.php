@@ -25,7 +25,7 @@ use Cupon\UsuarioBundle\Entity\Usuario;
  * Fixtures de la entidad Usuario.
  * Crea 500 usuarios de prueba con información muy realista.
  */
-class usuarios extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Usuarios extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
     public function getOrder()
     {
