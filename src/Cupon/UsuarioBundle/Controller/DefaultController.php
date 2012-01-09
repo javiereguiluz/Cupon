@@ -100,11 +100,18 @@ class DefaultController extends Controller
                 $em->persist($usuario);
                 $em->flush();
                 
+                // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
+                $this->get('session')->setFlash('info',
+                    '¡Enhorabuena! Te has registrado correctamente en Cupon'
+                );
+                
                 // Loguear al usuario automáticamente
                 $token = new UsernamePasswordToken($usuario, $usuario->getPassword(), 'usuarios', $usuario->getRoles());
                 $this->container->get('security.context')->setToken($token);
                 
-                return $this->redirect($this->generateUrl('portada'));
+                return $this->redirect($this->generateUrl('portada', array(
+                    'ciudad' => $usuario->getCiudad()->getSlug()
+                )));
             }
         }
         
