@@ -1,9 +1,8 @@
 {% extends '::base.html.twig' %}
 
-{% set ciudadSeleccionada = app.request.attributes.has('ciudad') ?
-                                app.request.attributes.get('ciudad')
-                                :
-                                ciudad_por_defecto
+{% set ciudadSeleccionada = app.request.attributes.has('ciudad')
+                            ? app.request.attributes.get('ciudad')
+                            : ciudad_por_defecto
 %}
 
 {% block stylesheets %}
