@@ -9,9 +9,10 @@ web/bundles/*
 web/css/*
 web/js/*
 
-# ignorar archivos de Eclipse, Zend Studio, Netbeans y PHPStorm
+# ignorar archivos de Eclipse, Zend Studio, Netbeans, PHPStorm y TextMate2
 .buildpath
 .project
 .settings
 nbproject
 .idea
+.tm_properties
