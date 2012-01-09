@@ -2,7 +2,9 @@
 
     {% include ':includes:flashes.html.twig' %}
     
-    <p>Conectado como <strong>{{ usuario.nombre ~ ' ' ~ usuario.apellidos }}</strong></p>
+    <p>Conectado como <strong>{{ app.usuario.nombre ~ ' ' ~ usuario.apellidos }}</strong></p>
+	{# si has definido un método __toString() en la entidad del usuario, puedes 
+	   reemplazar lo anterior por: <p>Conectado como <strong>{{ app.user }}</strong></p> #}
     
     <a href="{{ path('usuario_perfil') }}">Ver mi perfil</a>
     <a href="{{ path('usuario_logout') }}">Cerrar sesión</a>
