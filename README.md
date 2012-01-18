@@ -7,9 +7,7 @@ published by Javier Eguiluz from [symfony.es](http://symfony.es).
 
 If you find a bug, please fill in a bug report in the [Github issues page](https://github.com/javiereguiluz/Cupon/issues).
 
-## Screenshots ##
-
-Click on each image to see it full-size
+## Screenshots (click to enlarge) ##
 
 ### Frontend ###
 
@@ -45,7 +43,9 @@ Before trying the application:
   1. Create a new sample database and configure its credentials in `app/config/parameters.ini` file
   2. Create the schema: `php app/console doctrine:schema:create`
   3. Initialize the ACL tables: `php app/console init:acl`
-  4. Load data fixtures: `php app/console doctrine:fixtures:load` (if you get *Truncating table with foreign keys fails* exception, execute the following command: `php app/console doctrine:fixtures:load --append`)
+  4. Load data fixtures with the following commands:
+    * `php app/console doctrine:fixtures:load` if you want to load the complete fixtures for the finished application (with all the ACL and security-related properties).  If you get *Truncating table with foreign keys fails* exception, execute the following command: `php app/console doctrine:fixtures:load --append`
+    * `php app/console doctrine:fixtures:load --fixtures=app/Resources` if you want to load the simplified version of fixtures. Use this if you are developing the application and need simple fixtures without any ACL and security-related properties.
   5. Dump web assets with Assetic: `php app/console assetic:dump --env=prod --no-debug`
   6. Ensure that `web/uploads/images/` directory has write permissions.
 
@@ -103,9 +103,7 @@ aplicación es la base del libro **[Desarrollo web ágil con Symfony2](http://ww
 
 Si descubres algún error, por favor utiliza [la página de issues de Github](https://github.com/javiereguiluz/Cupon/issues) para avisarnos.
 
-## Pantallazos ##
-
-Pincha en cada imagen para verla a tamaño natural
+## Pantallazos (pincha cada imagen para ampliarla) ##
 
 ### Frontend ###
 
@@ -141,7 +139,9 @@ Para poder probar bien la aplicación:
   1. Crea una nueva base de datos de prueba y configura sus datos de acceso en el archivo de configuración `app/config/parameters.ini`
   2. Crea el esquema de la base de datos con el comando: `php app/console doctrine:schema:create`
   3. Crea las tablas de la ACL: `php app/console init:acl`
-  4. Carga los datos de pruebas con el siguiente comando: `php app/console doctrine:fixtures:load` (si se muestra una excepción de tipo *Truncating table with foreign keys fails* , ejecuta el siguiente comando: `php app/console doctrine:fixtures:load --append`)
+  4. Carga los datos de pruebas con los siguientes comandos:
+      * `php app/console doctrine:fixtures:load` para cargar todos los datos de prueba de la aplicación terminada (incluye todas las propiedades relacionadas con la ACL y la seguridad). Si se muestra una excepción de tipo *Truncating table with foreign keys fails* , ejecuta el siguiente comando: `php app/console doctrine:fixtures:load --append`
+      * `php app/console doctrine:fixtures:load --fixtures=app/Resources` para cargar una versión simplificada de los datos de prueba. Utiliza estos datos si estás creando la aplicación a mano y todavía no has llegado al capítulo relacionado con la seguridad y la ACL.
   5. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
   6. Asegúrate de que el directorio `web/uploads/images/` tiene permisos de escritura.
 
