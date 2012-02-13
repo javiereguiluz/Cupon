@@ -13,6 +13,7 @@
  */
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Cupon\CiudadBundle\Entity\Ciudad;
@@ -41,7 +42,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $this->container = $container;
     }
     
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         // Crear 10 ciudades de prueba
         for ($i=1; $i<=10; $i++) {
