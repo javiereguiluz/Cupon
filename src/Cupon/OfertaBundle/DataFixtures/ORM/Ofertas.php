@@ -16,6 +16,7 @@ namespace Cupon\OfertaBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
@@ -43,7 +44,7 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
         $this->container = $container;
     }
     
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         // Obtener todas las tiendas y ciudades de la base de datos
         $ciudades = $manager->getRepository('CiudadBundle:Ciudad')->findAll();

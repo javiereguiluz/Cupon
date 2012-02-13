@@ -16,9 +16,10 @@ namespace Cupon\OfertaBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
-use Cupon\OfertaBundle\Entity\Oferta,
-    Cupon\UsuarioBundle\Entity\Usuario,
-    Cupon\OfertaBundle\Entity\Venta;
+use Doctrine\Common\Persistence\ObjectManager;
+use Cupon\OfertaBundle\Entity\Oferta;
+use Cupon\UsuarioBundle\Entity\Usuario;
+use Cupon\OfertaBundle\Entity\Venta;
 
 /**
  * Fixtures de la entidad Venta.
@@ -31,7 +32,7 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
         return 50;
     }
     
-    public function load($manager)
+    public function load(ObjectManager $manager)
     {
         // Obtener todas las ofertas y usuarios de la base de datos
         $ofertas = $manager->getRepository('OfertaBundle:Oferta')->findAll();
