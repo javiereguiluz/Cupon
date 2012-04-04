@@ -32,6 +32,16 @@ use Cupon\OfertaBundle\Entity\Venta;
  * básicos ejecutando el siguiente comando:
  *
  * $ php app/console doctrine:fixtures:load --fixtures=app/Resources
+ * 
+ * Al utilizar este archivo de datos simplificado, la configuración de seguridad
+ * de la aplicación debe indicar que los usuarios de tipo `Usuario` guardan la
+ * contraseña en claro, sin codificar.
+ * 
+ * Asegúrate de que en el archivo `security.yml` tengas la siguiente configuración:
+ *   security:
+ *     # ...
+ *     encoders:
+ *       Cupon\UsuarioBundle\Entity\Usuario: plaintext
  */
 class Basico implements FixtureInterface, ContainerAwareInterface
 {
@@ -141,7 +151,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 $usuario->setNombre('Usuario #'.$numUsuario);
                 $usuario->setApellidos('Apellido1 Apellido2');
                 $usuario->setEmail('usuario'.$numUsuario.'@localhost');
-                $usuario->setSalt(md5(time()));
+                $usuario->setSalt('');
                 $usuario->setPassword('password'.$numUsuario);
                 $usuario->setDireccion("Calle Ipsum Lorem, 2\n".$ciudad->getNombre());
                 // El 60% de los usuarios permite email
