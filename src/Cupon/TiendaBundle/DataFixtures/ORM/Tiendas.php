@@ -47,9 +47,8 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         
         $i = 1;
         foreach ($ciudades as $ciudad) {
-            for ($j=1; $j<=rand(2, 5); $j++) {
-                $id = $ciudad->getId();
-                
+            $numeroTiendas = rand(2, 5);
+            for ($j=1; $j<=$numeroTiendas; $j++) {
                 $tienda = new Tienda();
                 
                 $tienda->setNombre($this->getNombre());
@@ -83,7 +82,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         $prefijos = array('Restaurante', 'Cafetería', 'Bar', 'Pub', 'Pizza', 'Burger');
         $nombres = array('Lorem ipsum', 'Sit amet', 'Consectetur', 'Adipiscing elit', 'Nec sapien', 'Tincidunt', 'Facilisis', 'Nulla scelerisque', 'Blandit ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enim sit');
         
-        return $prefijos[rand(0, count($prefijos)-1)].' '.$nombres[rand(0, count($nombres)-1)];
+        return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)];
     }
     
     /**
@@ -93,7 +92,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     {
         $descripcion = '';
         
-        $frases = array(
+        $frases = array_flip(array(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'Mauris ultricies nunc nec sapien tincidunt facilisis.',
             'Nulla scelerisque blandit ligula eget hendrerit.',
@@ -109,15 +108,11 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
             'Pellentesque fringilla ipsum nec justo tempus elementum.',
             'Aliquam dapibus metus aliquam ante lacinia blandit.',
             'Donec ornare lacus vitae dolor imperdiet vitae ultricies nibh congue.',
-        );
+        ));
         
         $numeroFrases = rand(3, 6);
         
-        for ($i=0; $i<$numeroFrases; $i++) {
-            $descripcion .= $frases[rand(0, count($frases)-1)].' ';
-        }
-        
-        return $descripcion;
+        return implode(' ', array_rand($frases, $numeroFrases));
     }
     
     /**
@@ -128,7 +123,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         $prefijos = array('Calle', 'Avenida', 'Plaza');
         $nombres = array('Lorem', 'Ipsum', 'Sitamet', 'Consectetur', 'Adipiscing', 'Necsapien', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque', 'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit');
         
-        return $prefijos[rand(0, count($prefijos)-1)].' '.$nombres[rand(0, count($nombres)-1)].', '.rand(1, 100)."\n"
+        return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)].', '.rand(1, 100)."\n"
                .$this->getCodigoPostal().' '.$ciudad->getNombre();
     }
     

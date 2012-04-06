@@ -51,11 +51,11 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
                 //   - si este mismo usuario no ha comprado antes la misma oferta
                 //   - si la oferta seleccionada ha sido revisada
                 //   - si la fecha de publicación de la oferta es posterior a ahora mismo
-                $oferta = $ofertas[rand(0, count($ofertas)-1)];
+                $oferta = $ofertas[array_rand($ofertas)];
                 while (in_array($oferta->getId(), $comprado)
                        || $oferta->getRevisada() == false
                        || $oferta->getFechaPublicacion() > new \DateTime('now')) {
-                    $oferta = $ofertas[rand(0, count($ofertas)-1)];
+                    $oferta = $ofertas[array_rand($ofertas)];
                 }
                 $comprado[] = $oferta->getId();
                 

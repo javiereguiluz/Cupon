@@ -59,8 +59,9 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
             $passwordCodificado = $encoder->encodePassword($passwordEnClaro, $usuario->getSalt());
             $usuario->setPassword($passwordCodificado);
             
-            $usuario->setDireccion('Gran Vía, 1');
-            $usuario->setPermiteEmail(true);
+            $usuario->setDireccion('Gran Vía, '.rand(), 1, 250);
+            // El 60% de los usuarios permite email
+            $usuario->setPermiteEmail((rand(1, 1000) % 10) < 6);
             $usuario->setFechaAlta(new \DateTime('now - '.rand(1, 150).' days'));
             $usuario->setFechaNacimiento(new \DateTime('now - '.rand(7000, 20000).' days'));
             
@@ -68,7 +69,7 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
             $usuario->setDni($dni.substr("TRWAGMYFPDXBNJZSQVHLCKE", strtr($dni, "XYZ", "012")%23, 1));
             
             $usuario->setNumeroTarjeta('1234567890123456');
-            $usuario->setCiudad($ciudades[rand(0, count($ciudades)-1)]);
+            $usuario->setCiudad($ciudades[array_rand($ciudades)]);
             
             $manager->persist($usuario);
         }
@@ -89,10 +90,10 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
         $mujeres = array('María Carmen', 'María', 'Carmen', 'Josefa', 'Isabel', 'Ana María', 'María Dolores', 'María Pilar', 'María Teresa', 'Ana', 'Francisca', 'Laura', 'Antonia', 'Dolores', 'María Angeles', 'Cristina', 'Marta', 'María José', 'María Isabel', 'Pilar', 'María Luisa', 'Concepción', 'Lucía', 'Mercedes', 'Manuela', 'Elena', 'Rosa María');
         
         if (rand() % 2) {
-            return $hombres[rand(0, count($hombres)-1)];
+            return $hombres[array_rand($hombres)];
         }
         else {
-            return $mujeres[rand(0, count($mujeres)-1)];
+            return $mujeres[array_rand($mujeres)];
         }
     }
     
@@ -106,6 +107,6 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
         
         $apellidos = array('García', 'González', 'Rodríguez', 'Fernández', 'López', 'Martínez', 'Sánchez', 'Pérez', 'Gómez', 'Martín', 'Jiménez', 'Ruiz', 'Hernández', 'Díaz', 'Moreno', 'Álvarez', 'Muñoz', 'Romero', 'Alonso', 'Gutiérrez', 'Navarro', 'Torres', 'Domínguez', 'Vázquez', 'Ramos', 'Gil', 'Ramírez', 'Serrano', 'Blanco', 'Suárez', 'Molina', 'Morales', 'Ortega', 'Delgado', 'Castro', 'Ortíz', 'Rubio', 'Marín', 'Sanz', 'Iglesias', 'Nuñez', 'Medina', 'Garrido');
         
-        return $apellidos[rand(0, count($apellidos)-1)].' '.$apellidos[rand(0, count($apellidos)-1)];
+        return $apellidos[array_rand($apellidos)].' '.$apellidos[array_rand($apellidos)];
     }
 }
