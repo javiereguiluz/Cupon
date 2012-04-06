@@ -86,15 +86,12 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         
         // Crear 50 ofertas en cada ciudad
         $ciudades = $manager->getRepository('CiudadBundle:Ciudad')->findAll();
-        
-        $tiendas  = $manager->getRepository('TiendaBundle:Tienda')->findAll();
-        $tiendasPorCiudad = array();
-        foreach ($tiendas as $tienda) {
-            $tiendasPorCiudad[$tienda->getCiudad()->getId()][] = $tienda;
-        }
-        
         $numOferta = 0;
         foreach ($ciudades as $ciudad) {
+            $tiendas = $manager->getRepository('TiendaBundle:Tienda')->findByCiudad(
+                $ciudad->getId()
+            );
+
             for ($i=1; $i<=50; $i++) {
                 $numOferta++;
                 
@@ -131,9 +128,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 $oferta->setCiudad($ciudad);
                 
                 // Seleccionar aleatoriamente una tienda que pertenezca a la ciudad
-                $tiendasDeLaCiudad = $tiendasPorCiudad[$oferta->getCiudad()->getId()];
-                $tienda = $tiendasDeLaCiudad[rand(0, count($tiendasDeLaCiudad)-1)];
-                $oferta->setTienda($tienda);
+                $oferta->setTienda($tiendas[array_rand($tiendas)]);
                 
                 $manager->persist($oferta);
             }
@@ -188,11 +183,11 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 //   - si este mismo usuario no ha comprado antes la misma oferta
                 //   - si la oferta seleccionada ha sido revisada
                 //   - si la fecha de publicación de la oferta es posterior a ahora mismo
-                $oferta = $ofertas[rand(0, count($ofertas)-1)];
+                $oferta = $ofertas[array_rand($ofertas)];
                 while (in_array($oferta->getId(), $comprado)
                        || $oferta->getRevisada() == false
                        || $oferta->getFechaPublicacion() > new \DateTime('now')) {
-                    $oferta = $ofertas[rand(0, count($ofertas)-1)];
+                    $oferta = $ofertas[array_rand($ofertas)];
                 }
                 $comprado[] = $oferta->getId();
                 
