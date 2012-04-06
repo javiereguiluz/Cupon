@@ -29,16 +29,34 @@ class DefaultControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $client->followRedirects(true);
-        
+
         $crawler = $client->request('GET', '/');
-        
+
         // Registrarse como nuevo usuario
         $enlaceRegistro = $crawler->selectLink('Regístrate ya')->link();
         $crawler = $client->click($enlaceRegistro);
         $this->assertGreaterThan(0, $crawler->filter('html:contains("Regístrate gratis como usuario")')->count(),
             'Después de pulsar el botón Regístrate de la portada, se carga la página con el formulario de registro'
         );
-        
+
+        // Cuando se cargan los archivos de fixtures, el atributo 'id' asignado
+        // a cada ciudad es un valor que se autoincrementa. Si la base de datos
+        // resetea este contador cada vez, los 'id' de las ciudades seran 1, 2, 3, ...
+        // Si no se resetean, no es posible saber cuál será el 'id' valido de alguna ciudad
+        // Por ello, se utiliza el siguiente truco:
+        //   1. Se obtiene el campo de formulario que permite elegir la ciudad
+        //   2. Se extraen todos los valores de la lista <select>
+        //   3. Se escoge la ciudad en la posición [1] del array de ciudades, ya que la
+        //      posición [0] suele estar vacía o muestra un mensaje al usuario
+        $listaDesplegable = $crawler
+            ->selectButton('Registrarme')
+            ->form()
+            ->get("frontend_usuario[ciudad]")
+        ;
+        $atributosIdCiudades = $listaDesplegable->availableOptionValues();
+        $idValidoCiudad = $atributosIdCiudades[1];
+        $usuario['frontend_usuario[ciudad]'] = $idValidoCiudad;
+
         $formulario = $crawler->selectButton('Registrarme')->form($usuario);
         $crawler = $client->submit($formulario);
         
