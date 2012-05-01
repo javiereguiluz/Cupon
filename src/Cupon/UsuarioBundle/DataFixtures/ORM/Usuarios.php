@@ -59,7 +59,7 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
             $passwordCodificado = $encoder->encodePassword($passwordEnClaro, $usuario->getSalt());
             $usuario->setPassword($passwordCodificado);
             
-            $usuario->setDireccion('Gran Vía, '.rand(), 1, 250);
+            $usuario->setDireccion('Gran Vía, '.rand(1, 250));
             // El 60% de los usuarios permite email
             $usuario->setPermiteEmail((rand(1, 1000) % 10) < 6);
             $usuario->setFechaAlta(new \DateTime('now - '.rand(1, 150).' days'));
