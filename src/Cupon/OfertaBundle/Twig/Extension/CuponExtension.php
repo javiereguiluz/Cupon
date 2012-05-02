@@ -83,10 +83,15 @@ class CuponExtension extends \Twig_Extension
         <span id="$idAleatorio"></span>
         
         <script type="text/javascript">
-        window.addEventListener('load', function(){
+        funcion_expira = function(){
             var expira = $fecha;
             muestraCuentaAtras('$idAleatorio', expira);
-        });
+        }
+        if (!window.addEventListener) {
+            window.attachEvent("onload", funcion_expira);
+        }else{
+            window.addEventListener('load', funcion_expira);
+        }
         </script>
 EOJ;
 
