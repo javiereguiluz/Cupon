@@ -33,7 +33,7 @@ class OfertaRepository extends EntityRepository
         $consulta->setParameter('ciudad', $ciudad);
         $consulta->setMaxResults(1);
         
-        return $consulta->getSingleResult();
+        return $consulta->getOneOrNullResult();
     }
     
     /**
@@ -50,7 +50,7 @@ class OfertaRepository extends EntityRepository
         $consulta->setParameter('ciudad', $ciudad);
         $consulta->setMaxResults(1);
         
-        return $consulta->getSingleResult();
+        return $consulta->getOneOrNullResult();
     }
     
     /**
@@ -67,7 +67,7 @@ class OfertaRepository extends EntityRepository
         $consulta->setParameter('ciudad', $ciudad);
         $consulta->setMaxResults(1);
         
-        return $consulta->getSingleResult();
+        return $consulta->getOneOrNullResult();
     }
     
     /**
