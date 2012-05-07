@@ -7,7 +7,7 @@
     {% block stylesheets %}{% endblock %}
     {% block rss %}{% endblock %}
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
-    
+    {% block javascripts %}{% endblock %}
 </head>
 
 <body id="{% block id '' %}"><div id="contenedor">
@@ -30,7 +30,7 @@
         </section>
     </footer>
 
-    {% block javascripts %}{% endblock %}
+
 </div></body>
 
 </html>

@@ -8,7 +8,16 @@
 <link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
 {% endstylesheets %}
 {% endblock %}
-
+{% block javascripts %}
+{% javascripts
+    '@OfertaBundle/Resources/public/js/lt_ie9/*' 
+    output='js/lt_ie9.js'
+%}
+  <!--[if lt IE 9]>
+     <script src="{{ asset_url }}"></script>
+  <![endif]-->
+{% endjavascripts %}  
+{% endblock %}
 {% block body %}
 <header>
     <h1><a href="{{ path('backend_portada') }}">CUPON ADMIN</a></h1>

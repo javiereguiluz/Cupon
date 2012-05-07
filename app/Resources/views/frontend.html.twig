@@ -15,8 +15,16 @@
 {% endblock %}
 
 {% block javascripts %}
-{% javascripts '@OfertaBundle/Resources/public/js/*' output='js/frontend.js' %}
-<script src="{{ asset('bundles/oferta/js/frontend.js') }}" type="text/javascript"></script>
+{% javascripts
+    '@OfertaBundle/Resources/public/js/lt_ie9/*' 
+    output='js/lt_ie9.js'
+%}
+  <!--[if lt IE 9]>
+     <script src="{{ asset_url }}"></script>
+  <![endif]-->
+{% endjavascripts %}  
+{% javascripts '@OfertaBundle/Resources/public/js/frontend/*' output='js/frontend.js' %}
+<script src="{{ asset_url }}" type="text/javascript"></script>
 {% endjavascripts %}
 {% endblock %}
 
