@@ -43,7 +43,9 @@ class UsuarioType extends AbstractType
             
             ->add('direccion')
             ->add('permite_email', 'checkbox', array('required' => false))
-            ->add('fecha_nacimiento', 'birthday')
+            ->add('fecha_nacimiento', 'birthday', array(
+                'years' => range(date('Y') - 18, date('Y') - 18 - 120)
+            ))
             ->add('dni')
             ->add('numero_tarjeta')
             ->add('numero_tarjeta', 'text', array('label' => 'Tarjeta de Crédito', 'attr' => array(

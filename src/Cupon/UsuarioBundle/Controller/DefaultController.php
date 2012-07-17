@@ -77,7 +77,6 @@ class DefaultController extends Controller
         
         $usuario = new Usuario();
         $usuario->setPermiteEmail(true);
-        $usuario->setFechaNacimiento(new \DateTime('now - 18 years'));
         
         $formulario = $this->createForm(new UsuarioType(), $usuario);
         
