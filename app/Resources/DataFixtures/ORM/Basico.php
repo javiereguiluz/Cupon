@@ -54,13 +54,14 @@ class Basico implements FixtureInterface, ContainerAwareInterface
     
     public function load(ObjectManager $manager)
     {
-        // Crear 10 ciudades de prueba
-        for ($i=1; $i<=10; $i++) {
+        // Crear 5 ciudades de prueba
+        foreach (array('Madrid', 'Barcelona', 'Castellón', 'Vigo', 'Vitoria-Gasteiz') as $nombre) {
             $ciudad = new Ciudad();
-            $ciudad->setNombre('Ciudad #'.$i);
+            $ciudad->setNombre($nombre);
             
             $manager->persist($ciudad);
         }
+
         $manager->flush();
         
         // Crear 10 tiendas en cada ciudad
@@ -75,8 +76,13 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 $tienda->setLogin('tienda'.$numTienda);
                 $tienda->setPassword('password'.$numTienda);
                 $tienda->setSalt(md5(time()));
-                $tienda->setDescripcion('Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat');
-                $tienda->setDireccion("Calle Lorem Ipsum, 5\n".$ciudad->getNombre());
+                $tienda->setDescripcion(
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing elit,"
+                    ."sed do eiusmod tempor incididunt ut labore et dolore magna"
+                    ."aliqua. Ut enim ad minim veniam, quis nostrud exercitation"
+                    ."ullamco laboris nisi ut aliquip ex ea commodo consequat."
+                );
+                $tienda->setDireccion("Calle Lorem Ipsum, $i\n".$ciudad->getNombre());
                 $tienda->setCiudad($ciudad);
                 
                 $manager->persist($tienda);
@@ -98,19 +104,33 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 $oferta = new Oferta();
                 
                 $oferta->setNombre('Oferta #'.$numOferta.' lorem ipsum dolor sit amet');
-                $oferta->setDescripcion("Lorem ipsum dolor sit amet, consectetur adipisicing.\nElit, sed do eiusmod tempor incididunt.\nUt labore et dolore magna aliqua.\nNostrud exercitation ullamco laboris nisi ut");
+                $oferta->setDescripcion(
+                    "Lorem ipsum dolor sit amet, consectetur adipisicing.\n"
+                    ."Elit, sed do eiusmod tempor incididunt.\n"
+                    ."Ut labore et dolore magna aliqua.\n"
+                    ."Nostrud exercitation ullamco laboris nisi ut"
+                );
                 $oferta->setCondiciones("Labore et dolore magna aliqua. Ut enim ad minim veniam.");
                 $oferta->setFoto('foto'.rand(1,20).'.jpg');
                 $oferta->setPrecio(number_format(rand(100, 10000)/100, 2));
                 $oferta->setDescuento($oferta->getPrecio() * (rand(10, 70)/100));
                 
                 // Se publican 9 ofertas en el pasado, 1 en el presente y 40 en el futuro
-                if ($i < 11) {
-                    $fechaPublicacion = new \DateTime('now - '.($i-1).' days');
+                if (1 == $i) {
+                    $fecha = 'today';
+                    $oferta->setRevisada(true);
+                }
+                elseif ($i < 10) {
+                    $fecha = 'now - '.($i-1).' days';
+                    // el 80% de las ofertas pasadas se marcan como revisadas
+                    $oferta->setRevisada((rand(1, 1000) % 10) < 8);
                 }
                 else {
-                    $fechaPublicacion = new \DateTime('now + '.($i-10).' days');
+                    $fecha = 'now + '.($i - 10 + 1).' days';
+                    $oferta->setRevisada(true);
                 }
+
+                $fechaPublicacion = new \DateTime($fecha);
                 $fechaPublicacion->setTime(23, 59, 59);
                 
                 $fechaExpiracion = clone $fechaPublicacion;
@@ -121,9 +141,6 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 
                 $oferta->setCompras(0);
                 $oferta->setUmbral(rand(25, 100));
-                
-                // Se marcan como revisadas aproximadamente el 90% de las ofertas
-                $oferta->setRevisada((rand(1, 1000) % 10) < 9);
                 
                 $oferta->setCiudad($ciudad);
                 
