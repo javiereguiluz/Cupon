@@ -14,7 +14,7 @@
 
     <p class="precio">{{ oferta.precio }} &euro; <span>{{ descuento(oferta.precio, oferta.descuento) }}</span></p>
 
-    <p><strong>Condiciones:</strong> {{ oferta.condiciones }}</p>
+    <p><strong>{{ "Condiciones" | trans }}:</strong> {{ oferta.condiciones }}</p>
 </section>
 
 <section class="estado {{ expirada ? 'expirada' : '' }}">
@@ -32,16 +32,20 @@
     <div class="faltan">
         {% set faltan = oferta.umbral - oferta.compras %}
         {% if faltan > 0 %}
-            {% transchoice faltan with {'%faltan%': faltan} %}
+            {% transchoice faltan with { '%faltan%': faltan } %}
             {1} ¡<strong>Una sola compra más</strong> <br/> activa la oferta!|[1, 9] ¡<strong>Sólo faltan %faltan% compras</strong> <br/> para activar la oferta!|]9,Inf] Faltan <strong>%faltan% compras</strong> <br/> para activar la oferta
             {% endtranschoice %}
         {% else %}
-        <strong>Oferta activada</strong> por superar las <strong>{{ oferta.umbral }}</strong> compras necesarias
+            {% trans with {'%compras%': oferta.umbral } %}
+            <strong>Oferta activada</strong> por superar las <strong>%compras%</strong> compras necesarias
+            {% endtrans %}
         {% endif %}
     </div>
 {% else %}
     <div class="tiempo">
-        <strong>Finalizada</strong> el {{ oferta.fechaExpiracion|fecha('long') }}
+        {% trans with { '%fecha%': oferta.fechaExpiracion|fecha('long') } %}
+        <strong>Finalizada</strong> el %fecha%
+        {% endtrans %}
     </div>
 
     <div class="compras">
@@ -51,7 +55,7 @@
 </section>
 
 <section class="direccion">
-    <h2>Disfruta de la oferta en</h2>
+    <h2>{{ "Disfruta de la oferta en" | trans }}</h2>
     <p>
         <a href="{{ path('tienda_portada', { 'ciudad': oferta.ciudad.slug, 'tienda': oferta.tienda.slug }) }}">{{ oferta.tienda.nombre }}</a>
         {{ oferta.tienda.direccion | nl2br }}
@@ -59,6 +63,6 @@
 </section>
 
 <section class="tienda">
-    <h2>Sobre la tienda</h2>
+    <h2>{{ "Sobre la tienda" | trans }}</h2>
     {{ oferta.tienda.descripcion }}
 </section>

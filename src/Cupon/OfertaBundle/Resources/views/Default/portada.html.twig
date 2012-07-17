@@ -5,7 +5,11 @@
 
 {% block anuncio %}
     {% if not is_granted('ROLE_USUARIO') %}
-        <div id="anuncio"><a href="{{ path('portada') }}">CUPON</a> publica cada día una oferta increíble en tu ciudad con descuentos de hasta el 90% <a class="boton" href="{{ path('usuario_registro') }}">{{ "Regístrate ya" | trans }}</a></div>
+        <div id="anuncio">
+            {% trans with { '%portada%': path('portada'), '%registro%': path('usuario_registro') } %}
+            <a href="%portada%">CUPON</a> publica cada día una oferta increíble en tu ciudad con descuentos de hasta el 90%% <a class="boton" href="%registro%">Regístrate ya</a>
+            {% endtrans %}
+        </div>
     {% endif %}
 {% endblock %}
 

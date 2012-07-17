@@ -5,7 +5,7 @@
 
 {% block article %}
 <section id="entrar">
-    <h1>Accede a tu cuenta</h1>
+    <h1>{{ "Accede a tu cuenta" | trans }}</h1>
 
     {% if error %}
         <div>{{ error.message }}</div>
@@ -26,7 +26,7 @@
 </section>
 
 <section id="registrar">
-    <a class="boton" href="{{ path('usuario_registro') }}">Regístrate gratis como usuario</a>
+    <a class="boton" href="{{ path('usuario_registro') }}">{{ "Regístrate gratis como usuario" | trans }}</a>
 </section>
 {% endblock %}
 

@@ -13,11 +13,17 @@
 
         <div class="estado {{ expirada ? 'expirada' : '' }} {{ comprada ? 'comprada' : '' }}">
             {% if comprada %}
-            Comprada el {{ fechaCompra|fecha('long', 'medium') }}
+                {% trans with { '%fecha%': fechaCompra|fecha('long', 'medium') } %}
+                Comprada el %fecha%
+                {% endtrans %}
             {% elseif not expirada %}
-            <strong>Faltan</strong>: {{ oferta.fechaExpiracion | cuenta_atras }}
+                {% trans with {'%tiempo%': oferta.fechaExpiracion | cuenta_atras } %}
+                <strong>Faltan</strong>: %tiempo%
+                {% endtrans %}
             {% else %}
-            Finalizada el {{ oferta.fechaExpiracion|fecha('long') }}
+                {% trans with { '%fecha%': oferta.fechaExpiracion|fecha('long') } %}
+                Finalizada el %fecha%
+                {% endtrans %}
             {% endif %}
         </div>
     </div>
@@ -27,6 +33,6 @@
 
         <p class="precio">{{ oferta.precio }} &euro; <span>{{ descuento(oferta.precio, oferta.descuento) }}</span></p>
 
-        <p>Disfruta de esta oferta en <a href="{{ path('tienda_portada', { 'ciudad': oferta.ciudad.slug, 'tienda' : oferta.tienda.slug }) }}">{{ oferta.tienda.nombre }}</a></p>
+        <p>{{ "Disfruta de la oferta en" | trans }} <a href="{{ path('tienda_portada', { 'ciudad': oferta.ciudad.slug, 'tienda' : oferta.tienda.slug }) }}">{{ oferta.tienda.nombre }}</a></p>
     </div>
 </section>

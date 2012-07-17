@@ -6,8 +6,8 @@
 	{# si has definido un método __toString() en la entidad del usuario, puedes
 	   reemplazar lo anterior por: <p>Conectado como <strong>{{ app.user }}</strong></p> #}
 
-    <a href="{{ path('usuario_perfil') }}">Ver mi perfil</a>
-    <a href="{{ path('usuario_logout') }}">Cerrar sesión</a>
+    <a href="{{ path('usuario_perfil') }}">{{ "Ver mi perfil" | trans }}</a>
+    <a href="{{ path('usuario_logout') }}">{{ "Cerrar sesión" | trans }}</a>
 
 {% else %} {# el usuario todavía no ha hecho login #}
 
