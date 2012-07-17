@@ -54,8 +54,8 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
                 $tienda->setNombre($this->getNombre());
                 
                 $tienda->setLogin('tienda'.$i);
-                $tienda->setSalt(md5(time()));
-                
+                $tienda->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
+
                 $passwordEnClaro = 'tienda'.$i;
                 $encoder = $this->container->get('security.encoder_factory')->getEncoder($tienda);
                 $passwordCodificado = $encoder->encodePassword($passwordEnClaro, $tienda->getSalt());
@@ -111,7 +111,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         ));
         
         $numeroFrases = rand(3, 6);
-        
+
         return implode(' ', array_rand($frases, $numeroFrases));
     }
     
@@ -122,7 +122,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     {
         $prefijos = array('Calle', 'Avenida', 'Plaza');
         $nombres = array('Lorem', 'Ipsum', 'Sitamet', 'Consectetur', 'Adipiscing', 'Necsapien', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque', 'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit');
-        
+
         return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)].', '.rand(1, 100)."\n"
                .$this->getCodigoPostal().' '.$ciudad->getNombre();
     }

@@ -67,17 +67,21 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
                 $oferta->setDescuento($oferta->getPrecio() * (rand(10, 70)/100));
 
                 // Una oferta se publica hoy, el resto se reparte entre el pasado y el futuro
-                if ($j < 10) {
-                    $fechaPublicacion = new \DateTime('now - '.($j-1).' days');
-                    // Se marcan como revisadas el 40% de las ofertas pasadas
-                    $oferta->setRevisada((rand(1, 1000) % 10) < 4);
-                }
-                else {
-                    $fechaPublicacion = new \DateTime('now + '.($j-9).' days');
-                    // Se marcan como revisadas todas las ofertas futuras, para
-                    // que sea más fácil probar la aplicación (y los tests)
+                if (1 == $j) {
+                    $fecha = 'today';
                     $oferta->setRevisada(true);
                 }
+                elseif ($j < 10) {
+                    $fecha = 'now - '.($j-1).' days';
+                    // el 80% de las ofertas pasadas se marcan como revisadas
+                    $oferta->setRevisada((rand(1, 1000) % 10) < 8);
+                }
+                else {
+                    $fecha = 'now + '.($j - 10 + 1).' days';
+                    $oferta->setRevisada(true);
+                }
+
+                $fechaPublicacion = new \DateTime($fecha);
                 $fechaPublicacion->setTime(23, 59, 59);
 
                 // Se debe clonar el valor de la fechaPublicacion porque si se usa directamente
@@ -92,7 +96,6 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
                 $oferta->setCompras(0);
                 $oferta->setUmbral(rand(25, 100));
 
-                //$oferta->setCiudad($ciudades[$i]);
                 $oferta->setCiudad($ciudad);
 
                 // Seleccionar aleatoriamente una tienda que pertenezca a la ciudad anterior
