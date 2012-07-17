@@ -13,11 +13,6 @@ usuario_compras:
     pattern:  /compras
     defaults: { _controller: UsuarioBundle:Default:compras }
 
-# Ruta para dar de baja un usuario y borrar todos sus datos
-usuario_baja:
-    pattern:  /baja
-    defaults: { _controller: UsuarioBundle:Default:baja }
-
 # Ruta para la acción de login de de los usuarios del frontend
 usuario_login:
     pattern:   /login

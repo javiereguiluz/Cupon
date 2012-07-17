@@ -22,6 +22,15 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  */
 class DefaultControllerTest extends WebTestCase
 {
+    private $em;
+
+    public function setUp()
+    {
+        $kernel = static::createKernel();
+        $kernel->boot();
+        $this->em = $kernel->getContainer()->get('doctrine.orm.entity_manager');
+    }
+
     /**
      * @dataProvider usuarios
      */
@@ -78,8 +87,9 @@ class DefaultControllerTest extends WebTestCase
         );
 
         // Dar de baja al usuario aleatorio recién creado
-        $crawler = $client->request('GET', '/es/usuario/baja');
-        $this->assertTrue($client->getResponse()->isSuccessful());
+        $usuario = $this->em->getRepository('UsuarioBundle:Usuario')->findOneByEmail($usuario['frontend_usuario[email]']);
+        $this->em->remove($usuario);
+        $this->em->flush();
     }
 
     /**
