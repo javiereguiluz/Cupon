@@ -98,7 +98,8 @@ class Usuario implements UserInterface
      * @var string $password
      *
      * @ORM\Column(name="password", type="string", length=255)
-     * @Assert\MinLength(6)
+     * @Assert\NotBlank(groups={"registro"})
+     * @Assert\MinLength(limit=6)
      */
     private $password;
 

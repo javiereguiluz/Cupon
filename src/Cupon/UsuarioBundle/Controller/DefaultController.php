@@ -18,7 +18,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Security\Core\SecurityContext;
 use Cupon\UsuarioBundle\Entity\Usuario;
 use Cupon\OfertaBundle\Entity\Venta;
-use Cupon\UsuarioBundle\Form\Frontend\UsuarioType;
+use Cupon\UsuarioBundle\Form\Frontend\UsuarioPerfilType;
+use Cupon\UsuarioBundle\Form\Frontend\UsuarioRegistroType;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -78,7 +79,7 @@ class DefaultController extends Controller
         $usuario = new Usuario();
         $usuario->setPermiteEmail(true);
         
-        $formulario = $this->createForm(new UsuarioType(), $usuario);
+        $formulario = $this->createForm(new UsuarioRegistroType(), $usuario);
         
         if ($peticion->getMethod() == 'POST') {
             
@@ -129,7 +130,7 @@ class DefaultController extends Controller
         $em = $this->getDoctrine()->getEntityManager();
         
         $usuario = $this->get('security.context')->getToken()->getUser();
-        $formulario = $this->createForm(new UsuarioType(), $usuario);
+        $formulario = $this->createForm(new UsuarioPerfilType(), $usuario);
         
         if ($peticion->getMethod() == 'POST') {
             $passwordOriginal = $formulario->getData()->getPassword();

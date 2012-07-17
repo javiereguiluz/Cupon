@@ -19,11 +19,12 @@ use Symfony\Component\Form\FormBuilder;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Formulario para crear y manipular entidades de tipo Usuario.
+ * Formulario para crear entidades de tipo Usuario cuando los usuarios se
+ * registran en el sitio.
  * Como se utiliza en la parte pública del sitio, algunas propiedades de
  * la entidad no se incluyen en el formulario.
  */
-class UsuarioType extends AbstractType
+class UsuarioRegistroType extends AbstractType
 {
     public function buildForm(FormBuilder $builder, array $options)
     {
@@ -33,14 +34,14 @@ class UsuarioType extends AbstractType
             ->add('email', 'email',  array('label' => 'Correo electrónico', 'attr' => array(
                 'placeholder' => 'usuario@servidor'
             )))
-            
+
             ->add('password', 'repeated', array(
                 'type' => 'password',
                 'invalid_message' => 'Las dos contraseñas deben coincidir',
                 'options' => array('label' => 'Contraseña'),
                 'required' => false
             ))
-            
+
             ->add('direccion')
             ->add('permite_email', 'checkbox', array('required' => false))
             ->add('fecha_nacimiento', 'birthday', array(
@@ -52,7 +53,7 @@ class UsuarioType extends AbstractType
                 'pattern' => '^[0-9]{13,16}$',
                 'placeholder' => 'Entre 13 y 16 numeros'
             )))
-            
+
             ->add('ciudad', 'entity', array(
                 'class' => 'Cupon\\CiudadBundle\\Entity\\Ciudad',
                 'empty_value' => 'Selecciona una ciudad',
@@ -63,7 +64,14 @@ class UsuarioType extends AbstractType
             ))
         ;
     }
-    
+
+    public function getDefaultOptions(array $options)
+    {
+        return array(
+            'validation_groups' => array('default', 'registro')
+        );
+    }
+
     public function getName()
     {
         return 'frontend_usuario';
