@@ -30,7 +30,9 @@ class UsuarioType extends AbstractType
         $builder
             ->add('nombre')
             ->add('apellidos')
-            ->add('email', 'email')
+            ->add('email', 'email',  array('label' => 'Correo electrónico', 'attr' => array(
+                'placeholder' => 'usuario@servidor'
+            )))
             
             ->add('password', 'repeated', array(
                 'type' => 'password',
@@ -44,6 +46,10 @@ class UsuarioType extends AbstractType
             ->add('fecha_nacimiento', 'birthday')
             ->add('dni')
             ->add('numero_tarjeta')
+            ->add('numero_tarjeta', 'text', array('label' => 'Tarjeta de Crédito', 'attr' => array(
+                'pattern' => '^[0-9]{13,16}$',
+                'placeholder' => 'Entre 13 y 16 numeros'
+            )))
             
             ->add('ciudad', 'entity', array(
                 'class' => 'Cupon\\CiudadBundle\\Entity\\Ciudad',
