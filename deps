@@ -1,10 +1,10 @@
 [symfony]
     git=http://github.com/symfony/symfony.git
-    version=v2.0.12
+    version=origin/2.0
 
 [twig]
     git=http://github.com/fabpot/Twig.git
-    version=v1.6.2
+    version=v1.8.2
 
 [monolog]
     git=http://github.com/Seldaek/monolog.git
@@ -16,15 +16,15 @@
 
 [doctrine-dbal]
     git=http://github.com/doctrine/dbal.git
-    version=2.1.6
+    version=2.1.7
 
 [doctrine]
     git=http://github.com/doctrine/doctrine2.git
-    version=2.1.6
+    version=2.1.7
 
 [swiftmailer]
     git=http://github.com/swiftmailer/swiftmailer.git
-    version=v4.1.5
+    version=v4.2.0
 
 [assetic]
     git=http://github.com/kriswallsmith/assetic.git
@@ -60,7 +60,7 @@
 [AsseticBundle]
     git=http://github.com/symfony/AsseticBundle.git
     target=/bundles/Symfony/Bundle/AsseticBundle
-    version=v1.0.1
+    version=origin/2.0
 
 ; En adelante sólo se incluyen las dependencias propias
 
