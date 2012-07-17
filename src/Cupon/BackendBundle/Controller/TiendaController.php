@@ -31,10 +31,10 @@ class TiendaController extends Controller
     public function indexAction()
     {
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         $slug = $this->getRequest()->getSession()->get('ciudad');
         $entities = $em->getRepository('CiudadBundle:Ciudad')->findTodasLasTiendas($slug);
-        
+
         return $this->render('BackendBundle:Tienda:index.html.twig', array(
             'entities' => $entities
         ));
@@ -94,7 +94,7 @@ class TiendaController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('backend_tienda_show', array('id' => $entity->getId())));
-            
+
         }
 
         return $this->render('BackendBundle:Tienda:new.html.twig', array(

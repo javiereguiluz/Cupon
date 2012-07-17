@@ -10,14 +10,14 @@
 {% block article %}
     <section id="descripcion">
         <h1>{{ tienda.nombre }}</h1>
-        
+
         <p>{{ tienda.descripcion }}</p>
     </section>
-    
+
     {% if ofertas %}
     <section id="ultimas">
     <h2>Últimas ofertas publicadas</h2>
-    
+
     <table>
         <thead>
             <tr>
@@ -45,7 +45,7 @@
 
 {% block aside %}
     {{ parent() }}
-    
+
     <section id="cercanas">
         <h2>Otras tiendas en {{ tienda.ciudad.nombre }}</h2>
         <ul>
@@ -54,7 +54,7 @@
             {% endfor %}
         </ul>
     </section>
-    
+
     <section id="nosotros">
         <h2>Sobre nosotros</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>

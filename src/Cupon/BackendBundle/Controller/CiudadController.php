@@ -93,7 +93,7 @@ class CiudadController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('backend_ciudad_show', array('id' => $entity->getId())));
-            
+
         }
 
         return $this->render('BackendBundle:Ciudad:new.html.twig', array(

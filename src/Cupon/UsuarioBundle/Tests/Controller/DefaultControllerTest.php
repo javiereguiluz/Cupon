@@ -59,29 +59,29 @@ class DefaultControllerTest extends WebTestCase
 
         $formulario = $crawler->selectButton('Registrarme')->form($usuario);
         $crawler = $client->submit($formulario);
-        
+
         $this->assertTrue($client->getResponse()->isSuccessful());
-        
+
         // Comprobar que el cliente ahora dispone de una cookie de sesión
         $this->assertRegExp('/(\d|[a-z])+/', $client->getCookieJar()->get('PHPSESSID')->getValue(),
             'La aplicación ha enviado una cookie de sesión'
         );
-        
+
         // Acceder al perfil del usuario recién creado
         $perfil = $crawler->filter('aside section#login')->selectLink('Ver mi perfil')->link();
         $crawler = $client->click($perfil);
-        
+
         $this->assertEquals(
             $usuario['frontend_usuario[email]'],
             $crawler->filter('form input[name="frontend_usuario[email]"]')->attr('value'),
             'El usuario se ha registrado correctamente y sus datos se han guardado en la base de datos'
         );
-        
+
         // Dar de baja al usuario aleatorio recién creado
         $crawler = $client->request('GET', '/es/usuario/baja');
         $this->assertTrue($client->getResponse()->isSuccessful());
     }
-    
+
     /**
      * Método que provee de usuarios de prueba a los tests de esta clase
      */

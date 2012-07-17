@@ -1,9 +1,9 @@
 {% set expirada = oferta.fechaExpiracion|date('YmdHis') < 'now'|date('YmdHis') %}
 <section class="descripcion">
     <h1><a href="{{ path('oferta', { 'ciudad': oferta.ciudad.slug, 'slug' : oferta.slug }) }}">{{ oferta.nombre }}</a></h1>
-    
+
     {{ oferta.descripcion | mostrar_como_lista }}
-    
+
     {% if not expirada %}
     <a class="boton" href="{{ path('comprar', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}">{{ "Comprar" | trans }}</a>
     {% endif %}
@@ -11,9 +11,9 @@
 
 <section class="galeria">
     <img alt="Fotografía de la oferta" src="{{ asset(directorio_imagenes ~ oferta.foto) }}">
-    
+
     <p class="precio">{{ oferta.precio }} &euro; <span>{{ descuento(oferta.precio, oferta.descuento) }}</span></p>
-    
+
     <p><strong>Condiciones:</strong> {{ oferta.condiciones }}</p>
 </section>
 
@@ -24,11 +24,11 @@
         <strong>Faltan</strong>: %tiempo%
         {% endtrans %}
     </div>
-    
+
     <div class="compras">
         <strong>{{ "Compras" | trans }}</strong>: {{ oferta.compras }}
     </div>
-    
+
     <div class="faltan">
         {% set faltan = oferta.umbral - oferta.compras %}
         {% if faltan > 0 %}
@@ -43,7 +43,7 @@
     <div class="tiempo">
         <strong>Finalizada</strong> el {{ oferta.fechaExpiracion|fecha('long') }}
     </div>
-    
+
     <div class="compras">
         <strong>{{ "Compras" | trans }}</strong>: {{ oferta.compras }}
     </div>

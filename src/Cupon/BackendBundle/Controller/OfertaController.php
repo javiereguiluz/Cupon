@@ -37,21 +37,21 @@ class OfertaController extends Controller
             $slug = $this->container->getParameter('cupon.ciudad_por_defecto');
             $sesion->set('ciudad', $slug);
         }
-        
+
         $em = $this->getDoctrine()->getEntityManager();
         $paginador = $this->get('ideup.simple_paginator');
         $paginador->setItemsPerPage(19);
-        
+
         $entities  = $paginador->paginate(
             $em->getRepository('CiudadBundle:Ciudad')->queryTodasLasOfertas($slug)
         )->getResult();
-        
+
         return $this->render('BackendBundle:Oferta:index.html.twig', array(
             'entities'  => $entities,
             'paginador' => $paginador
         ));
     }
-    
+
     /**
      * Finds and displays a Oferta entity.
      *
@@ -81,20 +81,20 @@ class OfertaController extends Controller
     public function newAction()
     {
         $entity = new Oferta();
-        
+
         // Rellenar con valores adecuados algunas propiedades
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         $ciudad = $em->getRepository('CiudadBundle:Ciudad')->findOneBySlug(
             $this->getRequest()->getSession()->get('ciudad')
         );
-        
+
         $entity->setCiudad($ciudad);
         $entity->setCompras(0);
         $entity->setUmbral(0);
         $entity->setFechaPublicacion(new \DateTime('now'));
         $entity->setFechaExpiracion(new \DateTime('tomorrow'));
-        
+
         $form = $this->createForm(new OfertaType(), $entity);
 
         return $this->render('BackendBundle:Oferta:new.html.twig', array(
@@ -113,15 +113,15 @@ class OfertaController extends Controller
         $request = $this->getRequest();
         $form    = $this->createForm(new OfertaType(), $entity);
         $form->bindRequest($request);
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
             $em->flush();
-            
+
             return $this->redirect($this->generateUrl('backend_oferta_show', array('id' => $entity->getId())));
         }
-        
+
         return $this->render('BackendBundle:Oferta:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
@@ -195,24 +195,24 @@ class OfertaController extends Controller
     {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
-        
+
         $form->bindRequest($request);
-        
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $entity = $em->getRepository('OfertaBundle:Oferta')->find($id);
-            
+
             if (!$entity) {
                 throw $this->createNotFoundException('No se ha encontrado la oferta solicitada');
             }
-            
+
             $em->remove($entity);
             $em->flush();
         }
-        
+
         return $this->redirect($this->generateUrl('backend_oferta'));
     }
-    
+
     private function createDeleteForm($id)
     {
         return $this->createFormBuilder(array('id' => $id))

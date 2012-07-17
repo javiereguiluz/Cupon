@@ -29,21 +29,21 @@ class Oferta
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="string")
      *
      * @Assert\NotBlank()
      */
     protected $nombre;
-    
+
     /**
      * @ORM\Column(type="string")
      *
      * @Assert\NotBlank()
      */
     protected $slug;
-    
+
     /**
      * @ORM\Column(type="text")
      *
@@ -51,50 +51,50 @@ class Oferta
      * @Assert\MinLength(30)
      */
     protected $descripcion;
-    
+
     /**
      * @ORM\Column(type="text")
      */
     protected $condiciones;
-    
+
     /**
      * @ORM\Column(type="string")
      *
      * @Assert\Image(maxSize = "500k")
      */
     protected $foto;
-    
+
     /**
      * @ORM\Column(type="decimal", scale=2)
      *
      * @Assert\Min(0)
      */
     protected $precio;
-    
+
     /**
      * @ORM\Column(type="decimal", scale=2)
      */
     protected $descuento;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      *
      * @Assert\DateTime
      */
     protected $fecha_publicacion;
-    
+
     /**
      * @ORM\Column(type="datetime", nullable=true)
      *
      * @Assert\DateTime
      */
     protected $fecha_expiracion;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     protected $compras;
-    
+
     /**
      * @ORM\Column(type="integer")
      *
@@ -102,29 +102,29 @@ class Oferta
      * @Assert\Min(0)
      */
     protected $umbral;
-    
+
     /**
      * @ORM\Column(type="boolean")
      *
      * @Assert\Type(type="bool")
      */
     protected $revisada;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Cupon\CiudadBundle\Entity\Ciudad")
      */
     protected $ciudad;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Cupon\TiendaBundle\Entity\Tienda")
      */
     protected $tienda;
-    
+
     public function __toString()
     {
         return $this->getNombre();
     }
-    
+
     /**
      * @Assert\True(message = "La fecha de expiración debe ser posterior a la fecha de publicación")
      */
@@ -133,10 +133,10 @@ class Oferta
         if ($this->fecha_publicacion == null || $this->fecha_expiracion == null) {
             return true;
         }
-        
+
         return $this->fecha_expiracion > $this->fecha_publicacion;
     }
-    
+
     /**
      * Sube la foto de la oferta copiándola en el directorio que se indica y
      * guardando en la entidad la ruta hasta la foto
@@ -148,18 +148,18 @@ class Oferta
         if (null === $this->foto) {
             return;
         }
-        
+
         $nombreArchivoFoto = uniqid('cupon-').'-1.'.$this->foto->guessExtension();
-        
+
         $this->foto->move($directorioDestino, $nombreArchivoFoto);
-        
+
         $this->setFoto($nombreArchivoFoto);
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -180,7 +180,7 @@ class Oferta
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -200,7 +200,7 @@ class Oferta
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -220,7 +220,7 @@ class Oferta
     /**
      * Get descripcion
      *
-     * @return text 
+     * @return text
      */
     public function getDescripcion()
     {
@@ -240,7 +240,7 @@ class Oferta
     /**
      * Get condiciones
      *
-     * @return text 
+     * @return text
      */
     public function getCondiciones()
     {
@@ -260,7 +260,7 @@ class Oferta
     /**
      * Get foto
      *
-     * @return string 
+     * @return string
      */
     public function getFoto()
     {
@@ -280,7 +280,7 @@ class Oferta
     /**
      * Get precio
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getPrecio()
     {
@@ -300,7 +300,7 @@ class Oferta
     /**
      * Get descuento
      *
-     * @return decimal 
+     * @return decimal
      */
     public function getDescuento()
     {
@@ -320,7 +320,7 @@ class Oferta
     /**
      * Get fecha_publicacion
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getFechaPublicacion()
     {
@@ -340,7 +340,7 @@ class Oferta
     /**
      * Get fecha_expiracion
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getFechaExpiracion()
     {
@@ -360,7 +360,7 @@ class Oferta
     /**
      * Get compras
      *
-     * @return integer 
+     * @return integer
      */
     public function getCompras()
     {
@@ -380,7 +380,7 @@ class Oferta
     /**
      * Get umbral
      *
-     * @return integer 
+     * @return integer
      */
     public function getUmbral()
     {
@@ -400,7 +400,7 @@ class Oferta
     /**
      * Get revisada
      *
-     * @return boolean 
+     * @return boolean
      */
     public function getRevisada()
     {
@@ -420,7 +420,7 @@ class Oferta
     /**
      * Get ciudad
      *
-     * @return Cupon\CiudadBundle\Entity\Ciudad 
+     * @return Cupon\CiudadBundle\Entity\Ciudad
      */
     public function getCiudad()
     {
@@ -440,7 +440,7 @@ class Oferta
     /**
      * Get tienda
      *
-     * @return Cupon\TiendaBundle\Entity\Tienda 
+     * @return Cupon\TiendaBundle\Entity\Tienda
      */
     public function getTienda()
     {

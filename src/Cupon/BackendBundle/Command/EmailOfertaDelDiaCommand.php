@@ -14,13 +14,11 @@
 
 namespace Cupon\BackendBundle\Command;
 
-use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Output\Output;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
-use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Comando que envía cada día un email a todos los usuarios que lo
@@ -44,40 +42,40 @@ en cuenta si el usuario permite el envío o no de publicidad.
 EOT
         );
     }
-    
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $host = 'dev' == $input->getOption('env') ? 'http://cupon.local' : 'http://cupon.com';
         $accion = $input->getOption('accion');
-        
+
         $contenedor = $this->getContainer();
         $em = $contenedor->get('doctrine')->getEntityManager();
-        
+
         // Obtener el listado de usuarios que permiten el envío de email
         $usuarios = $em->getRepository('UsuarioBundle:Usuario')->findBy(array('permite_email' => true));
-        
+
         $output->writeln(sprintf(' Se van a enviar <info>%s</info> emails', count($usuarios)));
-        
+
         // Buscar la 'oferta del día' en todas las ciudades de la aplicación
         $ofertas = array();
         $ciudades = $em->getRepository('CiudadBundle:Ciudad')->findAll();
         foreach ($ciudades as $ciudad) {
             $id   = $ciudad->getId();
             $slug = $ciudad->getSlug();
-            
+
             $ofertas[$id] = $em->getRepository('OfertaBundle:Oferta')->findOfertaDelDiaSiguiente($slug);
         }
-        
+
         // Generar el email personalizado de cada usuario
         foreach ($usuarios as $usuario) {
             $ciudad = $usuario->getCiudad();
             $oferta = $ofertas[$ciudad->getId()];
-            
+
             $contenido = $contenedor->get('twig')->render(
                 'BackendBundle:Oferta:email.html.twig',
                 array('host' => $host, 'ciudad' => $ciudad, 'oferta' => $oferta, 'usuario' => $usuario)
             );
-            
+
             // Enviar el email
             if ('enviar' == $accion) {
                 $email = \Swift_Message::newInstance()
@@ -89,7 +87,7 @@ EOT
                 $this->getContainer()->get('mailer')->send($email);
             }
         }
-        
+
         if ('enviar' != $accion) {
             $output->writeln("\n No se ha enviado ningún email. Para enviar los emails a sus destinatarios,\n ejecuta el comando con la opción <info>accion</info>. Ejemplo:\n <info>./app/console email:oferta-del-dia --accion=enviar</info>\n");
         }

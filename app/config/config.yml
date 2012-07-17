@@ -38,7 +38,7 @@ assetic:
         yui_js:
             jar:      %kernel.root_dir%/Resources/java/yuicompressor-2.4.6.jar
             apply_to: \.js$
-        
+
 #        optipng:
 #            bin: /usr/local/bin/optipng
 #

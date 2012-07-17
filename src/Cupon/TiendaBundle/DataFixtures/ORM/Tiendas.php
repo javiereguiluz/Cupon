@@ -39,20 +39,20 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     {
         $this->container = $container;
     }
-    
+
     public function load(ObjectManager $manager)
     {
         // Obtener todas las ciudades de la base de datos
         $ciudades = $manager->getRepository('CiudadBundle:Ciudad')->findAll();
-        
+
         $i = 1;
         foreach ($ciudades as $ciudad) {
             $numeroTiendas = rand(2, 5);
             for ($j=1; $j<=$numeroTiendas; $j++) {
                 $tienda = new Tienda();
-                
+
                 $tienda->setNombre($this->getNombre());
-                
+
                 $tienda->setLogin('tienda'.$i);
                 $tienda->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
 
@@ -66,32 +66,36 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
                 $tienda->setCiudad($ciudad);
 
                 $manager->persist($tienda);
-                
+
                 $i++;
             }
         }
-        
+
         $manager->flush();
     }
-    
+
     /**
      * Generador aleatorio de nombres de tiendas
      */
     private function getNombre()
     {
         $prefijos = array('Restaurante', 'Cafetería', 'Bar', 'Pub', 'Pizza', 'Burger');
-        $nombres = array('Lorem ipsum', 'Sit amet', 'Consectetur', 'Adipiscing elit', 'Nec sapien', 'Tincidunt', 'Facilisis', 'Nulla scelerisque', 'Blandit ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enim sit');
-        
+        $nombres = array(
+            'Lorem ipsum', 'Sit amet', 'Consectetur', 'Adipiscing elit',
+            'Nec sapien', 'Tincidunt', 'Facilisis', 'Nulla scelerisque',
+            'Blandit ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enim sit'
+        );
+
         return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)];
     }
-    
+
     /**
      * Generador aleatorio de descripciones de tiendas
      */
     private function getDescripcion()
     {
         $descripcion = '';
-        
+
         $frases = array_flip(array(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'Mauris ultricies nunc nec sapien tincidunt facilisis.',
@@ -109,24 +113,28 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
             'Aliquam dapibus metus aliquam ante lacinia blandit.',
             'Donec ornare lacus vitae dolor imperdiet vitae ultricies nibh congue.',
         ));
-        
+
         $numeroFrases = rand(3, 6);
 
         return implode(' ', array_rand($frases, $numeroFrases));
     }
-    
+
     /**
      * Generador aleatorio de direcciones postales
      */
     private function getDireccion($ciudad)
     {
         $prefijos = array('Calle', 'Avenida', 'Plaza');
-        $nombres = array('Lorem', 'Ipsum', 'Sitamet', 'Consectetur', 'Adipiscing', 'Necsapien', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque', 'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit');
+        $nombres = array(
+            'Lorem', 'Ipsum', 'Sitamet', 'Consectetur', 'Adipiscing',
+            'Necsapien', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque',
+            'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit'
+        );
 
         return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)].', '.rand(1, 100)."\n"
                .$this->getCodigoPostal().' '.$ciudad->getNombre();
     }
-    
+
     /**
      * Generador aleatorio de códigos postales
      */

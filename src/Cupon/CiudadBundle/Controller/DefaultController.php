@@ -15,9 +15,7 @@
 namespace Cupon\CiudadBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
@@ -32,13 +30,13 @@ class DefaultController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $ciudades = $em->getRepository('CiudadBundle:Ciudad')->findListaCiudades();
-        
+
         return $this->render('CiudadBundle:Default:listaCiudades.html.twig', array(
             'ciudadActual' => $ciudad,
             'ciudades'     => $ciudades
         ));
     }
-    
+
     /**
      * Cambia la ciudad activa por la que se indica. En la parte frontal de la
      * aplicación esto simplemente significa que se le redirige al usuario a la
@@ -50,7 +48,7 @@ class DefaultController extends Controller
     {
         return new RedirectResponse($this->generateUrl('portada', array('ciudad' => $ciudad)));
     }
-    
+
     /**
      * Muestra las ofertas más recientes de la ciudad indicada
      *
@@ -59,24 +57,24 @@ class DefaultController extends Controller
     public function recientesAction($ciudad)
     {
         $em = $this->getDoctrine()->getEntityManager();
-        
+
         $ciudad = $em->getRepository('CiudadBundle:Ciudad')->findOneBySlug($ciudad);
         if (!$ciudad) {
             throw $this->createNotFoundException('La ciudad indicada no está disponible');
         }
-        
+
         $cercanas = $em->getRepository('CiudadBundle:Ciudad')->findCercanas($ciudad->getId());
         $ofertas  = $em->getRepository('OfertaBundle:Oferta')->findRecientes($ciudad->getId());
-        
+
         $formato = $this->get('request')->getRequestFormat();
         $respuesta = $this->render('CiudadBundle:Default:recientes.'.$formato.'.twig', array(
             'ciudad'   => $ciudad,
             'cercanas' => $cercanas,
             'ofertas'  => $ofertas
         ));
-        
+
         $respuesta->setSharedMaxAge(3600);
-        
+
         return $respuesta;
     }
 }

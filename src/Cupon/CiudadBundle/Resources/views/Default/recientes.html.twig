@@ -9,7 +9,7 @@
 
 {% block article %}
     <h1>Ofertas recientes en <strong>{{ ciudad.nombre }}</strong></h1>
-    
+
     {% for oferta in ofertas %}
         {% include 'OfertaBundle:Default:includes/minioferta.html.twig' %}
     {% endfor %}

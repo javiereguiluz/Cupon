@@ -25,13 +25,13 @@ class Venta
      * @ORM\Column(type="datetime")
      */
     protected $fecha;
-    
+
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Cupon\OfertaBundle\Entity\Oferta")
      */
     protected $oferta;
-    
+
     /**
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Cupon\UsuarioBundle\Entity\Usuario")
@@ -51,7 +51,7 @@ class Venta
     /**
      * Get fecha
      *
-     * @return datetime 
+     * @return datetime
      */
     public function getFecha()
     {
@@ -71,7 +71,7 @@ class Venta
     /**
      * Get oferta
      *
-     * @return Cupon\OfertaBundle\Entity\Oferta 
+     * @return Cupon\OfertaBundle\Entity\Oferta
      */
     public function getOferta()
     {
@@ -91,7 +91,7 @@ class Venta
     /**
      * Get usuario
      *
-     * @return Cupon\UsuarioBundle\Entity\Usuario 
+     * @return Cupon\UsuarioBundle\Entity\Usuario
      */
     public function getUsuario()
     {

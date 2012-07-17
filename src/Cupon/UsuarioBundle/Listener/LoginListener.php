@@ -28,31 +28,30 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 class LoginListener
 {
     private $contexto, $router, $ciudad = null;
-    
+
     public function __construct(SecurityContext $context, Router $router)
     {
         $this->contexto = $context;
         $this->router   = $router;
     }
-    
+
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
     {
         $token = $event->getAuthenticationToken();
         $this->ciudad = $token->getUser()->getCiudad()->getSlug();
     }
-    
+
     public function onKernelResponse(FilterResponseEvent $event)
     {
         if (null != $this->ciudad) {
-            if($this->contexto->isGranted('ROLE_TIENDA')) {
+            if ($this->contexto->isGranted('ROLE_TIENDA')) {
                 $portada = $this->router->generate('extranet_portada');
-            }
-            else {
+            } else {
                 $portada = $this->router->generate('portada', array(
                     'ciudad' => $this->ciudad
                 ));
             }
-            
+
             $event->setResponse(new RedirectResponse($portada));
             $event->stopPropagation();
         }

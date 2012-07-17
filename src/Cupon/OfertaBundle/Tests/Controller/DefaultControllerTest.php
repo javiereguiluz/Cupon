@@ -32,28 +32,28 @@ class DefaultControllerTest extends WebTestCase
         $client = static::createClient();
         //SUT
         $crawler = $client->request('GET', '/');
-        
+
         $this->assertEquals(302, $client->getResponse()->getStatusCode(),
             'La portada redirige a la portada de una ciudad (status 302)'
         );
     }
-    
+
     /** @test */
     public function laPortadaSoloMuestraUnaOfertaActiva()
     {
         $client = static::createClient();
         $client->request('GET', '/');
         $crawler = $client->followRedirect();
-        //SUT        
+        //SUT
         $ofertasActivas = $crawler->filter(
             'article.oferta section.descripcion a:contains("Comprar")'
         )->count();
-        
+
         $this->assertEquals(1, $ofertasActivas,
             'La portada muestra una única oferta activa que se puede comprar'
         );
     }
-    
+
     /** @test */
     public function losUsuariosPuedenRegistrarseDesdeLaPortada()
     {
@@ -62,12 +62,12 @@ class DefaultControllerTest extends WebTestCase
         $crawler = $client->followRedirect();
         //SUT
         $numeroEnlacesRegistrarse = $crawler->filter('html:contains("Regístrate")')->count();
-        
+
         $this->assertGreaterThan(0, $numeroEnlacesRegistrarse,
             'La portada muestra al menos un enlace o botón para registrarse'
         );
     }
-    
+
     /** @test */
     public function losUsuariosAnonimosVenLaCiudadPorDefecto()
     {
@@ -77,12 +77,12 @@ class DefaultControllerTest extends WebTestCase
         //SUT
         $ciudadPorDefecto = $client->getContainer()->getParameter('cupon.ciudad_por_defecto');
         $ciudadPortada = $crawler->filter('header nav select option[selected="selected"]')->attr('value');
-        
+
         $this->assertEquals($ciudadPorDefecto, $ciudadPortada,
             'La ciudad seleccionada en la portada de un usuario anónimo es la ciudad por defecto'
         );
     }
-    
+
     /** @test */
     public function losUsuariosAnonimosNoPuedenComprar()
     {
@@ -92,12 +92,12 @@ class DefaultControllerTest extends WebTestCase
         //SUT
         $comprar = $crawler->selectLink('Comprar')->link();
         $client->click($comprar);
-        
+
         $this->assertTrue($client->getResponse()->isRedirect(),
             'Cuando un usuario anónimo intenta comprar, se le redirige al formulario de login'
         );
     }
-    
+
     /** @test */
     public function losUsuariosAnonimosDebenLoguearseParaPoderComprar()
     {
@@ -109,12 +109,12 @@ class DefaultControllerTest extends WebTestCase
         $comprar = $crawler->selectLink('Comprar')->link();
         $client->click($comprar);
         $crawler = $client->followRedirect();
-        
+
         $this->assertRegExp($pathLogin, $crawler->filter('article form')->attr('action'),
             'Después de pulsar el botón de comprar, el usuario anónimo ve el formulario de login'
         );
     }
-    
+
     /** @test */
     public function laPortadaRequierePocasConsultasDeBaseDeDatos()
     {
@@ -127,13 +127,13 @@ class DefaultControllerTest extends WebTestCase
             );
         }
     }
-    
+
     /** @test */
     public function laPortadaSeGeneraMuyRapido()
     {
         $client = static::createClient();
         $client->request('GET', '/');
-        
+
         if ($profiler = $client->getProfile()) {
             $this->assertLessThan(0.5, $profiler->getCollector('timer')->getTime(),
                 'La portada se genera en menos de medio segundo'

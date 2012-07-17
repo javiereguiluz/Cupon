@@ -26,76 +26,76 @@ class Tienda implements UserInterface
     /**
      * Método requerido por la interfaz UserInterface
      */
-    function equals(\Symfony\Component\Security\Core\User\UserInterface $usuario)
+    public function equals(\Symfony\Component\Security\Core\User\UserInterface $usuario)
     {
         return $this->getLogin() == $usuario->getLogin();
     }
-    
+
     /**
      * Método requerido por la interfaz UserInterface
      */
-    function eraseCredentials()
+    public function eraseCredentials()
     {
     }
-    
+
     /**
      * Método requerido por la interfaz UserInterface
      */
-    function getRoles()
+    public function getRoles()
     {
         return array('ROLE_TIENDA');
     }
-    
+
     /**
      * Método requerido por la interfaz UserInterface
      */
-    function getUsername()
+    public function getUsername()
     {
         return $this->getLogin();
     }
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="string", length=100)
      */
     protected $nombre;
-    
+
     /**
      * @ORM\Column(type="string", length=100)
      */
     protected $slug;
-    
+
     /**
      * @ORM\Column(type="string", length=10)
      */
     protected $login;
-    
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     protected $password;
-    
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     protected $salt;
-    
+
     /**
      * @ORM\Column(type="text")
      */
     protected $descripcion;
-    
+
     /**
      * @ORM\Column(type="text")
      */
     protected $direccion;
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="Cupon\CiudadBundle\Entity\Ciudad")
      */
@@ -105,11 +105,11 @@ class Tienda implements UserInterface
     {
         return $this->getNombre();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -130,7 +130,7 @@ class Tienda implements UserInterface
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -150,13 +150,13 @@ class Tienda implements UserInterface
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
         return $this->slug;
     }
-    
+
     /**
      * Set login
      *
@@ -170,13 +170,13 @@ class Tienda implements UserInterface
     /**
      * Get login
      *
-     * @return string 
+     * @return string
      */
     public function getLogin()
     {
         return $this->login;
     }
-    
+
     /**
      * Set password
      *
@@ -190,13 +190,13 @@ class Tienda implements UserInterface
     /**
      * Get salt
      *
-     * @return string 
+     * @return string
      */
     public function getSalt()
     {
         return $this->salt;
     }
-    
+
     /**
      * Set salt
      *
@@ -210,7 +210,7 @@ class Tienda implements UserInterface
     /**
      * Get password
      *
-     * @return string 
+     * @return string
      */
     public function getPassword()
     {
@@ -230,7 +230,7 @@ class Tienda implements UserInterface
     /**
      * Get descripcion
      *
-     * @return text 
+     * @return text
      */
     public function getDescripcion()
     {
@@ -250,7 +250,7 @@ class Tienda implements UserInterface
     /**
      * Get direccion
      *
-     * @return text 
+     * @return text
      */
     public function getDireccion()
     {
@@ -270,7 +270,7 @@ class Tienda implements UserInterface
     /**
      * Get ciudad
      *
-     * @return Cupon\CiudadBundle\Entity\Ciudad 
+     * @return Cupon\CiudadBundle\Entity\Ciudad
      */
     public function getCiudad()
     {

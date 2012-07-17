@@ -5,7 +5,7 @@
 
 {% block article %}
     <h1>{{ block('title') }}</h1>
-    
+
     {% for compra in compras %}
         {% include 'OfertaBundle:Default:includes/minioferta.html.twig' with {
             'oferta':      compra.oferta,

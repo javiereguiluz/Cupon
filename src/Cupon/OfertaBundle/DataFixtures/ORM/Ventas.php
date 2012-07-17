@@ -31,22 +31,22 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
     {
         return 50;
     }
-    
+
     public function load(ObjectManager $manager)
     {
         // Obtener todas las ofertas y usuarios de la base de datos
         $ofertas = $manager->getRepository('OfertaBundle:Oferta')->findAll();
         $usuarios = $manager->getRepository('UsuarioBundle:Usuario')->findAll();
-        
+
         foreach ($usuarios as $usuario) {
             $compras = rand(0, 10);
             $comprado = array();
-            
+
             for ($i=0; $i<$compras; $i++) {
                 $venta = new Venta();
 
                 $venta->setFecha(new \DateTime('now - '.rand(0, 250).' hours'));
-                
+
                 // Sólo se añade una venta:
                 //   - si este mismo usuario no ha comprado antes la misma oferta
                 //   - si la oferta seleccionada ha sido revisada
@@ -58,19 +58,19 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
                     $oferta = $ofertas[array_rand($ofertas)];
                 }
                 $comprado[] = $oferta->getId();
-                
+
                 $venta->setOferta($oferta);
                 $venta->setUsuario($usuario);
-                
+
                 $manager->persist($venta);
-                
+
                 $oferta->setCompras($oferta->getCompras() + 1);
                 $manager->persist($oferta);
             }
-            
+
             unset($comprado);
         }
-        
+
         $manager->flush();
     }
 }

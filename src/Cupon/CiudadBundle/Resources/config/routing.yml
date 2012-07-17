@@ -7,4 +7,3 @@ ciudad_cambiar:
 ciudad_recientes:
     pattern:  /{ciudad}/recientes
     defaults: { _controller: CiudadBundle:Default:recientes }
-

@@ -37,20 +37,20 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
     {
         return 30;
     }
-    
+
     private $container;
 
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
     }
-    
+
     public function load(ObjectManager $manager)
     {
         // Obtener todas las tiendas y ciudades de la base de datos
         $ciudades = $manager->getRepository('CiudadBundle:Ciudad')->findAll();
         $tiendas = $manager->getRepository('TiendaBundle:Tienda')->findAll();
-        
+
         foreach ($ciudades as $ciudad) {
             $tiendas = $manager->getRepository('TiendaBundle:Tienda')->findByCiudad(
                 $ciudad->getId()
@@ -70,13 +70,11 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
                 if (1 == $j) {
                     $fecha = 'today';
                     $oferta->setRevisada(true);
-                }
-                elseif ($j < 10) {
+                } elseif ($j < 10) {
                     $fecha = 'now - '.($j-1).' days';
                     // el 80% de las ofertas pasadas se marcan como revisadas
                     $oferta->setRevisada((rand(1, 1000) % 10) < 8);
-                }
-                else {
+                } else {
                     $fecha = 'now + '.($j - 10 + 1).' days';
                     $oferta->setRevisada(true);
                 }
@@ -139,21 +137,27 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
     private function getNombre()
     {
         $nombre = 'Oferta ';
-        
-        $palabras = array_flip(array('Lorem', 'Ipsum', 'Sitamet', 'Et', 'At', 'Sed', 'Aut', 'Vel', 'Ut', 'Dum', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque', 'Blandit', 'Ligula', 'Eget', 'Drerit', 'Malesuada', 'Enimsit', 'Libero', 'Penatibus', 'Imperdiet', 'Pendisse', 'Vulputae', 'Natoque', 'Aliquam', 'Dapibus', 'Lacinia'));
-        
+
+        $palabras = array_flip(array(
+            'Lorem', 'Ipsum', 'Sitamet', 'Et', 'At', 'Sed', 'Aut', 'Vel', 'Ut',
+            'Dum', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque', 'Blandit',
+            'Ligula', 'Eget', 'Drerit', 'Malesuada', 'Enimsit', 'Libero',
+            'Penatibus', 'Imperdiet', 'Pendisse', 'Vulputae', 'Natoque',
+            'Aliquam', 'Dapibus', 'Lacinia'
+        ));
+
         $numeroPalabras = rand(4, 8);
 
         return implode(' ', array_rand($palabras, $numeroPalabras));
     }
-    
+
     /**
      * Generador aleatorio de descripciones de ofertas
      */
     private function getDescripcion()
     {
         $descripcion = array();
-        
+
         $frases = array_flip(array(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'Mauris ultricies nunc nec sapien tincidunt facilisis.',
@@ -171,19 +175,19 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
             'Aliquam dapibus metus aliquam ante lacinia blandit.',
             'Donec ornare lacus vitae dolor imperdiet vitae ultricies nibh congue.',
         ));
-        
+
         $numeroFrases = rand(4, 7);
 
         return implode("\n", array_rand($frases, $numeroFrases));
     }
-    
+
     /**
      * Generador aleatorio de condiciones de ofertas
      */
     private function getCondiciones()
     {
         $condiciones = '';
-        
+
         $frases = array_flip(array(
             'Máximo 1 consumición por persona.',
             'No acumulable a otras ofertas.',
@@ -194,7 +198,7 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
             'Oferta válida si se realizan consumiciones adicionales por valor de 50 euros.',
             'Válido solamente para comidas, no para cenas.',
         ));
-        
+
         $numeroFrases = rand(2, 4);
 
         return implode(' ', array_rand($frases, $numeroFrases));

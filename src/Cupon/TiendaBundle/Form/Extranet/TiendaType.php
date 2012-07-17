@@ -29,14 +29,14 @@ class TiendaType extends AbstractType
         $builder
             ->add('nombre')
             ->add('login', 'text', array('read_only' => true))
-            
+
             ->add('password', 'repeated', array(
                 'type' => 'password',
                 'invalid_message' => 'Las dos contraseñas deben coincidir',
                 'options' => array('label' => 'Contraseña'),
                 'required' => false
             ))
-            
+
             ->add('descripcion')
             ->add('direccion')
             ->add('ciudad')

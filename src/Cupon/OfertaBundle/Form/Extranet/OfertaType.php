@@ -38,7 +38,7 @@ class OfertaType extends AbstractType
             ->add('descuento', 'money')
             ->add('umbral')
         ;
-        
+
         // El formulario es diferente según se utilice en la acción 'new' o en la acción 'edit'
         // Para determinar en qué acción estamos, se comprueba si el atributo `id` del objeto
         // es null, en cuyo caso estamos en la acción 'new'
@@ -51,7 +51,7 @@ class OfertaType extends AbstractType
         // activado y para mostrar un mensaje de error en caso contrario.
         if (null == $options['data']->getId()) {
             $builder->add('acepto', 'checkbox', array('property_path' => false));
-            
+
             $builder->addValidator(new CallbackValidator(function(FormInterface $form) {
                 if ($form["acepto"]->getData() == false) {
                     $form->addError(new FormError('Debes aceptar las condiciones indicadas antes de poder añadir una nueva oferta'));

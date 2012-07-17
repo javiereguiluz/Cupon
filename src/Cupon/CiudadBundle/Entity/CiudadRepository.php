@@ -24,13 +24,17 @@ class CiudadRepository extends EntityRepository
     public function findListaCiudades()
     {
         $em = $this->getEntityManager();
-        
-        $consulta = $em->createQuery('SELECT c FROM CiudadBundle:Ciudad c ORDER BY c.nombre');
+
+        $consulta = $em->createQuery('
+            SELECT c
+            FROM CiudadBundle:Ciudad c
+            ORDER BY c.nombre
+        ');
         $consulta->useResultCache(true, 3600);
-        
+
         return $consulta->getArrayResult();
     }
-    
+
     /**
      * Encuentra las cinco ciudades más cercanas a la ciudad indicada
      *
@@ -39,15 +43,20 @@ class CiudadRepository extends EntityRepository
     public function findCercanas($ciudad_id)
     {
         $em = $this->getEntityManager();
-        
-        $consulta = $em->createQuery('SELECT c FROM CiudadBundle:Ciudad c WHERE c.id != :id ORDER BY c.nombre ASC');
+
+        $consulta = $em->createQuery('
+            SELECT c
+            FROM CiudadBundle:Ciudad c
+            WHERE c.id != :id
+            ORDER BY c.nombre ASC
+        ');
         $consulta->setMaxResults(5);
         $consulta->setParameter('id', $ciudad_id);
         $consulta->useResultCache(true, 3600);
-        
+
         return $consulta->getResult();
     }
-    
+
     /**
      * Encuentra todas las ofertas de la ciudad indicada
      *
@@ -57,7 +66,7 @@ class CiudadRepository extends EntityRepository
     {
         return $this->queryTodasLasOfertas($ciudad)->getResult();
     }
-    
+
     /**
      * Método especial asociado con `findTodasLasOfertas()` y que devuelve solamente
      * la consulta necesaria para obtener todas las ofertas de la ciudad indicada.
@@ -68,14 +77,19 @@ class CiudadRepository extends EntityRepository
     public function queryTodasLasOfertas($ciudad)
     {
         $em = $this->getEntityManager();
-        
-        $consulta = $em->createQuery('SELECT o, t FROM OfertaBundle:Oferta o JOIN o.tienda t JOIN o.ciudad c WHERE c.slug = :ciudad ORDER BY o.fecha_publicacion DESC');
+
+        $consulta = $em->createQuery('
+            SELECT o, t
+            FROM OfertaBundle:Oferta o JOIN o.tienda t JOIN o.ciudad c
+            WHERE c.slug = :ciudad
+            ORDER BY o.fecha_publicacion DESC
+        ');
         $consulta->setParameter('ciudad', $ciudad);
         $consulta->useResultCache(true, 600);
-        
+
         return $consulta;
     }
-    
+
     /**
      * Encuentra todos los usuarios asociados a la ciudad indicada
      *
@@ -85,7 +99,7 @@ class CiudadRepository extends EntityRepository
     {
         return $this->queryTodosLosUsuarios($ciudad)->getResult();
     }
-    
+
     /**
      * Método especial asociado con `findTodosLosUsuarios()` y que devuelve solamente
      * la consulta necesaria para obtener todos los usuarios de la ciudad indicada.
@@ -96,13 +110,18 @@ class CiudadRepository extends EntityRepository
     public function queryTodosLosUsuarios($ciudad)
     {
         $em = $this->getEntityManager();
-        
-        $consulta = $em->createQuery('SELECT u FROM UsuarioBundle:Usuario u JOIN u.ciudad c WHERE c.slug = :ciudad ORDER BY u.apellidos ASC');
+
+        $consulta = $em->createQuery('
+            SELECT u
+            FROM UsuarioBundle:Usuario u JOIN u.ciudad c
+            WHERE c.slug = :ciudad
+            ORDER BY u.apellidos ASC
+        ');
         $consulta->setParameter('ciudad', $ciudad);
-        
+
         return $consulta;
     }
-    
+
     /**
      * Encuentra todas las tiendas asociadas a la ciudad indicada
      *
@@ -112,7 +131,7 @@ class CiudadRepository extends EntityRepository
     {
         return $this->queryTodasLasTiendas($ciudad)->getResult();
     }
-    
+
     /**
      * Método especial asociado con `findTodasLasTiendas()` y que devuelve solamente
      * la consulta necesaria para obtener todas las tiendas de la ciudad indicada.
@@ -123,11 +142,16 @@ class CiudadRepository extends EntityRepository
     public function queryTodasLasTiendas($ciudad)
     {
         $em = $this->getEntityManager();
-        
-        $consulta = $em->createQuery('SELECT t FROM TiendaBundle:Tienda t JOIN t.ciudad c WHERE c.slug = :ciudad ORDER BY t.nombre ASC');
+
+        $consulta = $em->createQuery('
+            SELECT t
+            FROM TiendaBundle:Tienda t JOIN t.ciudad c
+            WHERE c.slug = :ciudad
+            ORDER BY t.nombre ASC
+        ');
         $consulta->setParameter('ciudad', $ciudad);
         $consulta->useResultCache(true, 600);
-        
+
         return $consulta;
     }
 }

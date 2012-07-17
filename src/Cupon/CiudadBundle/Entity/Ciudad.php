@@ -28,27 +28,26 @@ class Ciudad
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(type="string", length=100)
      */
     protected $nombre;
-    
+
     /**
      * @ORM\Column(type="string", length=100)
      */
     protected $slug;
-    
-    
+
     public function __toString()
     {
         return $this->getNombre();
     }
-    
+
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -69,7 +68,7 @@ class Ciudad
     /**
      * Get nombre
      *
-     * @return string 
+     * @return string
      */
     public function getNombre()
     {
@@ -89,7 +88,7 @@ class Ciudad
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {

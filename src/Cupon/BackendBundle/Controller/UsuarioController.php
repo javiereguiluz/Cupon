@@ -32,13 +32,13 @@ class UsuarioController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
         $paginador = $this->get('ideup.simple_paginator');
-        
+
         $slug = $this->getRequest()->getSession()->get('ciudad');
-        
+
         $entities  = $paginador->paginate(
             $em->getRepository('CiudadBundle:Ciudad')->queryTodosLosUsuarios($slug)
         )->getResult();
-        
+
         return $this->render('BackendBundle:Usuario:index.html.twig', array(
             'entities'  => $entities,
             'paginador' => $paginador
@@ -99,7 +99,7 @@ class UsuarioController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('backend_usuario_show', array('id' => $entity->getId())));
-            
+
         }
 
         return $this->render('BackendBundle:Usuario:new.html.twig', array(

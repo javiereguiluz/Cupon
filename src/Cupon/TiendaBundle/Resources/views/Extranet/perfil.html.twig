@@ -14,38 +14,38 @@
         {{ form_label(formulario.nombre) }}
         {{ form_errors(formulario.nombre) }}
         {{ form_widget(formulario.nombre, { 'attr': { 'class': 'largo' } }) }}
-        
+
         <p class="ayuda">Puedes cambiarlo tantas veces como quieras, pero te aconsejamos que no lo hagas para no confundir a tus clientes.</p>
     </div>
-    
+
     <div>
         {{ form_label(formulario.login, 'Nombre de usuario') }}
         {{ form_errors(formulario.login) }}
         {{ form_widget(formulario.login) }}
-        
+
         <p class="ayuda">El "nombre de usuario" o <em>login</em> no se puede cambiar una vez asignado.</p>
     </div>
-    
+
     <div>
         {{ form_widget(formulario.password) }}
-        
+
         <p class="ayuda">Si quieres cambiar la contraseña, escríbela dos veces. Si no quieres cambiarla, deja su valor vacío.</p>
     </div>
-    
+
     <div>
         {{ form_label(formulario.descripcion, 'Descripción') }}
         {{ form_errors(formulario.descripcion) }}
         {{ form_widget(formulario.descripcion) }}
     </div>
-    
+
     <div>
         {{ form_label(formulario.ciudad) }}
         {{ form_errors(formulario.ciudad) }}
         {{ form_widget(formulario.ciudad) }}
     </div>
-    
+
     {{ form_rest(formulario) }}
-    
+
     <input class="boton" type="submit" value="Guardar cambios" />
 </div>
 </form>

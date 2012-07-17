@@ -17,7 +17,7 @@
             <th>Acciones</th>
         </tr>
     </thead>
-    
+
     <tbody>
         {% for oferta in ofertas %}
         <tr>
@@ -37,7 +37,7 @@
                         <a href="{{ path('extranet_oferta_ventas', { 'id': oferta.id }) }}">Lista de ventas</a>
                     </li>
                     {% endif %}
-                    
+
                     {% if not oferta.revisada %}
                     <li>
                         <a href="{{ path('extranet_oferta_editar', { 'id': oferta.id }) }}">Modificar</a>

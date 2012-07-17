@@ -14,7 +14,6 @@
 
 namespace Cupon\OfertaBundle\Listener;
 
-use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
 class RequestListener
