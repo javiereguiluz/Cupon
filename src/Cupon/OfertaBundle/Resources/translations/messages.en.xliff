@@ -4,7 +4,7 @@
         <body>
             <trans-unit id="1">
                 <source>Oferta del día</source>
-                <target>Daily deal</target>
+                <target>Daily offer</target>
             </trans-unit>
             <trans-unit id="2">
                 <source>Ofertas recientes</source>

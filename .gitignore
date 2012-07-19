@@ -1,18 +1,25 @@
-app/bootstrap.php.cache
-app/bootstrap_cache.php.cache
-app/cache/*
-app/logs/*
+# Archivos de bootstrap (compilan las clases más usadas en Symfony2)
+app/bootstrap*
 
+# Directorios de Symfony
 vendor/*
-
+*/logs/*
+*/cache/*
+web/uploads/*
 web/bundles/*
 web/css/*
 web/js/*
 
-# ignorar archivos de Eclipse, Zend Studio, Netbeans, PHPStorm y TextMate2
+# Archivos de configuración
+app/config/parameters.ini
+app/config/parameters.yml
+
+# Archivos de entornos de desarrollo y editores de texto
+# (SublimeText, Eclipse, Zend Studio, Netbeans, PHPStorm, TextMate2)
 .buildpath
+.idea
+nbproject
 .project
 .settings
-nbproject
-.idea
+.sublime-project
 .tm_properties

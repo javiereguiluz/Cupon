@@ -1,6 +1,8 @@
 imports:
     - { resource: config.yml }
 
+# Comenta las siguientes líneas si no tienes APC instalado en el
+# servidor de producción
 doctrine:
     orm:
         metadata_cache_driver: apc

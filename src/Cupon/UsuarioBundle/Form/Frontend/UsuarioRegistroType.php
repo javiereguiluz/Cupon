@@ -3,10 +3,6 @@
 /*
  * (c) Javier Eguiluz <javier.eguiluz@gmail.com>
  *
- * This file is part of the Cupon sample application.
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
  * Este archivo pertenece a la aplicación de prueba Cupon.
  * El código fuente de la aplicación incluye un archivo llamado LICENSE
  * con toda la información sobre el copyright y la licencia.
@@ -48,7 +44,6 @@ class UsuarioRegistroType extends AbstractType
                 'years' => range(date('Y') - 18, date('Y') - 18 - 120)
             ))
             ->add('dni')
-            ->add('numero_tarjeta')
             ->add('numero_tarjeta', 'text', array('label' => 'Tarjeta de Crédito', 'attr' => array(
                 'pattern' => '^[0-9]{13,16}$',
                 'placeholder' => 'Entre 13 y 16 numeros'

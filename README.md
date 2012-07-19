@@ -1,100 +1,3 @@
-# Cupon sample application #
-
-Cupon is a sample application designed to learn Symfony2 development. It's a 
-Groupon inspired clone, hence its name. Cupon application is explained in the 
-book *[Desarrollo web ágil con Symfony2](http://www.symfony.es/libro-symfony2/)* 
-published by Javier Eguiluz from [symfony.es](http://symfony.es).
-
-If you find a bug, please fill in a bug report in the [Github issues page](https://github.com/javiereguiluz/Cupon/issues).
-
-## Screenshots (click to enlarge) ##
-
-### Frontend ###
-
-[![Homepage](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-portada.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-portada.png)
-[![Offer details](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-oferta.png)
-[![Recent offers](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-recientes.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-recientes.png)
-[![Login form](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-frontend-login.png)](http://javiereguiluz.com/cupon/screenshots/cupon-frontend-login.png)
-
-### Extranet ###
-
-[![Listing](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-extranet-listado.png)](http://javiereguiluz.com/cupon/screenshots/cupon-extranet-listado.png)
-[![Offer edit action](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-extranet-modificar-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-extranet-modificar-oferta.png)
-
-### Backend ###
-
-[![Listing](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-backend-listado.png)](http://javiereguiluz.com/cupon/screenshots/cupon-backend-listado.png)
-[![Offer show action](http://javiereguiluz.com/cupon/screenshots/thumb-cupon-backend-ver-oferta.png)](http://javiereguiluz.com/cupon/screenshots/cupon-backend-ver-oferta.png)
-
-## How to install ##
-
-  1. `mkdir cupon`
-  2. `git clone git://github.com/javiereguiluz/Cupon.git cupon`
-  3. `cd cupon`
-  4. `php bin/vendors install`
-  5. `chmod -R 777 app/cache app/logs` (read [Setting up Permissions](http://symfony.com/doc/2.0/book/installation.html#configuration-and-setup) for a more elegant way to do this)
-  6. Configure your web server
-  7. Ensure that APC is installed and configured (it's used on the production environment)
-
-## How to use ##
-
-Before trying the application:
-
-  1. Create a new sample database and configure its credentials in `app/config/parameters.ini` file
-  2. Create the schema: `php app/console doctrine:schema:create`
-  3. Initialize the ACL tables: `php app/console init:acl`
-  4. Load data fixtures with the following commands:
-    * `php app/console doctrine:fixtures:load` if you want to load the complete fixtures for the finished application (with all the ACL and security-related properties).  If you get *Truncating table with foreign keys fails* exception, execute the following command: `php app/console doctrine:fixtures:load --append`
-    * `php app/console doctrine:fixtures:load --fixtures=app/Resources` if you want to load the simplified version of fixtures. Use this if you are developing the application and need simple fixtures without any ACL and security-related properties.
-  5. Dump web assets with Assetic: `php app/console assetic:dump --env=prod --no-debug`
-  6. Ensure that `web/uploads/images/` directory has write permissions.
-
-In case of error, don't forget to clear de cache:
-
-  * Development environment: `php app/console cache:clear`
-  * Production environment: `php app/console cache:clear --env=prod`
-
-## How to test ##
-
-Cupon application includes several unit and functional tests. In order to run the tests, you must have [PHPUnit](https://github.com/sebastianbergmann/phpunit/) installed on your machine. Then, execute the following command on the project's root directory:
-
-~~~
-$ phpunit -c app
-~~~
-
-If you don't want to run the full test suite, include an specific directory as argument:
-
-~~~
-$ phpunit -c app src/Cupon/OfertaBundle/
-~~~
-
-## Frontend ##
-
-  * URL:
-    * Development environment: `http://cupon/app_dev.php`
-    * Production environment: `http://cupon/app.php`
-  * User credentials:
-    * Login: `usuarioN@localhost` being `N` an integer ranging from `1` to `500`
-    * Password: `usuarioN` being `N` the number used in login
-
-## Extranet ##
-
-  * URL:
-    * Development environment: `http://cupon/app_dev.php/extranet`
-    * Production environment: `http://cupon/app.php/extranet`
-  * User credentials:
-    * Login: `tiendaN` being `N` an integer ranging from `1` to `80` approximately (the upper bound is randomly generated)
-    * Password: same as login
-
-## Backend ##
-
-  * URL:
-    * Development environment: `http://cupon/app_dev.php/backend`
-    * Production environment: `http://cupon/app.php/backend`
-  * User credentials:
-    * Login: `admin`
-    * Password: `1234`
-
 # Aplicación de prueba Cupon #
 
 Cupon es una aplicación de prueba desarrollada para aprender a programar con 
@@ -136,12 +39,18 @@ Si descubres algún error, por favor utiliza [la página de issues de Github](ht
 
 Para poder probar bien la aplicación:
 
-  1. Crea una nueva base de datos de prueba y configura sus datos de acceso en el archivo de configuración `app/config/parameters.ini`
+  1. Crea una nueva base de datos de prueba y configura sus datos de acceso en el
+     archivo de configuración `app/config/parameters.ini`
   2. Crea el esquema de la base de datos con el comando: `php app/console doctrine:schema:create`
   3. Crea las tablas de la ACL: `php app/console init:acl`
   4. Carga los datos de pruebas con los siguientes comandos:
-      * `php app/console doctrine:fixtures:load` para cargar todos los datos de prueba de la aplicación terminada (incluye todas las propiedades relacionadas con la ACL y la seguridad). Si se muestra una excepción de tipo *Truncating table with foreign keys fails* , ejecuta el siguiente comando: `php app/console doctrine:fixtures:load --append`
-      * `php app/console doctrine:fixtures:load --fixtures=app/Resources` para cargar una versión simplificada de los datos de prueba. Utiliza estos datos si estás creando la aplicación a mano y todavía no has llegado al capítulo relacionado con la seguridad y la ACL.
+      * `php app/console doctrine:fixtures:load` para cargar todos los datos de
+      prueba de la aplicación terminada (incluye todas las propiedades relacionadas
+      con la ACL y la seguridad). Si se muestra una excepción de tipo *Truncating table with foreign keys fails* , ejecuta el siguiente comando: `php app/console doctrine:fixtures:load --append`
+      * `php app/console doctrine:fixtures:load --fixtures=app/Resources` para
+      cargar una versión simplificada de los datos de prueba. Utiliza estos datos
+      si estás creando la aplicación a mano y todavía no has llegado al capítulo
+      relacionado con la seguridad y la ACL.
   5. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
   6. Asegúrate de que el directorio `web/uploads/images/` tiene permisos de escritura.
 
@@ -152,16 +61,11 @@ Si tienes algún problema, limpia la cache:
 
 ## Test unitarios y funcionales ##
 
-La aplicación incluye varios test unitarios y funcionales de ejemplo. Para ejecutarlos debes tener la herramienta [PHPUnit](https://github.com/sebastianbergmann/phpunit/) instalada. Después, ejecuta el siguiente comando en el directorio raíz del proyecto:
+La aplicación incluye varios test unitarios y funcionales de ejemplo. Para
+ejecutarlos debes tener la herramienta [PHPUnit](https://github.com/sebastianbergmann/phpunit/) instalada. Después, ejecuta el siguiente comando en el directorio raíz del proyecto:
 
 ~~~
 $ phpunit -c app
-~~~
-
-Si no quieres ejecutar todos los test, puedes indicar como argumento la ruta de un directorio para ejecutar solamente los test que se encuentren en esa ruta:
-
-~~~
-$ phpunit -c app src/Cupon/OfertaBundle/
 ~~~
 
 ## Frontend ##
@@ -179,7 +83,8 @@ $ phpunit -c app src/Cupon/OfertaBundle/
     * Entorno de desarrollo: `http://cupon/app_dev.php/extranet`
     * Entorno de producción: `http://cupon/app.php/extranet`
   * Credenciales de usuarios:
-    * Nombre de usuario: `tiendaN` siendo `N` un número entre `1` y `80` aproximadamente (el límite superior es aleatorio)
+    * Nombre de usuario: `tiendaN` siendo `N` un número entre `1` y `80` aproximadamente
+    (el límite superior es aleatorio)
     * Contraseña: la misma que el nombre de usuario
 
 ## Backend ##

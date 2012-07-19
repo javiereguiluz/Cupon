@@ -3,10 +3,6 @@
 /*
  * (c) Javier Eguiluz <javier.eguiluz@gmail.com>
  *
- * This file is part of the Cupon sample application.
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
  * Este archivo pertenece a la aplicación de prueba Cupon.
  * El código fuente de la aplicación incluye un archivo llamado LICENSE
  * con toda la información sobre el copyright y la licencia.
@@ -28,7 +24,12 @@ class TiendaRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
-        $consulta = $em->createQuery('SELECT o, t FROM OfertaBundle:Oferta o JOIN o.tienda t WHERE o.tienda = :id ORDER BY o.fecha_expiracion DESC');
+        $consulta = $em->createQuery('
+            SELECT o, t
+            FROM OfertaBundle:Oferta o JOIN o.tienda t
+            WHERE o.tienda = :id
+            ORDER BY o.fecha_expiracion DESC
+        ');
         $consulta->setMaxResults($limite);
         $consulta->setParameter('id', $tienda_id);
         $consulta->useResultCache(true, 3600);
@@ -47,7 +48,12 @@ class TiendaRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
-        $consulta = $em->createQuery('SELECT o, t FROM OfertaBundle:Oferta o JOIN o.tienda t WHERE o.revisada = true AND o.fecha_publicacion < :fecha AND o.tienda = :id ORDER BY o.fecha_expiracion DESC');
+        $consulta = $em->createQuery('
+            SELECT o, t
+            FROM OfertaBundle:Oferta o JOIN o.tienda t
+            WHERE o.revisada = true AND o.fecha_publicacion < :fecha AND o.tienda = :id
+            ORDER BY o.fecha_expiracion DESC
+        ');
         $consulta->setMaxResults($limite);
         $consulta->setParameter('id', $tienda_id);
         $consulta->setParameter('fecha', new \DateTime('now'));
@@ -65,7 +71,11 @@ class TiendaRepository extends EntityRepository
     {
         $em = $this->getEntityManager();
 
-        $consulta = $em->createQuery('SELECT t, c FROM TiendaBundle:Tienda t JOIN t.ciudad c WHERE c.slug = :ciudad AND t.slug != :tienda');
+        $consulta = $em->createQuery('
+            SELECT t, c
+            FROM TiendaBundle:Tienda t JOIN t.ciudad c
+            WHERE c.slug = :ciudad AND t.slug != :tienda
+        ');
         $consulta->setMaxResults(5);
         $consulta->setParameter('ciudad', $ciudad);
         $consulta->setParameter('tienda', $tienda);

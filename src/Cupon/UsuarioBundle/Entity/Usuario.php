@@ -3,10 +3,6 @@
 /*
  * (c) Javier Eguiluz <javier.eguiluz@gmail.com>
  *
- * This file is part of the Cupon sample application.
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
  * Este archivo pertenece a la aplicación de prueba Cupon.
  * El código fuente de la aplicación incluye un archivo llamado LICENSE
  * con toda la información sobre el copyright y la licencia.
@@ -177,6 +173,32 @@ class Usuario implements UserInterface
 
     /**
      * Validador propio que comprueba si el DNI introducido es válido
+     *
+     * El DNI es un identificador único obligatorio para todos los ciudadanos de
+     * España y de varios países americanos.
+     *
+     *   Formato:   entre 1 y 8 números seguidos de 1 letra
+     *   Ejemplos:  12345678Z - 11111111H - 01234567L
+     *
+     * Los números se pueden escoger aleatoriamente, pero la letra depende de los
+     * números y por tanto, actúa como carácter de control. ¿Cómo se obtiene la
+     * letra a partir de los números?
+     *
+     *   1. Obtener el 'mod 23' (resto de la división entera) del número
+     *      (e.g.: 12345678 mod 23 = 14).
+     *   2. Utilizar la siguiente tabla para elegir la letra que corresponde al
+     *      resultado de la operación anterior.
+     *
+     *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
+     *   | mod 23 |  0 |  1 |  2 |  3 |  4 |  5 |  6 |  7 |  8 |  9 | 10 | 11 |
+     *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
+     *   | letra  |  T |  R |  W |  A |  G |  M |  Y |  F |  P |  D |  X |  B |
+     *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
+     *   | mod 23 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20 | 21 | 22 |    |
+     *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
+     *   | letra  |  N |  J |  Z |  S |  Q |  V |  H |  L |  C |  K |  E |    |
+     *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
+     *   
      */
     public function esDniValido(ExecutionContext $context)
     {
