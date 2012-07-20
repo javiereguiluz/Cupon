@@ -1,4 +1,4 @@
-# Aplicación de prueba Cupon #
+# Aplicación de prueba Cupon para Symfony 2.0.x #
 
 Cupon es una aplicación de prueba desarrollada para aprender a programar con 
 Symfony2. Se trata de un clon simplificado de Groupon, de ahí el nombre. Esta 
