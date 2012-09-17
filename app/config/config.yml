@@ -5,18 +5,16 @@ imports:
 
 # Configuración general del framework
 framework:
+    default_locale:  %locale%
     esi:             { enabled: true }
     translator:      { fallback: es }
     secret:          %secret%
-    charset:         UTF-8
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
     form:            true
     csrf_protection: true
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
-    session:
-        default_locale: %locale%
-        auto_start:     true
+    session:         ~
 
 # Configuración de Twig
 twig:
@@ -70,7 +68,6 @@ swiftmailer:
 
 # Configuración del bundle JMS\SecurityExtraBundle
 jms_security_extra:
-    secure_controllers:  false
     secure_all_services: false
 
 # Parámetros globales del contenedor de dependencias
