@@ -1,0 +1,13 @@
+{
+    "name": "javiereguiluz/cupon",
+    "description": "Aplicación de prueba para aprender a programar con Symfony 2.1",
+    "autoload": {
+        "psr-0": { "": "src/" }
+    },
+    "require": {
+        "symfony/symfony": "2.1.*",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "ideup/simple-paginator-bundle": "dev-master"
+    },
+    "minimum-stability": "dev"
+}
