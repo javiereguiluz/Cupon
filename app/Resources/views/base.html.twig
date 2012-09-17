@@ -20,7 +20,7 @@
         <a href="{{ path('estatica', { 'pagina': 'privacidad' }) }}">{{ "Privacidad" | trans }}</a>
         <a href="{{ path('estatica', { 'pagina': 'sobre-nosotros' }) }}">{{ "Sobre nosotros" | trans }}</a>
         
-        {% set locale = app.request.session.locale %}
+        {% set locale = app.request.locale %}
         <section id="idioma">
         {% if locale == 'es' %}
             <span>Español</span> - <a href="{{ path('portada', { '_locale': 'en' }) }}">English</a>
