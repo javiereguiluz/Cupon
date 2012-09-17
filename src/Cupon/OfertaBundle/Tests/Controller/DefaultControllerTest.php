@@ -131,7 +131,8 @@ class DefaultControllerTest extends WebTestCase
         $client->request('GET', '/');
 
         if ($profiler = $client->getProfile()) {
-            $this->assertLessThan(0.5, $profiler->getCollector('timer')->getTime(),
+            // 500 es el tiempo en milisegundos
+            $this->assertLessThan(500, $profiler->getCollector('time')->getTotalTime(),
                 'La portada se genera en menos de medio segundo'
             );
         }
