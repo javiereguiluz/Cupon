@@ -22,14 +22,6 @@ class Tienda implements UserInterface
     /**
      * Método requerido por la interfaz UserInterface
      */
-    public function equals(\Symfony\Component\Security\Core\User\UserInterface $usuario)
-    {
-        return $this->getLogin() == $usuario->getLogin();
-    }
-
-    /**
-     * Método requerido por la interfaz UserInterface
-     */
     public function eraseCredentials()
     {
     }
