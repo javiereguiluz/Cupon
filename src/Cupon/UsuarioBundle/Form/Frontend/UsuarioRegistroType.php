@@ -11,7 +11,8 @@
 namespace Cupon\UsuarioBundle\Form\Frontend;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilder;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Doctrine\ORM\EntityRepository;
 
 /**
@@ -22,7 +23,7 @@ use Doctrine\ORM\EntityRepository;
  */
 class UsuarioRegistroType extends AbstractType
 {
-    public function buildForm(FormBuilder $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
             ->add('nombre')
@@ -60,11 +61,12 @@ class UsuarioRegistroType extends AbstractType
         ;
     }
 
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
+        $resolver->setDefaults(array(
+            'data_class' => 'Cupon\UsuarioBundle\Entity\Usuario',
             'validation_groups' => array('default', 'registro')
-        );
+        ));
     }
 
     public function getName()
