@@ -68,7 +68,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
 
         // Comprobar que el cliente ahora dispone de una cookie de sesión
-        $this->assertRegExp('/(\d|[a-z])+/', $client->getCookieJar()->get('PHPSESSID')->getValue(),
+        $this->assertRegExp('/(\d|[a-z])+/', $client->getCookieJar()->get('MOCKSESSID')->getValue(),
             'La aplicación ha enviado una cookie de sesión'
         );
 
@@ -96,19 +96,16 @@ class DefaultControllerTest extends WebTestCase
         return array(
             array(
                 array(
-                    'frontend_usuario[nombre]'                  => 'Anónimo',
-                    'frontend_usuario[apellidos]'               => 'Apellido1 Apellido2',
-                    'frontend_usuario[email]'                   => 'anonimo'.uniqid().'@localhost.localdomain',
-                    'frontend_usuario[password][first]'         => 'anonimo1234',
-                    'frontend_usuario[password][second]'        => 'anonimo1234',
-                    'frontend_usuario[direccion]'               => 'Mi calle, Mi ciudad, 01001',
-                    'frontend_usuario[fecha_nacimiento][day]'   => '01',
-                    'frontend_usuario[fecha_nacimiento][month]' => '01',
-                    'frontend_usuario[fecha_nacimiento][year]'  => '1970',
-                    'frontend_usuario[dni]'                     => '11111111H',
-                    'frontend_usuario[numero_tarjeta]'          => '123456789012345',
-                    'frontend_usuario[ciudad]'                  => '1',
-                    'frontend_usuario[permite_email]'           => '1'
+                    'frontend_usuario[nombre]'           => 'Anónimo',
+                    'frontend_usuario[apellidos]'        => 'Apellido1 Apellido2',
+                    'frontend_usuario[email]'            => 'anonimo'.uniqid().'@localhost.localdomain',
+                    'frontend_usuario[password][first]'  => 'anonimo1234',
+                    'frontend_usuario[password][second]' => 'anonimo1234',
+                    'frontend_usuario[direccion]'        => 'Mi calle, Mi ciudad, 01001',
+                    'frontend_usuario[dni]'              => '11111111H',
+                    'frontend_usuario[numero_tarjeta]'   => '123456789012345',
+                    'frontend_usuario[ciudad]'           => '1',
+                    'frontend_usuario[permite_email]'    => '1'
                 )
             )
         );
