@@ -2,6 +2,8 @@
 ciudad_cambiar:
     pattern:  /ciudad/cambiar-a-{ciudad}
     defaults: { _controller: CiudadBundle:Default:cambiar }
+    requirements:
+        ciudad: .+
 
 # Ruta para ver todas las ofertas recientes publicadas en la ciudad indicada
 ciudad_recientes:

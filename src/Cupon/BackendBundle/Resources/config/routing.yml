@@ -7,6 +7,8 @@ backend_portada:
 backend_ciudad_cambiar:
     pattern:  /cambiar-a-{ciudad}
     defaults: { _controller: BackendBundle:Default:ciudadCambiar }
+    requirements:
+        ciudad: .+
 
 # Importar las rutas de la entidad Ciudad generadas en el bundle BackendBundle
 BackendCiudad:
