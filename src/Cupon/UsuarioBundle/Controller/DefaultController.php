@@ -77,8 +77,7 @@ class DefaultController extends Controller
         $formulario = $this->createForm(new UsuarioRegistroType(), $usuario);
 
         if ($peticion->getMethod() == 'POST') {
-
-            $formulario->bindRequest($peticion);
+            $formulario->bind($peticion);
 
             if ($formulario->isValid()) {
                 // Completar las propiedades que el usuario no rellena en el formulario
