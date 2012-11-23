@@ -63,6 +63,7 @@ nav ul li:last-child {
    float: right;
 }
 nav ul li select {
+   max-width: 200px;
    font-size: 16px;
 }
 
