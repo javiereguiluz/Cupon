@@ -33,7 +33,6 @@ Si descubres algún error, por favor utiliza [la página de issues de Github](ht
   4. `php bin/vendors install`
   5. `chmod -R 777 app/cache app/logs` (lee la sección [Setting up Permissions](http://symfony.com/doc/2.0/book/installation.html#configuration-and-setup) para hacer esto de forma más elegante)
   6. Configura bien tu servidor web
-  7. Asegúrate de que tienes APC instalado y configurado (se usa en el entorno de producción)
 
 ## Uso ##
 
