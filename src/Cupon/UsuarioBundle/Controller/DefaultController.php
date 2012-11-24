@@ -261,7 +261,7 @@ class DefaultController extends Controller
     }
 
     /**
-     * Da de baja al usurario actualmente conectado borrando su información
+     * Da de baja al usuario actualmente conectado borrando su información
      * de la base de datos
      */
     public function bajaAction()
