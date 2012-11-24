@@ -71,7 +71,9 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de nombres de tiendas
+     * Generador aleatorio de nombres de tiendas.
+     *
+     * @return string Nombre aleatorio generado para la tienda.
      */
     private function getNombre()
     {
@@ -86,7 +88,9 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de descripciones de tiendas
+     * Generador aleatorio de descripciones de tiendas.
+     *
+     * @return  string Descripción aleatoria generada para la tienda.
      */
     private function getDescripcion()
     {
@@ -116,9 +120,12 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de direcciones postales
+     * Generador aleatorio de direcciones postales.
+     *
+     * @param  Ciudad $ciudad Objeto de la ciudad para la que se genera una dirección postal.
+     * @return string         Dirección postal aleatoria generada para la tienda.
      */
-    private function getDireccion($ciudad)
+    private function getDireccion(Ciudad $ciudad)
     {
         $prefijos = array('Calle', 'Avenida', 'Plaza');
         $nombres = array(
@@ -132,7 +139,9 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de códigos postales
+     * Generador aleatorio de códigos postales.
+     *
+     * @return string Código postal aleatorio generado para la tienda.
      */
     private function getCodigoPostal()
     {

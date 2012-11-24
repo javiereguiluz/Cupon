@@ -128,7 +128,9 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de nombres de ofertas
+     * Generador aleatorio de nombres de ofertas.
+     *
+     * @return string Nombre/título aletorio generado para la oferta.
      */
     private function getNombre()
     {
@@ -146,7 +148,9 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de descripciones de ofertas
+     * Generador aleatorio de descripciones de ofertas.
+     *
+     * @return string Descripción aletoria generada para la oferta.
      */
     private function getDescripcion()
     {
@@ -174,7 +178,9 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de condiciones de ofertas
+     * Generador aleatorio de condiciones de ofertas.
+     *
+     * @return string Condiciones aletorias generadas para la oferta.
      */
     private function getCondiciones()
     {

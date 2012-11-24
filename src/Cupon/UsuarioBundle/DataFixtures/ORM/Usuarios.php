@@ -77,8 +77,10 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
     }
 
     /**
-     * Generador aleatorio de nombres de personas
-     * Aproximadamente genera un 50% de hombres y un 50% de mujeres
+     * Generador aleatorio de nombres de personas.
+     * Aproximadamente genera un 50% de hombres y un 50% de mujeres.
+     *
+     * @return string Nombre aleatorio generado para el usuario.
      */
     private function getNombre()
     {
@@ -108,7 +110,9 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
     }
 
     /**
-     * Generador aleatorio de apellidos de personas
+     * Generador aleatorio de apellidos de personas.
+     *
+     * @return string Apellido aleatorio generado para el usuario.
      */
     private function getApellidos()
     {
@@ -129,9 +133,12 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
     }
 
     /**
-     * Generador aleatorio de direcciones postales
+     * Generador aleatorio de direcciones postales.
+     *
+     * @param  Ciudad $ciudad Objeto de la ciudad para la que se genera una dirección postal.
+     * @return string         Dirección postal aleatoria generada para la tienda.
      */
-    private function getDireccion($ciudad)
+    private function getDireccion(Ciudad $ciudad)
     {
         $prefijos = array('Calle', 'Avenida', 'Plaza');
         $nombres = array(
@@ -145,7 +152,9 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
     }
 
     /**
-     * Generador aleatorio de códigos postales
+     * Generador aleatorio de códigos postales.
+     *
+     * @return string Código postal aleatorio generado para la tienda.
      */
     private function getCodigoPostal()
     {
