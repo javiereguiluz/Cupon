@@ -30,6 +30,25 @@ class AppKernel extends Kernel
             new Cupon\BackendBundle\BackendBundle(),
             
             new Ideup\SimplePaginatorBundle\IdeupSimplePaginatorBundle(),
+
+            // Descomenta las siguientes líneas para probar SonataAdminBundle:
+            // 
+            // new Sonata\jQueryBundle\SonatajQueryBundle(),
+            // new Sonata\BlockBundle\SonataBlockBundle(),
+            // new Sonata\CacheBundle\SonataCacheBundle(),
+            // new Sonata\AdminBundle\SonataAdminBundle(),
+            // new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
+            // new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+            //
+            // Antes de usar SonataAdminBundle, añade las siguientes dependencias
+            // en el archivo composer.json:
+            // 
+            //     "sonata-project/admin-bundle": "dev-master",
+            //     "sonata-project/cache-bundle": "dev-master",
+            //     "sonata-project/doctrine-orm-admin-bundle": "dev-master"
+            //
+            // Y no olvides instalarlas ejecutando el siguiente comando:
+            //     $ php composer.phar update 
         );
         
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

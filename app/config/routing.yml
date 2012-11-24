@@ -1,3 +1,13 @@
+# Descomenta las siguientes líneas para probar Sonata Admin Bundle
+# sonata:
+#    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
+#    prefix:   /sonata
+
+# _sonata_admin:
+#    resource: .
+#    type:     sonata_admin
+#    prefix:   /sonata
+
 # Rutas importadas del bundle CiudadBundle
 CiudadBundle:
     resource: "@CiudadBundle/Resources/config/routing.yml"
@@ -58,19 +68,19 @@ estatica:
     requirements:
         _locale: en|es
 
-# Ruta de la portada básica del sitio (sin ningún parámetro)
-# esta ruta es opcional, ya que la aplicación puede funcionar bien
-# solamente con la ruta 'portada' y sus valores por defecto
-_portada:
-     pattern:  /
-     defaults: { _controller: FrameworkBundle:Redirect:redirect, route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
-
 # Ruta de la portada completa del sitio (con _locale y el slug de la ciudad)
 portada:
     pattern:  /{_locale}/{ciudad}
     defaults: { _controller: OfertaBundle:Default:portada, ciudad: %cupon.ciudad_por_defecto%, _locale: es }
     requirements:
         _locale: en|es
+
+# Ruta de la portada básica del sitio (sin ningún parámetro)
+# esta ruta es opcional, ya que la aplicación puede funcionar bien
+# solamente con la ruta 'portada' y sus valores por defecto
+_portada:
+     pattern:  /
+     defaults: { _controller: FrameworkBundle:Redirect:redirect, route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
 
 # Ruta interna para manejar las partes incluidas mediante ESI
 _internal:
