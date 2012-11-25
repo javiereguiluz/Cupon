@@ -62,8 +62,8 @@ nav ul {
 nav ul li:last-child {
    float: right;
 }
-nav ul li select {
-   ffont-size: 16px;
+nav ul li select#ciudadseleccionada {
+   max-width: 200px;
 }
 
 #portada   nav li:nth-child(1) a,
