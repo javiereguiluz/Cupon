@@ -16,6 +16,8 @@ use Symfony\Component\Form\CallbackValidator;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormEvents;
+use Cupon\OfertaBundle\Listener\OfertaTypeListener;
 
 /**
  * Formulario para crear y manipular entidades de tipo Oferta.
@@ -43,18 +45,13 @@ class OfertaType extends AbstractType
         // La acción `new` muestra un checkbox que no corresponde a ninguna propiedad de la entidad
         // del modelo. Se añade dinámicamente y se indica que no es parte del modelo (con la propiedad
         // `property_path`).
-        //
-        // También se añade dinámicamente un validador para comprobar que el checkbox añadido ha sido
-        // activado y para mostrar un mensaje de error en caso contrario.
         if (null == $options['data']->getId()) {
-            $builder->add('acepto', 'checkbox', array('mapped' => false));
-
-            $builder->addValidator(new CallbackValidator(function(FormInterface $form) {
-                if ($form["acepto"]->getData() == false) {
-                    $form->addError(new FormError('Debes aceptar las condiciones indicadas antes de poder añadir una nueva oferta'));
-                }
-            }));
+            $builder->add('acepto', 'checkbox', array('mapped' => false, 'required' => false));
         }
+
+        // registrar el listener que validará el campo 'acepto' añadido anteriormente
+        $listener = new OfertaTypeListener();
+        $builder->addEventListener(FormEvents::POST_BIND, array($listener, 'postBind'));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
