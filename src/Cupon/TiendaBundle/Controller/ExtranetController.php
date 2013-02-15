@@ -46,7 +46,7 @@ class ExtranetController extends Controller
      */
     public function portadaAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $tienda = $this->get('security.context')->getToken()->getUser();
         $ofertas = $em->getRepository('TiendaBundle:Tienda')->findOfertasRecientes($tienda->getId(), 50);
@@ -63,7 +63,7 @@ class ExtranetController extends Controller
      */
     public function ofertaVentasAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $ventas = $em->getRepository('OfertaBundle:Oferta')->findVentasByOferta($id);
 
@@ -99,7 +99,7 @@ class ExtranetController extends Controller
                // Copiar la foto subida y guardar la ruta
                $oferta->subirFoto($this->container->getParameter('cupon.directorio.imagenes'));
 
-               $em = $this->getDoctrine()->getEntityManager();
+               $em = $this->getDoctrine()->getManager();
                $em->persist($oferta);
                $em->flush();
 
@@ -131,7 +131,7 @@ class ExtranetController extends Controller
     public function ofertaEditarAction($id)
     {
         $peticion = $this->getRequest();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $oferta = $em->getRepository('OfertaBundle:Oferta')->find($id);
 
@@ -198,7 +198,7 @@ class ExtranetController extends Controller
     public function perfilAction()
     {
         $peticion = $this->getRequest();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $tienda = $this->get('security.context')->getToken()->getUser();
         $formulario = $this->createForm(new TiendaType(), $tienda);

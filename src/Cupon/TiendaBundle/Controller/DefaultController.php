@@ -23,7 +23,7 @@ class DefaultController extends Controller
      */
     public function portadaAction($ciudad, $tienda)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $ciudad = $em->getRepository('CiudadBundle:Ciudad')->findOneBySlug($ciudad);
         $tienda = $em->getRepository('TiendaBundle:Tienda')->findOneBy(array(

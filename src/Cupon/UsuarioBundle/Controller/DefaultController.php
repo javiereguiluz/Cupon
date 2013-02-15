@@ -69,7 +69,7 @@ class DefaultController extends Controller
     public function registroAction()
     {
         $peticion = $this->getRequest();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $usuario = new Usuario();
         $usuario->setPermiteEmail(true);
@@ -121,7 +121,7 @@ class DefaultController extends Controller
     public function perfilAction()
     {
         $peticion = $this->getRequest();
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $usuario = $this->get('security.context')->getToken()->getUser();
         $formulario = $this->createForm(new UsuarioPerfilType(), $usuario);
@@ -169,7 +169,7 @@ class DefaultController extends Controller
      */
     public function comprasAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $usuario = $this->get('security.context')->getToken()->getUser();
 
         $cercanas = $em->getRepository('CiudadBundle:Ciudad')->findCercanas(
@@ -192,7 +192,7 @@ class DefaultController extends Controller
      */
     public function comprarAction($ciudad, $slug)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $usuario = $this->get('security.context')->getToken()->getUser();
 
         // Solo pueden comprar los usuarios registrados y logueados
@@ -279,7 +279,7 @@ class DefaultController extends Controller
         $this->get('request')->getSession()->invalidate();
         $this->get('security.context')->setToken(null);
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->remove($usuario);
         $em->flush();
 

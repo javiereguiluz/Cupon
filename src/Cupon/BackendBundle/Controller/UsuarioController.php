@@ -26,7 +26,7 @@ class UsuarioController extends Controller
      */
     public function indexAction()
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $paginador = $this->get('ideup.simple_paginator');
 
         $slug = $this->getRequest()->getSession()->get('ciudad');
@@ -47,7 +47,7 @@ class UsuarioController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UsuarioBundle:Usuario')->find($id);
 
@@ -90,7 +90,7 @@ class UsuarioController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -110,7 +110,7 @@ class UsuarioController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UsuarioBundle:Usuario')->find($id);
 
@@ -134,7 +134,7 @@ class UsuarioController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('UsuarioBundle:Usuario')->find($id);
 
@@ -175,7 +175,7 @@ class UsuarioController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('UsuarioBundle:Usuario')->find($id);
 
             if (!$entity) {

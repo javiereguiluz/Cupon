@@ -34,7 +34,7 @@ class OfertaController extends Controller
             $sesion->set('ciudad', $slug);
         }
 
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $paginador = $this->get('ideup.simple_paginator');
         $paginador->setItemsPerPage(19);
 
@@ -54,7 +54,7 @@ class OfertaController extends Controller
      */
     public function showAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('OfertaBundle:Oferta')->find($id);
 
@@ -79,7 +79,7 @@ class OfertaController extends Controller
         $entity = new Oferta();
 
         // Rellenar con valores adecuados algunas propiedades
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $ciudad = $em->getRepository('CiudadBundle:Ciudad')->findOneBySlug(
             $this->getRequest()->getSession()->get('ciudad')
@@ -111,7 +111,7 @@ class OfertaController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
 
@@ -130,7 +130,7 @@ class OfertaController extends Controller
      */
     public function editAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('OfertaBundle:Oferta')->find($id);
 
@@ -154,7 +154,7 @@ class OfertaController extends Controller
      */
     public function updateAction($id)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $entity = $em->getRepository('OfertaBundle:Oferta')->find($id);
 
@@ -195,7 +195,7 @@ class OfertaController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $entity = $em->getRepository('OfertaBundle:Oferta')->find($id);
 
             if (!$entity) {

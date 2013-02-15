@@ -24,7 +24,7 @@ class DefaultController extends Controller
      */
     public function listaCiudadesAction($ciudad = null)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $ciudades = $em->getRepository('CiudadBundle:Ciudad')->findListaCiudades();
 
         return $this->render('CiudadBundle:Default:listaCiudades.html.twig', array(
@@ -52,7 +52,7 @@ class DefaultController extends Controller
      */
     public function recientesAction($ciudad)
     {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
 
         $ciudad = $em->getRepository('CiudadBundle:Ciudad')->findOneBySlug($ciudad);
         if (!$ciudad) {

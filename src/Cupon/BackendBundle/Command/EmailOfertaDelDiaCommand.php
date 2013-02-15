@@ -45,7 +45,7 @@ EOT
         $accion = $input->getOption('accion');
 
         $contenedor = $this->getContainer();
-        $em = $contenedor->get('doctrine')->getEntityManager();
+        $em = $contenedor->get('doctrine')->getManager();
 
         // Obtener el listado de usuarios que permiten el envío de email
         $usuarios = $em->getRepository('UsuarioBundle:Usuario')->findBy(array('permite_email' => true));
