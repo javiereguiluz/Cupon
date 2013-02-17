@@ -48,9 +48,9 @@ class CuponExtension extends \Twig_Extension
      */
     public function mostrarComoLista($value, $tipo='ul')
     {
-        $html = "<".$tipo.">\n";
-        $html .= "  <li>".str_replace("\n", "</li>\n  <li>", $value)."</li>\n";
-        $html .= "</".$tipo.">\n";
+        $html = "<".$tipo.">".PHP_EOL;
+        $html .= "  <li>".str_replace(PHP_EOL, "</li>".PHP_EOL."  <li>", $value)."</li>".PHP_EOL;
+        $html .= "</".$tipo.">".PHP_EOL;
 
         return $html;
     }
