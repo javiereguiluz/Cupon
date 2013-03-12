@@ -379,17 +379,17 @@ footer #idioma {
 /* ===========================================================================
    Mensajes flash
    ======================================================================== */
-p#flash {
+p.flash {
     background: #DCDCDC;
     margin-bottom: 1em;
     padding: .5em 1em;
 }
 
-p#flash.info {
+p.flash-info {
     background: #090;
     color: #FFF;
 }
-p#flash.error {
+p.flash-error {
     background: #C00;
     color: #FFF;
 }
