@@ -62,6 +62,14 @@ class AppKernel extends Kernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
+        // Si tu archivo YAML contiene código PHP, utiliza el siguiente código:
+        //
+        // use Symfony\Component\Yaml\Yaml;
+        //
+        // Yaml::setPhpParsing(true);
+        // $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
+        // Yaml::setPhpParsing(false);
+
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
 }
