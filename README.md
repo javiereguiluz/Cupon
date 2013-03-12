@@ -2,7 +2,7 @@
 
 Cupon es una aplicación de prueba desarrollada para aprender a programar con 
 Symfony 2.1. Se trata de un clon simplificado de Groupon, de ahí el nombre. Esta 
-aplicación es la base del libro **[Desarrollo web ágil con Symfony2](http://www.symfony.es/libro-symfony2/)** publicado por Javier Eguiluz.
+aplicación es la base del libro **[Desarrollo web ágil con Symfony2](http://www.symfony.es/libro/)** publicado por Javier Eguiluz.
 
 Si descubres algún error, por favor utiliza [la página de issues de Github](https://github.com/javiereguiluz/Cupon/issues) para avisarnos.
 
@@ -27,12 +27,15 @@ Si descubres algún error, por favor utiliza [la página de issues de Github](ht
 
 ## Instalación ##
 
+En el libro [Desarrollo web ágil con Symfony2](http://www.symfony.es/libro/) se expica detalladamente cómo instalar bien Symfony2 y la aplicación Cupon. El siguiente listado resume todos los pasos necesarios:
+
   1. `mkdir cupon`
   2. `git clone git://github.com/javiereguiluz/Cupon.git cupon`
   3. `cd cupon`
-  4. `php bin/vendors install`
-  5. `chmod -R 777 app/cache app/logs` (lee la sección [Setting up Permissions](http://symfony.com/doc/2.0/book/installation.html#configuration-and-setup) para hacer esto de forma más elegante)
-  6. Configura bien tu servidor web
+  4. `curl -s https://getcomposer.org/installer | php` (esta es la forma recomendada de instalar `Composer`. Si tienes problemas, utiliza alguna de las alternativas explicadas en la [documentación de Composer](http://getcomposer.org/download/))
+  5. `php composer.phar install`
+  6. `chmod -R 777 app/cache app/logs` (lee la sección [Setting up Permissions](http://symfony.com/doc/2.0/book/installation.html#configuration-and-setup) para hacer esto de forma más elegante)
+  7. Configura bien tu servidor web
 
 ## Uso ##
 
