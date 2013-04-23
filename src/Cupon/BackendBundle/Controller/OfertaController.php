@@ -13,6 +13,8 @@ namespace Cupon\BackendBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Cupon\OfertaBundle\Entity\Oferta;
 use Cupon\BackendBundle\Form\OfertaType;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Filesystem\Filesystem;
 
 /**
  * Oferta controller.
@@ -111,6 +113,9 @@ class OfertaController extends Controller
         $form->bindRequest($request);
 
         if ($form->isValid()) {
+            // Copiar la foto subida y guardar la ruta
+            $entity->subirFoto($this->container->getParameter('cupon.directorio.imagenes'));
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($entity);
             $em->flush();
@@ -138,6 +143,9 @@ class OfertaController extends Controller
             throw $this->createNotFoundException('No se ha encontrado la oferta solicitada');
         }
 
+        // el formulario necesita un objeto de tipo File, no la ruta de la foto
+        $entity->setFoto(new File($entity->getFoto(), false));
+
         $editForm = $this->createForm(new OfertaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -162,6 +170,9 @@ class OfertaController extends Controller
             throw $this->createNotFoundException('No se ha encontrado la oferta solicitada');
         }
 
+        $fotoOriginal = $entity->getFoto();
+        $entity->setFoto(new File($fotoOriginal, false));
+
         $editForm   = $this->createForm(new OfertaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -170,6 +181,21 @@ class OfertaController extends Controller
         $editForm->bindRequest($request);
 
         if ($editForm->isValid()) {
+            if (null == $entity->getFoto()) {
+                    // el usuario no ha modificado la foto original
+                    $entity->setFoto($fotoOriginal);
+            } else {
+                // el usuario ha modificado la foto: copiar la foto subida y
+                // guardar la nueva ruta
+                $entity->subirFoto($this->container->getParameter('cupon.directorio.imagenes'));
+
+                // borrar la foto anterior
+                if (!empty($fotoOriginal)) {
+                    $fs = new Filesystem();
+                    $fs->remove($this->container->getParameter('cupon.directorio.imagenes').$fotoOriginal);
+                }
+            }
+
             $em->persist($entity);
             $em->flush();
 
