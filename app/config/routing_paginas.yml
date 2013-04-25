@@ -1,0 +1,12 @@
+# Rutas de las páginas estáticas del sitio
+ayuda:
+    pattern:  /ayuda
+    defaults: { template: 'OfertaBundle:Sitio:ayuda.html.twig' }
+
+privacidad:
+    pattern:  /privacidad
+    defaults: { template: 'OfertaBundle:Sitio:privacidad.html.twig' }
+
+sobre_nosotros:
+    pattern:  /sobre-nosotros
+    defaults: { template: 'OfertaBundle:Sitio:sobre-nosotros.html.twig' }

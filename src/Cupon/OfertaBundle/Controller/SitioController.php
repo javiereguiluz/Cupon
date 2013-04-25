@@ -15,35 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class SitioController extends Controller
 {
     /**
-     * Muestra las páginas estáticas del sitio web
-     *
-     * @param string $pagina El slug de la página a mostrar
-     */
-    public function estaticaAction($pagina)
-    {
-        $respuesta = $this->render('OfertaBundle:Sitio:'.$pagina.'.html.twig');
-        $respuesta->setSharedMaxAge(3600 * 24);
-        $respuesta->setPublic();
-
-        return $respuesta;
-
-        /* Código necesario para lanzar un error 404 en las páginas que no existen
-
-        $plantilla = realpath(__DIR__.'/../Resources/views/Sitio/'.$pagina.'.html.twig');
-
-        if (file_exists($plantilla)) {
-            $respuesta = $this->render('OfertaBundle:Sitio:'.$pagina.'.html.twig');
-            $respuesta->setSharedMaxAge(3600 * 24);
-            $respuesta->setPublic();
-
-            return $respuesta;
-        } else {
-            throw $this->createNotFoundException('No se ha encontrado la página solicitada');
-        }
-        */
-    }
-
-    /**
      * Muestra el formulario de contacto y también procesa el envío de emails
      *
      */

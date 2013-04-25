@@ -8,6 +8,18 @@
 #    type:     sonata_admin
 #    prefix:   /sonata
 
+_paginas:
+    resource: routing_paginas.yml
+    prefix:   /{_locale}/sitio
+    requirements:
+        _locale: en|es
+    defaults:
+        _locale: es
+        _controller: FrameworkBundle:Template:template
+        private: false
+        maxAge: 86400
+        sharedMaxAge: 86400
+
 # Rutas importadas del bundle CiudadBundle
 CiudadBundle:
     resource: "@CiudadBundle/Resources/config/routing.yml"
@@ -61,13 +73,6 @@ contacto:
     requirements:
         _locale: en|es
 
-# Rutas de las páginas estáticas del sitio
-estatica:
-    pattern:  /{_locale}/sitio/{pagina}
-    defaults: { _controller: OfertaBundle:Sitio:estatica, _locale: es }
-    requirements:
-        _locale: en|es
-
 # Ruta de la portada completa del sitio (con _locale y el slug de la ciudad)
 portada:
     pattern:  /{_locale}/{ciudad}
@@ -81,8 +86,3 @@ portada:
 _portada:
      pattern:  /
      defaults: { _controller: FrameworkBundle:Redirect:redirect, route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
-
-# Ruta interna para manejar las partes incluidas mediante ESI
-_internal:
-   resource: "@FrameworkBundle/Resources/config/routing/internal.xml"
-   prefix:   /_internal
