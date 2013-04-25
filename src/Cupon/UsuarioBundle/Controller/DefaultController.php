@@ -150,7 +150,7 @@ class DefaultController extends Controller
                 $em->persist($usuario);
                 $em->flush();
 
-                $this->get('session')->setFlash('info',
+                $this->get('session')->getFlashBag()->add('info',
                     'Los datos de tu perfil se han actualizado correctamente'
                 );
 
@@ -197,7 +197,7 @@ class DefaultController extends Controller
 
         // Solo pueden comprar los usuarios registrados y logueados
         if (null == $usuario || !$this->get('security.context')->isGranted('ROLE_USUARIO')) {
-            $this->get('session')->setFlash('info',
+            $this->get('session')->getFlashBag()->add('info',
                 'Antes de comprar debes registrarte o conectarte con tu usuario y contraseña.'
             );
 
@@ -231,7 +231,7 @@ class DefaultController extends Controller
                 \IntlDateFormatter::NONE
             );
 
-            $this->get('session')->setFlash('error',
+            $this->get('session')->getFlashBag()->add('error',
                 'No puedes volver a comprar la misma oferta (la compraste el '.$formateador->format($fechaVenta).').'
             );
 
@@ -257,32 +257,5 @@ class DefaultController extends Controller
             'oferta'  => $oferta,
             'usuario' => $usuario
         ));
-    }
-
-    /**
-     * Da de baja al usuario actualmente conectado borrando su información
-     * de la base de datos
-     */
-    public function bajaAction()
-    {
-        $usuario = $this->get('security.context')->getToken()->getUser();
-
-        if (null == $usuario ||
-            !$this->get('security.context')->isGranted('ROLE_USUARIO')) {
-            $this->get('session')->setFlash('info',
-                'Para darte de baja primero tienes que conectarte.'
-            );
-
-            return $this->redirect($this->generateUrl('usuario_login'));
-        }
-
-        $this->get('request')->getSession()->invalidate();
-        $this->get('security.context')->setToken(null);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($usuario);
-        $em->flush();
-
-        return $this->redirect($this->generateUrl('portada'));
     }
 }
