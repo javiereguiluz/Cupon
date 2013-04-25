@@ -68,7 +68,7 @@ class DefaultControllerTest extends WebTestCase
         $this->assertTrue($client->getResponse()->isSuccessful());
 
         // Comprobar que el cliente ahora dispone de una cookie de sesión
-        $this->assertRegExp('/(\d|[a-z])+/', $client->getCookieJar()->get('MOCKSESSID')->getValue(),
+        $this->assertRegExp('/(\d|[a-z])+/', $client->getCookieJar()->get('MOCKSESSID', '/', 'localhost')->getValue(),
             'La aplicación ha enviado una cookie de sesión'
         );
 
