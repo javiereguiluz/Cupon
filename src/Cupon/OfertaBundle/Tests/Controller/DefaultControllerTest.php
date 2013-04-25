@@ -117,6 +117,8 @@ class DefaultControllerTest extends WebTestCase
     public function laPortadaRequierePocasConsultasDeBaseDeDatos()
     {
         $client = static::createClient();
+        $client->enableProfiler();
+
         $client->request('GET', '/');
         //SUT
         if ($profiler = $client->getProfile()) {
@@ -130,11 +132,13 @@ class DefaultControllerTest extends WebTestCase
     public function laPortadaSeGeneraMuyRapido()
     {
         $client = static::createClient();
+        $client->enableProfiler();
+
         $client->request('GET', '/');
 
         if ($profiler = $client->getProfile()) {
             // 500 es el tiempo en milisegundos
-            $this->assertLessThan(500, $profiler->getCollector('time')->getTotalTime(),
+            $this->assertLessThan(500, $profiler->getCollector('time')->getDuration(),
                 'La portada se genera en menos de medio segundo'
             );
         }
