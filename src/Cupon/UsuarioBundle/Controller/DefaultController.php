@@ -95,7 +95,7 @@ class DefaultController extends Controller
                 $em->flush();
 
                 // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
-                $this->get('session')->setFlash('info',
+                $this->get('session')->getFlashBag()->add('info',
                     '¡Enhorabuena! Te has registrado correctamente en Cupon'
                 );
 
