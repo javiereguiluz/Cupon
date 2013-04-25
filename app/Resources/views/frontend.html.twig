@@ -30,8 +30,7 @@
             <li><a href="{{ path('portada', { 'ciudad': ciudadSeleccionada }) }}">{{ "Oferta del día" | trans }}</a></li>
             <li><a href="{{ path('ciudad_recientes', { 'ciudad': ciudadSeleccionada }) }}">{{ "Ofertas recientes" | trans }}</a></li>
             <li><a href="{{ path('usuario_compras') }}">{{ "Mis ofertas" | trans }}</a></li>
-            
-            <li>{% render "CiudadBundle:Default:listaCiudades" with { 'ciudad': ciudadSeleccionada } %}</li>
+            <li>{{ render(controller('CiudadBundle:Default:listaCiudades', { 'ciudad': ciudadSeleccionada })) }}</li>
         </ul>
     </nav>
 </header>
@@ -45,7 +44,7 @@
 <aside>
     {% block aside %}
     <section id="login">
-        {% render 'UsuarioBundle:Default:cajaLogin' with { 'id': block('id') }, { 'standalone': true } %}
+        {{ render(controller('UsuarioBundle:Default:cajaLogin', { 'id': block('id') }), { 'strategy': 'esi'}) }}
     </section>
     {% endblock %}
 </aside>
