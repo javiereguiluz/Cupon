@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
-use Symfony\Component\Validator\ExecutionContext;
+use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
  * Cupon\UsuarioBundle\Entity\Usuario
@@ -192,13 +192,13 @@ class Usuario implements UserInterface
      *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
      *   
      */
-    public function esDniValido(ExecutionContext $context)
+    public function esDniValido(ExecutionContextInterface $context)
     {
         $dni = $this->getDni();
 
         // Comprobar que el formato sea correcto
         if (0 === preg_match("/\d{1,8}[a-z]/i", $dni)) {
-            $context->addViolationAtSubPath('dni', 'El DNI introducido no tiene el formato correcto (entre 1 y 8 números seguidos de una letra, sin guiones y sin dejar ningún espacio en blanco)');
+            $context->addViolationAt('dni', 'El DNI introducido no tiene el formato correcto (entre 1 y 8 números seguidos de una letra, sin guiones y sin dejar ningún espacio en blanco)');
 
             return;
         }
@@ -207,7 +207,7 @@ class Usuario implements UserInterface
         $numero = substr($dni, 0, -1);
         $letra  = strtoupper(substr($dni, -1));
         if ($letra != substr("TRWAGMYFPDXBNJZSQVHLCKE", strtr($numero, "XYZ", "012")%23, 1)) {
-            $context->addViolationAtSubPath('dni', 'La letra no coincide con el número del DNI. Comprueba que has escrito bien tanto el número como la letra');
+            $context->addViolationAt('dni', 'La letra no coincide con el número del DNI. Comprueba que has escrito bien tanto el número como la letra');
         }
     }
 
