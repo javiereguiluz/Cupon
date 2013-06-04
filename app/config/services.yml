@@ -5,18 +5,18 @@ services:
         class: Twig_Extensions_Extension_Text
         tags:
             - { name: twig.extension }
-    
+
     twig.extension.debug:
         class: Twig_Extensions_Extension_Debug
         tags:
             - { name: twig.extension }
-    
+
     twig.extension.cupon:
         class: Cupon\OfertaBundle\Twig\Extension\CuponExtension
         arguments: [@translator]
         tags:
             - { name: twig.extension }
-    
+
     cupon.ofertabundle.listener.request:
         class: Cupon\OfertaBundle\Listener\RequestListener
         tags:

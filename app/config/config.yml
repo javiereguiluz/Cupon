@@ -1,5 +1,5 @@
 imports:
-    - { resource: parameters.ini }
+    - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
 
@@ -65,10 +65,6 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
-
-# Configuración del bundle JMS\SecurityExtraBundle
-jms_security_extra:
-    secure_all_services: false
 
 # Parámetros globales del contenedor de dependencias
 parameters:
