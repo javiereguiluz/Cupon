@@ -163,6 +163,10 @@ class Usuario implements UserInterface
         return $this->getNombre().' '.$this->getApellidos();
     }
 
+    public function __sleep(){
+        return array('id', 'nombre', 'email');
+    }
+
     /**
      * Validador propio que comprueba si el DNI introducido es válido
      *
