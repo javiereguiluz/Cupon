@@ -110,7 +110,8 @@ class OfertaController extends Controller
         $entity  = new Oferta();
         $request = $this->getRequest();
         $form    = $this->createForm(new OfertaType(), $entity);
-        $form->bindRequest($request);
+
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             // Copiar la foto subida y guardar la ruta
@@ -143,9 +144,6 @@ class OfertaController extends Controller
             throw $this->createNotFoundException('No se ha encontrado la oferta solicitada');
         }
 
-        // el formulario necesita un objeto de tipo File, no la ruta de la foto
-        $entity->setFoto(new File($entity->getFoto(), false));
-
         $editForm = $this->createForm(new OfertaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
@@ -170,29 +168,29 @@ class OfertaController extends Controller
             throw $this->createNotFoundException('No se ha encontrado la oferta solicitada');
         }
 
-        $fotoOriginal = $entity->getFoto();
-        $entity->setFoto(new File($fotoOriginal, false));
-
         $editForm   = $this->createForm(new OfertaType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        // Guardar la ruta de la foto original de la oferta
+        $rutaFotoOriginal = $editForm->getData()->getRutaFoto();
+
+        $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             if (null == $entity->getFoto()) {
                     // el usuario no ha modificado la foto original
-                    $entity->setFoto($fotoOriginal);
+                    $entity->setRutaFoto($rutaFotoOriginal);
             } else {
                 // el usuario ha modificado la foto: copiar la foto subida y
                 // guardar la nueva ruta
                 $entity->subirFoto($this->container->getParameter('cupon.directorio.imagenes'));
 
                 // borrar la foto anterior
-                if (!empty($fotoOriginal)) {
+                if (!empty($rutaFotoOriginal)) {
                     $fs = new Filesystem();
-                    $fs->remove($this->container->getParameter('cupon.directorio.imagenes').$fotoOriginal);
+                    $fs->remove($this->container->getParameter('cupon.directorio.imagenes').$rutaFotoOriginal);
                 }
             }
 
@@ -218,7 +216,7 @@ class OfertaController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

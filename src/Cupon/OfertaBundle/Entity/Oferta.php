@@ -12,6 +12,7 @@ namespace Cupon\OfertaBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Cupon\OfertaBundle\Util\Util;
 
 /**
@@ -55,7 +56,10 @@ class Oferta
 
     /**
      * @ORM\Column(type="string")
-     *
+     */
+    protected $rutaFoto;
+
+    /**
      * @Assert\Image(maxSize = "500k")
      */
     protected $foto;
@@ -141,15 +145,15 @@ class Oferta
      */
     public function subirFoto($directorioDestino)
     {
-        if (null === $this->foto) {
+        if (null === $this->getFoto()) {
             return;
         }
 
-        $nombreArchivoFoto = uniqid('cupon-').'-1.'.$this->foto->guessExtension();
+        $nombreArchivoFoto = uniqid('cupon-').'-1.'.$this->getFoto()->guessExtension();
 
-        $this->foto->move($directorioDestino, $nombreArchivoFoto);
+        $this->getFoto()->move($directorioDestino, $nombreArchivoFoto);
 
-        $this->setFoto($nombreArchivoFoto);
+        $this->setRutaFoto($nombreArchivoFoto);
     }
 
     /**
@@ -244,19 +248,39 @@ class Oferta
     }
 
     /**
-     * Set foto
+     * Set rutaFoto
      *
      * @param string $foto
      */
-    public function setFoto($foto)
+    public function setRutaFoto($rutaFoto)
+    {
+        $this->rutaFoto = $rutaFoto;
+    }
+
+    /**
+     * Get rutaFoto
+     *
+     * @return string
+     */
+    public function getRutaFoto()
+    {
+        return $this->rutaFoto;
+    }
+
+    /**
+     * Set foto.
+     *
+     * @param UploadedFile $foto
+     */
+    public function setFoto(UploadedFile $foto = null)
     {
         $this->foto = $foto;
     }
 
     /**
-     * Get foto
+     * Get foto.
      *
-     * @return string
+     * @return UploadedFile
      */
     public function getFoto()
     {

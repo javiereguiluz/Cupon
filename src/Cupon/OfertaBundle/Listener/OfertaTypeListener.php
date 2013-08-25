@@ -24,7 +24,7 @@ class OfertaTypeListener
      *
      * @param \Symfony\Component\Form\FormEvent $event
      */
-    public function postBind(FormEvent $event)
+    public function preSubmit(FormEvent $event)
     {
         $formulario = $event->getForm();
 

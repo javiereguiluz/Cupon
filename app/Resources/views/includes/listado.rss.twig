@@ -5,7 +5,7 @@
     <description><![CDATA[
         {% set urlAbsolutaFoto = 'http://'
                                  ~ app.request.server.get('SERVER_NAME')
-                                 ~ asset(directorio_imagenes ~ oferta.foto) %}
+                                 ~ asset(directorio_imagenes ~ oferta.rutaFoto) %}
         <img alt="Fotografía de la oferta" src="{{ urlAbsolutaFoto }}">
         <br/>
         {{ oferta.descripcion | mostrar_como_lista }}

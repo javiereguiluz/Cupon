@@ -85,35 +85,25 @@ class ExtranetController extends Controller
         $oferta = new Oferta();
         $formulario = $this->createForm(new OfertaType(), $oferta);
 
-        if ($peticion->getMethod() == 'POST') {
-           $formulario->bindRequest($peticion);
+        $formulario->handleRequest($peticion);
 
-           if ($formulario->isValid()) {
-               // Completar las propiedades de la oferta que una tienda no puede establecer
-               $tienda = $this->get('security.context')->getToken()->getUser();
-               $oferta->setCompras(0);
-               $oferta->setRevisada(false);
-               $oferta->setTienda($tienda);
-               $oferta->setCiudad($tienda->getCiudad());
+        if ($formulario->isValid()) {
+            // Completar las propiedades de la oferta que una tienda no puede establecer
+            $tienda = $this->get('security.context')->getToken()->getUser();
+            $oferta->setCompras(0);
+            $oferta->setRevisada(false);
+            $oferta->setTienda($tienda);
+            $oferta->setCiudad($tienda->getCiudad());
 
-               // Copiar la foto subida y guardar la ruta
-               $oferta->subirFoto($this->container->getParameter('cupon.directorio.imagenes'));
+            // Copiar la foto subida y guardar la ruta
+            $oferta->subirFoto($this->container->getParameter('cupon.directorio.imagenes'));
 
-               $em = $this->getDoctrine()->getManager();
-               $em->persist($oferta);
-               $em->flush();
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($oferta);
+            $em->flush();
 
-               // Asignar el permiso necesario para que la tienda pueda modificar esta oferta
-               $idObjeto  = ObjectIdentity::fromDomainObject($oferta);
-               $idUsuario = UserSecurityIdentity::fromAccount($tienda);
-
-               $acl = $this->get('security.acl.provider')->createAcl($idObjeto);
-               $acl->insertObjectAce($idUsuario, MaskBuilder::MASK_OPERATOR);
-               $this->get('security.acl.provider')->updateAcl($acl);
-
-               return $this->redirect($this->generateUrl('extranet_portada'));
-           }
-       }
+            return $this->redirect($this->generateUrl('extranet_portada'));
+        }
 
         return $this->render('TiendaBundle:Extranet:formulario.html.twig', array(
             'accion'     => 'crear',
@@ -140,13 +130,13 @@ class ExtranetController extends Controller
         }
 
         // Comprobar que el usuario tiene permiso para editar esta oferta concreta
-        if (false === $this->get('security.context')->isGranted('EDIT', $oferta)) {
+        if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_OFERTA', $oferta)) {
             throw new AccessDeniedException();
         }
 
         // Una oferta sólo se puede modificar si todavía no ha sido revisada por los administradores
         if ($oferta->getRevisada()) {
-            $this->get('session')->setFlash('error',
+            $this->get('session')->getFlashBag()->add('error',
                 'La oferta indicada no se puede modificar porque ya ha sido revisada por los administradores'
             );
 
@@ -155,32 +145,33 @@ class ExtranetController extends Controller
 
         $formulario = $this->createForm(new OfertaType(), $oferta);
 
-        if ($peticion->getMethod() == 'POST') {
-            // Guardar la ruta de la foto original de la oferta
-            $fotoOriginal = $formulario->getData()->getFoto();
+        $formulario->handleRequest($peticion);
 
-            $formulario->bindRequest($peticion);
+        // Guardar la ruta de la foto original de la oferta
+        $rutaFotoOriginal = $formulario->getData()->getRutaFoto();
 
-            if ($formulario->isValid()) {
-                // Si el usuario no ha modificado la foto, su valor actual es null
-                if (null == $oferta->getFoto()) {
-                    // Guardar la ruta original de la foto en la oferta y no hacer nada más
-                    $oferta->setFoto($fotoOriginal);
-                }
-                // El usuario ha cambiado la foto
-                else {
-                    // Copiar la foto subida y guardar la nueva ruta
-                    $oferta->subirFoto($this->container->getParameter('cupon.directorio.imagenes'));
-
-                    // Borrar la foto anterior
-                    unlink($this->container->getParameter('cupon.directorio.imagenes').$fotoOriginal);
-                }
-
-                $em->persist($oferta);
-                $em->flush();
-
-                return $this->redirect($this->generateUrl('extranet_portada'));
+        if ($formulario->isValid()) {
+            // Si el usuario no ha modificado la foto, su valor actual es null
+            if (null == $oferta->getFoto()) {
+                // Guardar la ruta original de la foto en la oferta y no hacer nada más
+                $oferta->setRutaFoto($rutaFotoOriginal);
             }
+            // El usuario ha cambiado la foto
+            else {
+                // Copiar la foto subida y guardar la nueva ruta
+                $oferta->subirFoto($this->container->getParameter('cupon.directorio.imagenes'));
+
+                // Borrar la foto anterior
+                if (!empty($rutaFotoOriginal)) {
+                    $fs = new Filesystem();
+                    $fs->remove($this->container->getParameter('cupon.directorio.imagenes').$rutaFotoOriginal);
+                }
+            }
+
+            $em->persist($oferta);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('extranet_portada'));
         }
 
         return $this->render('TiendaBundle:Extranet:formulario.html.twig', array(
@@ -203,36 +194,34 @@ class ExtranetController extends Controller
         $tienda = $this->get('security.context')->getToken()->getUser();
         $formulario = $this->createForm(new TiendaType(), $tienda);
 
-        if ($peticion->getMethod() == 'POST') {
-            $passwordOriginal = $formulario->getData()->getPassword();
+        $formulario->handleRequest($peticion);
 
-            $formulario->bindRequest($peticion);
+        $passwordOriginal = $formulario->getData()->getPassword();
 
-            if ($formulario->isValid()) {
-                // Si el usuario no ha cambiado el password, su valor es null después de
-                // hacer el ->bindRequest(), por lo que hay que recuperar el valor original
-                if (null == $tienda->getPassword()) {
-                    $tienda->setPassword($passwordOriginal);
-                }
-                // Si el usuario ha cambiado su password, hay que codificarlo antes de guardarlo
-                else {
-                    $encoder = $this->get('security.encoder_factory')->getEncoder($tienda);
-                    $passwordCodificado = $encoder->encodePassword(
-                        $tienda->getPassword(),
-                        $tienda->getSalt()
-                    );
-                    $tienda->setPassword($passwordCodificado);
-                }
-
-                $em->persist($tienda);
-                $em->flush();
-
-                $this->get('session')->setFlash('info',
-                    'Los datos de tu perfil se han actualizado correctamente'
-                );
-
-                return $this->redirect($this->generateUrl('extranet_portada'));
+        if ($formulario->isValid()) {
+            // Si el usuario no ha cambiado el password, su valor es null después de
+            // hacer el ->bindRequest(), por lo que hay que recuperar el valor original
+            if (null == $tienda->getPassword()) {
+                $tienda->setPassword($passwordOriginal);
             }
+            // Si el usuario ha cambiado su password, hay que codificarlo antes de guardarlo
+            else {
+                $encoder = $this->get('security.encoder_factory')->getEncoder($tienda);
+                $passwordCodificado = $encoder->encodePassword(
+                    $tienda->getPassword(),
+                    $tienda->getSalt()
+                );
+                $tienda->setPassword($passwordCodificado);
+            }
+
+            $em->persist($tienda);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('info',
+                'Los datos de tu perfil se han actualizado correctamente'
+            );
+
+            return $this->redirect($this->generateUrl('extranet_portada'));
         }
 
         return $this->render('TiendaBundle:Extranet:perfil.html.twig', array(

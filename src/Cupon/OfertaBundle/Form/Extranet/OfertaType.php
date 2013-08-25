@@ -47,11 +47,11 @@ class OfertaType extends AbstractType
         // `property_path`).
         if (null == $options['data']->getId()) {
             $builder->add('acepto', 'checkbox', array('mapped' => false, 'required' => false));
-        }
 
-        // registrar el listener que validará el campo 'acepto' añadido anteriormente
-        $listener = new OfertaTypeListener();
-        $builder->addEventListener(FormEvents::POST_BIND, array($listener, 'postBind'));
+            // registrar el listener que validará el campo 'acepto' añadido anteriormente
+            $listener = new OfertaTypeListener();
+            $builder->addEventListener(FormEvents::PRE_SUBMIT, array($listener, 'preSubmit'));
+        }
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

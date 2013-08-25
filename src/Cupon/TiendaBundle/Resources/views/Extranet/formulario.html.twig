@@ -41,7 +41,7 @@
         {{ form_errors(formulario.foto) }}
 
         {% if accion == 'editar' %}
-        <img src="{{ asset(directorio_imagenes ~ oferta.foto) }}" />
+        <img src="{{ asset(directorio_imagenes ~ oferta.rutaFoto) }}" />
         <p class="ayuda">(No se muestra a tamaño real)</p>
 
         {{ form_label(formulario.foto, 'Modificar foto') }}

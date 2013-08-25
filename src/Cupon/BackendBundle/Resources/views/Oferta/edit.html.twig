@@ -11,7 +11,7 @@
         {{ form_label(edit_form.foto, 'Fotografía') }}
         {{ form_errors(edit_form.foto) }}
 
-        <img src="{{ asset('/uploads/images/' ~ entity.foto|split('/')|last|join('')) }}" />
+        <img src="{{  asset(directorio_imagenes ~ entity.rutaFoto) }}" />
         <p class="ayuda">(No se muestra a tamaño real)</p>
 
         {{ form_label(edit_form.foto, 'Modificar foto') }}
