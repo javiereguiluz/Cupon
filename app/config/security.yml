@@ -1,8 +1,5 @@
 security:
 
-    acl:
-        connection: default
-
     firewalls:
         # Firewall de la parte de administración o backend
         backend:

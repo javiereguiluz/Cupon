@@ -21,3 +21,8 @@ services:
         class: Cupon\OfertaBundle\Listener\RequestListener
         tags:
             - { name: kernel.event_listener, event: kernel.request }
+
+    cupon.tiendabundle.security.ownervoter:
+        class: Cupon\TiendaBundle\Security\OwnerVoter
+        tags:
+            - { name: security.voter }

@@ -15,13 +15,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
-use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Permission\MaskBuilder;
-use Symfony\Component\Security\Acl\Exception\AclNotFoundException;
-use Cupon\CiudadBundle\Entity\Ciudad;
 use Cupon\OfertaBundle\Entity\Oferta;
-use Cupon\TiendaBundle\Entity\Tienda;
 
 /**
  * Fixtures de la entidad Oferta.
@@ -98,31 +92,6 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
 
                 $manager->persist($oferta);
                 $manager->flush();
-
-                // Otorgar el permiso adecuado a cada oferta utilizando la ACL
-
-                // Obtener la identidad del objeto oferta y del usuario
-                $idObjeto  = ObjectIdentity::fromDomainObject($oferta);
-                $idUsuario = UserSecurityIdentity::fromAccount($tienda);
-
-                // Buscar si la oferta ya dispone de una ACL previa
-                $proveedor = $this->container->get('security.acl.provider');
-
-                try {
-                    $acl = $proveedor->findAcl($idObjeto, array($idUsuario));
-                } catch (AclNotFoundException $e) {
-                    // El objeto no disponía de ninguna ACL, crearla
-                    $acl = $proveedor->createAcl($idObjeto);
-                }
-
-                // Borrar los ACEs previos que (a lo mejor) dispone este objeto
-                $aces = $acl->getObjectAces();
-                foreach ($aces as $index => $ace) {
-                    $acl->deleteObjectAce($index);
-                }
-
-                $acl->insertObjectAce($idUsuario, MaskBuilder::MASK_OPERATOR);
-                $proveedor->updateAcl($acl);
             }
         }
     }
