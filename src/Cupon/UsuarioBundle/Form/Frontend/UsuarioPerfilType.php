@@ -10,6 +10,7 @@
 
 namespace Cupon\UsuarioBundle\Form\Frontend;
 
+use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Cupon\UsuarioBundle\Form\Frontend\UsuarioRegistroType;
 
 /**
@@ -22,10 +23,10 @@ class UsuarioPerfilType extends UsuarioRegistroType
      * la del formulario para darse de alta (escribir la contraseña por
      * ejemplo no es obligatorio)
      */
-    public function getDefaultOptions(array $options)
+    public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        return array(
-            'validation_groups' => array('default')
-        );
+        $resolver->setDefaults(array(
+            'validation_groups' => array('default'),
+        ));
     }
 }

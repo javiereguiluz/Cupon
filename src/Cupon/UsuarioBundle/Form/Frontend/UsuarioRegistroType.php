@@ -35,8 +35,9 @@ class UsuarioRegistroType extends AbstractType
             ->add('password', 'repeated', array(
                 'type' => 'password',
                 'invalid_message' => 'Las dos contraseñas deben coincidir',
-                'options' => array('label' => 'Contraseña'),
-                'required' => false
+                'first_options'   => array('label' => 'Contraseña'),
+                'second_options'  => array('label' => 'Repite Contraseña'),
+                'required'        => false
             ))
 
             ->add('direccion')
@@ -46,13 +47,13 @@ class UsuarioRegistroType extends AbstractType
             ))
             ->add('dni')
             ->add('numero_tarjeta', 'text', array('label' => 'Tarjeta de Crédito', 'attr' => array(
-                'pattern' => '^[0-9]{13,16}$',
+                'pattern'     => '^[0-9]{13,16}$',
                 'placeholder' => 'Entre 13 y 16 numeros'
             )))
 
             ->add('ciudad', 'entity', array(
-                'class' => 'Cupon\\CiudadBundle\\Entity\\Ciudad',
-                'empty_value' => 'Selecciona una ciudad',
+                'class'         => 'Cupon\\CiudadBundle\\Entity\\Ciudad',
+                'empty_value'   => 'Selecciona una ciudad',
                 'query_builder' => function(EntityRepository $repositorio) {
                     return $repositorio->createQueryBuilder('c')
                         ->orderBy('c.nombre', 'ASC');
