@@ -82,7 +82,8 @@ class TiendaController extends Controller
         $entity  = new Tienda();
         $request = $this->getRequest();
         $form    = $this->createForm(new TiendaType(), $entity);
-        $form->bindRequest($request);
+
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -142,7 +143,7 @@ class TiendaController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
@@ -167,7 +168,7 @@ class TiendaController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

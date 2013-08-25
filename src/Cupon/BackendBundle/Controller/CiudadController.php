@@ -81,7 +81,8 @@ class CiudadController extends Controller
         $entity  = new Ciudad();
         $request = $this->getRequest();
         $form    = $this->createForm(new CiudadType(), $entity);
-        $form->bindRequest($request);
+
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -89,7 +90,6 @@ class CiudadController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('backend_ciudad_show', array('id' => $entity->getId())));
-
         }
 
         return $this->render('BackendBundle:Ciudad:new.html.twig', array(
@@ -141,7 +141,7 @@ class CiudadController extends Controller
 
         $request = $this->getRequest();
 
-        $editForm->bindRequest($request);
+        $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->persist($entity);
@@ -166,7 +166,7 @@ class CiudadController extends Controller
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
-        $form->bindRequest($request);
+        $form->handleRequest($request);
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();

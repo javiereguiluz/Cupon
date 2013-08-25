@@ -29,34 +29,32 @@ class SitioController extends Controller
             ->getForm()
         ;
 
-        if ($peticion->getMethod() == 'POST') {
-            $formulario->bindRequest($peticion);
+        $formuario->handleRequest($peticion);
 
-            if ($formulario->isValid()) {
-                $datos = $formulario->getData();
+        if ($formulario->isValid()) {
+            $datos = $formulario->getData();
 
-                $contenido = sprintf(" Remitente: %s \n\n Mensaje: %s \n\n Navegador: %s \n Dirección IP: %s \n",
-                    $datos['remitente'],
-                    htmlspecialchars($datos['mensaje']),
-                    $peticion->server->get('HTTP_USER_AGENT'),
-                    $peticion->server->get('REMOTE_ADDR')
-                );
+            $contenido = sprintf(" Remitente: %s \n\n Mensaje: %s \n\n Navegador: %s \n Dirección IP: %s \n",
+                $datos['remitente'],
+                htmlspecialchars($datos['mensaje']),
+                $peticion->server->get('HTTP_USER_AGENT'),
+                $peticion->server->get('REMOTE_ADDR')
+            );
 
-                $mensaje = \Swift_Message::newInstance()
-                    ->setSubject('Contacto')
-                    ->setFrom($datos['remitente'])
-                    ->setTo('contacto@cupon')
-                    ->setBody($contenido)
-                ;
+            $mensaje = \Swift_Message::newInstance()
+                ->setSubject('Contacto')
+                ->setFrom($datos['remitente'])
+                ->setTo('contacto@cupon')
+                ->setBody($contenido)
+            ;
 
-                $this->container->get('mailer')->send($mensaje);
+            $this->container->get('mailer')->send($mensaje);
 
-                $this->get('session')->setFlash('info',
-                    'Tu mensaje se ha enviado correctamente.'
-                );
+            $this->get('session')->setFlash('info',
+                'Tu mensaje se ha enviado correctamente.'
+            );
 
-                return $this->redirect($this->generateUrl('portada'));
-            }
+            return $this->redirect($this->generateUrl('portada'));
         }
 
         return $this->render('OfertaBundle:Sitio:contacto.html.twig', array(

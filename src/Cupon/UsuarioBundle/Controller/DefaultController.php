@@ -76,37 +76,35 @@ class DefaultController extends Controller
 
         $formulario = $this->createForm(new UsuarioRegistroType(), $usuario);
 
-        if ($peticion->getMethod() == 'POST') {
-            $formulario->bind($peticion);
+        $formulario->handleRequest($peticion);
 
-            if ($formulario->isValid()) {
-                // Completar las propiedades que el usuario no rellena en el formulario
-                $usuario->setSalt(md5(time()));
+        if ($formulario->isValid()) {
+            // Completar las propiedades que el usuario no rellena en el formulario
+            $usuario->setSalt(md5(time()));
 
-                $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
-                $passwordCodificado = $encoder->encodePassword(
-                    $usuario->getPassword(),
-                    $usuario->getSalt()
-                );
-                $usuario->setPassword($passwordCodificado);
+            $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
+            $passwordCodificado = $encoder->encodePassword(
+                $usuario->getPassword(),
+                $usuario->getSalt()
+            );
+            $usuario->setPassword($passwordCodificado);
 
-                // Guardar el nuevo usuario en la base de datos
-                $em->persist($usuario);
-                $em->flush();
+            // Guardar el nuevo usuario en la base de datos
+            $em->persist($usuario);
+            $em->flush();
 
-                // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
-                $this->get('session')->getFlashBag()->add('info',
-                    '¡Enhorabuena! Te has registrado correctamente en Cupon'
-                );
+            // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
+            $this->get('session')->getFlashBag()->add('info',
+                '¡Enhorabuena! Te has registrado correctamente en Cupon'
+            );
 
-                // Loguear al usuario automáticamente
-                $token = new UsernamePasswordToken($usuario, $usuario->getPassword(), 'usuarios', $usuario->getRoles());
-                $this->container->get('security.context')->setToken($token);
+            // Loguear al usuario automáticamente
+            $token = new UsernamePasswordToken($usuario, null, 'frontend', $usuario->getRoles());
+            $this->container->get('security.context')->setToken($token);
 
-                return $this->redirect($this->generateUrl('portada', array(
-                    'ciudad' => $usuario->getCiudad()->getSlug()
-                )));
-            }
+            return $this->redirect($this->generateUrl('portada', array(
+                'ciudad' => $usuario->getCiudad()->getSlug()
+            )));
         }
 
         return $this->render('UsuarioBundle:Default:registro.html.twig', array(
@@ -126,36 +124,35 @@ class DefaultController extends Controller
         $usuario = $this->get('security.context')->getToken()->getUser();
         $formulario = $this->createForm(new UsuarioPerfilType(), $usuario);
 
-        if ($peticion->getMethod() == 'POST') {
-            $passwordOriginal = $formulario->getData()->getPassword();
+        $passwordOriginal = $formulario->getData()->getPassword();
 
-            $formulario->bindRequest($peticion);
+        $formulario->handleRequest($peticion);
 
-            if ($formulario->isValid()) {
-                // Si el usuario no ha cambiado el password, su valor es null después
-                // de hacer el ->bindRequest(), por lo que hay que recuperar el valor original
-                if (null == $usuario->getPassword()) {
-                    $usuario->setPassword($passwordOriginal);
-                }
-                // Si el usuario ha cambiado su password, hay que codificarlo antes de guardarlo
-                else {
-                    $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
-                    $passwordCodificado = $encoder->encodePassword(
-                        $usuario->getPassword(),
-                        $usuario->getSalt()
-                    );
-                    $usuario->setPassword($passwordCodificado);
-                }
+        if ($formulario->isValid()) {
+            // Si el usuario no ha cambiado el password, su valor es null después
+            // de hacer el ->bindRequest(), por lo que hay que recuperar el valor original
 
-                $em->persist($usuario);
-                $em->flush();
-
-                $this->get('session')->getFlashBag()->add('info',
-                    'Los datos de tu perfil se han actualizado correctamente'
-                );
-
-                return $this->redirect($this->generateUrl('usuario_perfil'));
+            if (null == $usuario->getPassword()) {
+                $usuario->setPassword($passwordOriginal);
             }
+            // Si el usuario ha cambiado su password, hay que codificarlo antes de guardarlo
+            else {
+                $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
+                $passwordCodificado = $encoder->encodePassword(
+                    $usuario->getPassword(),
+                    $usuario->getSalt()
+                );
+                $usuario->setPassword($passwordCodificado);
+            }
+
+            $em->persist($usuario);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('info',
+                'Los datos de tu perfil se han actualizado correctamente'
+            );
+
+            return $this->redirect($this->generateUrl('usuario_perfil'));
         }
 
         return $this->render('UsuarioBundle:Default:perfil.html.twig', array(
