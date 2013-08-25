@@ -32,9 +32,9 @@ En el libro [Desarrollo web ágil con Symfony2](http://www.symfony.es/libro/) se
   1. `mkdir cupon`
   2. `git clone git://github.com/javiereguiluz/Cupon.git cupon`
   3. `cd cupon`
-  4. `curl -s https://getcomposer.org/installer | php` (esta es la forma recomendada de instalar `Composer`. Si tienes problemas, utiliza alguna de las alternativas explicadas en la [documentación de Composer](http://getcomposer.org/download/))
+  4. `curl -s https://getcomposer.org/installer | php` (esta es la forma recomendada de instalar `Composer`. Si tienes problemas, utiliza alguna de las alternativas explicadas en la [documentación de Composer](http://librosweb.es/composer/capitulo_1/instalacion_en_servidores_linux.html))
   5. `php composer.phar install`
-  6. `chmod -R 777 app/cache app/logs` (lee la sección [Setting up Permissions](http://symfony.com/doc/2.0/book/installation.html#configuration-and-setup) para hacer esto de forma más elegante)
+  6. `chmod -R 777 app/cache app/logs` (lee la sección [Setting up Permissions](http://librosweb.es/symfony_2_3/capitulo_3/instalando_una_distribucion_de_symfony2.html#instalando_y_configurando) para hacer esto de forma más elegante)
   7. Configura bien tu servidor web
 
 ## Uso ##
@@ -42,19 +42,18 @@ En el libro [Desarrollo web ágil con Symfony2](http://www.symfony.es/libro/) se
 Para poder probar bien la aplicación:
 
   1. Crea una nueva base de datos de prueba y configura sus datos de acceso en el
-     archivo de configuración `app/config/parameters.ini`
+     archivo de configuración `app/config/parameters.yml`
   2. Crea el esquema de la base de datos con el comando: `php app/console doctrine:schema:create`
-  3. Crea las tablas de la ACL: `php app/console init:acl`
-  4. Carga los datos de pruebas con los siguientes comandos:
+  3. Carga los datos de prueba con los siguientes comandos:
       * `php app/console doctrine:fixtures:load` para cargar todos los datos de
       prueba de la aplicación terminada (incluye todas las propiedades relacionadas
-      con la ACL y la seguridad). Si se muestra una excepción de tipo *Truncating table with foreign keys fails* , ejecuta el siguiente comando: `php app/console doctrine:fixtures:load --append`
+      con la seguridad). Si se muestra una excepción de tipo *Truncating table with foreign keys fails* , ejecuta el siguiente comando: `php app/console doctrine:fixtures:load --append`
       * `php app/console doctrine:fixtures:load --fixtures=app/Resources` para
       cargar una versión simplificada de los datos de prueba. Utiliza estos datos
       si estás creando la aplicación a mano y todavía no has llegado al capítulo
-      relacionado con la seguridad y la ACL.
-  5. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
-  6. Asegúrate de que el directorio `web/uploads/images/` tiene permisos de escritura.
+      relacionado con la seguridad.
+  4. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
+  5. Asegúrate de que el directorio `web/uploads/images/` tiene permisos de escritura.
 
 Si tienes algún problema, limpia la cache:
 
