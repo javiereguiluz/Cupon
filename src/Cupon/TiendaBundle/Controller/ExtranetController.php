@@ -145,10 +145,10 @@ class ExtranetController extends Controller
 
         $formulario = $this->createForm(new OfertaType(), $oferta);
 
-        $formulario->handleRequest($peticion);
-
         // Guardar la ruta de la foto original de la oferta
         $rutaFotoOriginal = $formulario->getData()->getRutaFoto();
+
+        $formulario->handleRequest($peticion);
 
         if ($formulario->isValid()) {
             // Si el usuario no ha modificado la foto, su valor actual es null
@@ -194,9 +194,9 @@ class ExtranetController extends Controller
         $tienda = $this->get('security.context')->getToken()->getUser();
         $formulario = $this->createForm(new TiendaType(), $tienda);
 
-        $formulario->handleRequest($peticion);
-
         $passwordOriginal = $formulario->getData()->getPassword();
+
+        $formulario->handleRequest($peticion);
 
         if ($formulario->isValid()) {
             // Si el usuario no ha cambiado el password, su valor es null después de
