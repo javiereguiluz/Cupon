@@ -44,7 +44,7 @@
 <aside>
     {% block aside %}
     <section id="login">
-        {{ render(controller('UsuarioBundle:Default:cajaLogin', { 'id': block('id') }), { 'strategy': 'esi'}) }}
+        {{ render_esi(controller('UsuarioBundle:Default:cajaLogin', { 'id': block('id') })) }}
     </section>
     {% endblock %}
 </aside>
