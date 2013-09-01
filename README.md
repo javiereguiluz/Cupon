@@ -44,8 +44,7 @@ Para poder probar bien la aplicación:
   1. Crea una nueva base de datos de prueba y configura sus datos de acceso en el
      archivo de configuración `app/config/parameters.ini`
   2. Crea el esquema de la base de datos con el comando: `php app/console doctrine:schema:create`
-  3. Crea las tablas de la ACL: `php app/console init:acl`
-  4. Carga los datos de pruebas con los siguientes comandos:
+  3. Carga los datos de pruebas con los siguientes comandos:
       * `php app/console doctrine:fixtures:load` para cargar todos los datos de
       prueba de la aplicación terminada (incluye todas las propiedades relacionadas
       con la ACL y la seguridad). Si se muestra una excepción de tipo *Truncating table with foreign keys fails* , ejecuta el siguiente comando: `php app/console doctrine:fixtures:load --append`
@@ -53,8 +52,8 @@ Para poder probar bien la aplicación:
       cargar una versión simplificada de los datos de prueba. Utiliza estos datos
       si estás creando la aplicación a mano y todavía no has llegado al capítulo
       relacionado con la seguridad y la ACL.
-  5. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
-  6. Asegúrate de que el directorio `web/uploads/images/` tiene permisos de escritura.
+  4. Genera los web assets con Assetic: `php app/console assetic:dump --env=prod --no-debug`
+  5. Asegúrate de que el directorio `web/uploads/images/` tiene permisos de escritura.
 
 Si tienes algún problema, limpia la cache:
 
