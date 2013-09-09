@@ -29,7 +29,7 @@ class SitioController extends Controller
             ->getForm()
         ;
 
-        $formuario->handleRequest($peticion);
+        $formulario->handleRequest($peticion);
 
         if ($formulario->isValid()) {
             $datos = $formulario->getData();
