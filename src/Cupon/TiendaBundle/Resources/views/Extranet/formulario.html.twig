@@ -10,7 +10,8 @@
 {% block article %}
 <h1>{{ block('title') }}</h1>
 
-<form action="{{ accion == 'crear' ? path('extranet_oferta_nueva') : path('extranet_oferta_editar', { 'id': oferta.id }) }}" method="post" {{ form_enctype(formulario) }}>
+{% set accionFormulario = (accion == 'crear') ? path('extranet_oferta_nueva') : path('extranet_oferta_editar', { 'id': oferta.id }) %}
+{{ form_start(formulario, { 'action': accionFormulario }) }}
     <div>
     {{ form_errors(formulario) }}
 
@@ -83,11 +84,9 @@
     </div>
     {% endif %}
 
-    {{ form_rest(formulario) }}
-
     <input class="boton" type="submit" value="{{ accion == 'crear' ? 'Añadir oferta' : 'Guardar cambios' }}" />
     </div>
-</form>
+{{ form_end(formulario) }}
 {% endblock %}
 
 {% block aside %}

@@ -8,7 +8,7 @@
 
     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 
-    <form action="{{ path('contacto') }}" method="post" {{ form_enctype(formulario) }}>
+    {{ form_start(formulario) }}
         {{ form_errors(formulario) }}
 
         <div>
@@ -19,8 +19,6 @@
 
         {{ form_row(formulario.mensaje) }}
 
-        {{ form_rest(formulario) }}
-
         <input type="submit" value="Enviar mensaje" />
-    </form>
+    {{ form_end(formulario) }}
 {% endblock %}

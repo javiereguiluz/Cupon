@@ -6,7 +6,7 @@
 {% block article %}
 <h1>{{ block('title') }}</h1>
 
-<form action="{{ path('usuario_perfil') }}" method="post" {{ form_enctype(formulario) }}>
+{{ form_start(formulario, { 'action': path('usuario_perfil') }) }}
     <div>
 
     <div class="errors">
@@ -73,10 +73,8 @@
         <span>Me gustaría recibir el boletín de ofertas de Cupon</span>
     </div>
 
-    {{ form_rest(formulario) }}
-
     <input class="boton" type="submit" value="Guardar cambios" />
 
     </div>
-</form>
+{{ form_end(formulario) }}
 {% endblock %}
