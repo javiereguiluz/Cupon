@@ -6,11 +6,6 @@ services:
         tags:
             - { name: twig.extension }
 
-    twig.extension.debug:
-        class: Twig_Extensions_Extension_Debug
-        tags:
-            - { name: twig.extension }
-
     twig.extension.cupon:
         class: Cupon\OfertaBundle\Twig\Extension\CuponExtension
         arguments: [@translator]
