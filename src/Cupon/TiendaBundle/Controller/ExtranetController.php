@@ -11,6 +11,7 @@
 namespace Cupon\TiendaBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
@@ -25,9 +26,8 @@ class ExtranetController extends Controller
     /**
      * Muestra el formulario de login
      */
-    public function loginAction()
+    public function loginAction(Request $peticion)
     {
-        $peticion = $this->getRequest();
         $sesion = $peticion->getSession();
 
         $error = $peticion->attributes->get(
@@ -78,10 +78,8 @@ class ExtranetController extends Controller
      * procesamiento de la información recibida y la creación de las nuevas
      * entidades de tipo Oferta
      */
-    public function ofertaNuevaAction()
+    public function ofertaNuevaAction(Request $peticion)
     {
-        $peticion = $this->getRequest();
-
         $oferta = new Oferta();
         $formulario = $this->createForm(new OfertaType(), $oferta);
 
@@ -118,9 +116,8 @@ class ExtranetController extends Controller
      *
      * @param string $id El id de la oferta a modificar
      */
-    public function ofertaEditarAction($id)
+    public function ofertaEditarAction(Request $peticion, $id)
     {
-        $peticion = $this->getRequest();
         $em = $this->getDoctrine()->getManager();
 
         $oferta = $em->getRepository('OfertaBundle:Oferta')->find($id);
@@ -186,9 +183,8 @@ class ExtranetController extends Controller
      * logueada en la aplicación. También se encarga de procesar la información y
      * guardar las modificaciones en la base de datos
      */
-    public function perfilAction()
+    public function perfilAction(Request $peticion)
     {
-        $peticion = $this->getRequest();
         $em = $this->getDoctrine()->getManager();
 
         $tienda = $this->get('security.context')->getToken()->getUser();

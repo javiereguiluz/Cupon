@@ -11,6 +11,7 @@
 namespace Cupon\UsuarioBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Cupon\UsuarioBundle\Entity\Usuario;
 use Cupon\OfertaBundle\Entity\Venta;
@@ -23,9 +24,8 @@ class DefaultController extends Controller
     /**
      * Muestra el formulario de login
      */
-    public function loginAction()
+    public function loginAction(Request $peticion)
     {
-        $peticion = $this->getRequest();
         $sesion = $peticion->getSession();
 
         $error = $peticion->attributes->get(
@@ -66,9 +66,8 @@ class DefaultController extends Controller
      * Muestra el formulario para que se registren los nuevos usuarios. Además
      * se encarga de procesar la información y de guardar la información en la base de datos
      */
-    public function registroAction()
+    public function registroAction(Request $peticion)
     {
-        $peticion = $this->getRequest();
         $em = $this->getDoctrine()->getManager();
 
         $usuario = new Usuario();
@@ -116,9 +115,8 @@ class DefaultController extends Controller
      * Muestra el formulario con toda la información del perfil del usuario logueado.
      * También permite modificar la información y guarda los cambios en la base de datos
      */
-    public function perfilAction()
+    public function perfilAction(Request $peticion)
     {
-        $peticion = $this->getRequest();
         $em = $this->getDoctrine()->getManager();
 
         $usuario = $this->get('security.context')->getToken()->getUser();
@@ -187,7 +185,7 @@ class DefaultController extends Controller
      * @param string $ciudad El slug de la ciudad a la que pertenece la oferta
      * @param string $slug   El slug de la oferta
      */
-    public function comprarAction($ciudad, $slug)
+    public function comprarAction(Request $peticion, $ciudad, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $usuario = $this->get('security.context')->getToken()->getUser();
@@ -233,7 +231,7 @@ class DefaultController extends Controller
             );
 
             return $this->redirect(
-                $this->getRequest()->headers->get('Referer', $this->generateUrl('portada'))
+                $peticion->headers->get('Referer', $this->generateUrl('portada'))
             );
         }
 
