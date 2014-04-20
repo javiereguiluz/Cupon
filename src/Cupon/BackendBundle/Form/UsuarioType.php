@@ -36,6 +36,7 @@ class UsuarioType extends AbstractType
             ->add('dni')
             ->add('numero_tarjeta')
             ->add('ciudad')
+            ->add('guardar', 'submit', array('attr' => array('class' => 'boton')))
         ;
     }
 

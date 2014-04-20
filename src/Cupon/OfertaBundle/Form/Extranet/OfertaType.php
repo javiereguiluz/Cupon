@@ -36,6 +36,10 @@ class OfertaType extends AbstractType
             ->add('precio', 'money')
             ->add('descuento', 'money')
             ->add('umbral')
+            ->add('guardar', 'submit', array(
+                'label' => 'Guardar cambios',
+                'attr'  => array('class' => 'boton'),
+            ))
         ;
 
         // El formulario es diferente según se utilice en la acción 'new' o en la acción 'edit'

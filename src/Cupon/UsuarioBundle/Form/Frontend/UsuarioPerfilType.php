@@ -10,6 +10,7 @@
 
 namespace Cupon\UsuarioBundle\Form\Frontend;
 
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Cupon\UsuarioBundle\Form\Frontend\UsuarioRegistroType;
 

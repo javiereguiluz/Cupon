@@ -59,6 +59,8 @@ class UsuarioRegistroType extends AbstractType
                         ->orderBy('c.nombre', 'ASC');
                 },
             ))
+
+            ->add('registrarme', 'submit')
         ;
     }
 

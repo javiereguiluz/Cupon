@@ -6,8 +6,8 @@
 {% block article %}
 <h1>{{ block('title') }}</h1>
 
-{{ form_start(formulario, { 'action': path('usuario_registro') }) }}
-    <div>
+{{ form_start(formulario) }}
+<div>
     {{ form_errors(formulario) }}
 
     <div>
@@ -73,10 +73,9 @@
         <span>Me gustaría recibir el boletín de ofertas de Cupon</span>
     </div>
 
-    <input class="boton" type="submit" value="Registrarme" />
-
-    </div>
-{{ form_rest(formulario) }}
+    {{ form_row(formulario.registrarme, { 'attr': { 'class': 'boton' } }) }}
+</div>
+{{ form_end(formulario) }}
 {% endblock %}
 
 {% block aside %}

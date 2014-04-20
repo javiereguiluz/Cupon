@@ -38,6 +38,11 @@ class TiendaType extends AbstractType
             ->add('descripcion')
             ->add('direccion')
             ->add('ciudad')
+
+            ->add('guardar', 'submit', array(
+                'label' => 'Guardar cambios',
+                'attr'  => array('class' => 'boton')
+            ))
         ;
     }
 

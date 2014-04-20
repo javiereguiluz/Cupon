@@ -6,7 +6,7 @@
 {% block article %}
 <h1>{{ block('title') }}</h1>
 
-{{ form_start(formulario, { 'action': path('extranet_perfil') }) }}
+{{ form_start(formulario) }}
 <div>
     {{ form_errors(formulario) }}
 
@@ -44,7 +44,11 @@
         {{ form_widget(formulario.ciudad) }}
     </div>
 
-    <input class="boton" type="submit" value="Guardar cambios" />
+    <div>
+        {{ form_label(formulario.direccion) }}
+        {{ form_errors(formulario.direccion) }}
+        {{ form_widget(formulario.direccion) }}
+    </div>
 </div>
 {{ form_end(formulario) }}
 {% endblock %}

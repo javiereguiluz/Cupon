@@ -10,9 +10,8 @@
 {% block article %}
 <h1>{{ block('title') }}</h1>
 
-{% set accionFormulario = (accion == 'crear') ? path('extranet_oferta_nueva') : path('extranet_oferta_editar', { 'id': oferta.id }) %}
-{{ form_start(formulario, { 'action': accionFormulario }) }}
-    <div>
+{{ form_start(formulario) }}
+<div>
     {{ form_errors(formulario) }}
 
     <div>
@@ -83,9 +82,7 @@
         {{ form_widget(formulario.acepto) }} <span>Declaro que toda la información de esta oferta es correcta, que soy consciente de la obligación de cumplir las condiciones prometidas y que dispongo de los medios necesarios para hacerlo.</span>
     </div>
     {% endif %}
-
-    <input class="boton" type="submit" value="{{ accion == 'crear' ? 'Añadir oferta' : 'Guardar cambios' }}" />
-    </div>
+</div>
 {{ form_end(formulario) }}
 {% endblock %}
 

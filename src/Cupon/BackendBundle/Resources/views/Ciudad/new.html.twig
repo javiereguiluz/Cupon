@@ -6,12 +6,7 @@
 {% block article %}
 <h1>{{ block('title') }}</h1>
 
-{{ form_start(form, { 'action': path('backend_ciudad_create') }) }}
-    {{ form_widget(form) }}
-    <p>
-        <button class="boton" type="submit">Añadir ciudad</button>
-    </p>
-{{ form_end(form) }}
+{{ form(form, { 'action': path('backend_ciudad_create') }) }}
 
 <ul class="record_actions">
     <li>

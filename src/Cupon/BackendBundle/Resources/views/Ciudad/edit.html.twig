@@ -6,12 +6,7 @@
 {% block article %}
 <h1>{{ block('title') }}</h1>
 
-{{ form_start(edit_form, { 'action': path('backend_ciudad_update', { 'id': entity.id }) }) }}
-    {{ form_widget(edit_form) }}
-    <p>
-        <button class="boton" type="submit">Guardar cambios</button>
-    </p>
-{{ form_end(edit_form) }}
+{{ form(edit_form, { 'action': path('backend_ciudad_update', { 'id': entity.id }) }) }}
 
 <ul class="record_actions">
     <li>
