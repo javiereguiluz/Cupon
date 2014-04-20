@@ -1,8 +1,7 @@
-# Aplicación de prueba Cupon para Symfony 2.3.x #
+# Aplicación de prueba Cupon para Symfony 2.4.x #
 
 Cupon es una aplicación de prueba desarrollada para aprender a programar con 
-Symfony 2.3. Se trata de un clon simplificado de Groupon, de ahí el nombre. Esta 
-aplicación es la base del libro **[Desarrollo web ágil con Symfony2](http://www.symfony.es/libro/)** publicado por Javier Eguiluz.
+Symfony 2.4. Se trata de un clon simplificado de Groupon, de ahí el nombre. Esta aplicación es la base del libro **[Desarrollo web ágil con Symfony2](http://www.symfony.es/libro/)** publicado por Javier Eguiluz.
 
 Si descubres algún error, por favor utiliza [la página de issues de Github](https://github.com/javiereguiluz/Cupon/issues) para avisarnos.
 
@@ -34,15 +33,15 @@ En el libro [Desarrollo web ágil con Symfony2](http://www.symfony.es/libro/) se
   3. `cd cupon`
   4. `curl -s https://getcomposer.org/installer | php` (esta es la forma recomendada de instalar `Composer`. Si tienes problemas, utiliza alguna de las alternativas explicadas en la [documentación de Composer](http://librosweb.es/composer/capitulo_1/instalacion_en_servidores_linux.html))
   5. `php composer.phar install`
-  6. `chmod -R 777 app/cache app/logs` (lee la sección [Setting up Permissions](http://librosweb.es/symfony_2_3/capitulo_3/instalando_una_distribucion_de_symfony2.html#instalando_y_configurando) para hacer esto de forma más elegante)
+  6. `chmod -R 777 app/cache app/logs` (lee la sección [Setting up Permissions](http://librosweb.es/symfony_2_4/capitulo_3/instalando_una_distribucion_de_symfony2.html#instalando_y_configurando) para hacer esto de forma más elegante)
   7. Configura bien tu servidor web
 
 ## Uso ##
 
 Para poder probar bien la aplicación:
 
-  1. Crea una nueva base de datos de prueba y configura sus datos de acceso en el
-     archivo de configuración `app/config/parameters.yml`
+  1. Crea una nueva base de datos de prueba y configura sus datos de acceso en 
+     el archivo de configuración `app/config/parameters.yml`
   2. Crea el esquema de la base de datos con el comando: `php app/console doctrine:schema:create`
   3. Carga los datos de prueba con los siguientes comandos:
       * `php app/console doctrine:fixtures:load` para cargar todos los datos de
@@ -65,9 +64,9 @@ Si tienes algún problema, limpia la cache:
 La aplicación incluye varios test unitarios y funcionales de ejemplo. Para
 ejecutarlos debes tener la herramienta [PHPUnit](https://github.com/sebastianbergmann/phpunit/) instalada. Después, ejecuta el siguiente comando en el directorio raíz del proyecto:
 
-~~~
+```
 $ phpunit -c app
-~~~
+```
 
 ## Frontend ##
 
