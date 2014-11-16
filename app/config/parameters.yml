@@ -1,0 +1,21 @@
+# This file is auto-generated during the composer install
+parameters:
+    # Si NO usas SQLite, comenta estas dos líneas
+    database_driver: pdo_sqlite
+    database_path:   "%kernel.root_dir%/data/datos.sqlite"
+
+    # Si usas MySQL, descomenta estas líneas
+    # database_driver: pdo_mysql
+    # database_host: localhost
+    # database_port: null
+    # database_name: cupon
+    # database_user: cupon
+    # database_password: cupon
+
+    mailer_transport: smtp
+    mailer_host: localhost
+    mailer_user: null
+    mailer_password: null
+
+    locale: es
+    secret: ThisTokenIsNotSoSecretChangeIt
