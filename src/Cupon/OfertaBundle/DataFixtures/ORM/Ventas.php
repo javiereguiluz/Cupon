@@ -19,7 +19,7 @@ use Cupon\OfertaBundle\Entity\Venta;
 
 /**
  * Fixtures de la entidad Venta.
- * Crea para cada usuario registrado entre 0 y 10 ventas.
+ * Crea para cada usuario registrado entre 0 y 3 ventas.
  */
 class Ventas extends AbstractFixture implements OrderedFixtureInterface
 {
@@ -35,7 +35,7 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
         $usuarios = $manager->getRepository('UsuarioBundle:Usuario')->findAll();
 
         foreach ($usuarios as $usuario) {
-            $compras = rand(0, 10);
+            $compras = rand(0, 3);
             $comprado = array();
 
             for ($i=0; $i<$compras; $i++) {

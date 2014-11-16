@@ -19,7 +19,7 @@ use Cupon\OfertaBundle\Entity\Oferta;
 
 /**
  * Fixtures de la entidad Oferta.
- * Crea para cada ciudad 20 ofertas con información muy realista.
+ * Crea para cada ciudad 15 ofertas con información muy realista.
  */
 class Ofertas extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
@@ -46,7 +46,7 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
                 $ciudad->getId()
             );
 
-            for ($j=1; $j<=20; $j++) {
+            for ($j=1; $j<=15; $j++) {
                 $oferta = new Oferta();
 
                 $oferta->setNombre($this->getNombre());
