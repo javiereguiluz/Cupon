@@ -1,10 +1,10 @@
 # Configuración global de los servicios de la aplicación
 # Este archivo se importa desde app/config/config.yml
 services:
-    twig.extension.text:
-        class: Twig_Extensions_Extension_Text
-        tags:
-            - { name: twig.extension }
+#    twig.extension.text:
+#        class: Twig_Extensions_Extension_Text
+#        tags:
+#            - { name: twig.extension }
 
     twig.extension.cupon:
         class: Cupon\OfertaBundle\Twig\Extension\CuponExtension

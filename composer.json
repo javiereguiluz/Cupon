@@ -1,26 +1,33 @@
 {
     "name": "javiereguiluz/cupon",
-    "description": "Aplicación de prueba para aprender a programar con Symfony 2.5",
+    "description": "Aplicación de prueba para aprender a programar con Symfony 2.8",
+    "type": "project",
+    "license": "MIT",
     "autoload": {
-        "psr-0": { "": "src/" }
+        "psr-4": {
+            "": "src/"
+        },
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
+        ]
     },
     "require": {
         "php"                                  : ">=5.3.3",
-        "symfony/symfony"                      : "2.5.*",
-        "doctrine/orm"                         : "~2.2,>=2.2.3",
-        "doctrine/doctrine-bundle"             : "~1.2",
-        "twig/extensions"                      : "~1.0",
-        "symfony/assetic-bundle"               : "~2.3",
+        "symfony/symfony"                      : "2.8.*",
+        "doctrine/orm"                         : "^2.4.8",
+        "doctrine/doctrine-bundle"             : "~1.4",
         "symfony/swiftmailer-bundle"           : "~2.3",
+        "symfony/assetic-bundle"               : "~2.3",
         "symfony/monolog-bundle"               : "~2.4",
-        "sensio/distribution-bundle"           : "~2.3",
-        "sensio/framework-extra-bundle"        : "~3.0",
-        "sensio/generator-bundle"              : "~2.3",
-        "incenteev/composer-parameter-handler" : "~2.0",
-        "doctrine/doctrine-fixtures-bundle"    : "dev-master",
-        "doctrine/data-fixtures"               : "dev-master",
-        "ideup/simple-paginator-bundle"        : "dev-master",
-        "beberlei/DoctrineExtensions"          : "dev-master"
+        "sensio/distribution-bundle"           : "~5.0",
+        "sensio/framework-extra-bundle"        : "^3.0.2",
+        "incenteev/composer-parameter-handler" : "~2.0"
+    },
+    "require-dev": {
+        "sensio/generator-bundle"              : "~3.0",
+        "symfony/phpunit-bridge"               : "~2.7",
+        "doctrine/doctrine-fixtures-bundle"    : "^2.3"
     },
     "scripts": {
         "post-install-cmd": [
@@ -28,28 +35,30 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile"
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "platform": {
+            "php": "5.3.9"
+        }
     },
     "extra": {
         "symfony-app-dir": "app",
         "symfony-web-dir": "web",
+        "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"
-        },
-        "branch-alias": {
-            "dev-master": "2.4-dev"
         }
-    },
-    "minimum-stability": "stable"
+    }
 }
