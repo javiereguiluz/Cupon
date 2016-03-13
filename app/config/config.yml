@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: services.yml }
+    - { resource: admin.yml }
 
 # Configuración general del framework
 framework:
@@ -74,28 +75,3 @@ swiftmailer:
 parameters:
     cupon.ciudad_por_defecto:  'barcelona'
     cupon.directorio.imagenes: %kernel.root_dir%/../web/uploads/images/
-
-# Descomenta las siguientes líneas para probar Sonata Admin Bundle
-# sonata_admin:
-#    title:      'Cupon - Backend'
-#    title_logo: /bundles/backend/logotipo.png
-
-# sonata_block:
-#    default_contexts: [cms]
-#    blocks:
-#        sonata.admin.block.admin_list:
-#            contexts:   [admin]
-
-#        sonata.block.service.text:   ~
-#        sonata.block.service.action: ~
-#        sonata.block.service.rss:    ~
-
-# services:
-#     sonata.cupon.admin.oferta:
-#         class: Cupon\OfertaBundle\Admin\OfertaAdmin
-#         tags:
-#             - { name: sonata.admin, manager_type: orm, group: 'Ofertas y Ventas', label: Ofertas }
-#         arguments:
-#             - null
-#             - Cupon\OfertaBundle\Entity\Oferta
-#             - OfertaBundle:Admin

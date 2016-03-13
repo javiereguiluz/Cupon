@@ -1,0 +1,7 @@
+easy_admin:
+    entities:
+        - Cupon\CiudadBundle\Entity\Ciudad
+        - Cupon\OfertaBundle\Entity\Oferta
+        #- Cupon\OfertaBundle\Entity\Venta
+        - Cupon\TiendaBundle\Entity\Tienda
+        - Cupon\UsuarioBundle\Entity\Usuario

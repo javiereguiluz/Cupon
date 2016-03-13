@@ -1,12 +1,7 @@
-# Descomenta las siguientes líneas para probar Sonata Admin Bundle
-# sonata:
-#    resource: '@SonataAdminBundle/Resources/config/routing/sonata_admin.xml'
-#    prefix:   /sonata
-
-# _sonata_admin:
-#    resource: .
-#    type:     sonata_admin
-#    prefix:   /sonata
+easy_admin_bundle:
+    resource: "@EasyAdminBundle/Controller/"
+    type:     annotation
+    prefix:   /admin
 
 _paginas:
     resource: routing_paginas.yml
@@ -60,11 +55,6 @@ UsuarioBundle:
         _locale: en|es
     defaults:
         _locale: es
-
-# Rutas importadas del bundle BackendBundle
-BackendBundle:
-    resource: "@BackendBundle/Resources/config/routing.yml"
-    prefix:   /backend
 
 # Ruta para mostrar el formulario de contacto
 contacto:

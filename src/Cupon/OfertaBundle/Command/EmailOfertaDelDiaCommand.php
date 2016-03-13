@@ -8,7 +8,7 @@
  * con toda la información sobre el copyright y la licencia.
  */
 
-namespace Cupon\BackendBundle\Command;
+namespace Cupon\OfertaBundle\Command;
 
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Input\InputInterface;

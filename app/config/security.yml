@@ -3,9 +3,10 @@ security:
     firewalls:
         # Firewall de la parte de administración o backend
         backend:
-            pattern:        ^/backend
+            pattern:        ^/admin
             provider:       administradores
             http_basic:     ~
+
         # Firewall de la extranet a la que se conectan las tiendas
         extranet:
             pattern:        ^/extranet
@@ -36,7 +37,7 @@ security:
         - { path: ^/(es|en)/usuario/*, roles: ROLE_USUARIO }
         - { path: ^/extranet/login,    roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/extranet/*,        roles: ROLE_TIENDA }
-        - { path: ^/backend/*,         roles: ROLE_ADMIN }
+        - { path: ^/admin/*,           roles: ROLE_ADMIN }
 
     encoders:
         Cupon\UsuarioBundle\Entity\Usuario:        { algorithm: sha512, iterations: 10 }
