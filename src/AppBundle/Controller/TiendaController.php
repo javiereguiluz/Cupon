@@ -18,6 +18,7 @@ class TiendaController extends Controller
 {
     /**
      * @Route("/{ciudad}/tiendas/{tienda}", requirements={ "ciudad" = ".+" }, name="tienda_portada")
+     * @Cache(smaxage="3600")
      *
      * Muestra la portada de cada tienda, que muestra su información y las
      * ofertas que ha publicado recientemente
@@ -46,14 +47,10 @@ class TiendaController extends Controller
         );
 
         $formato = $this->get('request')->getRequestFormat();
-        $respuesta = $this->render('tienda/portada.'.$formato.'.twig', array(
+        return $this->render('tienda/portada.'.$formato.'.twig', array(
             'tienda'   => $tienda,
             'ofertas'  => $ofertas,
             'cercanas' => $cercanas
         ));
-
-        $respuesta->setSharedMaxAge(3600);
-
-        return $respuesta;
     }
 }
