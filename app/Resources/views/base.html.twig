@@ -19,20 +19,20 @@
 
 <body id="{% block id '' %}"><div id="contenedor">
     {% block body %}{% endblock %}
-    
+
     <footer>
         &copy; {{ 'now'|date('Y') }} - Cupon
         <a href="{{ path('ayuda') }}">{{ "Ayuda" | trans }}</a>
         <a href="{{ path('contacto') }}">{{ "Contacto" | trans }}</a>
         <a href="{{ path('privacidad') }}">{{ "Privacidad" | trans }}</a>
         <a href="{{ path('sobre_nosotros') }}">{{ "Sobre nosotros" | trans }}</a>
-        
+
         {% set locale = app.request.locale %}
         <section id="idioma">
         {% if locale == 'es' %}
-            <span>Español</span> - <a href="{{ path('portada', { '_locale': 'en' }) }}">English</a>
+            <span>Español</span> - <a href="{{ path('portada', { _locale: 'en' }) }}">English</a>
         {% elseif locale == 'en' %}
-            <a href="{{ path('portada', { '_locale': 'es' }) }}">Español</a> - <span>English</span>
+            <a href="{{ path('portada', { _locale: 'es' }) }}">Español</a> - <span>English</span>
         {% endif %}
         </section>
     </footer>

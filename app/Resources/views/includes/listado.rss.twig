@@ -1,7 +1,7 @@
 {% for oferta in ofertas %}
 <item>
     <title>{{ oferta.nombre }}</title>
-    <link>{{ url('oferta', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}</link>
+    <link>{{ url('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}</link>
     <description><![CDATA[
         {% set urlAbsolutaFoto = 'http://'
                                  ~ app.request.server.get('SERVER_NAME')
@@ -15,6 +15,6 @@
         <p>Ver otras ofertas de la tienda <a href="{{ url('tienda_portada', { 'ciudad': oferta.ciudad.slug, 'tienda' : oferta.tienda.slug }) }}">{{ oferta.tienda.nombre }}</a></p>
     ]]></description>
     <pubDate>{{ oferta.fechaPublicacion | date('r') }}</pubDate>
-    <guid>{{ url('oferta', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}</guid>
+    <guid>{{ url('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}</guid>
 </item>
 {% endfor %}

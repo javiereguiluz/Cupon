@@ -1,4 +1,4 @@
-{% extends '::frontend.html.twig' %}
+{% extends 'frontend.html.twig' %}
 
 {% block id 'usuario' %}
 {% block title %}Regístrate gratis como usuario{% endblock %}
@@ -17,13 +17,13 @@
     <div>
         {{ form_label(formulario.apellidos) }}
         {{ form_errors(formulario.apellidos) }}
-        {{ form_widget(formulario.apellidos, { 'attr': { 'class': 'largo' } }) }}
+        {{ form_widget(formulario.apellidos, { attr: { class: 'largo' } }) }}
     </div>
 
     <div>
         {{ form_label(formulario.email) }}
         {{ form_errors(formulario.email) }}
-        {{ form_widget(formulario.email, { 'attr': { 'class': 'largo' } }) }}
+        {{ form_widget(formulario.email, { attr: { class: 'largo' } }) }}
     </div>
 
     <div>
@@ -36,7 +36,7 @@
     <div>
         {{ form_label(formulario.direccion, 'Dirección postal') }}
         {{ form_errors(formulario.direccion) }}
-        {{ form_widget(formulario.direccion, { 'attr': { 'class': 'mediana' } }) }}
+        {{ form_widget(formulario.direccion, { attr: { class: 'mediana' } }) }}
     </div>
 
     <div>
@@ -50,7 +50,7 @@
     <div>
         {{ form_label(formulario.dni, 'DNI') }}
         {{ form_errors(formulario.dni) }}
-        {{ form_widget(formulario.dni, { 'attr': { 'class': 'corto' } }) }}
+        {{ form_widget(formulario.dni, { attr: { class: 'corto' } }) }}
 
         <p class="ayuda">Escribe las 8 cifras y la letra sin dejar ningún espacio en blanco</p>
     </div>
@@ -73,7 +73,7 @@
         <span>Me gustaría recibir el boletín de ofertas de Cupon</span>
     </div>
 
-    {{ form_row(formulario.registrarme, { 'attr': { 'class': 'boton' } }) }}
+    {{ form_row(formulario.registrarme, { attr: { class: 'boton' } }) }}
 </div>
 {{ form_end(formulario) }}
 {% endblock %}

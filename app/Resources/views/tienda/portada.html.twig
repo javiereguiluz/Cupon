@@ -1,10 +1,10 @@
-{% extends '::frontend.html.twig' %}
+{% extends 'frontend.html.twig' %}
 
 {% block title %}Tienda {{ tienda.nombre }}{% endblock %}
 {% block id 'tienda' %}
 
 {% block rss %}
-<link rel="alternate" type="application/rss+xml" title="RSS de las ofertas más recientes de {{ tienda.nombre }}" href="{{ path('tienda_portada', { 'ciudad': tienda.ciudad.slug, 'tienda': tienda.slug, '_format': 'rss' }) }}" />
+<link rel="alternate" type="application/rss+xml" title="RSS de las ofertas más recientes de {{ tienda.nombre }}" href="{{ path('tienda_portada', { ciudad: tienda.ciudad.slug, tienda: tienda.slug, _format: 'rss' }) }}" />
 {% endblock %}
 
 {% block article %}
@@ -32,7 +32,7 @@
             {% for oferta in ofertas %}
             <tr>
                 <td>{{ oferta.fechaPublicacion | fecha() }}</td>
-                <td><a href="{{ path('oferta', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}">{{ oferta.nombre }}</a></td>
+                <td><a href="{{ path('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}">{{ oferta.nombre }}</a></td>
                 <td>{{ oferta.precio }} &euro;</td>
                 <td>{{ oferta.descuento }} &euro;</td>
                 <td>{{ oferta.compras }}</td>
@@ -50,7 +50,7 @@
         <h2>Otras tiendas en {{ tienda.ciudad.nombre }}</h2>
         <ul>
             {% for tienda in cercanas %}
-            <li><a href="{{ path('tienda_portada', {'ciudad': tienda.ciudad.slug, 'tienda': tienda.slug}) }}">{{ tienda.nombre }}</a></li>
+            <li><a href="{{ path('tienda_portada', {ciudad: tienda.ciudad.slug, tienda: tienda.slug}) }}">{{ tienda.nombre }}</a></li>
             {% endfor %}
         </ul>
     </section>

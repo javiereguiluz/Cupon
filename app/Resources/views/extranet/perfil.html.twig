@@ -1,4 +1,4 @@
-{% extends '::extranet.html.twig' %}
+{% extends 'extranet.html.twig' %}
 
 {% block id 'tienda' %}
 {% block title %}Ver / Modificar mis datos{% endblock %}
@@ -13,7 +13,7 @@
     <div>
         {{ form_label(formulario.nombre) }}
         {{ form_errors(formulario.nombre) }}
-        {{ form_widget(formulario.nombre, { 'attr': { 'class': 'largo' } }) }}
+        {{ form_widget(formulario.nombre, { attr: { class: 'largo' } }) }}
 
         <p class="ayuda">Puedes cambiarlo tantas veces como quieras, pero te aconsejamos que no lo hagas para no confundir a tus clientes.</p>
     </div>

@@ -1,4 +1,4 @@
-{% extends '::frontend.html.twig' %}
+{% extends 'frontend.html.twig' %}
 
 {% block title %}Últimas ofertas que has comprado{% endblock %}
 {% block id 'compras' %}
@@ -22,7 +22,7 @@
         <h2>Ofertas en otras ciudades</h2>
         <ul>
             {% for ciudad in cercanas %}
-            <li><a href="{{ path('ciudad_cambiar', { 'ciudad': ciudad.slug }) }}">{{ ciudad.nombre }}</a></li>
+            <li><a href="{{ path('ciudad_cambiar', { ciudad: ciudad.slug }) }}">{{ ciudad.nombre }}</a></li>
             {% endfor %}
         </ul>
     </section>

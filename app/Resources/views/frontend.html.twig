@@ -1,4 +1,4 @@
-{% extends '::base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% set ciudadSeleccionada = app.request.attributes.get('ciudad', ciudad_por_defecto) %}
 
@@ -14,27 +14,27 @@
 
 {% block body %}
 <header>
-    <h1><a href="{{ path('portada', { 'ciudad': ciudadSeleccionada }) }}">CUPON</a></h1>
+    <h1><a href="{{ path('portada', { ciudad: ciudadSeleccionada }) }}">CUPON</a></h1>
     <nav>
         <ul>
-            <li><a href="{{ path('portada', { 'ciudad': ciudadSeleccionada }) }}">{{ "Oferta del día" | trans }}</a></li>
-            <li><a href="{{ path('ciudad_recientes', { 'ciudad': ciudadSeleccionada }) }}">{{ "Ofertas recientes" | trans }}</a></li>
+            <li><a href="{{ path('portada', { ciudad: ciudadSeleccionada }) }}">{{ "Oferta del día" | trans }}</a></li>
+            <li><a href="{{ path('ciudad_recientes', { ciudad: ciudadSeleccionada }) }}">{{ "Ofertas recientes" | trans }}</a></li>
             <li><a href="{{ path('usuario_compras') }}">{{ "Mis ofertas" | trans }}</a></li>
-            <li>{{ render(controller('AppBundle:Ciudad:listaCiudades', { 'ciudad': ciudadSeleccionada })) }}</li>
+            <li>{{ render(controller('AppBundle:Ciudad:listaCiudades', { ciudad: ciudadSeleccionada })) }}</li>
         </ul>
     </nav>
 </header>
 
 {% block anuncio %}{% endblock %}
 
-<article {{ block('id') in ['portada', 'oferta'] ? ' class="oferta"' : '' }}>
+<article class="{{ block('id') in ['portada', 'oferta'] ? 'oferta' }}">
     {% block article %}{% endblock %}
 </article>
 
 <aside>
     {% block aside %}
     <section id="login">
-        {{ render_esi(controller('AppBundle:Usuario:cajaLogin', { 'id': block('id') })) }}
+        {{ render_esi(controller('AppBundle:Usuario:cajaLogin', { id: block('id') })) }}
     </section>
     {% endblock %}
 </aside>
