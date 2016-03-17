@@ -22,7 +22,7 @@ class SitioController extends Controller
      * Muestra el formulario de contacto y también procesa el envío de emails
      *
      */
-    public function contactoAction(Request $peticion)
+    public function contactoAction(Request $request)
     {
         // Se crea un formulario "in situ", sin clase asociada
         $formulario = $this->createFormBuilder()
@@ -31,7 +31,7 @@ class SitioController extends Controller
             ->getForm()
         ;
 
-        $formulario->handleRequest($peticion);
+        $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
             $datos = $formulario->getData();
@@ -39,8 +39,8 @@ class SitioController extends Controller
             $contenido = sprintf(" Remitente: %s \n\n Mensaje: %s \n\n Navegador: %s \n Dirección IP: %s \n",
                 $datos['remitente'],
                 htmlspecialchars($datos['mensaje']),
-                $peticion->server->get('HTTP_USER_AGENT'),
-                $peticion->server->get('REMOTE_ADDR')
+                $request->server->get('HTTP_USER_AGENT'),
+                $request->server->get('REMOTE_ADDR')
             );
 
             $mensaje = \Swift_Message::newInstance()

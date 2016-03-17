@@ -30,11 +30,11 @@ class UsuarioController extends Controller
      * @Route("/login", name="usuario_login")
      * Muestra el formulario de login
      */
-    public function loginAction(Request $peticion)
+    public function loginAction(Request $request)
     {
-        $sesion = $peticion->getSession();
+        $sesion = $request->getSession();
 
-        $error = $peticion->attributes->get(
+        $error = $request->attributes->get(
             SecurityContext::AUTHENTICATION_ERROR,
             $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
         );
@@ -90,7 +90,7 @@ class UsuarioController extends Controller
      * Muestra el formulario para que se registren los nuevos usuarios. Además
      * se encarga de procesar la información y de guardar la información en la base de datos
      */
-    public function registroAction(Request $peticion)
+    public function registroAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -99,7 +99,7 @@ class UsuarioController extends Controller
 
         $formulario = $this->createForm(new UsuarioRegistroType(), $usuario);
 
-        $formulario->handleRequest($peticion);
+        $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
             // Completar las propiedades que el usuario no rellena en el formulario
@@ -140,7 +140,7 @@ class UsuarioController extends Controller
      * Muestra el formulario con toda la información del perfil del usuario logueado.
      * También permite modificar la información y guarda los cambios en la base de datos
      */
-    public function perfilAction(Request $peticion)
+    public function perfilAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -156,7 +156,7 @@ class UsuarioController extends Controller
 
         $passwordOriginal = $formulario->getData()->getPassword();
 
-        $formulario->handleRequest($peticion);
+        $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
             // Si el usuario no ha cambiado el password, su valor es null después
@@ -219,7 +219,7 @@ class UsuarioController extends Controller
      * @param string $ciudad El slug de la ciudad a la que pertenece la oferta
      * @param string $slug   El slug de la oferta
      */
-    public function comprarAction(Request $peticion, $ciudad, $slug)
+    public function comprarAction(Request $request, $ciudad, $slug)
     {
         $em = $this->getDoctrine()->getManager();
         $usuario = $this->get('security.context')->getToken()->getUser();
@@ -265,7 +265,7 @@ class UsuarioController extends Controller
             );
 
             return $this->redirect(
-                $peticion->headers->get('Referer', $this->generateUrl('portada'))
+                $request->headers->get('Referer', $this->generateUrl('portada'))
             );
         }
 

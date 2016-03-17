@@ -32,11 +32,11 @@ class ExtranetController extends Controller
      * @Route("/login", name="extranet_login")
      * Muestra el formulario de login
      */
-    public function loginAction(Request $peticion)
+    public function loginAction(Request $request)
     {
-        $sesion = $peticion->getSession();
+        $sesion = $request->getSession();
 
-        $error = $peticion->attributes->get(
+        $error = $request->attributes->get(
             SecurityContext::AUTHENTICATION_ERROR,
             $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
         );
@@ -103,12 +103,12 @@ class ExtranetController extends Controller
      * procesamiento de la información recibida y la creación de las nuevas
      * entidades de tipo Oferta
      */
-    public function ofertaNuevaAction(Request $peticion)
+    public function ofertaNuevaAction(Request $request)
     {
         $oferta = new Oferta();
         $formulario = $this->createForm(new OfertaType(), $oferta);
 
-        $formulario->handleRequest($peticion);
+        $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
             // Completar las propiedades de la oferta que una tienda no puede establecer
@@ -142,7 +142,7 @@ class ExtranetController extends Controller
      *
      * @param string $id El id de la oferta a modificar
      */
-    public function ofertaEditarAction(Request $peticion, $id)
+    public function ofertaEditarAction(Request $request, $id)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -171,7 +171,7 @@ class ExtranetController extends Controller
         // Guardar la ruta de la foto original de la oferta
         $rutaFotoOriginal = $formulario->getData()->getRutaFoto();
 
-        $formulario->handleRequest($peticion);
+        $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
             // Si el usuario no ha modificado la foto, su valor actual es null
@@ -210,7 +210,7 @@ class ExtranetController extends Controller
      * logueada en la aplicación. También se encarga de procesar la información y
      * guardar las modificaciones en la base de datos
      */
-    public function perfilAction(Request $peticion)
+    public function perfilAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -219,7 +219,7 @@ class ExtranetController extends Controller
 
         $passwordOriginal = $formulario->getData()->getPassword();
 
-        $formulario->handleRequest($peticion);
+        $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
             // Si el usuario no ha cambiado el password, su valor es null después de
