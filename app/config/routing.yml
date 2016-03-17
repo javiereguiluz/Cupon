@@ -15,60 +15,14 @@ _paginas:
         maxAge: 86400
         sharedMaxAge: 86400
 
-# Rutas importadas del bundle CiudadBundle
-CiudadBundle:
-    resource: "@CiudadBundle/Resources/config/routing.yml"
+app:
+    resource: '@AppBundle/Controller/'
+    type:     annotation
     prefix:   /{_locale}
     requirements:
         _locale: en|es
     defaults:
-        _locale: es
-
-# Rutas importadas del bundle OfertaBundle
-OfertaBundle:
-    resource: "@OfertaBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}
-    requirements:
-        _locale: en|es
-    defaults:
-        _locale: es
-
-# Rutas importadas del bundle TiendaBundle
-TiendaBundle:
-    resource: "@TiendaBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}
-    requirements:
-        _locale: en|es
-    defaults:
-        _locale: es
-
-# Rutas importadas de la parte de extranet del bundle TiendaBundle
-Extranet:
-    resource: "@TiendaBundle/Resources/config/routing_extranet.yml"
-    prefix:   /extranet
-
-# Rutas importadas del bundle UsuarioBundle
-UsuarioBundle:
-    resource: "@UsuarioBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}/usuario
-    requirements:
-        _locale: en|es
-    defaults:
-        _locale: es
-
-# Ruta para mostrar el formulario de contacto
-contacto:
-    pattern:  /{_locale}/contacto
-    defaults: { _controller: OfertaBundle:Sitio:contacto, _locale: es }
-    requirements:
-        _locale: en|es
-
-# Ruta de la portada completa del sitio (con _locale y el slug de la ciudad)
-portada:
-    pattern:  /{_locale}/{ciudad}
-    defaults: { _controller: OfertaBundle:Default:portada, ciudad: %cupon.ciudad_por_defecto%, _locale: es }
-    requirements:
-        _locale: en|es
+        _locale: %locale%
 
 # Ruta de la portada básica del sitio (sin ningún parámetro)
 # esta ruta es opcional, ya que la aplicación puede funcionar bien

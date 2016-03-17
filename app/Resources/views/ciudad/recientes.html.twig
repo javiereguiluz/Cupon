@@ -1,0 +1,35 @@
+{% extends '::frontend.html.twig' %}
+
+{% block title %}Ofertas recientes en {{ ciudad.nombre }}{% endblock %}
+{% block id 'recientes' %}
+
+{% block rss %}
+<link rel="alternate" type="application/rss+xml" title="RSS de las ofertas más recientes en {{ ciudad.nombre }}" href="{{ url('ciudad_recientes', { 'ciudad': ciudad.slug, '_format': 'rss' }) }}" />
+{% endblock %}
+
+{% block article %}
+    <h1>{{ "Ofertas recientes en" | trans }} <strong>{{ ciudad.nombre }}</strong></h1>
+
+    {% for oferta in ofertas %}
+        {% include 'oferta/includes/minioferta.html.twig' %}
+    {% endfor %}
+{% endblock %}
+
+{% block aside %}
+    {{ parent() }}
+
+    <section id="cercanas">
+        <h2>{{ "Ofertas en otras ciudades" | trans }}</h2>
+        <ul>
+            {% for ciudad in cercanas %}
+            <li><a href="{{ path('ciudad_recientes', { 'ciudad': ciudad.slug }) }}">{{ ciudad.nombre }}</a></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section id="nosotros">
+        <h2>{{ "Sobre nosotros" | trans }}</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+    </section>
+{% endblock %}
