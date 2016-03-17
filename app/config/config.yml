@@ -15,8 +15,10 @@ framework:
     csrf_protection: true
     trusted_hosts:   ~
     validation:      { enable_annotations: true }
-    templating:      { engines: ['twig'] } #assets_version: SomeVersionScheme
+    templating:      { engines: ['twig'] }
     session:         ~
+    #assets:
+    #    base_path:   %kernel.root_dir%/assets
 
 # Configuración de Twig
 twig:
@@ -25,26 +27,6 @@ twig:
     globals:
         ciudad_por_defecto:  %cupon.ciudad_por_defecto%
         directorio_imagenes: '/uploads/images/'
-
-# Configuración de Assetic
-assetic:
-    debug:          %kernel.debug%
-    use_controller: false
-    filters:
-        cssrewrite: ~
-#        yui_css:
-#            jar:      %kernel.root_dir%/Resources/java/yuicompressor-2.4.6.jar
-#            apply_to: \.css$
-#        yui_js:
-#            jar:      %kernel.root_dir%/Resources/java/yuicompressor-2.4.6.jar
-#            apply_to: \.js$
-
-#        optipng:
-#            bin: /usr/local/bin/optipng
-#
-#    twig:
-#        functions:
-#            optipng: ~
 
 # Configuración de Doctrine
 doctrine:

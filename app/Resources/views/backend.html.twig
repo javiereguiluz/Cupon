@@ -1,20 +1,8 @@
 {% extends '::base.html.twig' %}
 
 {% block stylesheets %}
-{% stylesheets '@OfertaBundle/Resources/public/css/normalizar.css'
-               '@OfertaBundle/Resources/public/css/comun.css'
-               '@BackendBundle/Resources/public/css/backend.css'
-               output='css/backend.css' %}
-<link href="{{ asset_url }}" rel="stylesheet" type="text/css" />
-{% endstylesheets %}
-{% endblock %}
-
-{% block javascripts %}
-{% javascripts '@OfertaBundle/Resources/public/js/lt_ie9/*' output='js/lt_ie9.js' %}
-<!--[if lt IE 9]>
-    <script src="{{ asset_url }}"></script>
-<![endif]-->
-{% endjavascripts %}  
+    {{  parent() }}
+    <link rel="stylesheet" href="{{ asset('css/backend.css') }}" />
 {% endblock %}
 
 {% block body %}

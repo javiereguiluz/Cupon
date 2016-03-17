@@ -4,10 +4,17 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>{% block title %}{% endblock %} | Cupon</title>
-    {% block stylesheets %}{% endblock %}
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/normalizar.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/comun.css') }}" />
+    {% endblock %}
     {% block rss %}{% endblock %}
     <link rel="shortcut icon" href="{{ asset('favicon.png') }}" />
-    {% block javascripts %}{% endblock %}
+    {% block javascripts %}
+        <!--[if lt IE 9]>
+        <script src="{{ asset('js/lt_ie9/html5.js') }}"></script>
+        <![endif]-->
+    {% endblock %}
 </head>
 
 <body id="{% block id '' %}"><div id="contenedor">
