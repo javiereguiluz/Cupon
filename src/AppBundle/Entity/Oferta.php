@@ -139,7 +139,7 @@ class Oferta
 
     /**
      * Sube la foto de la oferta copiándola en el directorio que se indica y
-     * guardando en la entidad la ruta hasta la foto
+     * guardando en la entidad la ruta hasta la foto.
      *
      * @param string $directorioDestino Ruta completa del directorio al que se sube la foto
      */
@@ -157,9 +157,9 @@ class Oferta
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -167,7 +167,7 @@ class Oferta
     }
 
     /**
-     * Set nombre
+     * Set nombre.
      *
      * @param string $nombre
      */
@@ -178,7 +178,7 @@ class Oferta
     }
 
     /**
-     * Get nombre
+     * Get nombre.
      *
      * @return string
      */
@@ -188,7 +188,7 @@ class Oferta
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
      */
@@ -198,7 +198,7 @@ class Oferta
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -208,7 +208,7 @@ class Oferta
     }
 
     /**
-     * Set descripcion
+     * Set descripcion.
      *
      * @param text $descripcion
      */
@@ -218,7 +218,7 @@ class Oferta
     }
 
     /**
-     * Get descripcion
+     * Get descripcion.
      *
      * @return text
      */
@@ -228,7 +228,7 @@ class Oferta
     }
 
     /**
-     * Set condiciones
+     * Set condiciones.
      *
      * @param text $condiciones
      */
@@ -238,7 +238,7 @@ class Oferta
     }
 
     /**
-     * Get condiciones
+     * Get condiciones.
      *
      * @return text
      */
@@ -248,7 +248,7 @@ class Oferta
     }
 
     /**
-     * Set rutaFoto
+     * Set rutaFoto.
      *
      * @param string $foto
      */
@@ -258,7 +258,7 @@ class Oferta
     }
 
     /**
-     * Get rutaFoto
+     * Get rutaFoto.
      *
      * @return string
      */
@@ -288,7 +288,7 @@ class Oferta
     }
 
     /**
-     * Set precio
+     * Set precio.
      *
      * @param decimal $precio
      */
@@ -298,7 +298,7 @@ class Oferta
     }
 
     /**
-     * Get precio
+     * Get precio.
      *
      * @return decimal
      */
@@ -308,7 +308,7 @@ class Oferta
     }
 
     /**
-     * Set descuento
+     * Set descuento.
      *
      * @param decimal $descuento
      */
@@ -318,7 +318,7 @@ class Oferta
     }
 
     /**
-     * Get descuento
+     * Get descuento.
      *
      * @return decimal
      */
@@ -328,7 +328,7 @@ class Oferta
     }
 
     /**
-     * Set fecha_publicacion
+     * Set fecha_publicacion.
      *
      * @param datetime $fechaPublicacion
      */
@@ -338,7 +338,7 @@ class Oferta
     }
 
     /**
-     * Get fecha_publicacion
+     * Get fecha_publicacion.
      *
      * @return datetime
      */
@@ -348,7 +348,7 @@ class Oferta
     }
 
     /**
-     * Set fecha_expiracion
+     * Set fecha_expiracion.
      *
      * @param datetime $fechaExpiracion
      */
@@ -358,7 +358,7 @@ class Oferta
     }
 
     /**
-     * Get fecha_expiracion
+     * Get fecha_expiracion.
      *
      * @return datetime
      */
@@ -368,9 +368,9 @@ class Oferta
     }
 
     /**
-     * Set compras
+     * Set compras.
      *
-     * @param integer $compras
+     * @param int $compras
      */
     public function setCompras($compras)
     {
@@ -378,9 +378,9 @@ class Oferta
     }
 
     /**
-     * Get compras
+     * Get compras.
      *
-     * @return integer
+     * @return int
      */
     public function getCompras()
     {
@@ -388,9 +388,9 @@ class Oferta
     }
 
     /**
-     * Set umbral
+     * Set umbral.
      *
-     * @param integer $umbral
+     * @param int $umbral
      */
     public function setUmbral($umbral)
     {
@@ -398,9 +398,9 @@ class Oferta
     }
 
     /**
-     * Get umbral
+     * Get umbral.
      *
-     * @return integer
+     * @return int
      */
     public function getUmbral()
     {
@@ -408,9 +408,9 @@ class Oferta
     }
 
     /**
-     * Set revisada
+     * Set revisada.
      *
-     * @param boolean $revisada
+     * @param bool $revisada
      */
     public function setRevisada($revisada)
     {
@@ -418,9 +418,9 @@ class Oferta
     }
 
     /**
-     * Get revisada
+     * Get revisada.
      *
-     * @return boolean
+     * @return bool
      */
     public function getRevisada()
     {
@@ -428,7 +428,7 @@ class Oferta
     }
 
     /**
-     * Set ciudad
+     * Set ciudad.
      *
      * @param AppBundle\Entity\Ciudad $ciudad
      */
@@ -438,7 +438,7 @@ class Oferta
     }
 
     /**
-     * Get ciudad
+     * Get ciudad.
      *
      * @return AppBundle\Entity\Ciudad
      */
@@ -448,7 +448,7 @@ class Oferta
     }
 
     /**
-     * Set tienda
+     * Set tienda.
      *
      * @param AppBundle\Entity\Tienda $tienda
      */
@@ -458,7 +458,7 @@ class Oferta
     }
 
     /**
-     * Get tienda
+     * Get tienda.
      *
      * @return AppBundle\Entity\Tienda
      */

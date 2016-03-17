@@ -14,9 +14,9 @@ use AppBundle\Twig\Extension\CuponExtension;
 
 /**
  * Test unitario para asegurar el buen funcionamiento de la extensión
- * propia de Twig
+ * propia de Twig.
  */
-class TwigExtensionTest extends \PHPUnit_Framework_TestCase
+class CuponExtensionTest extends \PHPUnit_Framework_TestCase
 {
     public function testDescuento()
     {

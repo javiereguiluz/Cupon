@@ -10,15 +10,11 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Acl\Domain\ObjectIdentity;
-use Symfony\Component\Security\Acl\Domain\UserSecurityIdentity;
-use Symfony\Component\Security\Acl\Permission\MaskBuilder;
 use AppBundle\Entity\Oferta;
 use AppBundle\Form\Extranet\OfertaType;
 use AppBundle\Form\Extranet\TiendaType;
@@ -42,7 +38,7 @@ class ExtranetController extends Controller
         );
 
         return $this->render('extranet/login.html.twig', array(
-            'error' => $error
+            'error' => $error,
         ));
     }
 
@@ -75,7 +71,7 @@ class ExtranetController extends Controller
         $ofertas = $em->getRepository('AppBundle:Tienda')->findOfertasRecientes($tienda->getId(), 50);
 
         return $this->render('extranet/portada.html.twig', array(
-            'ofertas' => $ofertas
+            'ofertas' => $ofertas,
         ));
     }
 
@@ -93,7 +89,7 @@ class ExtranetController extends Controller
 
         return $this->render('extranet/ventas.html.twig', array(
             'oferta' => $ventas[0]->getOferta(),
-            'ventas' => $ventas
+            'ventas' => $ventas,
         ));
     }
 
@@ -129,8 +125,8 @@ class ExtranetController extends Controller
         }
 
         return $this->render('extranet/formulario.html.twig', array(
-            'accion'     => 'crear',
-            'formulario' => $formulario->createView()
+            'accion' => 'crear',
+            'formulario' => $formulario->createView(),
         ));
     }
 
@@ -198,9 +194,9 @@ class ExtranetController extends Controller
         }
 
         return $this->render('extranet/formulario.html.twig', array(
-            'accion'     => 'editar',
-            'oferta'     => $oferta,
-            'formulario' => $formulario->createView()
+            'accion' => 'editar',
+            'oferta' => $oferta,
+            'formulario' => $formulario->createView(),
         ));
     }
 
@@ -248,8 +244,8 @@ class ExtranetController extends Controller
         }
 
         return $this->render('extranet/perfil.html.twig', array(
-            'tienda'     => $tienda,
-            'formulario' => $formulario->createView()
+            'tienda' => $tienda,
+            'formulario' => $formulario->createView(),
         ));
     }
 }

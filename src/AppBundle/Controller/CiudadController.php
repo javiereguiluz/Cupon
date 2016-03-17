@@ -32,7 +32,7 @@ class CiudadController extends Controller
 
         return $this->render('ciudad/listaCiudades.html.twig', array(
             'ciudadActual' => $ciudad,
-            'ciudades'     => $ciudades
+            'ciudades' => $ciudades,
         ));
     }
 
@@ -44,6 +44,7 @@ class CiudadController extends Controller
      * portada de la nueva ciudad seleccionada.
      *
      * @param string $ciudad El slug de la ciudad a la que se cambia
+     *
      * @return RedirectResponse
      */
     public function cambiarAction($ciudad)
@@ -58,6 +59,7 @@ class CiudadController extends Controller
      * Muestra las ofertas más recientes de la ciudad indicada
      *
      * @param string $ciudad El slug de la ciudad
+     *
      * @return Response
      */
     public function recientesAction($ciudad)
@@ -70,13 +72,14 @@ class CiudadController extends Controller
         }
 
         $cercanas = $em->getRepository('AppBundle:Ciudad')->findCercanas($ciudad->getId());
-        $ofertas  = $em->getRepository('AppBundle:Oferta')->findRecientes($ciudad->getId());
+        $ofertas = $em->getRepository('AppBundle:Oferta')->findRecientes($ciudad->getId());
 
         $formato = $this->get('request')->getRequestFormat();
+
         return $this->render('ciudad/recientes.'.$formato.'.twig', array(
-            'ciudad'   => $ciudad,
+            'ciudad' => $ciudad,
             'cercanas' => $cercanas,
-            'ofertas'  => $ofertas
+            'ofertas' => $ofertas,
         ));
     }
 }

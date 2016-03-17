@@ -41,7 +41,7 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
         // Obtener todas las ciudades de la base de datos
         $ciudades = $manager->getRepository('AppBundle:Ciudad')->findAll();
 
-        for ($i=1; $i<=200; $i++) {
+        for ($i = 1; $i <= 200; ++$i) {
             $usuario = new Usuario();
 
             $usuario->setNombre($this->getNombre());
@@ -66,7 +66,7 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
             $usuario->setFechaNacimiento(new \DateTime('now - '.rand(7000, 20000).' days'));
 
             $dni = substr(rand(), 0, 8);
-            $usuario->setDni($dni.substr("TRWAGMYFPDXBNJZSQVHLCKE", strtr($dni, "XYZ", "012")%23, 1));
+            $usuario->setDni($dni.substr('TRWAGMYFPDXBNJZSQVHLCKE', strtr($dni, 'XYZ', '012') % 23, 1));
 
             $usuario->setNumeroTarjeta('1234567890123456');
 
@@ -92,14 +92,14 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
             'José Antonio', 'José Luis', 'Jesús', 'Javier', 'Francisco Javier',
             'Carlos', 'Daniel', 'Miguel', 'Rafael', 'Pedro', 'José Manuel',
             'Ángel', 'Alejandro', 'Miguel Ángel', 'José María', 'Fernando',
-            'Luis', 'Sergio', 'Pablo', 'Jorge', 'Alberto'
+            'Luis', 'Sergio', 'Pablo', 'Jorge', 'Alberto',
         );
         $mujeres = array(
             'María Carmen', 'María', 'Carmen', 'Josefa', 'Isabel', 'Ana María',
             'María Dolores', 'María Pilar', 'María Teresa', 'Ana', 'Francisca',
             'Laura', 'Antonia', 'Dolores', 'María Angeles', 'Cristina', 'Marta',
             'María José', 'María Isabel', 'Pilar', 'María Luisa', 'Concepción',
-            'Lucía', 'Mercedes', 'Manuela', 'Elena', 'Rosa María'
+            'Lucía', 'Mercedes', 'Manuela', 'Elena', 'Rosa María',
         );
 
         if (rand() % 2) {
@@ -126,7 +126,7 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
             'Alonso', 'Gutiérrez', 'Navarro', 'Torres', 'Domínguez', 'Vázquez',
             'Ramos', 'Gil', 'Ramírez', 'Serrano', 'Blanco', 'Suárez', 'Molina',
             'Morales', 'Ortega', 'Delgado', 'Castro', 'Ortíz', 'Rubio', 'Marín',
-            'Sanz', 'Iglesias', 'Nuñez', 'Medina', 'Garrido'
+            'Sanz', 'Iglesias', 'Nuñez', 'Medina', 'Garrido',
         );
 
         return $apellidos[array_rand($apellidos)].' '.$apellidos[array_rand($apellidos)];
@@ -135,8 +135,9 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
     /**
      * Generador aleatorio de direcciones postales.
      *
-     * @param  Ciudad $ciudad Objeto de la ciudad para la que se genera una dirección postal.
-     * @return string         Dirección postal aleatoria generada para la tienda.
+     * @param Ciudad $ciudad Objeto de la ciudad para la que se genera una dirección postal.
+     *
+     * @return string Dirección postal aleatoria generada para la tienda.
      */
     private function getDireccion(Ciudad $ciudad)
     {
@@ -144,7 +145,7 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
         $nombres = array(
             'Lorem', 'Ipsum', 'Sitamet', 'Consectetur', 'Adipiscing',
             'Necsapien', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque',
-            'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit'
+            'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit',
         );
 
         return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)].', '.rand(1, 100)."\n"
@@ -152,7 +153,7 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
     }
 
     /**
-     * Generador aleatorio de códigos postales
+     * Generador aleatorio de códigos postales.
      *
      * @return string Código postal aleatorio generado para la tienda.
      */

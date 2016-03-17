@@ -46,22 +46,22 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
                 $ciudad->getId()
             );
 
-            for ($j=1; $j<=15; $j++) {
+            for ($j = 1; $j <= 15; ++$j) {
                 $oferta = new Oferta();
 
                 $oferta->setNombre($this->getNombre());
                 $oferta->setDescripcion($this->getDescripcion());
                 $oferta->setCondiciones($this->getCondiciones());
-                $oferta->setRutaFoto('foto'.rand(1,20).'.jpg');
-                $oferta->setPrecio(number_format(rand(100, 10000)/100, 2));
-                $oferta->setDescuento($oferta->getPrecio() * (rand(10, 70)/100));
+                $oferta->setRutaFoto('foto'.rand(1, 20).'.jpg');
+                $oferta->setPrecio(number_format(rand(100, 10000) / 100, 2));
+                $oferta->setDescuento($oferta->getPrecio() * (rand(10, 70) / 100));
 
                 // Una oferta se publica hoy, el resto se reparte entre el pasado y el futuro
                 if (1 == $j) {
                     $fecha = 'today';
                     $oferta->setRevisada(true);
                 } elseif ($j < 10) {
-                    $fecha = 'now - '.($j-1).' days';
+                    $fecha = 'now - '.($j - 1).' days';
                     // el 80% de las ofertas pasadas se marcan como revisadas
                     $oferta->setRevisada((rand(1, 1000) % 10) < 8);
                 } else {
@@ -108,7 +108,7 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface, Contai
             'Dum', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque', 'Blandit',
             'Ligula', 'Eget', 'Drerit', 'Malesuada', 'Enimsit', 'Libero',
             'Penatibus', 'Imperdiet', 'Pendisse', 'Vulputae', 'Natoque',
-            'Aliquam', 'Dapibus', 'Lacinia'
+            'Aliquam', 'Dapibus', 'Lacinia',
         ));
 
         $numeroPalabras = rand(4, 8);

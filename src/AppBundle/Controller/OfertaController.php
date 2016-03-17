@@ -10,10 +10,8 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class OfertaController extends Controller
 {
@@ -33,7 +31,7 @@ class OfertaController extends Controller
         }
 
         $respuesta = $this->render('oferta/portada.html.twig', array(
-            'oferta' => $oferta
+            'oferta' => $oferta,
         ));
         $respuesta->setSharedMaxAge(60);
 
@@ -51,7 +49,7 @@ class OfertaController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $oferta   = $em->getRepository('AppBundle:Oferta')->findOferta($ciudad, $slug);
+        $oferta = $em->getRepository('AppBundle:Oferta')->findOferta($ciudad, $slug);
         $cercanas = $em->getRepository('AppBundle:Oferta')->findCercanas($ciudad);
 
         if (!$oferta) {
@@ -60,7 +58,7 @@ class OfertaController extends Controller
 
         $respuesta = $this->render('oferta/detalle.html.twig', array(
             'cercanas' => $cercanas,
-            'oferta'   => $oferta
+            'oferta' => $oferta,
         ));
 
         $respuesta->setSharedMaxAge(60);

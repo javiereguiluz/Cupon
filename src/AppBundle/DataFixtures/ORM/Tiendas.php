@@ -44,7 +44,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         $i = 1;
         foreach ($ciudades as $ciudad) {
             $numeroTiendas = rand(2, 5);
-            for ($j=1; $j<=$numeroTiendas; $j++) {
+            for ($j = 1; $j <= $numeroTiendas; ++$j) {
                 $tienda = new Tienda();
 
                 $tienda->setNombre($this->getNombre());
@@ -63,7 +63,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
 
                 $manager->persist($tienda);
 
-                $i++;
+                ++$i;
             }
         }
 
@@ -71,7 +71,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de nombres de tiendas
+     * Generador aleatorio de nombres de tiendas.
      *
      * @return string Nombre aleatorio generado para la tienda.
      */
@@ -81,16 +81,16 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         $nombres = array(
             'Lorem ipsum', 'Sit amet', 'Consectetur', 'Adipiscing elit',
             'Nec sapien', 'Tincidunt', 'Facilisis', 'Nulla scelerisque',
-            'Blandit ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enim sit'
+            'Blandit ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enim sit',
         );
 
         return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)];
     }
 
     /**
-     * Generador aleatorio de descripciones de tiendas
+     * Generador aleatorio de descripciones de tiendas.
      *
-     * @return  string Descripción aleatoria generada para la tienda.
+     * @return string Descripción aleatoria generada para la tienda.
      */
     private function getDescripcion()
     {
@@ -122,8 +122,9 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     /**
      * Generador aleatorio de direcciones postales.
      *
-     * @param  Ciudad $ciudad Objeto de la ciudad para la que se genera una dirección postal.
-     * @return string         Dirección postal aleatoria generada para la tienda.
+     * @param Ciudad $ciudad Objeto de la ciudad para la que se genera una dirección postal.
+     *
+     * @return string Dirección postal aleatoria generada para la tienda.
      */
     private function getDireccion(Ciudad $ciudad)
     {
@@ -131,7 +132,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         $nombres = array(
             'Lorem', 'Ipsum', 'Sitamet', 'Consectetur', 'Adipiscing',
             'Necsapien', 'Tincidunt', 'Facilisis', 'Nulla', 'Scelerisque',
-            'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit'
+            'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit',
         );
 
         return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)].', '.rand(1, 100)."\n"
@@ -139,7 +140,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     }
 
     /**
-     * Generador aleatorio de códigos postales
+     * Generador aleatorio de códigos postales.
      *
      * @return string Código postal aleatorio generado para la tienda.
      */

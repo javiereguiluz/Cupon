@@ -41,9 +41,9 @@ class Ciudad
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -51,7 +51,7 @@ class Ciudad
     }
 
     /**
-     * Set nombre
+     * Set nombre.
      *
      * @param string $nombre
      */
@@ -62,7 +62,7 @@ class Ciudad
     }
 
     /**
-     * Get nombre
+     * Get nombre.
      *
      * @return string
      */
@@ -72,7 +72,7 @@ class Ciudad
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
      */
@@ -82,7 +82,7 @@ class Ciudad
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */

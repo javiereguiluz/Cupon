@@ -12,9 +12,6 @@ namespace AppBundle\Form\Extranet;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\CallbackValidator;
-use Symfony\Component\Form\FormInterface;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use Symfony\Component\Form\FormEvents;
 use AppBundle\Listener\OfertaTypeListener;
@@ -38,7 +35,7 @@ class OfertaType extends AbstractType
             ->add('umbral')
             ->add('guardar', 'submit', array(
                 'label' => 'Guardar cambios',
-                'attr'  => array('class' => 'boton'),
+                'attr' => array('class' => 'boton'),
             ))
         ;
 

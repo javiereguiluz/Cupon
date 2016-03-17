@@ -41,7 +41,7 @@ class UsuarioController extends Controller
 
         return $this->render('usuario/login.html.twig', array(
             'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
-            'error'         => $error
+            'error' => $error,
         ));
     }
 
@@ -76,8 +76,8 @@ class UsuarioController extends Controller
         $usuario = $this->get('security.context')->getToken()->getUser();
 
         $respuesta = $this->render('usuario/cajaLogin.html.twig', array(
-            'id'      => $id,
-            'usuario' => $usuario
+            'id' => $id,
+            'usuario' => $usuario,
         ));
 
         $respuesta->setMaxAge(30);
@@ -126,12 +126,12 @@ class UsuarioController extends Controller
             $this->container->get('security.context')->setToken($token);
 
             return $this->redirect($this->generateUrl('portada', array(
-                'ciudad' => $usuario->getCiudad()->getSlug()
+                'ciudad' => $usuario->getCiudad()->getSlug(),
             )));
         }
 
         return $this->render('usuario/registro.html.twig', array(
-            'formulario' => $formulario->createView()
+            'formulario' => $formulario->createView(),
         ));
     }
 
@@ -150,7 +150,7 @@ class UsuarioController extends Controller
             ->remove('registrarme')
             ->add('guardar', 'submit', array(
                 'label' => 'Guardar cambios',
-                'attr'  => array('class' => 'boton')
+                'attr' => array('class' => 'boton'),
             ))
         ;
 
@@ -186,8 +186,8 @@ class UsuarioController extends Controller
         }
 
         return $this->render('usuario/perfil.html.twig', array(
-            'usuario'    => $usuario,
-            'formulario' => $formulario->createView()
+            'usuario' => $usuario,
+            'formulario' => $formulario->createView(),
         ));
     }
 
@@ -207,8 +207,8 @@ class UsuarioController extends Controller
         $compras = $em->getRepository('UsuarioBundle:Usuario')->findTodasLasCompras($usuario->getId());
 
         return $this->render('usuario/compras.html.twig', array(
-            'compras'  => $compras,
-            'cercanas' => $cercanas
+            'compras' => $compras,
+            'cercanas' => $cercanas,
         ));
     }
 
@@ -247,8 +247,8 @@ class UsuarioController extends Controller
 
         // Un mismo usuario no puede comprar dos veces la misma oferta
         $venta = $em->getRepository('AppBundle:Venta')->findOneBy(array(
-            'oferta'  => $oferta->getId(),
-            'usuario' => $usuario->getId()
+            'oferta' => $oferta->getId(),
+            'usuario' => $usuario->getId(),
         ));
 
         if (null != $venta) {
@@ -278,13 +278,13 @@ class UsuarioController extends Controller
 
         $em->persist($venta);
 
-        $oferta->setCompras($oferta->getCompras()+1);
+        $oferta->setCompras($oferta->getCompras() + 1);
 
         $em->flush();
 
         return $this->render('usuario/comprar.html.twig', array(
-            'oferta'  => $oferta,
-            'usuario' => $usuario
+            'oferta' => $oferta,
+            'usuario' => $usuario,
         ));
     }
 }

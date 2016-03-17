@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityRepository;
 class OfertaRepository extends EntityRepository
 {
     /**
-     * Encuentra la oferta cuyo slug y ciudad coinciden con los indicados
+     * Encuentra la oferta cuyo slug y ciudad coinciden con los indicados.
      *
      * @param string $ciudad El slug de la ciudad
      * @param string $slug   El slug de la oferta
@@ -37,7 +37,7 @@ class OfertaRepository extends EntityRepository
     }
 
     /**
-     * Encuentra la oferta del día en la ciudad indicada
+     * Encuentra la oferta del día en la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad
      */
@@ -59,7 +59,7 @@ class OfertaRepository extends EntityRepository
     }
 
     /**
-     * Encuentra la oferta del día de mañana en la ciudad indicada
+     * Encuentra la oferta del día de mañana en la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad
      */
@@ -81,7 +81,7 @@ class OfertaRepository extends EntityRepository
     }
 
     /**
-     * Encuentra las cinco ofertas más recuentes de la ciudad indicada
+     * Encuentra las cinco ofertas más recuentes de la ciudad indicada.
      *
      * @param string $ciudad_id El id de la ciudad
      */
@@ -104,7 +104,7 @@ class OfertaRepository extends EntityRepository
     }
 
     /**
-     * Encuentra las cinco ofertas más cercanas a la ciudad indicada
+     * Encuentra las cinco ofertas más cercanas a la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad
      */
@@ -127,7 +127,7 @@ class OfertaRepository extends EntityRepository
     }
 
     /**
-     * Encuentra todas las ventas de la oferta indicada
+     * Encuentra todas las ventas de la oferta indicada.
      *
      * @param string $oferta El id de la oferta
      */

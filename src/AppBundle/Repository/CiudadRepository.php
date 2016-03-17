@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityRepository;
 class CiudadRepository extends EntityRepository
 {
     /**
-     * Devuelve un array simple con todas las ciudades disponibles
+     * Devuelve un array simple con todas las ciudades disponibles.
      */
     public function findListaCiudades()
     {
@@ -32,7 +32,7 @@ class CiudadRepository extends EntityRepository
     }
 
     /**
-     * Encuentra las cinco ciudades más cercanas a la ciudad indicada
+     * Encuentra las cinco ciudades más cercanas a la ciudad indicada.
      *
      * @param string $ciudad_id El id de la ciudad para la que se buscan cercanas
      */
@@ -54,7 +54,7 @@ class CiudadRepository extends EntityRepository
     }
 
     /**
-     * Encuentra todas las ofertas de la ciudad indicada
+     * Encuentra todas las ofertas de la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad para la que se buscan sus ofertas
      */
@@ -87,7 +87,7 @@ class CiudadRepository extends EntityRepository
     }
 
     /**
-     * Encuentra todos los usuarios asociados a la ciudad indicada
+     * Encuentra todos los usuarios asociados a la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad para la que se buscan sus usuarios
      */
@@ -119,7 +119,7 @@ class CiudadRepository extends EntityRepository
     }
 
     /**
-     * Encuentra todas las tiendas asociadas a la ciudad indicada
+     * Encuentra todas las tiendas asociadas a la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad para la que se buscan sus tiendas
      */

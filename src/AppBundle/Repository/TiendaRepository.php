@@ -14,12 +14,12 @@ use Doctrine\ORM\EntityRepository;
 
 class TiendaRepository extends EntityRepository
 {
-     /**
-      * Encuentra las ofertas más recientes de la tienda indicada
-      *
-      * @param string $tienda_id El id de la tienda
-      * @param string $limite Número de ofertas a devolver (por defecto, cinco)
-      */
+    /**
+     * Encuentra las ofertas más recientes de la tienda indicada.
+     *
+     * @param string $tienda_id El id de la tienda
+     * @param string $limite    Número de ofertas a devolver (por defecto, cinco)
+     */
     public function findOfertasRecientes($tienda_id, $limite = 5)
     {
         $em = $this->getEntityManager();
@@ -39,7 +39,7 @@ class TiendaRepository extends EntityRepository
 
     /**
      * Encuentra las ofertas más recientemente publicadas por la tienda indicada
-     * Las ofertas devueltas, además de publicadas, también han sido revisadas
+     * Las ofertas devueltas, además de publicadas, también han sido revisadas.
      *
      * @param string $tienda_id El id de la tienda
      * @param string $limite    Número de ofertas a devolver (por defecto, diez)
@@ -62,7 +62,7 @@ class TiendaRepository extends EntityRepository
     }
 
     /**
-     * Encuentra las tiendas más cercanas a la tienda indicada
+     * Encuentra las tiendas más cercanas a la tienda indicada.
      *
      * @param string $tienda El slug de la tienda para la que se buscan tiendas cercanas
      * @param string $ciudad El slug de la ciudad a la que pertenece la tienda

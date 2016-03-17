@@ -14,7 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 /**
  * Test funcional para comprobar que funciona bien el registro de usuarios
- * en el frontend, además del perfil y el proceso de baja del usuario
+ * en el frontend, además del perfil y el proceso de baja del usuario.
  */
 class UserControllerTest extends WebTestCase
 {
@@ -56,7 +56,7 @@ class UserControllerTest extends WebTestCase
         $listaDesplegable = $crawler
             ->selectButton('Registrarme')
             ->form()
-            ->get("frontend_usuario[ciudad]")
+            ->get('frontend_usuario[ciudad]')
         ;
         $atributosIdCiudades = $listaDesplegable->availableOptionValues();
         $idValidoCiudad = $atributosIdCiudades[1];
@@ -89,25 +89,25 @@ class UserControllerTest extends WebTestCase
     }
 
     /**
-     * Método que provee de usuarios de prueba a los tests de esta clase
+     * Método que provee de usuarios de prueba a los tests de esta clase.
      */
     public function usuarios()
     {
         return array(
             array(
                 array(
-                    'frontend_usuario[nombre]'           => 'Anónimo',
-                    'frontend_usuario[apellidos]'        => 'Apellido1 Apellido2',
-                    'frontend_usuario[email]'            => 'anonimo'.uniqid().'@localhost.localdomain',
-                    'frontend_usuario[password][first]'  => 'anonimo1234',
+                    'frontend_usuario[nombre]' => 'Anónimo',
+                    'frontend_usuario[apellidos]' => 'Apellido1 Apellido2',
+                    'frontend_usuario[email]' => 'anonimo'.uniqid().'@localhost.localdomain',
+                    'frontend_usuario[password][first]' => 'anonimo1234',
                     'frontend_usuario[password][second]' => 'anonimo1234',
-                    'frontend_usuario[direccion]'        => 'Mi calle, Mi ciudad, 01001',
-                    'frontend_usuario[dni]'              => '11111111H',
-                    'frontend_usuario[numero_tarjeta]'   => '123456789012345',
-                    'frontend_usuario[ciudad]'           => '1',
-                    'frontend_usuario[permite_email]'    => '1'
-                )
-            )
+                    'frontend_usuario[direccion]' => 'Mi calle, Mi ciudad, 01001',
+                    'frontend_usuario[dni]' => '11111111H',
+                    'frontend_usuario[numero_tarjeta]' => '123456789012345',
+                    'frontend_usuario[ciudad]' => '1',
+                    'frontend_usuario[permite_email]' => '1',
+                ),
+            ),
         );
     }
 }

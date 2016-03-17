@@ -10,7 +10,6 @@
 
 namespace AppBundle\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +19,6 @@ class SitioController extends Controller
     /**
      * @Route("/contacto", defaults={ "_locale"="es" }, name="contacto")
      * Muestra el formulario de contacto y también procesa el envío de emails
-     *
      */
     public function contactoAction(Request $request)
     {

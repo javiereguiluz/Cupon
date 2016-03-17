@@ -10,7 +10,6 @@
 
 namespace AppBundle\Listener;
 
-use Symfony\Component\EventDispatcher\Event;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Security\Core\SecurityContext;
@@ -19,7 +18,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Listener del evento SecurityInteractive que se utiliza para redireccionar
- * al usuario recién logueado a la portada de su ciudad
+ * al usuario recién logueado a la portada de su ciudad.
  */
 class LoginListener
 {
@@ -28,7 +27,7 @@ class LoginListener
     public function __construct(SecurityContext $context, Router $router)
     {
         $this->contexto = $context;
-        $this->router   = $router;
+        $this->router = $router;
     }
 
     public function onSecurityInteractiveLogin(InteractiveLoginEvent $event)
@@ -44,7 +43,7 @@ class LoginListener
                 $portada = $this->router->generate('extranet_portada');
             } else {
                 $portada = $this->router->generate('portada', array(
-                    'ciudad' => $this->ciudad
+                    'ciudad' => $this->ciudad,
                 ));
             }
 

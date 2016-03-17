@@ -38,7 +38,7 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
             $compras = rand(0, 3);
             $comprado = array();
 
-            for ($i=0; $i<$compras; $i++) {
+            for ($i = 0; $i < $compras; ++$i) {
                 $venta = new Venta();
 
                 $venta->setFecha(new \DateTime('now - '.rand(0, 250).' hours'));

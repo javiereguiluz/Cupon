@@ -17,7 +17,7 @@ use AppBundle\Entity\Tienda;
 
 /**
  * Test unitario para asegurar que la validación de la entidad Oferta
- * funciona correctamente
+ * funciona correctamente.
  */
 class OfertaTest extends \PHPUnit_Framework_TestCase
 {
@@ -58,7 +58,7 @@ class OfertaTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $listaErrores->count(), 'La descripción debe tener al menos 30 caracteres');
 
         $error = $listaErrores[0];
-        $this->assertRegExp("/This value is too short/", $error->getMessage());
+        $this->assertRegExp('/This value is too short/', $error->getMessage());
         $this->assertEquals('descripcion', $error->getPropertyPath());
     }
 
@@ -93,7 +93,7 @@ class OfertaTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $listaErrores->count(), 'El umbral debe ser un número entero');
 
         $error = $listaErrores[0];
-        $this->assertRegExp("/This value should be of type/", $error->getMessage());
+        $this->assertRegExp('/This value should be of type/', $error->getMessage());
         $this->assertEquals('umbral', $error->getPropertyPath());
     }
 
@@ -112,7 +112,7 @@ class OfertaTest extends \PHPUnit_Framework_TestCase
         $this->assertGreaterThan(0, $listaErrores->count(), 'El precio no puede ser un número negativo');
 
         $error = $listaErrores[0];
-        $this->assertRegExp("/This value should be .* or more/", $error->getMessageTemplate());
+        $this->assertRegExp('/This value should be .* or more/', $error->getMessageTemplate());
         $this->assertEquals('precio', $error->getPropertyPath());
     }
 
@@ -167,5 +167,4 @@ class OfertaTest extends \PHPUnit_Framework_TestCase
 
         return $tienda;
     }
-
 }

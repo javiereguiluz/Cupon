@@ -17,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
 use Symfony\Component\Validator\ExecutionContextInterface;
 
 /**
- * AppBundle\Entity\Usuario
+ * AppBundle\Entity\Usuario.
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UsuarioRepository")
@@ -27,14 +27,14 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 class Usuario implements UserInterface
 {
     /**
-     * Método requerido por la interfaz UserInterface
+     * Método requerido por la interfaz UserInterface.
      */
     public function eraseCredentials()
     {
     }
 
     /**
-     * Método requerido por la interfaz UserInterface
+     * Método requerido por la interfaz UserInterface.
      */
     public function getRoles()
     {
@@ -42,7 +42,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Método requerido por la interfaz UserInterface
+     * Método requerido por la interfaz UserInterface.
      */
     public function getUsername()
     {
@@ -50,7 +50,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * @var integer $id
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
@@ -59,7 +59,7 @@ class Usuario implements UserInterface
     private $id;
 
     /**
-     * @var string $nombre
+     * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=100)
      * @Assert\NotBlank()
@@ -67,7 +67,7 @@ class Usuario implements UserInterface
     private $nombre;
 
     /**
-     * @var string $apellidos
+     * @var string
      *
      * @ORM\Column(name="apellidos", type="string", length=255)
      * @Assert\NotBlank()
@@ -75,7 +75,7 @@ class Usuario implements UserInterface
     private $apellidos;
 
     /**
-     * @var string $email
+     * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
      * @Assert\Email()
@@ -83,7 +83,7 @@ class Usuario implements UserInterface
     private $email;
 
     /**
-     * @var string $password
+     * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
      * @Assert\NotBlank(groups={"registro"})
@@ -99,7 +99,7 @@ class Usuario implements UserInterface
     protected $salt;
 
     /**
-     * @var text $direccion
+     * @var text
      *
      * @ORM\Column(name="direccion", type="text")
      * @Assert\NotBlank()
@@ -107,7 +107,7 @@ class Usuario implements UserInterface
     private $direccion;
 
     /**
-     * @var boolean $permite_email
+     * @var bool
      *
      * @ORM\Column(name="permite_email", type="boolean")
      * @Assert\Type(type="bool")
@@ -115,7 +115,7 @@ class Usuario implements UserInterface
     private $permite_email;
 
     /**
-     * @var datetime $fecha_alta
+     * @var datetime
      *
      * @ORM\Column(name="fecha_alta", type="datetime")
      * @Assert\DateTime()
@@ -123,7 +123,7 @@ class Usuario implements UserInterface
     private $fecha_alta;
 
     /**
-     * @var datetime $fecha_nacimiento
+     * @var datetime
      *
      * @ORM\Column(name="fecha_nacimiento", type="datetime")
      * @Assert\DateTime()
@@ -131,14 +131,14 @@ class Usuario implements UserInterface
     private $fecha_nacimiento;
 
     /**
-     * @var string $dni
+     * @var string
      *
      * @ORM\Column(name="dni", type="string", length=9)
      */
     private $dni;
 
     /**
-     * @var string $numero_tarjeta
+     * @var string
      *
      * @ORM\Column(name="numero_tarjeta", type="string", length=20)
      * @Assert\Regex("/\d{11,19}/")
@@ -146,7 +146,7 @@ class Usuario implements UserInterface
     private $numero_tarjeta;
 
     /**
-     * @var integer $ciudad
+     * @var int
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Ciudad", inversedBy="usuarios")
      * @Assert\Type("AppBundle\Entity\Ciudad")
@@ -163,12 +163,13 @@ class Usuario implements UserInterface
         return $this->getNombre().' '.$this->getApellidos();
     }
 
-    public function __sleep(){
+    public function __sleep()
+    {
         return array('id', 'nombre', 'email');
     }
 
     /**
-     * Validador propio que comprueba si el DNI introducido es válido
+     * Validador propio que comprueba si el DNI introducido es válido.
      *
      * El DNI es un identificador único obligatorio para todos los ciudadanos de
      * España y de varios países americanos.
@@ -194,7 +195,6 @@ class Usuario implements UserInterface
      *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
      *   | letra  |  N |  J |  Z |  S |  Q |  V |  H |  L |  C |  K |  E |    |
      *   +--------+----+----+----+----+----+----+----+----+----+----+----+----+
-     *
      */
     public function esDniValido(ExecutionContextInterface $context)
     {
@@ -209,8 +209,8 @@ class Usuario implements UserInterface
 
         // Comprobar que la letra cumple con el algoritmo
         $numero = substr($dni, 0, -1);
-        $letra  = strtoupper(substr($dni, -1));
-        if ($letra != substr("TRWAGMYFPDXBNJZSQVHLCKE", strtr($numero, "XYZ", "012")%23, 1)) {
+        $letra = strtoupper(substr($dni, -1));
+        if ($letra != substr('TRWAGMYFPDXBNJZSQVHLCKE', strtr($numero, 'XYZ', '012') % 23, 1)) {
             $context->addViolationAt('dni', 'La letra no coincide con el número del DNI. Comprueba que has escrito bien tanto el número como la letra');
         }
     }
@@ -224,9 +224,9 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -234,7 +234,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set nombre
+     * Set nombre.
      *
      * @param string $nombre
      */
@@ -244,7 +244,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get nombre
+     * Get nombre.
      *
      * @return string
      */
@@ -254,7 +254,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set apellidos
+     * Set apellidos.
      *
      * @param string $apellidos
      */
@@ -264,7 +264,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get apellidos
+     * Get apellidos.
      *
      * @return string
      */
@@ -274,7 +274,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set email
+     * Set email.
      *
      * @param string $email
      */
@@ -284,7 +284,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get email
+     * Get email.
      *
      * @return string
      */
@@ -294,7 +294,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set password
+     * Set password.
      *
      * @param string $password
      */
@@ -304,7 +304,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get password
+     * Get password.
      *
      * @return string
      */
@@ -314,7 +314,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set salt
+     * Set salt.
      *
      * @param string $salt
      */
@@ -324,7 +324,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get salt
+     * Get salt.
      *
      * @return string
      */
@@ -334,7 +334,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set direccion
+     * Set direccion.
      *
      * @param text $direccion
      */
@@ -344,7 +344,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get direccion
+     * Get direccion.
      *
      * @return text
      */
@@ -354,9 +354,9 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set permite_email
+     * Set permite_email.
      *
-     * @param boolean $permiteEmail
+     * @param bool $permiteEmail
      */
     public function setPermiteEmail($permiteEmail)
     {
@@ -364,9 +364,9 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get permite_email
+     * Get permite_email.
      *
-     * @return boolean
+     * @return bool
      */
     public function getPermiteEmail()
     {
@@ -374,7 +374,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set fecha_alta
+     * Set fecha_alta.
      *
      * @param datetime $fechaAlta
      */
@@ -384,7 +384,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get fecha_alta
+     * Get fecha_alta.
      *
      * @return datetime
      */
@@ -394,7 +394,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set fecha_nacimiento
+     * Set fecha_nacimiento.
      *
      * @param datetime $fechaNacimiento
      */
@@ -404,7 +404,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get fecha_nacimiento
+     * Get fecha_nacimiento.
      *
      * @return datetime
      */
@@ -414,7 +414,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set dni
+     * Set dni.
      *
      * @param string $dni
      */
@@ -424,7 +424,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get dni
+     * Get dni.
      *
      * @return string
      */
@@ -434,7 +434,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set numero_tarjeta
+     * Set numero_tarjeta.
      *
      * @param string $numeroTarjeta
      */
@@ -444,7 +444,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get numero_tarjeta
+     * Get numero_tarjeta.
      *
      * @return string
      */
@@ -454,7 +454,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set ciudad
+     * Set ciudad.
      *
      * @param AppBundle\Entity\Ciudad $ciudad
      */
@@ -464,7 +464,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Get ciudad
+     * Get ciudad.
      *
      * @return AppBundle\Entity\Ciudad
      */

@@ -20,14 +20,14 @@ use AppBundle\Util\Util;
 class Tienda implements UserInterface
 {
     /**
-     * Método requerido por la interfaz UserInterface
+     * Método requerido por la interfaz UserInterface.
      */
     public function eraseCredentials()
     {
     }
 
     /**
-     * Método requerido por la interfaz UserInterface
+     * Método requerido por la interfaz UserInterface.
      */
     public function getRoles()
     {
@@ -35,7 +35,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Método requerido por la interfaz UserInterface
+     * Método requerido por la interfaz UserInterface.
      */
     public function getUsername()
     {
@@ -95,9 +95,9 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -105,7 +105,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set nombre
+     * Set nombre.
      *
      * @param string $nombre
      */
@@ -116,7 +116,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get nombre
+     * Get nombre.
      *
      * @return string
      */
@@ -126,7 +126,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set slug
+     * Set slug.
      *
      * @param string $slug
      */
@@ -136,7 +136,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get slug
+     * Get slug.
      *
      * @return string
      */
@@ -146,7 +146,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set login
+     * Set login.
      *
      * @param string $login
      */
@@ -156,7 +156,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get login
+     * Get login.
      *
      * @return string
      */
@@ -166,7 +166,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set password
+     * Set password.
      *
      * @param string $password
      */
@@ -176,7 +176,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get salt
+     * Get salt.
      *
      * @return string
      */
@@ -186,7 +186,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set salt
+     * Set salt.
      *
      * @param string $salt
      */
@@ -196,7 +196,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get password
+     * Get password.
      *
      * @return string
      */
@@ -206,7 +206,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set descripcion
+     * Set descripcion.
      *
      * @param text $descripcion
      */
@@ -216,7 +216,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get descripcion
+     * Get descripcion.
      *
      * @return text
      */
@@ -226,7 +226,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set direccion
+     * Set direccion.
      *
      * @param text $direccion
      */
@@ -236,7 +236,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get direccion
+     * Get direccion.
      *
      * @return text
      */
@@ -246,7 +246,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set ciudad
+     * Set ciudad.
      *
      * @param AppBundle\Entity\Ciudad $ciudad
      */
@@ -256,7 +256,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get ciudad
+     * Get ciudad.
      *
      * @return AppBundle\Entity\Ciudad
      */

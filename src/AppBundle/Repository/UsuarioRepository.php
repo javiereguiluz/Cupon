@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityRepository;
 class UsuarioRepository extends EntityRepository
 {
     /**
-     * Encuentra todas las compras del usuario indicado
+     * Encuentra todas las compras del usuario indicado.
      *
      * @param string $usuario El id del usuario
      */

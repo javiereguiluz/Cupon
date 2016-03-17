@@ -15,7 +15,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 class RequestListener
 {
     /**
-     * Ejemplo de cómo añadir un nuevo formato a la aplicación
+     * Ejemplo de cómo añadir un nuevo formato a la aplicación.
      */
     public function onKernelRequest(GetResponseEvent $event)
     {

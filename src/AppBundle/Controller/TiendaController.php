@@ -33,7 +33,7 @@ class TiendaController extends Controller
         $ciudad = $em->getRepository('AppBundle:Ciudad')->findOneBySlug($ciudad);
         $tienda = $em->getRepository('AppBundle:Tienda')->findOneBy(array(
             'slug' => $tienda,
-            'ciudad' => $ciudad->getId()
+            'ciudad' => $ciudad->getId(),
         ));
 
         if (!$tienda) {
@@ -47,10 +47,11 @@ class TiendaController extends Controller
         );
 
         $formato = $this->get('request')->getRequestFormat();
+
         return $this->render('tienda/portada.'.$formato.'.twig', array(
-            'tienda'   => $tienda,
-            'ofertas'  => $ofertas,
-            'cercanas' => $cercanas
+            'tienda' => $tienda,
+            'ofertas' => $ofertas,
+            'cercanas' => $cercanas,
         ));
     }
 }

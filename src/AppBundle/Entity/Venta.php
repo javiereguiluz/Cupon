@@ -35,7 +35,7 @@ class Venta
     protected $usuario;
 
     /**
-     * Set fecha
+     * Set fecha.
      *
      * @param datetime $fecha
      */
@@ -45,7 +45,7 @@ class Venta
     }
 
     /**
-     * Get fecha
+     * Get fecha.
      *
      * @return datetime
      */
@@ -55,7 +55,7 @@ class Venta
     }
 
     /**
-     * Set oferta
+     * Set oferta.
      *
      * @param AppBundle\Entity\Oferta $oferta
      */
@@ -65,7 +65,7 @@ class Venta
     }
 
     /**
-     * Get oferta
+     * Get oferta.
      *
      * @return AppBundle\Entity\Oferta
      */
@@ -75,7 +75,7 @@ class Venta
     }
 
     /**
-     * Set usuario
+     * Set usuario.
      *
      * @param AppBundle\Entity\Usuario $usuario
      */
@@ -85,7 +85,7 @@ class Venta
     }
 
     /**
-     * Get usuario
+     * Get usuario.
      *
      * @return AppBundle\Entity\Usuario
      */
