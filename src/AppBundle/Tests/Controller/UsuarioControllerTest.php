@@ -16,7 +16,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * Test funcional para comprobar que funciona bien el registro de usuarios
  * en el frontend, además del perfil y el proceso de baja del usuario.
  */
-class UserControllerTest extends WebTestCase
+class UsuarioControllerTest extends WebTestCase
 {
     private $em;
 

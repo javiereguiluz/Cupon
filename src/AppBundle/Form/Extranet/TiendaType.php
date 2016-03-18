@@ -25,9 +25,9 @@ class TiendaType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('login', 'text', array('read_only' => true))
+            ->add('login', null, array('read_only' => true))
 
-            ->add('password', 'repeated', array(
+            ->add('password', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
                 'type' => 'password',
                 'invalid_message' => 'Las dos contraseñas deben coincidir',
                 'first_options' => array('label' => 'Contraseña'),
@@ -39,7 +39,7 @@ class TiendaType extends AbstractType
             ->add('direccion')
             ->add('ciudad')
 
-            ->add('guardar', 'submit', array(
+            ->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
                 'label' => 'Guardar cambios',
                 'attr' => array('class' => 'boton'),
             ))
@@ -53,7 +53,7 @@ class TiendaType extends AbstractType
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'cupon_tiendabundle_tiendatype';
     }

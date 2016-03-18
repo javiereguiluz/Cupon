@@ -216,7 +216,7 @@ class Usuario implements UserInterface
     }
 
     /**
-     * @Assert\True(message = "Debes tener al menos 18 años para registrarte en el sitio")
+     * @Assert\IsTrue(message = "Debes tener al menos 18 años para registrarte en el sitio")
      */
     public function isMayorDeEdad()
     {

@@ -29,11 +29,11 @@ class OfertaType extends AbstractType
             ->add('nombre')
             ->add('descripcion')
             ->add('condiciones')
-            ->add('foto', 'file', array('required' => false))
-            ->add('precio', 'money')
-            ->add('descuento', 'money')
+            ->add('foto', 'Symfony\Component\Form\Extension\Core\Type\FileType', array('required' => false))
+            ->add('precio', 'Symfony\Component\Form\Extension\Core\Type\MoneyType')
+            ->add('descuento', 'Symfony\Component\Form\Extension\Core\Type\MoneyType')
             ->add('umbral')
-            ->add('guardar', 'submit', array(
+            ->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
                 'label' => 'Guardar cambios',
                 'attr' => array('class' => 'boton'),
             ))
@@ -62,7 +62,7 @@ class OfertaType extends AbstractType
         ));
     }
 
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'oferta_tienda';
     }

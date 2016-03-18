@@ -126,7 +126,7 @@ class Oferta
     }
 
     /**
-     * @Assert\True(message = "La fecha de expiración debe ser posterior a la fecha de publicación")
+     * @Assert\IsTrue(message = "La fecha de expiración debe ser posterior a la fecha de publicación")
      */
     public function isFechaValida()
     {

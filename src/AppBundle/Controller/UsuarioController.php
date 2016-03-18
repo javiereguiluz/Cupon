@@ -17,8 +17,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\SecurityContext;
 use AppBundle\Entity\Usuario;
 use AppBundle\Entity\Venta;
-use AppBundle\Form\Frontend\UsuarioPerfilType;
-use AppBundle\Form\Frontend\UsuarioRegistroType;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
@@ -73,7 +71,7 @@ class UsuarioController extends Controller
      */
     public function cajaLoginAction($id = '')
     {
-        $usuario = $this->get('security.context')->getToken()->getUser();
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
         $respuesta = $this->render('usuario/cajaLogin.html.twig', array(
             'id' => $id,
@@ -97,7 +95,7 @@ class UsuarioController extends Controller
         $usuario = new Usuario();
         $usuario->setPermiteEmail(true);
 
-        $formulario = $this->createForm(new UsuarioRegistroType(), $usuario);
+        $formulario = $this->createForm('AppBundle\Form\Frontend\UsuarioRegistroType', $usuario);
 
         $formulario->handleRequest($request);
 
@@ -123,7 +121,7 @@ class UsuarioController extends Controller
 
             // Loguear al usuario automáticamente
             $token = new UsernamePasswordToken($usuario, null, 'frontend', $usuario->getRoles());
-            $this->container->get('security.context')->setToken($token);
+            $this->container->get('security.token_storage')->setToken($token);
 
             return $this->redirect($this->generateUrl('portada', array(
                 'ciudad' => $usuario->getCiudad()->getSlug(),
@@ -144,8 +142,8 @@ class UsuarioController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $usuario = $this->get('security.context')->getToken()->getUser();
-        $formulario = $this->createForm(new UsuarioPerfilType(), $usuario);
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
+        $formulario = $this->createForm('AppBundle\Form\Frontend\UsuarioPerfilType', $usuario);
         $formulario
             ->remove('registrarme')
             ->add('guardar', 'submit', array(
@@ -198,7 +196,7 @@ class UsuarioController extends Controller
     public function comprasAction()
     {
         $em = $this->getDoctrine()->getManager();
-        $usuario = $this->get('security.context')->getToken()->getUser();
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
         $cercanas = $em->getRepository('AppBundle:Ciudad')->findCercanas(
             $usuario->getCiudad()->getId()
@@ -222,10 +220,10 @@ class UsuarioController extends Controller
     public function comprarAction(Request $request, $ciudad, $slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $usuario = $this->get('security.context')->getToken()->getUser();
+        $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
         // Solo pueden comprar los usuarios registrados y logueados
-        if (null == $usuario || !$this->get('security.context')->isGranted('ROLE_USUARIO')) {
+        if (null == $usuario || !$this->get('security.authorization_checker')->isGranted('ROLE_USUARIO')) {
             $this->get('session')->getFlashBag()->add('info',
                 'Antes de comprar debes registrarte o conectarte con tu usuario y contraseña.'
             );

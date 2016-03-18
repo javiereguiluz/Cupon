@@ -11,8 +11,8 @@
 namespace AppBundle\Listener;
 
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Security\Core\SecurityContext;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -22,11 +22,11 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
  */
 class LoginListener
 {
-    private $contexto, $router, $ciudad = null;
+    private $checker, $router, $ciudad = null;
 
-    public function __construct(SecurityContext $context, Router $router)
+    public function __construct(AuthorizationChecker $context, Router $router)
     {
-        $this->contexto = $context;
+        $this->checker = $context;
         $this->router = $router;
     }
 
@@ -39,7 +39,7 @@ class LoginListener
     public function onKernelResponse(FilterResponseEvent $event)
     {
         if (null != $this->ciudad) {
-            if ($this->contexto->isGranted('ROLE_TIENDA')) {
+            if ($this->checker->isGranted('ROLE_TIENDA')) {
                 $portada = $this->router->generate('extranet_portada');
             } else {
                 $portada = $this->router->generate('portada', array(

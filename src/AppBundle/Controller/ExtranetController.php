@@ -67,7 +67,7 @@ class ExtranetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tienda = $this->get('security.context')->getToken()->getUser();
+        $tienda = $this->get('security.token_storage')->getToken()->getUser();
         $ofertas = $em->getRepository('AppBundle:Tienda')->findOfertasRecientes($tienda->getId(), 50);
 
         return $this->render('extranet/portada.html.twig', array(
@@ -108,7 +108,7 @@ class ExtranetController extends Controller
 
         if ($formulario->isValid()) {
             // Completar las propiedades de la oferta que una tienda no puede establecer
-            $tienda = $this->get('security.context')->getToken()->getUser();
+            $tienda = $this->get('security.token_storage')->getToken()->getUser();
             $oferta->setCompras(0);
             $oferta->setRevisada(false);
             $oferta->setTienda($tienda);
@@ -149,7 +149,7 @@ class ExtranetController extends Controller
         }
 
         // Comprobar que el usuario tiene permiso para editar esta oferta concreta
-        if (false === $this->get('security.context')->isGranted('ROLE_EDITAR_OFERTA', $oferta)) {
+        if (false === $this->get('security.token_storage')->isGranted('ROLE_EDITAR_OFERTA', $oferta)) {
             throw new AccessDeniedException();
         }
 
@@ -210,7 +210,7 @@ class ExtranetController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $tienda = $this->get('security.context')->getToken()->getUser();
+        $tienda = $this->get('security.token_storage')->getToken()->getUser();
         $formulario = $this->createForm(new TiendaType(), $tienda);
 
         $passwordOriginal = $formulario->getData()->getPassword();
