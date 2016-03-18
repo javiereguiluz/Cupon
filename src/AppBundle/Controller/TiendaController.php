@@ -13,6 +13,8 @@ namespace AppBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class TiendaController extends Controller
 {
@@ -25,8 +27,9 @@ class TiendaController extends Controller
      *
      * @param string $ciudad El slug de la ciudad donde se encuentra la tienda
      * @param string $tienda El slug de la tienda
+     * @return Response
      */
-    public function portadaAction($ciudad, $tienda)
+    public function portadaAction(Request $request, $ciudad, $tienda)
     {
         $em = $this->getDoctrine()->getManager();
 
@@ -46,7 +49,7 @@ class TiendaController extends Controller
             $tienda->getCiudad()->getSlug()
         );
 
-        $formato = $this->get('request')->getRequestFormat();
+        $formato = $request->getRequestFormat();
 
         return $this->render('tienda/portada.'.$formato.'.twig', array(
             'tienda' => $tienda,

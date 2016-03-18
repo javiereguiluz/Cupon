@@ -24,8 +24,8 @@ class SitioController extends Controller
     {
         // Se crea un formulario "in situ", sin clase asociada
         $formulario = $this->createFormBuilder()
-            ->add('remitente', 'email')
-            ->add('mensaje', 'textarea')
+            ->add('remitente', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
+            ->add('mensaje', 'Symfony\Component\Form\Extension\Core\Type\TextareaType')
             ->getForm()
         ;
 

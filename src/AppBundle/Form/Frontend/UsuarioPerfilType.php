@@ -10,7 +10,7 @@
 
 namespace AppBundle\Form\Frontend;
 
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
  * Formulario para editar el perfil de los usuarios registrados.
@@ -22,7 +22,7 @@ class UsuarioPerfilType extends UsuarioRegistroType
      * la del formulario para darse de alta (escribir la contraseña por
      * ejemplo no es obligatorio).
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'validation_groups' => array('default'),

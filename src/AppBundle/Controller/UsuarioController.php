@@ -61,6 +61,8 @@ class UsuarioController extends Controller
 
     /**
      * @Route("/login", name="usuario_login")
+     * @Cache(maxage="30")
+     *
      * Muestra la caja de login que se incluye en el lateral de la mayoría de páginas del sitio web.
      * Esta caja se transforma en información y enlaces cuando el usuario se loguea en la aplicación.
      * La respuesta se marca como privada para que no se añada a la cache pública. El trozo de plantilla
@@ -73,14 +75,10 @@ class UsuarioController extends Controller
     {
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
-        $respuesta = $this->render('usuario/cajaLogin.html.twig', array(
+        return $this->render('usuario/cajaLogin.html.twig', array(
             'id' => $id,
             'usuario' => $usuario,
         ));
-
-        $respuesta->setMaxAge(30);
-
-        return $respuesta;
     }
 
     /**
@@ -146,7 +144,7 @@ class UsuarioController extends Controller
         $formulario = $this->createForm('AppBundle\Form\Frontend\UsuarioPerfilType', $usuario);
         $formulario
             ->remove('registrarme')
-            ->add('guardar', 'submit', array(
+            ->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
                 'label' => 'Guardar cambios',
                 'attr' => array('class' => 'boton'),
             ))
@@ -223,7 +221,7 @@ class UsuarioController extends Controller
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
         // Solo pueden comprar los usuarios registrados y logueados
-        if (null == $usuario || !$this->get('security.authorization_checker')->isGranted('ROLE_USUARIO')) {
+        if (null === $usuario || !$this->get('security.authorization_checker')->isGranted('ROLE_USUARIO')) {
             $this->get('session')->getFlashBag()->add('info',
                 'Antes de comprar debes registrarte o conectarte con tu usuario y contraseña.'
             );
@@ -249,7 +247,7 @@ class UsuarioController extends Controller
             'usuario' => $usuario->getId(),
         ));
 
-        if (null != $venta) {
+        if (null !== $venta) {
             $fechaVenta = $venta->getFecha();
 
             $formateador = \IntlDateFormatter::create(

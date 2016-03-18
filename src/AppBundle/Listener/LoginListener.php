@@ -38,7 +38,7 @@ class LoginListener
 
     public function onKernelResponse(FilterResponseEvent $event)
     {
-        if (null != $this->ciudad) {
+        if (null !== $this->ciudad) {
             if ($this->checker->isGranted('ROLE_TIENDA')) {
                 $portada = $this->router->generate('extranet_portada');
             } else {
