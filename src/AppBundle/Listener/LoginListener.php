@@ -10,11 +10,11 @@
 
 namespace AppBundle\Listener;
 
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
+use Symfony\Component\Routing\Router;
 use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-use Symfony\Component\Routing\Router;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 /**
  * Listener del evento SecurityInteractive que se utiliza para redireccionar

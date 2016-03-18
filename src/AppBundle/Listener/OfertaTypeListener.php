@@ -10,8 +10,8 @@
 
 namespace AppBundle\Listener;
 
-use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormError;
+use Symfony\Component\Form\FormEvent;
 
 /**
  * Este listener se emplea para añadir un validador propio que compruebe los campos

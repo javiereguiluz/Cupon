@@ -10,12 +10,12 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Oferta;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use AppBundle\Entity\Oferta;
 
 /**
  * Fixtures de la entidad Oferta.

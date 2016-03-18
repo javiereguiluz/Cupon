@@ -10,10 +10,10 @@
 
 namespace AppBundle\Form\Frontend;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Doctrine\ORM\EntityRepository;
 
 /**
  * Formulario para crear entidades de tipo Usuario cuando los usuarios se

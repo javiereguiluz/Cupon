@@ -10,8 +10,8 @@
 
 namespace AppBundle\Security;
 
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 
 class OwnerVoter implements VoterInterface
 {

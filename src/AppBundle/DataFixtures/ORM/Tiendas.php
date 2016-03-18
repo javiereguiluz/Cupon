@@ -10,13 +10,13 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Ciudad;
+use AppBundle\Entity\Tienda;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use AppBundle\Entity\Ciudad;
-use AppBundle\Entity\Tienda;
 
 /**
  * Fixtures de la entidad Tienda.

@@ -10,10 +10,10 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Ciudad;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use AppBundle\Entity\Ciudad;
 
 /**
  * Fixtures de la entidad Ciudad.

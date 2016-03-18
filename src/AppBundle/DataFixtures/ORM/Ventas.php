@@ -10,12 +10,11 @@
 
 namespace AppBundle\DataFixtures\ORM;
 
+use AppBundle\Entity\Oferta;
+use AppBundle\Entity\Venta;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use AppBundle\Entity\Oferta;
-use AppBundle\Entity\Usuario;
-use AppBundle\Entity\Venta;
 
 /**
  * Fixtures de la entidad Venta.

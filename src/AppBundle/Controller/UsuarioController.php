@@ -10,14 +10,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Usuario;
+use AppBundle\Entity\Venta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\SecurityContext;
-use AppBundle\Entity\Usuario;
-use AppBundle\Entity\Venta;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Core\SecurityContext;
 
 /**
  * @Route("/usuario")

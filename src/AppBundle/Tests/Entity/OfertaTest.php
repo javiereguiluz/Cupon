@@ -10,10 +10,10 @@
 
 namespace AppBundle\Tests;
 
-use Symfony\Component\Validator\Validation;
-use AppBundle\Entity\Oferta;
 use AppBundle\Entity\Ciudad;
+use AppBundle\Entity\Oferta;
 use AppBundle\Entity\Tienda;
+use Symfony\Component\Validator\Validation;
 
 /**
  * Test unitario para asegurar que la validación de la entidad Oferta
