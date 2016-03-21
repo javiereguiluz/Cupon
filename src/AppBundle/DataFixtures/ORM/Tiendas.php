@@ -61,7 +61,6 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
                 $tienda->setCiudad($ciudad);
 
                 $manager->persist($tienda);
-                $this->addReference('tienda'.$j, $tienda);
             }
         }
 
