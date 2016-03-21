@@ -57,7 +57,7 @@ class UsuarioRegistroType extends AbstractType
                 )
             ))
 
-            ->add('ciudad', 'Symfony\Component\Form\Extension\Core\Type\EntityType', array(
+            ->add('ciudad', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'class' => 'AppBundle\\Entity\\Ciudad',
                 'empty_value' => 'Selecciona una ciudad',
                 'query_builder' => function (EntityRepository $repositorio) {
