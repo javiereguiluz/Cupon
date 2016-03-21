@@ -40,17 +40,17 @@ security:
         - { path: ^/admin/*,           roles: ROLE_ADMIN }
 
     encoders:
-        Cupon\UsuarioBundle\Entity\Usuario:        { algorithm: sha512, iterations: 10 }
-        Cupon\TiendaBundle\Entity\Tienda:          { algorithm: sha512, iterations: 10 }
+        AppBundle\Entity\Usuario:        { algorithm: sha512, iterations: 10 }
+        AppBundle\Entity\Tienda:         { algorithm: sha512, iterations: 10 }
         Symfony\Component\Security\Core\User\User: sha512
 
     providers:
         # Usuarios del frontend
         usuarios:
-            entity: { class: Cupon\UsuarioBundle\Entity\Usuario, property: email }
+            entity: { class: AppBundle\Entity\Usuario, property: email }
         # Usuarios de la extranet
         tiendas:
-            entity: { class: Cupon\TiendaBundle\Entity\Tienda, property: login }
+            entity: { class: AppBundle\Entity\Tienda, property: login }
         # Usuarios del backend
         administradores:
             memory:
