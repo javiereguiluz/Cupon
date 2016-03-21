@@ -21,18 +21,11 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  * Fixtures de la entidad Oferta.
  * Crea para cada ciudad 15 ofertas con información muy realista.
  */
-class Ofertas extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
+class Ofertas extends AbstractFixture implements OrderedFixtureInterface
 {
     public function getOrder()
     {
         return 30;
-    }
-
-    private $container;
-
-    public function setContainer(ContainerInterface $container = null)
-    {
-        $this->container = $container;
     }
 
     public function load(ObjectManager $manager)
