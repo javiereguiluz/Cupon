@@ -60,7 +60,6 @@ class UsuarioController extends Controller
     }
 
     /**
-     * @Route("/login", name="usuario_login")
      * @Cache(maxage="30")
      *
      * Muestra la caja de login que se incluye en el lateral de la mayoría de páginas del sitio web.

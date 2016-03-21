@@ -7,11 +7,14 @@
 <section id="entrar">
     <h1>{{ "Accede a tu cuenta" | trans }}</h1>
 
-    {% if error %}
-        <div>{{ error.message }}</div>
-    {% endif %}
-
     <form action="{{ path('usuario_login_check') }}" method="post">
+        {% if error %}
+            <div class="errores-globales">
+                <span class="label">ERROR</span>
+                {{ error.message|trans }}
+            </div>
+        {% endif %}
+
         <label for="username">{{ "Email" | trans }}</label>
         <input type="text" id="username" name="_username" value="{{ last_username }}" />
 

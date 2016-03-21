@@ -139,8 +139,8 @@ form input.corto {
     width: 100px;
 }
 
-form > div:first-child > ul:first-child, /* mensajes de error globales */
-form div > * > ul:first-child,           /* mensajes de error de cada campo */
+/* mensajes de error de cada campo */
+form div > * > ul:first-child,
 form label + ul {
     background: #C00;
     color: #FFF;
@@ -148,16 +148,28 @@ form label + ul {
     margin: 0 0 1em;
     padding: .2em;
 }
-form > div:first-child > ul:first-child li,
 form div > * > ul:first-child li,
 form label + ul li {
     margin: 0;
     padding: .2em;
 }
-form > div:first-child > ul:first-child li + li,
 form div > * > ul:first-child li + li,
 form label + ul li + li {
     margin-top: .5em;
+}
+
+/* mensajes de error globales */
+form div.errores-globales {
+    color: #C00;
+    margin-bottom: 1em;
+}
+form div.errores-globales .label {
+    background: #C00;
+    color: #FFF;
+    font-size: 12px;
+    font-weight: bold;
+    margin-right: 5px;
+    padding: 2px 4px;
 }
 
 /* ===========================================================================
