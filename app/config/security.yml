@@ -18,6 +18,7 @@ security:
             logout:
                 path:       /extranet/logout
                 target:     /extranet
+
         # Firewall global utilizado en la parte pública o frontend
         frontend:
             pattern:        ^/*
@@ -40,9 +41,9 @@ security:
         - { path: ^/admin/*,           roles: ROLE_ADMIN }
 
     encoders:
-        AppBundle\Entity\Usuario:        { algorithm: sha512, iterations: 10 }
-        AppBundle\Entity\Tienda:         { algorithm: sha512, iterations: 10 }
-        Symfony\Component\Security\Core\User\User: sha512
+        AppBundle\Entity\Usuario: bcrypt
+        AppBundle\Entity\Tienda: bcrypt
+        Symfony\Component\Security\Core\User\User: bcrypt
 
     providers:
         # Usuarios del frontend
@@ -55,8 +56,8 @@ security:
         administradores:
             memory:
                 users:
-                    # user = admin, pass = 1234
-                    admin: { password: Eti36Ru/pWG6WfoIPiDFUBxUuyvgMA4L8+LLuGbGyqV9ATuT9brCWPchBqX5vFTF+DgntacecW+sSGD+GZts2A==, roles: ROLE_ADMIN }
+                    # usuario = admin, contraseña = 1234
+                    admin: { password: '$2y$13$w700yeSs8FxMLrEXaCATgehosZf9vx09RbwKddswl9LN/22dKL2qO', roles: ROLE_ADMIN }
 
     role_hierarchy:
         ROLE_ADMIN: [ROLE_TIENDA, ROLE_USUARIO, ROLE_ALLOWED_TO_SWITCH]

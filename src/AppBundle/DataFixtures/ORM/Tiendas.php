@@ -24,16 +24,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class Tiendas extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {
-    public function getOrder()
-    {
-        return 20;
-    }
-
+    /** @var ContainerInterface */
     private $container;
+    /** @var BCryptPasswordEncoder */
+    private $encoder;
 
     public function setContainer(ContainerInterface $container = null)
     {
         $this->container = $container;
+    }
+
+    public function getOrder()
+    {
+        return 20;
     }
 
     public function load(ObjectManager $manager)
@@ -41,21 +44,17 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         // Obtener todas las ciudades de la base de datos
         $ciudades = $manager->getRepository('AppBundle:Ciudad')->findAll();
 
+        // Obtener el "encoder" que codifica las contraseñas de las tiendas
+        $this->encoder = $this->container->get('security.encoder_factory')->getEncoder(new Tienda());
+
         foreach ($ciudades as $i => $ciudad) {
             $numeroTiendas = rand(2, 5);
             for ($j = 1; $j <= $numeroTiendas; ++$j) {
                 $tienda = new Tienda();
 
                 $tienda->setNombre($this->getNombre());
-
                 $tienda->setLogin('tienda'.$i);
-                $tienda->setSalt(base_convert(sha1(uniqid(mt_rand(), true)), 16, 36));
-
-                $passwordEnClaro = 'tienda'.$i;
-                $encoder = $this->container->get('security.encoder_factory')->getEncoder($tienda);
-                $passwordCodificado = $encoder->encodePassword($passwordEnClaro, $tienda->getSalt());
-                $tienda->setPassword($passwordCodificado);
-
+                $tienda->setPassword($this->encoder->encodePassword('tienda'.$i, null));
                 $tienda->setDescripcion($this->getDescripcion());
                 $tienda->setDireccion($this->getDireccion($ciudad));
                 $tienda->setCiudad($ciudad);
@@ -70,7 +69,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     /**
      * Generador aleatorio de nombres de tiendas.
      *
-     * @return string Nombre aleatorio generado para la tienda.
+     * @return string
      */
     private function getNombre()
     {
@@ -87,7 +86,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     /**
      * Generador aleatorio de descripciones de tiendas.
      *
-     * @return string Descripción aleatoria generada para la tienda.
+     * @return string
      */
     private function getDescripcion()
     {
@@ -121,7 +120,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
      *
      * @param Ciudad $ciudad Objeto de la ciudad para la que se genera una dirección postal.
      *
-     * @return string Dirección postal aleatoria generada para la tienda.
+     * @return string
      */
     private function getDireccion(Ciudad $ciudad)
     {
@@ -139,7 +138,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
     /**
      * Generador aleatorio de códigos postales.
      *
-     * @return string Código postal aleatorio generado para la tienda.
+     * @return string
      */
     private function getCodigoPostal()
     {

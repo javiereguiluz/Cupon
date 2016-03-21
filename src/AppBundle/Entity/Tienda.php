@@ -20,29 +20,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class Tienda implements UserInterface
 {
     /**
-     * Método requerido por la interfaz UserInterface.
-     */
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * Método requerido por la interfaz UserInterface.
-     */
-    public function getRoles()
-    {
-        return array('ROLE_TIENDA');
-    }
-
-    /**
-     * Método requerido por la interfaz UserInterface.
-     */
-    public function getUsername()
-    {
-        return $this->getLogin();
-    }
-
-    /**
      * @ORM\Id
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -68,11 +45,6 @@ class Tienda implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     protected $password;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    protected $salt;
 
     /**
      * @ORM\Column(type="text")
@@ -176,26 +148,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get salt.
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
-     * Set salt.
-     *
-     * @param string $salt
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    }
-
-    /**
      * Get password.
      *
      * @return string
@@ -264,4 +216,27 @@ class Tienda implements UserInterface
     {
         return $this->ciudad;
     }
+
+    /**
+     * Método requerido por la interfaz UserInterface.
+     */
+    public function getRoles()
+    {
+        return array('ROLE_TIENDA');
+    }
+
+    /**
+     * Método requerido por la interfaz UserInterface.
+     */
+    public function getUsername()
+    {
+        return $this->getLogin();
+    }
+
+    /**
+     * Métodos requeridos por la interfaz UserInterface, pero no implementados
+     * por esta clase.
+     */
+    public function getSalt() { }
+    public function eraseCredentials() { }
 }

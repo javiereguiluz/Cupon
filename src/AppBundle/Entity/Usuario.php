@@ -27,29 +27,6 @@ use Symfony\Component\Validator\ExecutionContextInterface;
 class Usuario implements UserInterface
 {
     /**
-     * Método requerido por la interfaz UserInterface.
-     */
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * Método requerido por la interfaz UserInterface.
-     */
-    public function getRoles()
-    {
-        return array('ROLE_USUARIO');
-    }
-
-    /**
-     * Método requerido por la interfaz UserInterface.
-     */
-    public function getUsername()
-    {
-        return $this->getEmail();
-    }
-
-    /**
      * @var int
      *
      * @ORM\Column(name="id", type="integer")
@@ -90,13 +67,6 @@ class Usuario implements UserInterface
      * @Assert\Length(min = 6)
      */
     private $password;
-
-    /**
-     * @var string salt
-     *
-     * @ORM\Column(name="salt", type="string", length=255)
-     */
-    protected $salt;
 
     /**
      * @var text
@@ -314,26 +284,6 @@ class Usuario implements UserInterface
     }
 
     /**
-     * Set salt.
-     *
-     * @param string $salt
-     */
-    public function setSalt($salt)
-    {
-        $this->salt = $salt;
-    }
-
-    /**
-     * Get salt.
-     *
-     * @return string
-     */
-    public function getSalt()
-    {
-        return $this->salt;
-    }
-
-    /**
      * Set direccion.
      *
      * @param text $direccion
@@ -472,4 +422,27 @@ class Usuario implements UserInterface
     {
         return $this->ciudad;
     }
+
+    /**
+     * Método requerido por la interfaz UserInterface.
+     */
+    public function getRoles()
+    {
+        return array('ROLE_USUARIO');
+    }
+
+    /**
+     * Método requerido por la interfaz UserInterface.
+     */
+    public function getUsername()
+    {
+        return $this->getEmail();
+    }
+
+    /**
+     * Métodos requeridos por la interfaz UserInterface, pero no implementados
+     * por esta clase.
+     */
+    public function getSalt() { }
+    public function eraseCredentials() { }
 }

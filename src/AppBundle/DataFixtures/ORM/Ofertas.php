@@ -23,6 +23,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 class Ofertas extends AbstractFixture implements OrderedFixtureInterface
 {
+    const NUM_OFERTAS = 15;
+
     public function getOrder()
     {
         return 30;
@@ -39,7 +41,7 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface
                 $ciudad->getId()
             );
 
-            for ($j = 1; $j <= 15; ++$j) {
+            for ($j = 1; $j <= self::NUM_OFERTAS; ++$j) {
                 $oferta = new Oferta();
 
                 $oferta->setNombre($this->getNombre());

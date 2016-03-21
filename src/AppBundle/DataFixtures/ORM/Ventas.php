@@ -31,7 +31,7 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
     {
         // Obtener todas las ofertas y usuarios de la base de datos
         $ofertas = $manager->getRepository('AppBundle:Oferta')->findAll();
-        $usuarios = $manager->getRepository('UsuarioBundle:Usuario')->findAll();
+        $usuarios = $manager->getRepository('AppBundle:Usuario')->findAll();
 
         foreach ($usuarios as $usuario) {
             $compras = rand(0, 3);
