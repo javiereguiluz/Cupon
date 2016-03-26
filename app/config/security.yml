@@ -40,9 +40,9 @@ security:
         - { path: ^/admin/*,           roles: ROLE_ADMIN }
 
     encoders:
-        AppBundle\Entity\Usuario: bcrypt
-        AppBundle\Entity\Tienda: bcrypt
-        Symfony\Component\Security\Core\User\User: bcrypt
+        AppBundle\Entity\Usuario: { algorithm: bcrypt, cost: 8 }
+        AppBundle\Entity\Tienda: { algorithm: bcrypt, cost: 8 }
+        Symfony\Component\Security\Core\User\User: { algorithm: bcrypt, cost: 8 }
 
     providers:
         # Usuarios del frontend
