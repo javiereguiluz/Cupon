@@ -33,7 +33,7 @@ class UsuarioController extends Controller
     {
         $authUtils = $this->get('security.authentication_utils');
 
-        return $this->render('usuario/login.html.twig.html.twig', array(
+        return $this->render('usuario/login.html.twig', array(
             'last_username' => $authUtils->getLastUsername(),
             'error' => $authUtils->getLastAuthenticationError(),
         ));
@@ -73,7 +73,7 @@ class UsuarioController extends Controller
     {
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
-        return $this->render('usuario/cajaLogin.html.twig.html.twig', array(
+        return $this->render('usuario/cajaLogin.html.twig', array(
             'id' => $id,
             'usuario' => $usuario,
         ));
