@@ -22,11 +22,15 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
  */
 class LoginListener
 {
-    private $checker, $router, $ciudad = null;
+    /** @var AuthorizationChecker */
+    private $checker;
+    /** @var Router */
+    private $router;
+    private $ciudad;
 
-    public function __construct(AuthorizationChecker $context, Router $router)
+    public function __construct(AuthorizationChecker $checker, Router $router)
     {
-        $this->checker = $context;
+        $this->checker = $checker;
         $this->router = $router;
     }
 
