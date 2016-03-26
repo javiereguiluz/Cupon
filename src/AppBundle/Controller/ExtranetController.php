@@ -100,7 +100,7 @@ class ExtranetController extends Controller
     public function ofertaNuevaAction(Request $request)
     {
         $oferta = new Oferta();
-        $formulario = $this->createForm(new OfertaType(), $oferta);
+        $formulario = $this->createForm('AppBundle\Form\Extranet\OfertaType', $oferta);
 
         // Cuando se crea una oferta, se muestra un checkbox para aceptar las
         // condiciones de uso. Este campo de formulario no se corresponde con
@@ -166,7 +166,7 @@ class ExtranetController extends Controller
             return $this->redirectToRoute('extranet_portada');
         }
 
-        $formulario = $this->createForm(new OfertaType(), $oferta);
+        $formulario = $this->createForm('AppBundle\Form\Extranet\OfertaType', $oferta);
 
         // Guardar la ruta de la foto original de la oferta
         $rutaFotoOriginal = $formulario->getData()->getRutaFoto();

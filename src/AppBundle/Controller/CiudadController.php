@@ -15,6 +15,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class CiudadController extends Controller
@@ -65,13 +66,13 @@ class CiudadController extends Controller
      *
      * @return Response
      */
-    public function recientesAction(Ciudad $ciudad)
+    public function recientesAction(Request $request, Ciudad $ciudad)
     {
         $em = $this->getDoctrine()->getManager();
         $cercanas = $em->getRepository('AppBundle:Ciudad')->findCercanas($ciudad->getId());
         $ofertas = $em->getRepository('AppBundle:Oferta')->findRecientes($ciudad->getId());
 
-        $formato = $this->get('request')->getRequestFormat();
+        $formato = $request->getRequestFormat();
 
         return $this->render('ciudad/recientes.'.$formato.'.twig', array(
             'ciudad' => $ciudad,

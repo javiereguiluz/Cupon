@@ -25,16 +25,16 @@ class CuponExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            'mostrar_como_lista' => new \Twig_Filter_Method($this, 'mostrarComoLista', array('is_safe' => array('html'))),
-            'cuenta_atras' => new \Twig_Filter_Method($this, 'cuentaAtras', array('is_safe' => array('html'))),
-            'fecha' => new \Twig_Filter_Method($this, 'fecha'),
+            new \Twig_SimpleFilter('mostrar_como_lista', array($this, 'mostrarComoLista'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFilter('cuenta_atras', array($this, 'cuentaAtras'), array('is_safe' => array('html'))),
+            new \Twig_SimpleFilter('fecha', array($this, 'fecha')),
         );
     }
 
     public function getFunctions()
     {
         return array(
-            'descuento' => new \Twig_Function_Method($this, 'descuento'),
+            new \Twig_SimpleFunction('descuento', array($this, 'descuento')),
         );
     }
 
