@@ -158,7 +158,7 @@ class ExtranetController extends Controller
         }
 
         // Comprobar que el usuario tiene permiso para editar esta oferta concreta
-        if (false === $this->get('security.token_storage')->isGranted('ROLE_EDITAR_OFERTA', $oferta)) {
+        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_EDITAR_OFERTA', $oferta)) {
             throw new AccessDeniedException();
         }
 
