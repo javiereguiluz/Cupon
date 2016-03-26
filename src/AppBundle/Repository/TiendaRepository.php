@@ -17,10 +17,10 @@ class TiendaRepository extends EntityRepository
     /**
      * Encuentra las ofertas más recientes de la tienda indicada.
      *
-     * @param string $tienda_id El id de la tienda
+     * @param string $tiendaId El id de la tienda
      * @param string $limite    Número de ofertas a devolver (por defecto, cinco)
      */
-    public function findOfertasRecientes($tienda_id, $limite = 5)
+    public function findOfertasRecientes($tiendaId, $limite = 5)
     {
         $em = $this->getEntityManager();
 
@@ -28,10 +28,10 @@ class TiendaRepository extends EntityRepository
             SELECT o, t
             FROM AppBundle:Oferta o JOIN o.tienda t
             WHERE o.tienda = :id
-            ORDER BY o.fecha_expiracion DESC
+            ORDER BY o.fechaExpiracion DESC
         ');
         $consulta->setMaxResults($limite);
-        $consulta->setParameter('id', $tienda_id);
+        $consulta->setParameter('id', $tiendaId);
         $consulta->useResultCache(true, 3600);
 
         return $consulta->getResult();
@@ -44,15 +44,15 @@ class TiendaRepository extends EntityRepository
      * @param string $tienda_id El id de la tienda
      * @param string $limite    Número de ofertas a devolver (por defecto, diez)
      */
-    public function findUltimasOfertasPublicadas($tienda_id, $limite = 10)
+    public function findUltimasOfertasPublicadas($tiendaId, $limite = 10)
     {
         $em = $this->getEntityManager();
 
         $consulta = $em->createQuery('
             SELECT o, t
             FROM AppBundle:Oferta o JOIN o.tienda t
-            WHERE o.revisada = true AND o.fecha_publicacion < :fecha AND o.tienda = :id
-            ORDER BY o.fecha_expiracion DESC
+            WHERE o.revisada = true AND o.fechaPublicacion < :fecha AND o.tienda = :id
+            ORDER BY o.fechaExpiracion DESC
         ');
         $consulta->setMaxResults($limite);
         $consulta->setParameter('id', $tienda_id);

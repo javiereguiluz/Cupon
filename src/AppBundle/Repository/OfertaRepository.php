@@ -48,8 +48,8 @@ class OfertaRepository extends EntityRepository
         $consulta = $em->createQuery('
             SELECT o, c, t
             FROM AppBundle:Oferta o JOIN o.ciudad c JOIN o.tienda t
-            WHERE o.revisada = true AND o.fecha_publicacion < :fecha AND c.slug = :ciudad
-            ORDER BY o.fecha_publicacion DESC
+            WHERE o.revisada = true AND o.fechaPublicacion < :fecha AND c.slug = :ciudad
+            ORDER BY o.fechaPublicacion DESC
         ');
         $consulta->setParameter('fecha', new \DateTime('now'));
         $consulta->setParameter('ciudad', $ciudad);
@@ -70,8 +70,8 @@ class OfertaRepository extends EntityRepository
         $consulta = $em->createQuery('
             SELECT o, c, t
             FROM AppBundle:Oferta o JOIN o.ciudad c JOIN o.tienda t
-            WHERE o.revisada = true AND o.fecha_publicacion < :fecha AND c.slug = :ciudad
-            ORDER BY o.fecha_publicacion DESC
+            WHERE o.revisada = true AND o.fechaPublicacion < :fecha AND c.slug = :ciudad
+            ORDER BY o.fechaPublicacion DESC
         ');
         $consulta->setParameter('fecha', new \DateTime('tomorrow'));
         $consulta->setParameter('ciudad', $ciudad);
@@ -92,8 +92,8 @@ class OfertaRepository extends EntityRepository
         $consulta = $em->createQuery('
             SELECT o, t
             FROM AppBundle:Oferta o JOIN o.tienda t
-            WHERE o.revisada = true AND o.fecha_publicacion < :fecha AND o.ciudad = :id
-            ORDER BY o.fecha_publicacion DESC
+            WHERE o.revisada = true AND o.fechaPublicacion < :fecha AND o.ciudad = :id
+            ORDER BY o.fechaPublicacion DESC
         ');
         $consulta->setMaxResults(5);
         $consulta->setParameter('id', $ciudad_id);
@@ -115,8 +115,8 @@ class OfertaRepository extends EntityRepository
         $consulta = $em->createQuery('
             SELECT o, c
             FROM AppBundle:Oferta o JOIN o.ciudad c
-            WHERE o.revisada = true AND o.fecha_publicacion <= :fecha AND c.slug != :ciudad
-            ORDER BY o.fecha_publicacion DESC
+            WHERE o.revisada = true AND o.fechaPublicacion <= :fecha AND c.slug != :ciudad
+            ORDER BY o.fechaPublicacion DESC
         ');
         $consulta->setMaxResults(5);
         $consulta->setParameter('ciudad', $ciudad);

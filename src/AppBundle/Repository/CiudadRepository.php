@@ -36,7 +36,7 @@ class CiudadRepository extends EntityRepository
      *
      * @param string $ciudad_id El id de la ciudad para la que se buscan cercanas
      */
-    public function findCercanas($ciudad_id)
+    public function findCercanas($ciudadId)
     {
         $em = $this->getEntityManager();
 
@@ -47,7 +47,7 @@ class CiudadRepository extends EntityRepository
             ORDER BY c.nombre ASC
         ');
         $consulta->setMaxResults(5);
-        $consulta->setParameter('id', $ciudad_id);
+        $consulta->setParameter('id', $ciudadId);
         $consulta->useResultCache(true, 3600);
 
         return $consulta->getResult();
@@ -78,7 +78,7 @@ class CiudadRepository extends EntityRepository
             SELECT o, t
             FROM AppBundle:Oferta o JOIN o.tienda t JOIN o.ciudad c
             WHERE c.slug = :ciudad
-            ORDER BY o.fecha_publicacion DESC
+            ORDER BY o.fechaPublicacion DESC
         ');
         $consulta->setParameter('ciudad', $ciudad);
         $consulta->useResultCache(true, 600);
