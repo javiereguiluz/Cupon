@@ -44,12 +44,14 @@ class UsuarioRegistroType extends AbstractType
             ))
 
             ->add('direccion')
-            ->add('permite_email', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('required' => false))
-            ->add('fecha_nacimiento', 'Symfony\Component\Form\Extension\Core\Type\BirthdayType', array(
+            ->add('permiteEmail', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('required' => false))
+            ->add(
+                'fechaNacimiento', 'Symfony\Component\Form\Extension\Core\Type\BirthdayType', array(
                 'years' => range(date('Y') - 18, date('Y') - 18 - 120),
             ))
             ->add('dni')
-            ->add('numero_tarjeta', null, array(
+            ->add(
+                'numeroTarjeta', null, array(
                 'label' => 'Tarjeta de Crédito',
                 'attr' => array(
                     'pattern' => '^[0-9]{13,16}$',
