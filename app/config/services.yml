@@ -7,11 +7,6 @@ services:
         tags:
             - { name: twig.extension }
 
-    app.request_listener:
-        class: AppBundle\Listener\RequestListener
-        tags:
-            - { name: kernel.event_listener, event: kernel.request }
-
     app.security.owner_voter:
         class: AppBundle\Security\OwnerVoter
         tags:
