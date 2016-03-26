@@ -14,7 +14,6 @@ services:
 
     app.login_listener:
         class: AppBundle\Listener\LoginListener
-        scope: container
         arguments: ["@security.authorization_checker", "@router"]
         tags:
             - { name: kernel.event_listener, event: security.interactive_login }

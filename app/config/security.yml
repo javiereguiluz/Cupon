@@ -29,7 +29,7 @@ security:
             logout:
                 path:       usuario_logout
             remember_me:
-                key:        cupon1234
+                secret:     cupon1234
                 lifetime:   604800  # 604.800 = 3.600 * 24 * 7 = 1 semana
 
     access_control:

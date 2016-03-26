@@ -10,6 +10,7 @@
 
 namespace AppBundle\Form\Frontend;
 
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 /**
