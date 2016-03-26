@@ -81,14 +81,14 @@ class Oferta
      *
      * @Assert\DateTime
      */
-    protected $fecha_publicacion;
+    protected $fechaPublicacion;
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
      *
      * @Assert\DateTime
      */
-    protected $fecha_expiracion;
+    protected $fechaExpiracion;
 
     /**
      * @ORM\Column(type="integer")
@@ -126,15 +126,264 @@ class Oferta
     }
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param string $nombre
+     */
+    public function setNombre($nombre)
+    {
+        $this->nombre = $nombre;
+        $this->slug = Util::getSlug($nombre);
+    }
+
+    /**
+     * @return string
+     */
+    public function getNombre()
+    {
+        return $this->nombre;
+    }
+
+    /**
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @param string $descripcion
+     */
+    public function setDescripcion($descripcion)
+    {
+        $this->descripcion = $descripcion;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescripcion()
+    {
+        return $this->descripcion;
+    }
+
+    /**
+     * @param string $condiciones
+     */
+    public function setCondiciones($condiciones)
+    {
+        $this->condiciones = $condiciones;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCondiciones()
+    {
+        return $this->condiciones;
+    }
+
+    /**
+     * @param string $rutaFoto
+     */
+    public function setRutaFoto($rutaFoto)
+    {
+        $this->rutaFoto = $rutaFoto;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRutaFoto()
+    {
+        return $this->rutaFoto;
+    }
+
+    /**
+     * @param UploadedFile $foto
+     */
+    public function setFoto(UploadedFile $foto = null)
+    {
+        $this->foto = $foto;
+    }
+
+    /**
+     * @return UploadedFile
+     */
+    public function getFoto()
+    {
+        return $this->foto;
+    }
+
+    /**
+     * @param float $precio
+     */
+    public function setPrecio($precio)
+    {
+        $this->precio = $precio;
+    }
+
+    /**
+     * @return float
+     */
+    public function getPrecio()
+    {
+        return $this->precio;
+    }
+
+    /**
+     * @param float $descuento
+     */
+    public function setDescuento($descuento)
+    {
+        $this->descuento = $descuento;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDescuento()
+    {
+        return $this->descuento;
+    }
+
+    /**
+     * @param \DateTime $fechaPublicacion
+     */
+    public function setFechaPublicacion($fechaPublicacion)
+    {
+        $this->fechaPublicacion = $fechaPublicacion;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getFechaPublicacion()
+    {
+        return $this->fechaPublicacion;
+    }
+
+    /**
+     * @param \DateTime $fechaExpiracion
+     */
+    public function setFechaExpiracion($fechaExpiracion)
+    {
+        $this->fechaExpiracion = $fechaExpiracion;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getFechaExpiracion()
+    {
+        return $this->fechaExpiracion;
+    }
+
+    /**
+     * @param int $compras
+     */
+    public function setCompras($compras)
+    {
+        $this->compras = $compras;
+    }
+
+    /**
+     * @return int
+     */
+    public function getCompras()
+    {
+        return $this->compras;
+    }
+
+    /**
+     * @param int $umbral
+     */
+    public function setUmbral($umbral)
+    {
+        $this->umbral = $umbral;
+    }
+
+    /**
+     * @return int
+     */
+    public function getUmbral()
+    {
+        return $this->umbral;
+    }
+
+    /**
+     * @param bool $revisada
+     */
+    public function setRevisada($revisada)
+    {
+        $this->revisada = $revisada;
+    }
+
+    /**
+     * @return bool
+     */
+    public function getRevisada()
+    {
+        return $this->revisada;
+    }
+
+    /**
+     * @param Ciudad $ciudad
+     */
+    public function setCiudad(Ciudad $ciudad)
+    {
+        $this->ciudad = $ciudad;
+    }
+
+    /**
+     * @return Ciudad
+     */
+    public function getCiudad()
+    {
+        return $this->ciudad;
+    }
+
+    /**
+     * @param Tienda $tienda
+     */
+    public function setTienda(Tienda $tienda)
+    {
+        $this->tienda = $tienda;
+    }
+
+    /**
+     * @return Tienda
+     */
+    public function getTienda()
+    {
+        return $this->tienda;
+    }
+
+    /**
      * @Assert\IsTrue(message = "La fecha de expiración debe ser posterior a la fecha de publicación")
      */
     public function isFechaValida()
     {
-        if ($this->fecha_publicacion == null || $this->fecha_expiracion == null) {
+        if (null === $this->fechaPublicacion || null === $this->fechaExpiracion) {
             return true;
         }
 
-        return $this->fecha_expiracion > $this->fecha_publicacion;
+        return $this->fechaExpiracion > $this->fechaPublicacion;
     }
 
     /**
@@ -154,316 +403,5 @@ class Oferta
         $this->getFoto()->move($directorioDestino, $nombreArchivoFoto);
 
         $this->setRutaFoto($nombreArchivoFoto);
-    }
-
-    /**
-     * Get id.
-     *
-     * @return int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Set nombre.
-     *
-     * @param string $nombre
-     */
-    public function setNombre($nombre)
-    {
-        $this->nombre = $nombre;
-        $this->slug = Util::getSlug($nombre);
-    }
-
-    /**
-     * Get nombre.
-     *
-     * @return string
-     */
-    public function getNombre()
-    {
-        return $this->nombre;
-    }
-
-    /**
-     * Set slug.
-     *
-     * @param string $slug
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-    }
-
-    /**
-     * Get slug.
-     *
-     * @return string
-     */
-    public function getSlug()
-    {
-        return $this->slug;
-    }
-
-    /**
-     * Set descripcion.
-     *
-     * @param text $descripcion
-     */
-    public function setDescripcion($descripcion)
-    {
-        $this->descripcion = $descripcion;
-    }
-
-    /**
-     * Get descripcion.
-     *
-     * @return text
-     */
-    public function getDescripcion()
-    {
-        return $this->descripcion;
-    }
-
-    /**
-     * Set condiciones.
-     *
-     * @param text $condiciones
-     */
-    public function setCondiciones($condiciones)
-    {
-        $this->condiciones = $condiciones;
-    }
-
-    /**
-     * Get condiciones.
-     *
-     * @return text
-     */
-    public function getCondiciones()
-    {
-        return $this->condiciones;
-    }
-
-    /**
-     * Set rutaFoto.
-     *
-     * @param string $foto
-     */
-    public function setRutaFoto($rutaFoto)
-    {
-        $this->rutaFoto = $rutaFoto;
-    }
-
-    /**
-     * Get rutaFoto.
-     *
-     * @return string
-     */
-    public function getRutaFoto()
-    {
-        return $this->rutaFoto;
-    }
-
-    /**
-     * Set foto.
-     *
-     * @param UploadedFile $foto
-     */
-    public function setFoto(UploadedFile $foto = null)
-    {
-        $this->foto = $foto;
-    }
-
-    /**
-     * Get foto.
-     *
-     * @return UploadedFile
-     */
-    public function getFoto()
-    {
-        return $this->foto;
-    }
-
-    /**
-     * Set precio.
-     *
-     * @param decimal $precio
-     */
-    public function setPrecio($precio)
-    {
-        $this->precio = $precio;
-    }
-
-    /**
-     * Get precio.
-     *
-     * @return decimal
-     */
-    public function getPrecio()
-    {
-        return $this->precio;
-    }
-
-    /**
-     * Set descuento.
-     *
-     * @param decimal $descuento
-     */
-    public function setDescuento($descuento)
-    {
-        $this->descuento = $descuento;
-    }
-
-    /**
-     * Get descuento.
-     *
-     * @return decimal
-     */
-    public function getDescuento()
-    {
-        return $this->descuento;
-    }
-
-    /**
-     * Set fecha_publicacion.
-     *
-     * @param datetime $fechaPublicacion
-     */
-    public function setFechaPublicacion($fechaPublicacion)
-    {
-        $this->fecha_publicacion = $fechaPublicacion;
-    }
-
-    /**
-     * Get fecha_publicacion.
-     *
-     * @return datetime
-     */
-    public function getFechaPublicacion()
-    {
-        return $this->fecha_publicacion;
-    }
-
-    /**
-     * Set fecha_expiracion.
-     *
-     * @param datetime $fechaExpiracion
-     */
-    public function setFechaExpiracion($fechaExpiracion)
-    {
-        $this->fecha_expiracion = $fechaExpiracion;
-    }
-
-    /**
-     * Get fecha_expiracion.
-     *
-     * @return datetime
-     */
-    public function getFechaExpiracion()
-    {
-        return $this->fecha_expiracion;
-    }
-
-    /**
-     * Set compras.
-     *
-     * @param int $compras
-     */
-    public function setCompras($compras)
-    {
-        $this->compras = $compras;
-    }
-
-    /**
-     * Get compras.
-     *
-     * @return int
-     */
-    public function getCompras()
-    {
-        return $this->compras;
-    }
-
-    /**
-     * Set umbral.
-     *
-     * @param int $umbral
-     */
-    public function setUmbral($umbral)
-    {
-        $this->umbral = $umbral;
-    }
-
-    /**
-     * Get umbral.
-     *
-     * @return int
-     */
-    public function getUmbral()
-    {
-        return $this->umbral;
-    }
-
-    /**
-     * Set revisada.
-     *
-     * @param bool $revisada
-     */
-    public function setRevisada($revisada)
-    {
-        $this->revisada = $revisada;
-    }
-
-    /**
-     * Get revisada.
-     *
-     * @return bool
-     */
-    public function getRevisada()
-    {
-        return $this->revisada;
-    }
-
-    /**
-     * Set ciudad.
-     *
-     * @param AppBundle\Entity\Ciudad $ciudad
-     */
-    public function setCiudad(\AppBundle\Entity\Ciudad $ciudad)
-    {
-        $this->ciudad = $ciudad;
-    }
-
-    /**
-     * Get ciudad.
-     *
-     * @return AppBundle\Entity\Ciudad
-     */
-    public function getCiudad()
-    {
-        return $this->ciudad;
-    }
-
-    /**
-     * Set tienda.
-     *
-     * @param AppBundle\Entity\Tienda $tienda
-     */
-    public function setTienda(\AppBundle\Entity\Tienda $tienda)
-    {
-        $this->tienda = $tienda;
-    }
-
-    /**
-     * Get tienda.
-     *
-     * @return AppBundle\Entity\Tienda
-     */
-    public function getTienda()
-    {
-        return $this->tienda;
     }
 }

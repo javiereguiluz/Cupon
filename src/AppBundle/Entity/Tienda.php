@@ -37,7 +37,7 @@ class Tienda implements UserInterface
     protected $slug;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=15)
      */
     protected $login;
 
@@ -67,8 +67,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get id.
-     *
      * @return int
      */
     public function getId()
@@ -77,8 +75,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set nombre.
-     *
      * @param string $nombre
      */
     public function setNombre($nombre)
@@ -88,8 +84,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get nombre.
-     *
      * @return string
      */
     public function getNombre()
@@ -98,8 +92,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set slug.
-     *
      * @param string $slug
      */
     public function setSlug($slug)
@@ -108,8 +100,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get slug.
-     *
      * @return string
      */
     public function getSlug()
@@ -118,8 +108,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set login.
-     *
      * @param string $login
      */
     public function setLogin($login)
@@ -128,8 +116,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get login.
-     *
      * @return string
      */
     public function getLogin()
@@ -138,8 +124,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set password.
-     *
      * @param string $password
      */
     public function setPassword($password)
@@ -148,8 +132,6 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get password.
-     *
      * @return string
      */
     public function getPassword()
@@ -158,9 +140,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set descripcion.
-     *
-     * @param text $descripcion
+     * @param string $descripcion
      */
     public function setDescripcion($descripcion)
     {
@@ -168,9 +148,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get descripcion.
-     *
-     * @return text
+     * @return string
      */
     public function getDescripcion()
     {
@@ -178,9 +156,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set direccion.
-     *
-     * @param text $direccion
+     * @param string $direccion
      */
     public function setDireccion($direccion)
     {
@@ -188,9 +164,7 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Get direccion.
-     *
-     * @return text
+     * @return string
      */
     public function getDireccion()
     {
@@ -198,19 +172,15 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Set ciudad.
-     *
-     * @param AppBundle\Entity\Ciudad $ciudad
+     * @param Ciudad $ciudad
      */
-    public function setCiudad(\AppBundle\Entity\Ciudad $ciudad)
+    public function setCiudad(Ciudad $ciudad)
     {
         $this->ciudad = $ciudad;
     }
 
     /**
-     * Get ciudad.
-     *
-     * @return AppBundle\Entity\Ciudad
+     * @return Ciudad
      */
     public function getCiudad()
     {
@@ -219,6 +189,8 @@ class Tienda implements UserInterface
 
     /**
      * Método requerido por la interfaz UserInterface.
+     *
+     * @return array
      */
     public function getRoles()
     {
@@ -227,6 +199,8 @@ class Tienda implements UserInterface
 
     /**
      * Método requerido por la interfaz UserInterface.
+     *
+     * @return string
      */
     public function getUsername()
     {
@@ -234,9 +208,22 @@ class Tienda implements UserInterface
     }
 
     /**
-     * Métodos requeridos por la interfaz UserInterface, pero no implementados
-     * por esta clase.
+     * Este método es requerido por la interfaz UserInterface, pero esta clase
+     * no necesita implementarlo porque se usa 'bcrypt' para codificar las contraseñas.
      */
-    public function getSalt() { }
-    public function eraseCredentials() { }
+    public function getSalt() {
+        return;
+    }
+
+    /**
+     * Este método es requerido por la interfaz UserInterface, pero esta clase
+     * no necesita implementarlo.
+     */
+    public function eraseCredentials() {
+        // si esta clase guardara tanto la contraseña codificada como la contraseña
+        // en claro, en este método se pondría esta última a 'null'
+        // $this->passwordEnClaro = null;
+
+        return;
+    }
 }

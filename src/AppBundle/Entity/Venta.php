@@ -18,26 +18,29 @@ use Doctrine\ORM\Mapping as ORM;
 class Venta
 {
     /**
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+
+    /**
      * @ORM\Column(type="datetime")
      */
     protected $fecha;
 
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Oferta")
      */
     protected $oferta;
 
     /**
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Usuario")
      */
     protected $usuario;
 
     /**
-     * Set fecha.
-     *
-     * @param datetime $fecha
+     * @param \DateTime $fecha
      */
     public function setFecha($fecha)
     {
@@ -45,9 +48,7 @@ class Venta
     }
 
     /**
-     * Get fecha.
-     *
-     * @return datetime
+     * @return \DateTime
      */
     public function getFecha()
     {
@@ -55,19 +56,15 @@ class Venta
     }
 
     /**
-     * Set oferta.
-     *
-     * @param AppBundle\Entity\Oferta $oferta
+     * @param Oferta $oferta
      */
-    public function setOferta(\AppBundle\Entity\Oferta $oferta)
+    public function setOferta(Oferta $oferta)
     {
         $this->oferta = $oferta;
     }
 
     /**
-     * Get oferta.
-     *
-     * @return AppBundle\Entity\Oferta
+     * @return Oferta
      */
     public function getOferta()
     {
@@ -75,19 +72,15 @@ class Venta
     }
 
     /**
-     * Set usuario.
-     *
-     * @param AppBundle\Entity\Usuario $usuario
+     * @param Usuario $usuario
      */
-    public function setUsuario(\AppBundle\Entity\Usuario $usuario)
+    public function setUsuario(Usuario $usuario)
     {
         $this->usuario = $usuario;
     }
 
     /**
-     * Get usuario.
-     *
-     * @return AppBundle\Entity\Usuario
+     * @return Usuario
      */
     public function getUsuario()
     {
