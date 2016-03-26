@@ -1,5 +1,4 @@
 security:
-
     firewalls:
         # Firewall de la parte de administración o backend
         backend:

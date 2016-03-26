@@ -1,24 +1,23 @@
 # Configuración global de los servicios de la aplicación
 # Este archivo se importa desde app/config/config.yml
 services:
-
-    twig.extension.cupon:
+    app.twig.cupon_extension:
         class: AppBundle\Twig\Extension\CuponExtension
         arguments: ["@translator"]
         tags:
             - { name: twig.extension }
 
-    cupon.ofertabundle.listener.request:
+    app.request_listener:
         class: AppBundle\Listener\RequestListener
         tags:
             - { name: kernel.event_listener, event: kernel.request }
 
-    cupon.tiendabundle.security.ownervoter:
+    app.security.owner_voter:
         class: AppBundle\Security\OwnerVoter
         tags:
             - { name: security.voter }
 
-    login_listener:
+    app.login_listener:
         class: AppBundle\Listener\LoginListener
         scope: container
         arguments: ["@security.authorization_checker", "@router"]

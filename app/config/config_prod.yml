@@ -4,6 +4,12 @@ imports:
 # Descomenta las siguientes líneas si tienes intalado y configurado APC en el
 # servidor de producción y quieres mejorar su rendimiento:
 #
+# framework:
+#     validation:
+#         cache: validator.mapping.cache.doctrine.apc
+#     serializer:
+#         cache: serializer.mapping.cache.doctrine.apc
+#
 # doctrine:
 #     orm:
 #         metadata_cache_driver: apc

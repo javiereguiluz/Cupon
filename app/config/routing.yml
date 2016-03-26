@@ -9,7 +9,7 @@ _paginas:
     requirements:
         _locale: en|es
     defaults:
-        _locale: es
+        _locale: %locale%
         _controller: FrameworkBundle:Template:template
         private: false
         maxAge: 86400
@@ -29,4 +29,7 @@ app:
 # solamente con la ruta 'portada' y sus valores por defecto
 _portada:
      path:  /
-     defaults: { _controller: FrameworkBundle:Redirect:redirect, route: portada, ciudad: '%cupon.ciudad_por_defecto%' }
+     defaults:
+          _controller: FrameworkBundle:Redirect:redirect
+          route: portada
+          ciudad: '%cupon.ciudad_por_defecto%'
