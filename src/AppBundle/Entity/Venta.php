@@ -40,6 +40,14 @@ class Venta
     protected $usuario;
 
     /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
      * @param \DateTime $fecha
      */
     public function setFecha($fecha)
