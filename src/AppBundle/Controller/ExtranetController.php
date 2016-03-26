@@ -157,10 +157,7 @@ class ExtranetController extends Controller
             throw $this->createNotFoundException('La oferta indicada no está disponible');
         }
 
-        // Comprobar que el usuario tiene permiso para editar esta oferta concreta
-        if (false === $this->get('security.authorization_checker')->isGranted('ROLE_EDITAR_OFERTA', $oferta)) {
-            throw new AccessDeniedException();
-        }
+        $this->denyAccessUnlessGranted('ROLE_EDITAR_OFERTA', $oferta);
 
         // Una oferta sólo se puede modificar si todavía no ha sido revisada por los administradores
         if ($oferta->getRevisada()) {
