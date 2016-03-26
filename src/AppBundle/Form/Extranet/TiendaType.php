@@ -26,19 +26,16 @@ class TiendaType extends AbstractType
         $builder
             ->add('nombre')
             ->add('login', null, array('read_only' => true))
-
             ->add('password', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
-                'type' => 'password',
+                'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
                 'invalid_message' => 'Las dos contraseñas deben coincidir',
                 'first_options' => array('label' => 'Contraseña'),
                 'second_options' => array('label' => 'Repite Contraseña'),
                 'required' => false,
             ))
-
             ->add('descripcion')
             ->add('direccion')
             ->add('ciudad')
-
             ->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
                 'label' => 'Guardar cambios',
                 'attr' => array('class' => 'boton'),
