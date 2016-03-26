@@ -19,14 +19,15 @@ use Symfony\Component\HttpFoundation\Response;
 class TiendaController extends Controller
 {
     /**
-     * @Route("/{ciudad}/tiendas/{tienda}", requirements={ "ciudad" = ".+" }, name="tienda_portada")
-     * @Cache(smaxage="3600")
-     *
      * Muestra la portada de cada tienda, que muestra su información y las
      * ofertas que ha publicado recientemente
      *
+     * @Route("/{ciudad}/tiendas/{tienda}", requirements={ "ciudad" = ".+" }, name="tienda_portada")
+     * @Cache(smaxage="3600")
+     *
      * @param string $ciudad El slug de la ciudad donde se encuentra la tienda
      * @param string $tienda El slug de la tienda
+     *
      * @return Response
      */
     public function portadaAction(Request $request, $ciudad, $tienda)

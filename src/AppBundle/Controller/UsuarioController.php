@@ -16,6 +16,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\SecurityContext;
 
@@ -30,16 +31,11 @@ class UsuarioController extends Controller
      */
     public function loginAction(Request $request)
     {
-        $sesion = $request->getSession();
+        $authUtils = $this->get('security.authentication_utils');
 
-        $error = $request->attributes->get(
-            SecurityContext::AUTHENTICATION_ERROR,
-            $sesion->get(SecurityContext::AUTHENTICATION_ERROR)
-        );
-
-        return $this->render('usuario/login.html.twig', array(
-            'last_username' => $sesion->get(SecurityContext::LAST_USERNAME),
-            'error' => $error,
+        return $this->render('usuario/login.html.twig.html.twig', array(
+            'last_username' => $authUtils->getLastUsername(),
+            'error' => $authUtils->getLastAuthenticationError(),
         ));
     }
 
@@ -59,52 +55,46 @@ class UsuarioController extends Controller
         // el logout lo hace Symfony automáticamente
     }
 
+
     /**
-     * @Cache(maxage="30")
-     *
      * Muestra la caja de login que se incluye en el lateral de la mayoría de páginas del sitio web.
      * Esta caja se transforma en información y enlaces cuando el usuario se loguea en la aplicación.
      * La respuesta se marca como privada para que no se añada a la cache pública. El trozo de plantilla
      * que llama a esta función se sirve a través de ESI
      *
+     * @Cache(maxage="30")
+     *
      * @param string $id El valor del bloque `id` de la plantilla,
      *                   que coincide con el valor del atributo `id` del elemento <body>
+     *
+     * @return Response
      */
     public function cajaLoginAction($id = '')
     {
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
-        return $this->render('usuario/cajaLogin.html.twig', array(
+        return $this->render('usuario/cajaLogin.html.twig.html.twig', array(
             'id' => $id,
             'usuario' => $usuario,
         ));
     }
-
     /**
-     * @Route("/registro", name="usuario_registro")
      * Muestra el formulario para que se registren los nuevos usuarios. Además
      * se encarga de procesar la información y de guardar la información en la base de datos
+     *
+     * @Route("/registro", name="usuario_registro")
      */
     public function registroAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
 
         $usuario = new Usuario();
-        $usuario->setPermiteEmail(true);
-
         $formulario = $this->createForm('AppBundle\Form\Frontend\UsuarioRegistroType', $usuario);
-
         $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
-            // Completar las propiedades que el usuario no rellena en el formulario
-            $usuario->setSalt(md5(time()));
-
             $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
-            $passwordCodificado = $encoder->encodePassword(
-                $usuario->getPassword(),
-                $usuario->getSalt()
-            );
+            $passwordCodificado = $encoder->encodePassword($usuario->getPassword(), $usuario->getSalt());
             $usuario->setPassword($passwordCodificado);
 
             // Guardar el nuevo usuario en la base de datos
@@ -112,17 +102,13 @@ class UsuarioController extends Controller
             $em->flush();
 
             // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
-            $this->get('session')->getFlashBag()->add('info',
-                '¡Enhorabuena! Te has registrado correctamente en Cupon'
-            );
+            $this->addFlash('info', '¡Enhorabuena! Te has registrado correctamente en Cupon');
 
             // Loguear al usuario automáticamente
             $token = new UsernamePasswordToken($usuario, null, 'frontend', $usuario->getRoles());
             $this->container->get('security.token_storage')->setToken($token);
 
-            return $this->redirect($this->generateUrl('portada', array(
-                'ciudad' => $usuario->getCiudad()->getSlug(),
-            )));
+            return $this->redirectToRoute('portada', array('ciudad' => $usuario->getCiudad()->getSlug()));
         }
 
         return $this->render('usuario/registro.html.twig', array(
@@ -141,14 +127,6 @@ class UsuarioController extends Controller
 
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
         $formulario = $this->createForm('AppBundle\Form\Frontend\UsuarioPerfilType', $usuario);
-        $formulario
-            ->remove('registrarme')
-            ->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
-                'label' => 'Guardar cambios',
-                'attr' => array('class' => 'boton'),
-            ))
-        ;
-
         $passwordOriginal = $formulario->getData()->getPassword();
 
         $formulario->handleRequest($request);
@@ -156,28 +134,22 @@ class UsuarioController extends Controller
         if ($formulario->isValid()) {
             // Si el usuario no ha cambiado el password, su valor es null después
             // de hacer el ->bindRequest(), por lo que hay que recuperar el valor original
-
-            if (null == $usuario->getPassword()) {
+            if (null === $usuario->getPassword()) {
                 $usuario->setPassword($passwordOriginal);
             }
             // Si el usuario ha cambiado su password, hay que codificarlo antes de guardarlo
             else {
                 $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
-                $passwordCodificado = $encoder->encodePassword(
-                    $usuario->getPassword(),
-                    $usuario->getSalt()
-                );
+                $passwordCodificado = $encoder->encodePassword($usuario->getPassword(), $usuario->getSalt());
                 $usuario->setPassword($passwordCodificado);
             }
 
             $em->persist($usuario);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('info',
-                'Los datos de tu perfil se han actualizado correctamente'
-            );
+            $this->addFlash('info', 'Los datos de tu perfil se han actualizado correctamente');
 
-            return $this->redirect($this->generateUrl('usuario_perfil'));
+            return $this->redirectToRoute('usuario_perfil');
         }
 
         return $this->render('usuario/perfil.html.twig', array(
@@ -208,11 +180,14 @@ class UsuarioController extends Controller
     }
 
     /**
-     * @Route("/{ciudad}/ofertas/{slug}/comprar", name="comprar")
      * Registra una nueva compra de la oferta indicada por parte del usuario logueado
+     *
+     * @Route("/{ciudad}/ofertas/{slug}/comprar", name="comprar")
      *
      * @param string $ciudad El slug de la ciudad a la que pertenece la oferta
      * @param string $slug   El slug de la oferta
+     *
+     * @return Response
      */
     public function comprarAction(Request $request, $ciudad, $slug)
     {
@@ -221,11 +196,9 @@ class UsuarioController extends Controller
 
         // Solo pueden comprar los usuarios registrados y logueados
         if (null === $usuario || !$this->get('security.authorization_checker')->isGranted('ROLE_USUARIO')) {
-            $this->get('session')->getFlashBag()->add('info',
-                'Antes de comprar debes registrarte o conectarte con tu usuario y contraseña.'
-            );
+            $this->addFlash('info', 'Antes de comprar debes registrarte o conectarte con tu usuario y contraseña.');
 
-            return $this->redirect($this->generateUrl('usuario_login'));
+            return $this->redirectToRoute('usuario_login');
         }
 
         // Comprobar que existe la ciudad indicada
@@ -255,9 +228,7 @@ class UsuarioController extends Controller
                 \IntlDateFormatter::NONE
             );
 
-            $this->get('session')->getFlashBag()->add('error',
-                'No puedes volver a comprar la misma oferta (la compraste el '.$formateador->format($fechaVenta).').'
-            );
+            $this->addFlash('error', 'No puedes volver a comprar la misma oferta (la compraste el '.$formateador->format($fechaVenta).').');
 
             return $this->redirect(
                 $request->headers->get('Referer', $this->generateUrl('portada'))

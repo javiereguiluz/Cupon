@@ -10,14 +10,17 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class OfertaController extends Controller
 {
     /**
-     * @Route("/{ciudad}", defaults={ "ciudad" = "%cupon.ciudad_por_defecto%" }, name="portada")
      * Muestra la portada del sitio web
+     *
+     * @Route("/{ciudad}", defaults={ "ciudad" = "%cupon.ciudad_por_defecto%" }, name="portada")
+     * @Cache(smaxage="60")
      *
      * @param string $ciudad El slug de la ciudad activa en la aplicación
      */
@@ -30,20 +33,19 @@ class OfertaController extends Controller
             throw $this->createNotFoundException('No se ha encontrado ninguna oferta del día en la ciudad seleccionada');
         }
 
-        $respuesta = $this->render('oferta/portada.html.twig', array(
+        return $this->render('oferta/portada.html.twig', array(
             'oferta' => $oferta,
         ));
-        $respuesta->setSharedMaxAge(60);
-
-        return $respuesta;
     }
 
     /**
+     * Muestra la página de detalle de la oferta indicada.
+     *
      * @Route("/{ciudad}/ofertas/{slug}", name="oferta")
-     * Muestra la página de detalle de la oferta indicada
+     * @Cache(smaxage="60")
      *
      * @param string $ciudad El slug de la ciudad a la que pertenece la oferta
-     * @param string $slug   El slug de la oferta (el mismo slug se puede dar en dos o más ciudades diferentes)
+     * @param string $slug   El slug de la oferta (es único en cada ciudad)
      */
     public function ofertaAction($ciudad, $slug)
     {
@@ -56,13 +58,9 @@ class OfertaController extends Controller
             throw $this->createNotFoundException('No se ha encontrado la oferta solicitada');
         }
 
-        $respuesta = $this->render('oferta/detalle.html.twig', array(
+        return $this->render('oferta/detalle.html.twig', array(
             'cercanas' => $cercanas,
             'oferta' => $oferta,
         ));
-
-        $respuesta->setSharedMaxAge(60);
-
-        return $respuesta;
     }
 }

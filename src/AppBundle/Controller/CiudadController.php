@@ -10,6 +10,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Ciudad;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,6 +25,8 @@ class CiudadController extends Controller
      * para seleccionar la ciudad activa.
      *
      * @param string $ciudad El slug de la ciudad seleccionada
+     *
+     * @return Response
      */
     public function listaCiudadesAction($ciudad = null)
     {
@@ -37,11 +40,11 @@ class CiudadController extends Controller
     }
 
     /**
-     * @Route("/ciudad/cambiar-a-{ciudad}", requirements={ "ciudad" = ".+" }, name="ciudad_cambiar")
-     *
      * Cambia la ciudad activa por la que se indica. En la parte frontal de la
      * aplicación esto simplemente significa que se le redirige al usuario a la
      * portada de la nueva ciudad seleccionada.
+     *
+     * @Route("/ciudad/cambiar-a-{ciudad}", requirements={ "ciudad" = ".+" }, name="ciudad_cambiar")
      *
      * @param string $ciudad El slug de la ciudad a la que se cambia
      *
@@ -49,28 +52,22 @@ class CiudadController extends Controller
      */
     public function cambiarAction($ciudad)
     {
-        return new RedirectResponse($this->generateUrl('portada', array('ciudad' => $ciudad)));
+        return $this->redirectToRoute('portada', array('ciudad' => $ciudad));
     }
 
     /**
-     * @Route("/{ciudad}/recientes", name="ciudad_recientes")
-     * @Cache(smaxage="3600")
-     *
      * Muestra las ofertas más recientes de la ciudad indicada
      *
-     * @param string $ciudad El slug de la ciudad
+     * @Route("/{slug}/recientes", name="ciudad_recientes")
+     * @Cache(smaxage="3600")
+     *
+     * @param Ciudad $ciudad El slug de la ciudad
      *
      * @return Response
      */
-    public function recientesAction($ciudad)
+    public function recientesAction(Ciudad $ciudad)
     {
         $em = $this->getDoctrine()->getManager();
-
-        $ciudad = $em->getRepository('AppBundle:Ciudad')->findOneBySlug($ciudad);
-        if (!$ciudad) {
-            throw $this->createNotFoundException('La ciudad indicada no está disponible');
-        }
-
         $cercanas = $em->getRepository('AppBundle:Ciudad')->findCercanas($ciudad->getId());
         $ofertas = $em->getRepository('AppBundle:Oferta')->findRecientes($ciudad->getId());
 

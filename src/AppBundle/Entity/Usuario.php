@@ -102,6 +102,7 @@ class Usuario implements UserInterface
     public function __construct()
     {
         $this->fechaAlta = new \DateTime();
+        $this->permiteEmail = true;
     }
 
     public function __toString()

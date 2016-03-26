@@ -17,6 +17,19 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  */
 class UsuarioPerfilType extends UsuarioRegistroType
 {
+    public function buildForm(FormBuilderInterface $builder, array $options)
+    {
+        parent::buildForm($builder, $options);
+
+        $builder
+            ->remove('registrarme')
+            ->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+                'label' => 'Guardar cambios',
+                'attr' => array('class' => 'boton'),
+            ))
+        ;
+    }
+
     /**
      * El formulario para editar el perfil utiliza una validación diferente a
      * la del formulario para darse de alta (escribir la contraseña por

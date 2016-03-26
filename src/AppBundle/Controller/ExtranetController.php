@@ -130,7 +130,7 @@ class ExtranetController extends Controller
             $em->persist($oferta);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('extranet_portada'));
+            return $this->redirectToRoute('extranet_portada');
         }
 
         return $this->render('extranet/formulario.html.twig', array(
@@ -161,11 +161,9 @@ class ExtranetController extends Controller
 
         // Una oferta sólo se puede modificar si todavía no ha sido revisada por los administradores
         if ($oferta->getRevisada()) {
-            $this->get('session')->getFlashBag()->add('error',
-                'La oferta indicada no se puede modificar porque ya ha sido revisada por los administradores'
-            );
+            $this->addFlash('error', 'La oferta indicada no se puede modificar porque ya ha sido revisada por los administradores');
 
-            return $this->redirect($this->generateUrl('extranet_portada'));
+            return $this->redirectToRoute('extranet_portada');
         }
 
         $formulario = $this->createForm(new OfertaType(), $oferta);
@@ -196,7 +194,7 @@ class ExtranetController extends Controller
             $em->persist($oferta);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('extranet_portada'));
+            return $this->redirectToRoute('extranet_portada');
         }
 
         return $this->render('extranet/formulario.html.twig', array(
@@ -242,11 +240,9 @@ class ExtranetController extends Controller
             $em->persist($tienda);
             $em->flush();
 
-            $this->get('session')->getFlashBag()->add('info',
-                'Los datos de tu perfil se han actualizado correctamente'
-            );
+            $this->addFlash('info', 'Los datos de tu perfil se han actualizado correctamente');
 
-            return $this->redirect($this->generateUrl('extranet_portada'));
+            return $this->redirectToRoute('extranet_portada');
         }
 
         return $this->render('extranet/perfil.html.twig', array(
