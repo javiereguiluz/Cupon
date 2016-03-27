@@ -17,7 +17,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class OfertaController extends Controller
 {
     /**
-     * Muestra la portada del sitio web
+     * Muestra la portada del sitio web.
      *
      * @Route("/{ciudad}", defaults={ "ciudad" = "%cupon.ciudad_por_defecto%" }, name="portada")
      * @Cache(smaxage="60")

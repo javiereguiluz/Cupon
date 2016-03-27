@@ -20,7 +20,7 @@ class TiendaController extends Controller
 {
     /**
      * Muestra la portada de cada tienda, que muestra su información y las
-     * ofertas que ha publicado recientemente
+     * ofertas que ha publicado recientemente.
      *
      * @Route("/{ciudad}/tiendas/{tienda}", requirements={ "ciudad" = ".+" }, name="tienda_portada")
      * @Cache(smaxage="3600")

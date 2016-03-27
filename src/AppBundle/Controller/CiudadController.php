@@ -57,7 +57,7 @@ class CiudadController extends Controller
     }
 
     /**
-     * Muestra las ofertas más recientes de la ciudad indicada
+     * Muestra las ofertas más recientes de la ciudad indicada.
      *
      * @Route("/{slug}/recientes", name="ciudad_recientes")
      * @Cache(smaxage="3600")

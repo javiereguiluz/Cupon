@@ -237,7 +237,8 @@ class Tienda implements UserInterface
      * Este método es requerido por la interfaz UserInterface, pero esta clase
      * no necesita implementarlo porque se usa 'bcrypt' para codificar las contraseñas.
      */
-    public function getSalt() {
+    public function getSalt()
+    {
         return;
     }
 }

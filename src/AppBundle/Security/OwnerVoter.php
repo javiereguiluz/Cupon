@@ -29,13 +29,14 @@ class OwnerVoter extends Voter
      * Devuelve 'true' si el usuario logueado es de tipo Tienda y es el creador
      * de la oferta que se quiere modificar.
      *
-     * @param string $attribute
-     * @param mixed $subject
+     * @param string         $attribute
+     * @param mixed          $subject
      * @param TokenInterface $token
      *
      * @return bool
      */
-    protected function voteOnAttribute($attribute, $subject, TokenInterface $token) {
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
+    {
         $tienda = $token->getUser();
 
         return $tienda instanceof Tienda && $subject->getTienda()->getId() === $tienda->getId();

@@ -11,12 +11,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Oferta;
-use AppBundle\Form\Extranet\OfertaType;
-use AppBundle\Form\Extranet\TiendaType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ExtranetController extends Controller
 {
@@ -54,7 +51,7 @@ class ExtranetController extends Controller
 
     /**
      * Muestra la portada de la extranet de la tienda que está logueada en
-     * la aplicación
+     * la aplicación.
      *
      * @Route("/", name="extranet_portada")
      */
@@ -71,7 +68,7 @@ class ExtranetController extends Controller
     }
 
     /**
-     * Muestra las ventas registradas para la oferta indicada
+     * Muestra las ventas registradas para la oferta indicada.
      *
      * @Route("/oferta/ventas/{id}", name="extranet_oferta_ventas")
      */
@@ -124,7 +121,7 @@ class ExtranetController extends Controller
     /**
      * Muestra el formulario para editar una oferta y se encarga del
      * procesamiento de la información recibida y la modificación de los
-     * datos de las entidades de tipo Oferta
+     * datos de las entidades de tipo Oferta.
      *
      * @Route("/oferta/editar/{id}", requirements={ "ciudad" = ".+" }, name="extranet_oferta_editar")
      */

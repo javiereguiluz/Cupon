@@ -10,10 +10,8 @@
 
 namespace AppBundle\Form\Extranet;
 
-use AppBundle\Listener\OfertaTypeListener;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 
@@ -46,7 +44,7 @@ class OfertaType extends AbstractType
             $builder->add('acepto', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array(
                 'mapped' => false,
                 'constraints' => new IsTrue(array(
-                    'message' => 'Debes aceptar las condiciones indicadas antes de poder añadir una nueva oferta'
+                    'message' => 'Debes aceptar las condiciones indicadas antes de poder añadir una nueva oferta',
                 )),
             ));
         }
