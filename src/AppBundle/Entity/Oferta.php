@@ -125,6 +125,12 @@ class Oferta
         return $this->getNombre();
     }
 
+    public function __construct()
+    {
+        $this->compras = 0;
+        $this->revisada = false;
+    }
+
     /**
      * @return int
      */

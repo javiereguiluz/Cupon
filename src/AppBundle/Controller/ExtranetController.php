@@ -116,8 +116,6 @@ class ExtranetController extends Controller
         if ($formulario->isValid()) {
             // Completar las propiedades de la oferta que una tienda no puede establecer
             $tienda = $this->get('security.token_storage')->getToken()->getUser();
-            $oferta->setCompras(0);
-            $oferta->setRevisada(false);
             $oferta->setTienda($tienda);
             $oferta->setCiudad($tienda->getCiudad());
 
