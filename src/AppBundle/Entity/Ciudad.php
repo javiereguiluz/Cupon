@@ -11,6 +11,7 @@
 namespace AppBundle\Entity;
 
 use AppBundle\Util\Util;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -35,9 +36,19 @@ class Ciudad
      */
     protected $slug;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Usuario", mappedBy="ciudad")
+     */
+    private $usuarios;
+
     public function __toString()
     {
         return $this->getNombre();
+    }
+
+    public function __construct()
+    {
+        $this->usuarios = new ArrayCollection();
     }
 
     /**
@@ -79,5 +90,21 @@ class Ciudad
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
+
+    public function addUsuario(Usuario $usuario)
+    {
+        $this->usuarios->add($usuario);
+        $usuario->setCiudad($this);
+    }
+
+    public function removeUsuario(Usuario $usuario)
+    {
+        $this->usuarios->removeElement($usuario);
     }
 }

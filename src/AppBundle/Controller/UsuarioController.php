@@ -144,7 +144,7 @@ class UsuarioController extends Controller
             $usuario->getCiudad()->getId()
         );
 
-        $compras = $em->getRepository('UsuarioBundle:Usuario')->findTodasLasCompras($usuario->getId());
+        $compras = $em->getRepository('AppBundle:Usuario')->findTodasLasCompras($usuario->getId());
 
         return $this->render('usuario/compras.html.twig', array(
             'compras' => $compras,
