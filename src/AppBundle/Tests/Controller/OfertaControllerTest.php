@@ -62,7 +62,7 @@ class OfertaControllerTest extends WebTestCase
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
 
-        $ciudadPorDefecto = $client->getContainer()->getParameter('cupon.ciudad_por_defecto');
+        $ciudadPorDefecto = $client->getContainer()->getParameter('app.ciudad_por_defecto');
         $ciudadPortada = $crawler->filter('header nav select option[selected="selected"]')->attr('value');
 
         $this->assertEquals($ciudadPorDefecto, $ciudadPortada,

@@ -4,6 +4,11 @@ imports:
     - { resource: services.yml }
     - { resource: admin.yml }
 
+# Parámetros globales del contenedor de dependencias
+parameters:
+    app.ciudad_por_defecto:  'barcelona'
+    app.directorio.imagenes: %kernel.root_dir%/../web/uploads/images/
+
 # Configuración general del framework
 framework:
     default_locale:  %locale%
@@ -25,7 +30,7 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     globals:
-        ciudad_por_defecto:  %cupon.ciudad_por_defecto%
+        ciudad_por_defecto:  %app.ciudad_por_defecto%
         directorio_imagenes: '/uploads/images/'
 
 # Configuración de Doctrine
@@ -52,8 +57,3 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
-
-# Parámetros globales del contenedor de dependencias
-parameters:
-    cupon.ciudad_por_defecto:  'barcelona'
-    cupon.directorio.imagenes: %kernel.root_dir%/../web/uploads/images/
