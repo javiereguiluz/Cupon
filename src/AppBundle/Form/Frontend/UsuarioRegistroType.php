@@ -48,14 +48,7 @@ class UsuarioRegistroType extends AbstractType
                 'years' => range(date('Y') - 18, date('Y') - 18 - 120),
             ))
             ->add('dni')
-            ->add(
-                'numeroTarjeta', null, array(
-                'label' => 'Tarjeta de Crédito',
-                'attr' => array(
-                    'pattern' => '^[0-9]{13,16}$',
-                    'placeholder' => 'Entre 13 y 16 numeros',
-                ),
-            ))
+            ->add('numeroTarjeta', null, array('label' => 'Tarjeta de Crédito'))
             ->add('ciudad', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'class' => 'AppBundle\\Entity\\Ciudad',
                 'placeholder' => 'Selecciona una ciudad',

@@ -93,7 +93,7 @@ class Usuario implements UserInterface
 
     /**
      * @ORM\Column(name="numero_tarjeta", type="string", length=20)
-     * @Assert\Regex("/\d{11,19}/")
+     * @Assert\CardScheme(schemes={"AMEX", "MAESTRO", "MASTERCARD", "VISA"})
      */
     private $numeroTarjeta;
 
