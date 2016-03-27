@@ -1,10 +1,9 @@
 {% extends 'extranet.html.twig' %}
 
 {% block id 'oferta' %}
-{% block title %}{{ accion == 'crear' ?
-    'Añadir una nueva oferta'
-    :
-    'Modificar la oferta ' ~ oferta.nombre
+{% block title %}{{ accion == 'crear'
+    ? 'Añadir una nueva oferta'
+    : 'Modificar la oferta ' ~ oferta.nombre
 }}{% endblock %}
 
 {% block article %}
@@ -33,7 +32,8 @@
         {{ form_errors(formulario.condiciones) }}
         {{ form_widget(formulario.condiciones, { attr: { class: 'mediana' } }) }}
 
-        <p class="ayuda">Ejemplos: máximo 1 consumición por persona; No acumulable a otras ofertas; Debe consumirse en el propio local; etc.</p>
+        <p class="ayuda">Ejemplos: máximo 1 consumición por persona;
+            No acumulable a otras ofertas; Debe consumirse en el propio local; etc.</p>
     </div>
 
     <div>
@@ -65,7 +65,9 @@
         {{ form_errors(formulario.descuento) }}
         {{ form_widget(formulario.descuento, { attr: { class: 'corto' } }) }}
 
-        <p class="ayuda">Descuento aplicado sobre el precio original (en euros). Si el precio original era 10 euros y el precio de venta en Cupon es de 8 euros, el descuento son 2 euros.</p>
+        <p class="ayuda">Descuento aplicado sobre el precio original (en euros).
+            Si el precio original era 10 euros y el precio de venta en Cupon
+            es de 8 euros, el descuento son 2 euros.</p>
     </div>
 
     <div>
@@ -73,30 +75,37 @@
         {{ form_errors(formulario.umbral) }}
         {{ form_widget(formulario.umbral, { attr: { class: 'corto' } }) }}
 
-        <p class="ayuda">Mínimo número de compras para que la oferta se active para todos los usuarios.</p>
+        <p class="ayuda">Mínimo número de compras para que la oferta se
+            active para todos los usuarios.</p>
     </div>
 
     {% if accion == 'crear' %}
-    <div>
-        {{ form_errors(formulario.acepto) }}
-        {{ form_widget(formulario.acepto) }} <span>Declaro que toda la información de esta oferta es correcta, que soy consciente de la obligación de cumplir las condiciones prometidas y que dispongo de los medios necesarios para hacerlo.</span>
-    </div>
+        <div>
+            {{ form_errors(formulario.acepto) }}
+            {{ form_widget(formulario.acepto) }}
+            <span>Declaro que toda la información de esta oferta es correcta,
+                que soy consciente de la obligación de cumplir las condiciones
+                prometidas y que dispongo de los medios necesarios para hacerlo.</span>
+        </div>
     {% endif %}
 </div>
 {{ form_end(formulario) }}
 {% endblock %}
 
 {% block aside %}
-<section id="faq">
-    <h2>Preguntas frecuentes</h2>
+    <section id="faq">
+        <h2>Preguntas frecuentes</h2>
 
-    <dl>
-        <dt>¿Lorem ipsum dolor sit amet?</dt>
-        <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dd>
-        <dt>¿Ut enim ad minim veniam?</dt>
-        <dd>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dd>
-        <dt>¿Excepteur sint occaecat cupidatat non proident?</dt>
-        <dd>Sunt in culpa qui officia deserunt mollit anim id est laborum.</dd>
-    </dl>
-</section>
+        <dl>
+            <dt>¿Lorem ipsum dolor sit amet?</dt>
+            <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                ut labore et dolore magna aliqua.</dd>
+            <dt>¿Ut enim ad minim veniam?</dt>
+            <dd>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                ea commodo consequat. Duis aute irure dolor in reprehenderit
+                in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dd>
+            <dt>¿Excepteur sint occaecat cupidatat non proident?</dt>
+            <dd>Sunt in culpa qui officia deserunt mollit anim id est laborum.</dd>
+        </dl>
+    </section>
 {% endblock %}

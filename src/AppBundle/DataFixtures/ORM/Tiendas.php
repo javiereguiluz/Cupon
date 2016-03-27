@@ -26,8 +26,6 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
 {
     /** @var ContainerInterface */
     private $container;
-    /** @var BCryptPasswordEncoder */
-    private $encoder;
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -44,9 +42,6 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         // Obtener todas las ciudades de la base de datos
         $ciudades = $manager->getRepository('AppBundle:Ciudad')->findAll();
 
-        // Obtener el "encoder" que codifica las contraseñas de las tiendas
-        $this->encoder = $this->container->get('security.encoder_factory')->getEncoder(new Tienda());
-
         foreach ($ciudades as $i => $ciudad) {
             $numeroTiendas = rand(2, 5);
             for ($j = 1; $j <= $numeroTiendas; ++$j) {
@@ -54,16 +49,14 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
 
                 $tienda->setNombre($this->getNombre());
                 $tienda->setLogin('tienda'.$i);
-                $tienda->setPassword($this->encoder->encodePassword('tienda'.$i, null));
+                $tienda->setPasswordEnClaro('tienda'.$i);
                 $tienda->setDescripcion($this->getDescripcion());
                 $tienda->setDireccion($this->getDireccion($ciudad));
                 $tienda->setCiudad($ciudad);
 
-                $manager->persist($tienda);
+                $this->container->get('app.manager.tienda_manager')->guardar($tienda);
             }
         }
-
-        $manager->flush();
     }
 
     /**
