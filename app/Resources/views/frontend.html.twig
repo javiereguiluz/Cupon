@@ -18,7 +18,7 @@
     <nav>
         <ul>
             <li><a href="{{ path('portada', { ciudad: ciudadSeleccionada }) }}">{{ "Oferta del día" | trans }}</a></li>
-            <li><a href="{{ path('ciudad_recientes', { slug: ciudadSeleccionada }) }}">{{ "Ofertas recientes" | trans }}</a></li>
+            <li><a href="{{ path('ciudad_recientes', { ciudad: ciudadSeleccionada }) }}">{{ "Ofertas recientes" | trans }}</a></li>
             <li><a href="{{ path('usuario_compras') }}">{{ "Mis ofertas" | trans }}</a></li>
             <li>{{ render(controller('AppBundle:Ciudad:listaCiudades', { ciudad: ciudadSeleccionada })) }}</li>
         </ul>

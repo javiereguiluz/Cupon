@@ -59,16 +59,22 @@ class CiudadController extends Controller
     /**
      * Muestra las ofertas más recientes de la ciudad indicada.
      *
-     * @Route("/{slug}/recientes", name="ciudad_recientes")
+     * @Route("/{ciudad}/recientes", name="ciudad_recientes")
      * @Cache(smaxage="3600")
      *
-     * @param Ciudad $ciudad El slug de la ciudad
+     * @param string $ciudad El slug de la ciudad
      *
      * @return Response
      */
-    public function recientesAction(Request $request, Ciudad $ciudad)
+    public function recientesAction(Request $request, $ciudad)
     {
         $em = $this->getDoctrine()->getManager();
+
+        $ciudad = $em->getRepository('AppBundle:Ciudad')->findOneBySlug($ciudad);
+        if (!$ciudad) {
+            throw $this->createNotFoundException('La ciudad indicada no está disponible');
+        }
+
         $cercanas = $em->getRepository('AppBundle:Ciudad')->findCercanas($ciudad->getId());
         $ofertas = $em->getRepository('AppBundle:Oferta')->findRecientes($ciudad->getId());
 
