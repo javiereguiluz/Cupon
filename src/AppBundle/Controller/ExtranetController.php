@@ -17,8 +17,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
-use Symfony\Component\Security\Core\SecurityContext;
-use Symfony\Component\Validator\Constraints\IsTrue;
 
 class ExtranetController extends Controller
 {
@@ -98,19 +96,7 @@ class ExtranetController extends Controller
     public function ofertaNuevaAction(Request $request)
     {
         $oferta = new Oferta();
-        $formulario = $this->createForm('AppBundle\Form\Extranet\OfertaType', $oferta);
-
-        // Cuando se crea una oferta, se muestra un checkbox para aceptar las
-        // condiciones de uso. Este campo de formulario no se corresponde con
-        // ninguna propiedad de la entidad, por lo que se añade dinámicamente
-        // al formulario
-        $formulario->add('acepto', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array(
-            'mapped' => false,
-            'constraints' => new IsTrue(array(
-                'message' => 'Debes aceptar las condiciones indicadas antes de poder añadir una nueva oferta'
-            )),
-        ));
-
+        $formulario = $this->createForm('AppBundle\Form\Extranet\OfertaType', $oferta, array('mostrar_condiciones' => true));
         $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {

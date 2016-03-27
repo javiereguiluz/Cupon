@@ -15,6 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 /**
  * Formulario para crear y manipular entidades de tipo Oferta.
@@ -38,12 +39,24 @@ class OfertaType extends AbstractType
                 'attr' => array('class' => 'boton'),
             ))
         ;
+
+        if (true === $options['mostrar_condiciones']) {
+            // Cuando se crea una oferta, se muestra un checkbox para aceptar las
+            // condiciones de uso
+            $builder->add('acepto', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array(
+                'mapped' => false,
+                'constraints' => new IsTrue(array(
+                    'message' => 'Debes aceptar las condiciones indicadas antes de poder añadir una nueva oferta'
+                )),
+            ));
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
             'data_class' => 'AppBundle\Entity\Oferta',
+            'mostrar_condiciones' => false,
         ));
     }
 
