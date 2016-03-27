@@ -132,6 +132,25 @@ class Oferta
     }
 
     /**
+     * Este método estático actúa como "constructor con nombre" y simplifica el
+     * código de la aplicación ya que rellena los campos de la oferta que no
+     * puede rellenar la tienda que ha creado la oferta.
+     *
+     * @param Tienda $tienda
+     *
+     * @return Oferta
+     */
+    public static function crearParaTienda(Tienda $tienda)
+    {
+        $oferta = new Oferta();
+
+        $oferta->setTienda($tienda);
+        $oferta->setCiudad($tienda->getCiudad());
+
+        return $oferta;
+    }
+
+    /**
      * @return int
      */
     public function getId()

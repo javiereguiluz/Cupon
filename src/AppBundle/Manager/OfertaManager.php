@@ -20,10 +20,12 @@ use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 class OfertaManager
 {
     private $em;
+    private $directorioImagenes;
 
-    public function __construct(ObjectManager $entityManager)
+    public function __construct(ObjectManager $entityManager, $directorioImagenes)
     {
         $this->em = $entityManager;
+        $this->directorioImagenes = $directorioImagenes;
     }
 
     public function comprar(Oferta $oferta, Usuario $usuario)
@@ -37,6 +39,14 @@ class OfertaManager
         $this->em->persist($venta);
         $oferta->setCompras($oferta->getCompras() + 1);
 
+        $this->em->flush();
+    }
+
+    public function guardar(Oferta $oferta)
+    {
+        $oferta->subirFoto($this->directorioImagenes);
+
+        $this->em->persist($oferta);
         $this->em->flush();
     }
 }
