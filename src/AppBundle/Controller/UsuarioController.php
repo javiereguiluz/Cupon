@@ -14,6 +14,7 @@ use AppBundle\Entity\Usuario;
 use AppBundle\Entity\Venta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -156,6 +157,7 @@ class UsuarioController extends Controller
      * Registra una nueva compra de la oferta indicada por parte del usuario logueado.
      *
      * @Route("/{ciudad}/ofertas/{slug}/comprar", name="comprar")
+     * @Security("is_granted('ROLE_USUARIO')")
      *
      * @param string $ciudad El slug de la ciudad a la que pertenece la oferta
      * @param string $slug   El slug de la oferta
@@ -167,14 +169,6 @@ class UsuarioController extends Controller
         $em = $this->getDoctrine()->getManager();
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
-        // Solo pueden comprar los usuarios registrados y logueados
-        if (null === $usuario || !$this->get('security.authorization_checker')->isGranted('ROLE_USUARIO')) {
-            $this->addFlash('info', 'Antes de comprar debes registrarte o conectarte con tu usuario y contraseña.');
-
-            return $this->redirectToRoute('usuario_login');
-        }
-
-        // Comprobar que existe la ciudad indicada
         $ciudad = $em->getRepository('AppBundle:Ciudad')->findOneBySlug($ciudad);
         if (!$ciudad) {
             throw $this->createNotFoundException('La ciudad indicada no está disponible');
@@ -193,33 +187,12 @@ class UsuarioController extends Controller
         ));
 
         if (null !== $venta) {
-            $fechaVenta = $venta->getFecha();
+            $this->addFlash('error', sprintf('No puedes volver a comprar esta oferta (la compraste el %s)', $venta->getFecha()->format('d/m/Y')));
 
-            $formateador = \IntlDateFormatter::create(
-                $this->get('translator')->getLocale(),
-                \IntlDateFormatter::LONG,
-                \IntlDateFormatter::NONE
-            );
-
-            $this->addFlash('error', 'No puedes volver a comprar la misma oferta (la compraste el '.$formateador->format($fechaVenta).').');
-
-            return $this->redirect(
-                $request->headers->get('Referer', $this->generateUrl('portada'))
-            );
+            return $this->redirect($request->headers->get('Referer', $this->generateUrl('portada')));
         }
 
-        // Guardar la nueva venta e incrementar el contador de compras de la oferta
-        $venta = new Venta();
-
-        $venta->setOferta($oferta);
-        $venta->setUsuario($usuario);
-        $venta->setFecha(new \DateTime());
-
-        $em->persist($venta);
-
-        $oferta->setCompras($oferta->getCompras() + 1);
-
-        $em->flush();
+        $this->get('app.manager.oferta_manager')->comprar($oferta, $usuario);
 
         return $this->render('usuario/comprar.html.twig', array(
             'oferta' => $oferta,
