@@ -55,7 +55,7 @@ class TiendaRepository extends EntityRepository
             ORDER BY o.fechaExpiracion DESC
         ');
         $consulta->setMaxResults($limite);
-        $consulta->setParameter('id', $tienda_id);
+        $consulta->setParameter('id', $tiendaId);
         $consulta->setParameter('fecha', new \DateTime('now'));
 
         return $consulta->getResult();
