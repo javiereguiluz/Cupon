@@ -3,10 +3,7 @@
     <title>{{ oferta.nombre }}</title>
     <link>{{ url('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}</link>
     <description><![CDATA[
-        {% set urlAbsolutaFoto = 'http://'
-                                 ~ app.request.server.get('SERVER_NAME')
-                                 ~ asset(directorio_imagenes ~ oferta.rutaFoto) %}
-        <img alt="Fotografía de la oferta" src="{{ urlAbsolutaFoto }}">
+        <img alt="Fotografía de la oferta" src="{{ absolute_url(asset(oferta.rutaFoto, 'ofertas')) }}">
         <br/>
         {{ oferta.descripcion | mostrar_como_lista }}
         <br/>

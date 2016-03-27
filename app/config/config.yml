@@ -22,8 +22,10 @@ framework:
     validation:      { enable_annotations: true }
     templating:      { engines: ['twig'] }
     session:         ~
-    #assets:
-    #    base_path:   %kernel.root_dir%/assets
+    assets:
+        packages:
+            ofertas:
+                base_path: /uploads/images/
 
 # Configuración de Twig
 twig:
@@ -31,7 +33,6 @@ twig:
     strict_variables: %kernel.debug%
     globals:
         ciudad_por_defecto:  %app.ciudad_por_defecto%
-        directorio_imagenes: '/uploads/images/'
 
 # Configuración de Doctrine
 doctrine:
