@@ -52,9 +52,13 @@ class Usuario implements UserInterface
     private $email;
 
     /**
-     * @ORM\Column(name="password", type="string", length=255)
      * @Assert\NotBlank(groups={"registro"})
      * @Assert\Length(min = 6)
+     */
+    private $passwordEnClaro;
+
+    /**
+     * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
 
@@ -169,6 +173,22 @@ class Usuario implements UserInterface
     public function getEmail()
     {
         return $this->email;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPasswordEnClaro($password)
+    {
+        $this->passwordEnClaro = $password;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPasswordEnClaro()
+    {
+        return $this->passwordEnClaro;
     }
 
     /**
@@ -316,24 +336,19 @@ class Usuario implements UserInterface
     }
 
     /**
+     * Método requerido por la interfaz UserInterface.
+     */
+    public function eraseCredentials()
+    {
+        $this->passwordEnClaro = null;
+    }
+
+    /**
      * Este método es requerido por la interfaz UserInterface, pero esta clase
      * no necesita implementarlo porque se usa 'bcrypt' para codificar las contraseñas.
      */
     public function getSalt()
     {
-        return;
-    }
-
-    /**
-     * Este método es requerido por la interfaz UserInterface, pero esta clase
-     * no necesita implementarlo.
-     */
-    public function eraseCredentials()
-    {
-        // si esta clase guardara tanto la contraseña codificada como la contraseña
-        // en claro, en este método se pondría esta última a 'null'
-        // $this->passwordEnClaro = null;
-
         return;
     }
 

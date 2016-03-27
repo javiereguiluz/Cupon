@@ -34,7 +34,7 @@ class UsuarioRegistroType extends AbstractType
                     'placeholder' => 'usuario@servidor',
                 )
             ))
-            ->add('password', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
+            ->add('passwordEnClaro', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
                 'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
                 'invalid_message' => 'Las dos contraseñas deben coincidir',
                 'first_options' => array('label' => 'Contraseña'),

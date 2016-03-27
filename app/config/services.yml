@@ -7,6 +7,10 @@ services:
         tags:
             - { name: twig.extension }
 
+    app.manager.usuario_manager:
+        class: AppBundle\Manager\UsuarioManager
+        arguments: ["@doctrine.orm.entity_manager", "@security.encoder_factory", "@security.token_storage"]
+
     app.security.owner_voter:
         class: AppBundle\Security\OwnerVoter
         tags:

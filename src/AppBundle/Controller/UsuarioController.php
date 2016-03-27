@@ -93,20 +93,11 @@ class UsuarioController extends Controller
         $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
-            $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
-            $passwordCodificado = $encoder->encodePassword($usuario->getPassword(), $usuario->getSalt());
-            $usuario->setPassword($passwordCodificado);
-
-            // Guardar el nuevo usuario en la base de datos
-            $em->persist($usuario);
-            $em->flush();
+            $this->get('app.manager.usuario_manager')->guardar($usuario);
+            $this->get('app.manager.usuario_manager')->loguear($usuario);
 
             // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
             $this->addFlash('info', '¡Enhorabuena! Te has registrado correctamente en Cupon');
-
-            // Loguear al usuario automáticamente
-            $token = new UsernamePasswordToken($usuario, null, 'frontend', $usuario->getRoles());
-            $this->container->get('security.token_storage')->setToken($token);
 
             return $this->redirectToRoute('portada', array('ciudad' => $usuario->getCiudad()->getSlug()));
         }
@@ -132,21 +123,7 @@ class UsuarioController extends Controller
         $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
-            // Si el usuario no ha cambiado el password, su valor es null después
-            // de hacer el ->bindRequest(), por lo que hay que recuperar el valor original
-            if (null === $usuario->getPassword()) {
-                $usuario->setPassword($passwordOriginal);
-            }
-            // Si el usuario ha cambiado su password, hay que codificarlo antes de guardarlo
-            else {
-                $encoder = $this->get('security.encoder_factory')->getEncoder($usuario);
-                $passwordCodificado = $encoder->encodePassword($usuario->getPassword(), $usuario->getSalt());
-                $usuario->setPassword($passwordCodificado);
-            }
-
-            $em->persist($usuario);
-            $em->flush();
-
+            $this->get('app.manager.usuario_manager')->guardar($usuario);
             $this->addFlash('info', 'Los datos de tu perfil se han actualizado correctamente');
 
             return $this->redirectToRoute('usuario_perfil');

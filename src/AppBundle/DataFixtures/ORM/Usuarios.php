@@ -12,12 +12,12 @@ namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Ciudad;
 use AppBundle\Entity\Usuario;
+use AppBundle\Manager\UsuarioManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder;
 
 /**
  * Fixtures de la entidad Usuario.
@@ -29,8 +29,6 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
 
     /** @var ContainerInterface */
     private $container;
-    /** @var BCryptPasswordEncoder */
-    private $encoder;
 
     public function setContainer(ContainerInterface $container = null)
     {
@@ -47,16 +45,13 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
         // Obtener todas las ciudades de la base de datos
         $ciudades = $manager->getRepository('AppBundle:Ciudad')->findAll();
 
-        // Obtener el "encoder" que codifica las contraseñas de los usuarios
-        $this->encoder = $this->container->get('security.encoder_factory')->getEncoder(new Usuario());
-
         for ($i = 1; $i <= self::NUM_USUARIOS; ++$i) {
             $usuario = new Usuario();
 
             $usuario->setNombre($this->getNombre());
             $usuario->setApellidos($this->getApellidos());
             $usuario->setEmail('usuario'.$i.'@localhost');
-            $usuario->setPassword($this->encoder->encodePassword('usuario'.$i, null));
+            $usuario->setPasswordEnClaro('usuario'.$i);
             $usuario->setDni($this->getDni());
             $usuario->setNumeroTarjeta('1234567890123456');
             $usuario->setFechaAlta(new \DateTime('now - '.rand(1, 150).' days'));
@@ -69,10 +64,8 @@ class Usuarios extends AbstractFixture implements OrderedFixtureInterface, Conta
             // El 60% de los usuarios permite email
             $usuario->setPermiteEmail((rand(1, 1000) % 10) < 6);
 
-            $manager->persist($usuario);
+            $this->container->get('app.manager.usuario_manager')->guardar($usuario);
         }
-
-        $manager->flush();
     }
 
     /**
