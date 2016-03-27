@@ -8,7 +8,7 @@
  * con toda la información sobre el copyright y la licencia.
  */
 
-namespace AppBundle\Form\Frontend;
+namespace AppBundle\Form;
 
 use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
@@ -21,7 +21,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
  * Como se utiliza en la parte pública del sitio, algunas propiedades de
  * la entidad no se incluyen en el formulario.
  */
-class UsuarioRegistroType extends AbstractType
+class UsuarioType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -57,15 +57,24 @@ class UsuarioRegistroType extends AbstractType
                         ->orderBy('c.nombre', 'ASC');
                 },
             ))
-            ->add('registrarme', 'Symfony\Component\Form\Extension\Core\Type\SubmitType')
         ;
+
+        if ('crear_usuario' === $options['accion']) {
+            $builder->add('registrarme', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
+        } elseif ('modificar_perfil' === $options['accion']) {
+            $builder->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+                'label' => 'Guardar cambios',
+                'attr' => array('class' => 'boton'),
+            ));
+        }
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
+            'accion' => 'modificar_perfil',
             'data_class' => 'AppBundle\Entity\Usuario',
-            'validation_groups' => array('default', 'registro'),
+            'validation_groups' => array('default'),
         ));
     }
 

@@ -70,8 +70,7 @@ class UsuarioController extends Controller
     {
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
-        return $this->render(
-            'usuario/caja_login.html.twig', array(
+        return $this->render('usuario/caja_login.html.twig', array(
             'id' => $id,
             'usuario' => $usuario,
         ));
@@ -84,17 +83,17 @@ class UsuarioController extends Controller
      */
     public function registroAction(Request $request)
     {
-        $em = $this->getDoctrine()->getManager();
-
         $usuario = new Usuario();
-        $formulario = $this->createForm('AppBundle\Form\Frontend\UsuarioRegistroType', $usuario);
+        $formulario = $this->createForm('AppBundle\Form\UsuarioType', $usuario, array(
+            'accion' => 'crear_usuario',
+            'validation_groups' => array('default', 'registro'),
+        ));
         $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
             $this->get('app.manager.usuario_manager')->guardar($usuario);
             $this->get('app.manager.usuario_manager')->loguear($usuario);
 
-            // Crear un mensaje flash para notificar al usuario que se ha registrado correctamente
             $this->addFlash('info', '¡Enhorabuena! Te has registrado correctamente en Cupon');
 
             return $this->redirectToRoute('portada', array('ciudad' => $usuario->getCiudad()->getSlug()));
@@ -106,14 +105,15 @@ class UsuarioController extends Controller
     }
 
     /**
-     * @Route("/perfil", name="usuario_perfil")
      * Muestra el formulario con toda la información del perfil del usuario logueado.
      * También permite modificar la información y guarda los cambios en la base de datos
+     *
+     * @Route("/perfil", name="usuario_perfil")
      */
     public function perfilAction(Request $request)
     {
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
-        $formulario = $this->createForm('AppBundle\Form\Frontend\UsuarioPerfilType', $usuario);
+        $formulario = $this->createForm('AppBundle\Form\UsuarioType', $usuario);
 
         $formulario->handleRequest($request);
 
@@ -131,8 +131,9 @@ class UsuarioController extends Controller
     }
 
     /**
+     * Muestra todas las compras del usuario logueado.
+     *
      * @Route("/compras", name="usuario_compras")
-     * Muestra todas las compras del usuario logueado
      */
     public function comprasAction()
     {
