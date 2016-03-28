@@ -50,7 +50,7 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface
                 $oferta->setDescuento($oferta->getPrecio() * (rand(10, 70) / 100));
 
                 // Una oferta se publica hoy, el resto se reparte entre el pasado y el futuro
-                if (1 == $j) {
+                if (1 === $j) {
                     $fecha = 'today';
                     $oferta->setRevisada(true);
                 } elseif ($j < 10) {
@@ -74,7 +74,6 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface
                 $oferta->setFechaPublicacion($fechaPublicacion);
                 $oferta->setFechaExpiracion($fechaExpiracion);
 
-                $oferta->setCompras(0);
                 $oferta->setUmbral(rand(25, 100));
 
                 $oferta->setCiudad($ciudad);
