@@ -2,8 +2,6 @@
 
 namespace AppBundle\Twig\Extension;
 
-use Symfony\Component\Translation\TranslatorInterface;
-
 /**
  * Extensión propia de Twig con filtros y funciones útiles para
  * la aplicación.

@@ -107,7 +107,7 @@ class UsuarioController extends Controller
 
     /**
      * Muestra el formulario con toda la información del perfil del usuario logueado.
-     * También permite modificar la información y guarda los cambios en la base de datos
+     * También permite modificar la información y guarda los cambios en la base de datos.
      *
      * @Route("/perfil", name="usuario_perfil")
      */
