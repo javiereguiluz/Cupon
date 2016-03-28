@@ -41,7 +41,6 @@ class OfertaManager
 
     public function guardar(Oferta $oferta)
     {
-        $oferta->setSlug(Slugger::getSlug($oferta->getNombre()));
         $oferta->setFechaActualizacion(new \DateTime('now'));
 
         $this->em->persist($oferta);

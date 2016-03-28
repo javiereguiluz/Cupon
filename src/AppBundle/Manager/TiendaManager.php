@@ -32,8 +32,6 @@ class TiendaManager
             $this->codificarPassword($tienda);
         }
 
-        $tienda->setSlug(Slugger::getSlug($tienda->getNombre()));
-
         $this->em->persist($tienda);
         $this->em->flush();
     }

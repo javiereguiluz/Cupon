@@ -44,7 +44,6 @@ class Ofertas extends AbstractFixture implements OrderedFixtureInterface
                 $oferta = new Oferta();
 
                 $oferta->setNombre($this->getNombre());
-                $oferta->setSlug(Slugger::getSlug($oferta->getNombre()));
                 $oferta->setDescripcion($this->getDescripcion());
                 $oferta->setCondiciones($this->getCondiciones());
                 $oferta->setRutaFoto('foto'.rand(1, 20).'.jpg');

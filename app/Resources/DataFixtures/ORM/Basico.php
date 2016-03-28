@@ -101,7 +101,6 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 $oferta = new Oferta();
 
                 $oferta->setNombre('Oferta #'.$numOferta.' lorem ipsum dolor sit amet');
-                $oferta->setSlug(Slugger::getSlug($oferta->getNombre()));
                 $oferta->setDescripcion(
                     "Lorem ipsum dolor sit amet, consectetur adipisicing.\n"
                     ."Elit, sed do eiusmod tempor incididunt.\n"
