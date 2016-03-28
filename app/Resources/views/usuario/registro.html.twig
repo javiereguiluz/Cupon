@@ -15,55 +15,38 @@
         </div>
 
         <div>
-            {{ form_label(formulario.apellidos) }}
-            {{ form_errors(formulario.apellidos) }}
-            {{ form_widget(formulario.apellidos, { attr: { class: 'largo' } }) }}
+            {{ form_row(formulario.apellidos) }}
         </div>
 
         <div>
-            {{ form_label(formulario.email) }}
-            {{ form_errors(formulario.email) }}
-            {{ form_widget(formulario.email, { attr: { class: 'largo' } }) }}
+            {{ form_row(formulario.email) }}
         </div>
 
         <div>
-            {{ form_errors(formulario.passwordEnClaro) }}
-            {{ form_widget(formulario.passwordEnClaro) }}
-
+            {{ form_row(formulario.passwordEnClaro) }}
             <p class="ayuda">Escribe dos veces la misma contraseña.</p>
         </div>
 
         <div>
-            {{ form_label(formulario.direccion, 'Dirección postal') }}
-            {{ form_errors(formulario.direccion) }}
-            {{ form_widget(formulario.direccion, { attr: { class: 'mediana' } }) }}
+            {{ form_row(formulario.direccion) }}
         </div>
 
         <div>
-            {{ form_label(formulario.fechaNacimiento, 'Fecha de nacimiento') }}
-            {{ form_errors(formulario.fechaNacimiento) }}
-            {{ form_widget(formulario.fechaNacimiento) }}
-
+            {{ form_row(formulario.fechaNacimiento) }}
             <p class="ayuda">Debes tener más de 18 años para registrarte como cliente</p>
         </div>
 
         <div>
-            {{ form_label(formulario.dni, 'DNI') }}
-            {{ form_errors(formulario.dni) }}
-            {{ form_widget(formulario.dni, { attr: { class: 'corto' } }) }}
-
+            {{ form_row(formulario.dni) }}
             <p class="ayuda">Escribe las 8 cifras y la letra sin dejar ningún espacio en blanco</p>
         </div>
 
         <div>
-            {{ form_label(formulario.numeroTarjeta, 'Número de tarjeta de crédito') }}
-            {{ form_errors(formulario.numeroTarjeta) }}
-            {{ form_widget(formulario.numeroTarjeta) }}
+            {{ form_row(formulario.numeroTarjeta) }}
         </div>
 
         <div>
             {{ form_row(formulario.ciudad) }}
-
             <p class="ayuda">Una vez registrado puedes comprar cualquier oferta de cualquier ciudad, pero la ciudad que elijas será tu opción preferente.</p>
         </div>
 
@@ -73,7 +56,7 @@
             <span>Me gustaría recibir el boletín de ofertas de Cupon</span>
         </div>
 
-        {{ form_row(formulario.registrarme, { attr: { class: 'boton' } }) }}
+        {{ form_row(formulario.registrarme) }}
     </div>
     {{ form_end(formulario) }}
 {% endblock %}

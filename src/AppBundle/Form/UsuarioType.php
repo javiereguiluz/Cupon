@@ -27,10 +27,11 @@ class UsuarioType extends AbstractType
     {
         $builder
             ->add('nombre')
-            ->add('apellidos')
+            ->add('apellidos', null, array('attr' => array('class' => 'largo')))
             ->add('email', 'Symfony\Component\Form\Extension\Core\Type\EmailType', array(
                 'label' => 'Correo electrónico',
                 'attr' => array(
+                    'class' => 'largo',
                     'placeholder' => 'usuario@servidor',
                 ),
             ))
@@ -41,14 +42,14 @@ class UsuarioType extends AbstractType
                 'second_options' => array('label' => 'Repite Contraseña'),
                 'required' => false,
             ))
-            ->add('direccion')
+            ->add('direccion', null, array('label' => 'Dirección postal', 'attr' => array('class' => 'mediana')))
             ->add('permiteEmail', 'Symfony\Component\Form\Extension\Core\Type\CheckboxType', array('required' => false))
-            ->add(
-                'fechaNacimiento', 'Symfony\Component\Form\Extension\Core\Type\BirthdayType', array(
+            ->add('fechaNacimiento', 'Symfony\Component\Form\Extension\Core\Type\BirthdayType', array(
+                'label' => 'Fecha de nacimiento',
                 'years' => range(date('Y') - 18, date('Y') - 18 - 120),
             ))
-            ->add('dni')
-            ->add('numeroTarjeta', null, array('label' => 'Tarjeta de Crédito'))
+            ->add('dni', null, array('label' => 'DNI', 'attr' => array('class' => 'corto')))
+            ->add('numeroTarjeta', null, array('label' => 'Número de tarjeta de crédito'))
             ->add('ciudad', 'Symfony\Bridge\Doctrine\Form\Type\EntityType', array(
                 'class' => 'AppBundle\\Entity\\Ciudad',
                 'placeholder' => 'Selecciona una ciudad',
@@ -60,7 +61,10 @@ class UsuarioType extends AbstractType
         ;
 
         if ('crear_usuario' === $options['accion']) {
-            $builder->add('registrarme', 'Symfony\Component\Form\Extension\Core\Type\SubmitType');
+            $builder->add('registrarme', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
+                'label' => 'Registrarme',
+                'attr' => array('class' => 'boton'),
+            ));
         } elseif ('modificar_perfil' === $options['accion']) {
             $builder->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
                 'label' => 'Guardar cambios',
