@@ -2,12 +2,35 @@
 
 namespace AppBundle\Controller;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller
 {
+    /**
+     * Muestra la portada del sitio web.
+     *
+     * @Route("/{ciudad}", defaults={ "ciudad" = "%app.ciudad_por_defecto%" }, name="portada")
+     * @Cache(smaxage="60")
+     *
+     * @param string $ciudad El slug de la ciudad activa en la aplicación
+     */
+    public function portadaAction($ciudad)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $oferta = $em->getRepository('AppBundle:Oferta')->findOfertaDelDia($ciudad);
+
+        if (!$oferta) {
+            throw $this->createNotFoundException('No se ha encontrado ninguna oferta del día en la ciudad seleccionada');
+        }
+
+        return $this->render('sitio/portada.html.twig', array(
+            'oferta' => $oferta,
+        ));
+    }
+
     /**
      * Muestra el formulario de contacto y también procesa el envío de emails.
      *

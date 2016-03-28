@@ -17,28 +17,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class OfertaController extends Controller
 {
     /**
-     * Muestra la portada del sitio web.
-     *
-     * @Route("/{ciudad}", defaults={ "ciudad" = "%app.ciudad_por_defecto%" }, name="portada")
-     * @Cache(smaxage="60")
-     *
-     * @param string $ciudad El slug de la ciudad activa en la aplicación
-     */
-    public function portadaAction($ciudad)
-    {
-        $em = $this->getDoctrine()->getManager();
-        $oferta = $em->getRepository('AppBundle:Oferta')->findOfertaDelDia($ciudad);
-
-        if (!$oferta) {
-            throw $this->createNotFoundException('No se ha encontrado ninguna oferta del día en la ciudad seleccionada');
-        }
-
-        return $this->render('oferta/portada.html.twig', array(
-            'oferta' => $oferta,
-        ));
-    }
-
-    /**
      * Muestra la página de detalle de la oferta indicada.
      *
      * @Route("/{ciudad}/ofertas/{slug}", name="oferta")

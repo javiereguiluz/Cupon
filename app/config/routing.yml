@@ -1,4 +1,4 @@
-easy_admin_bundle:
+_backend:
     resource: "@EasyAdminBundle/Controller/"
     type:     annotation
     prefix:   /admin
@@ -24,7 +24,7 @@ app:
     defaults:
         _locale: %locale%
 
-extranet:
+_extranet:
     resource: '@AppBundle/Controller/ExtranetController.php'
     type:     annotation
     prefix:   /extranet
