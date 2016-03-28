@@ -13,7 +13,7 @@
 
         <div class="estado {{ expirada ? 'expirada' }} {{ comprada ? 'comprada' }}">
             {% if comprada %}
-                {% trans with { '%fecha%': fechaCompra|fecha('long', 'medium') } %}
+                {% trans with { '%fecha%': fechaCompra|localizeddate('long', 'medium') } %}
                     Comprada el %fecha%
                 {% endtrans %}
             {% elseif not expirada %}
@@ -21,7 +21,7 @@
                     <strong>Faltan</strong>: %tiempo%
                 {% endtrans %}
             {% else %}
-                {% trans with { '%fecha%': oferta.fechaExpiracion|fecha('long') } %}
+                {% trans with { '%fecha%': oferta.fechaExpiracion|localizeddate('long', 'none') } %}
                     Finalizada el %fecha%
                 {% endtrans %}
             {% endif %}

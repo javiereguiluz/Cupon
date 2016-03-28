@@ -41,7 +41,7 @@
     </div>
 {% else %}
     <div class="tiempo">
-        {% trans with { '%fecha%': oferta.fechaExpiracion|fecha('long') } %}
+        {% trans with { '%fecha%': oferta.fechaExpiracion|localizeddate('long', 'none') } %}
             <strong>Finalizada</strong> el %fecha%
         {% endtrans %}
     </div>

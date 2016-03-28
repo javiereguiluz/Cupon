@@ -23,8 +23,8 @@
             <tr>
                 <td>{{ oferta.revisada ? '<span class="si">&#10004;</span>' : '<span class="no">&#10008;</span>' }}</td>
                 {% if oferta.revisada %}
-                    <td>{{ oferta.fechaPublicacion|fecha('medium', 'short') }}</td>
-                    <td>{{ oferta.fechaExpiracion |fecha('medium', 'short') }}</td>
+                    <td>{{ oferta.fechaPublicacion|localizeddate('medium', 'short') }}</td>
+                    <td>{{ oferta.fechaExpiracion |localizeddate('medium', 'short') }}</td>
                 {% else %}
                     <td colspan="2">Pendiente de revisión</td>
                 {% endif %}

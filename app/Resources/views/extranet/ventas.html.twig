@@ -21,7 +21,7 @@
                 <tr>
                     <td>{{ venta.usuario.dni }}</td>
                     <td>{{ venta.usuario.nombre ~ ' ' ~ venta.usuario.apellidos }}</td>
-                    <td>{{ venta.fecha|fecha('long', 'medium') }}</td>
+                    <td>{{ venta.fecha|localizeddate('long', 'medium') }}</td>
                 </tr>
                 {% set total = total + venta.oferta.precio %}
             {% endfor %}

@@ -3,7 +3,11 @@
 services:
     app.twig.cupon_extension:
         class: AppBundle\Twig\Extension\CuponExtension
-        arguments: ["@translator"]
+        tags:
+            - { name: twig.extension }
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
         tags:
             - { name: twig.extension }
 
