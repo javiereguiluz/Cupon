@@ -12,11 +12,12 @@ use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Cupon\CiudadBundle\Entity\Ciudad;
-use Cupon\OfertaBundle\Entity\Oferta;
-use Cupon\TiendaBundle\Entity\Tienda;
-use Cupon\UsuarioBundle\Entity\Usuario;
-use Cupon\OfertaBundle\Entity\Venta;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
+use AppBundle\Entity\Ciudad;
+use AppBundle\Entity\Oferta;
+use AppBundle\Entity\Tienda;
+use AppBundle\Entity\Usuario;
+use AppBundle\Entity\Venta;
 
 /**
  * Versión simplificada de los fixtures completos de la aplicación.
@@ -41,6 +42,7 @@ use Cupon\OfertaBundle\Entity\Venta;
  */
 class Basico implements FixtureInterface, ContainerAwareInterface
 {
+    /** @var ContainerInterface */
     private $container;
 
     public function setContainer(ContainerInterface $container = null)
@@ -61,7 +63,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $manager->flush();
 
         // Crear 10 tiendas en cada ciudad
-        $ciudades = $manager->getRepository('CiudadBundle:Ciudad')->findAll();
+        $ciudades = $manager->getRepository('AppBundle:Ciudad')->findAll();
         $numTienda = 0;
         foreach ($ciudades as $ciudad) {
             for ($i = 1; $i <= 10; ++$i) {
@@ -71,7 +73,6 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 $tienda->setNombre('Tienda #'.$numTienda);
                 $tienda->setLogin('tienda'.$numTienda);
                 $tienda->setPassword('password'.$numTienda);
-                $tienda->setSalt(md5(time()));
                 $tienda->setDescripcion(
                     'Lorem ipsum dolor sit amet, consectetur adipisicing elit,'
                     .'sed do eiusmod tempor incididunt ut labore et dolore magna'
@@ -87,10 +88,10 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $manager->flush();
 
         // Crear 50 ofertas en cada ciudad
-        $ciudades = $manager->getRepository('CiudadBundle:Ciudad')->findAll();
+        $ciudades = $manager->getRepository('AppBundle:Ciudad')->findAll();
         $numOferta = 0;
         foreach ($ciudades as $ciudad) {
-            $tiendas = $manager->getRepository('TiendaBundle:Tienda')->findByCiudad(
+            $tiendas = $manager->getRepository('AppBundle:Tienda')->findByCiudad(
                 $ciudad->getId()
             );
 
@@ -107,7 +108,7 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                     .'Nostrud exercitation ullamco laboris nisi ut'
                 );
                 $oferta->setCondiciones('Labore et dolore magna aliqua. Ut enim ad minim veniam.');
-                $oferta->setFoto('foto'.rand(1, 20).'.jpg');
+                $oferta->setRutaFoto('foto'.rand(1, 20).'.jpg');
                 $oferta->setPrecio(number_format(rand(100, 10000) / 100, 2));
                 $oferta->setDescuento($oferta->getPrecio() * (rand(10, 70) / 100));
 
@@ -157,7 +158,6 @@ class Basico implements FixtureInterface, ContainerAwareInterface
                 $usuario->setNombre('Usuario #'.$numUsuario);
                 $usuario->setApellidos('Apellido1 Apellido2');
                 $usuario->setEmail('usuario'.$numUsuario.'@localhost');
-                $usuario->setSalt('');
                 $usuario->setPassword('password'.$numUsuario);
                 $usuario->setDireccion("Calle Ipsum Lorem, 2\n".$ciudad->getNombre());
                 // El 60% de los usuarios permite email
@@ -180,8 +180,8 @@ class Basico implements FixtureInterface, ContainerAwareInterface
         $manager->flush();
 
         // Crear 500 ventas aleatorias
-        $ofertas = $manager->getRepository('OfertaBundle:Oferta')->findAll();
-        $usuarios = $manager->getRepository('UsuarioBundle:Usuario')->findAll();
+        $ofertas = $manager->getRepository('AppBundle:Oferta')->findAll();
+        $usuarios = $manager->getRepository('AppBundle:Usuario')->findAll();
 
         foreach ($usuarios as $usuario) {
             $compras = rand(0, 10);
