@@ -66,6 +66,7 @@ class CiudadController extends Controller
      * @param Request $request
      * @param string $ciudad El slug de la ciudad
      * @return Response
+     * @throws \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
     public function recientesAction(Request $request, $ciudad)
     {

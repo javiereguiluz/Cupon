@@ -49,14 +49,14 @@ class CuponExtension extends \Twig_Extension
      * `id` generado automáticamente, para que se puedan añadir varias
      * cuentas atrás en la misma página.
      *
-     * @param string $fecha Objeto que representa la fecha original
+     * @param \DateTime $fecha Objeto que representa la fecha original
      * @return string
      */
     public function cuentaAtras(\DateTime $fecha)
     {
         // En JavaScript los meses empiezan a contar en 0 y acaban en 12
         // En PHP los meses van de 1 a 12, por lo que hay que convertir la fecha
-        $fecha = json_encode(array(
+        $fechaJson = json_encode(array(
             'ano' => $fecha->format('Y'),
             'mes' => $fecha->format('m') - 1,
             'dia' => $fecha->format('d'),
@@ -71,7 +71,7 @@ class CuponExtension extends \Twig_Extension
 
         <script type="text/javascript">
         funcion_expira = function(){
-            var expira = $fecha;
+            var expira = $fechaJson;
             muestraCuentaAtras('$idAleatorio', expira);
         }
         if (!window.addEventListener) {

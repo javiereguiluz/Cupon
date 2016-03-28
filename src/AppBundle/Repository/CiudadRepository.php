@@ -34,9 +34,8 @@ class CiudadRepository extends EntityRepository
     /**
      * Encuentra las cinco ciudades más cercanas a la ciudad indicada.
      *
-     * @param $ciudadId
+     * @param $ciudadId El id de la ciudad para la que se buscan cercanas
      * @return array
-     * @internal param string $ciudad_id El id de la ciudad para la que se buscan cercanas
      */
     public function findCercanas($ciudadId)
     {
