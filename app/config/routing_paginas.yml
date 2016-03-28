@@ -9,4 +9,4 @@ privacidad:
 
 sobre_nosotros:
     path: /sobre-nosotros
-    defaults: { template: 'sitio/sobre-nosotros.html.twig' }
+    defaults: { template: 'sitio/sobre_nosotros.html.twig' }

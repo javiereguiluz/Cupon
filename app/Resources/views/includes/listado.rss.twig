@@ -1,17 +1,17 @@
 {% for oferta in ofertas %}
-<item>
-    <title>{{ oferta.nombre }}</title>
-    <link>{{ url('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}</link>
-    <description><![CDATA[
-        <img alt="Fotografía de la oferta" src="{{ absolute_url(asset(oferta.rutaFoto, 'ofertas')) }}">
-        <br/>
-        {{ oferta.descripcion | mostrar_como_lista }}
-        <br/>
-        <strong><a href="{{ url('comprar', { 'ciudad': oferta.ciudad.slug, 'slug': oferta.slug }) }}">Comprar</a></strong>
-        <br/>
-        <p>Ver otras ofertas de la tienda <a href="{{ url('tienda_portada', { 'ciudad': oferta.ciudad.slug, 'tienda' : oferta.tienda.slug }) }}">{{ oferta.tienda.nombre }}</a></p>
-    ]]></description>
-    <pubDate>{{ oferta.fechaPublicacion | date('r') }}</pubDate>
-    <guid>{{ url('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}</guid>
-</item>
+    <item>
+        <title>{{ oferta.nombre }}</title>
+        <link>{{ url('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}</link>
+        <description><![CDATA[
+            <img alt="Fotografía de la oferta" src="{{ absolute_url(asset(oferta.rutaFoto, 'ofertas')) }}">
+            <br/>
+            {{ oferta.descripcion|mostrar_como_lista }}
+            <br/>
+            <strong><a href="{{ url('comprar', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}">Comprar</a></strong>
+            <br/>
+            <p>Ver otras ofertas de la tienda <a href="{{ url('tienda_portada', { ciudad: oferta.ciudad.slug, tienda: oferta.tienda.slug }) }}">{{ oferta.tienda.nombre }}</a></p>
+        ]]></description>
+        <pubDate>{{ oferta.fechaPublicacion|date('r') }}</pubDate>
+        <guid>{{ url('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}</guid>
+    </item>
 {% endfor %}

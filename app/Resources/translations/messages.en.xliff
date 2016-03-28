@@ -8,7 +8,11 @@
             </trans-unit>
             <trans-unit id="2">
                 <source>Ofertas recientes</source>
-                <target>Recent offers</target>
+                <target>Recent Offers</target>
+            </trans-unit>
+            <trans-unit id="2-1">
+                <source>Ofertas recientes en %ciudad%</source>
+                <target>Recent offers in %ciudad%</target>
             </trans-unit>
             <trans-unit id="3">
                 <source>Mis ofertas</source>

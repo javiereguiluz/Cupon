@@ -1,8 +1,10 @@
-{% for tipo, mensajes in app.session.flashbag.all() %}
-    {% for mensaje in mensajes %}
-        <p class="flash flash-{{ tipo }}">
-            {{ tipo == 'error' ? '<strong>Error</strong> ' : '' | raw }}
-            {{ mensaje }}
-        </p>
+{% if app.request.hasPreviousSession %}
+    {% for tipo, mensajes in app.session.flashbag.all() %}
+        {% for mensaje in mensajes %}
+            <p class="flash flash-{{ tipo }}">
+                {{ tipo == 'error' ? '<strong>Error</strong> '|raw }}
+                {{ mensaje }}
+            </p>
+        {% endfor %}
     {% endfor %}
-{% endfor %}
+{% endif %}

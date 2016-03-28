@@ -20,7 +20,7 @@
     <p>Teléfono de atención al cliente <strong>902 XXX XXX</strong></p>
 </header>
 
-{% include ':includes:flashes.html.twig' %}
+{{ include('includes/flashes.html.twig') }}
 
 <article>
     {% block article %}{% endblock %}
@@ -28,20 +28,29 @@
 
 <aside>
     {% block aside %}
-    <a class="boton" href="{{ path('extranet_oferta_nueva') }}">Añadir oferta</a>
+        <a class="boton" href="{{ path('extranet_oferta_nueva') }}">Añadir oferta</a>
 
-    <section id="faq">
-        <h2>Preguntas frecuentes</h2>
+        <section id="faq">
+            <h2>Preguntas frecuentes</h2>
 
-        <dl>
-            <dt>¿Lorem ipsum dolor sit amet?</dt>
-            <dd>Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dd>
-            <dt>¿Ut enim ad minim veniam?</dt>
-            <dd>Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dd>
-            <dt>¿Excepteur sint occaecat cupidatat non proident?</dt>
-            <dd>Sunt in culpa qui officia deserunt mollit anim id est laborum.</dd>
-        </dl>
-    </section>
+            <dl>
+                <dt>¿Lorem ipsum dolor sit amet?</dt>
+                <dd>
+                    Consectetur adipisicing elit, sed do eiusmod tempor incididunt
+                    ut labore et dolore magna aliqua.
+                </dd>
+                <dt>¿Ut enim ad minim veniam?</dt>
+                <dd>
+                    Quis nostrud exercitation ullamco laboris nisi ut aliquip ex
+                    ea commodo consequat. Duis aute irure dolor in reprehenderit
+                    in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                </dd>
+                <dt>¿Excepteur sint occaecat cupidatat non proident?</dt>
+                <dd>
+                    Sunt in culpa qui officia deserunt mollit anim id est laborum.
+                </dd>
+            </dl>
+        </section>
     {% endblock %}
 </aside>
 {% endblock %}

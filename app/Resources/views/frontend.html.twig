@@ -13,29 +13,29 @@
 {% endblock %}
 
 {% block body %}
-<header>
-    <h1><a href="{{ path('portada', { ciudad: ciudadSeleccionada }) }}">CUPON</a></h1>
-    <nav>
-        <ul>
-            <li><a href="{{ path('portada', { ciudad: ciudadSeleccionada }) }}">{{ "Oferta del día" | trans }}</a></li>
-            <li><a href="{{ path('ciudad_recientes', { ciudad: ciudadSeleccionada }) }}">{{ "Ofertas recientes" | trans }}</a></li>
-            <li><a href="{{ path('usuario_compras') }}">{{ "Mis ofertas" | trans }}</a></li>
-            <li>{{ render(controller('AppBundle:Ciudad:listaCiudades', { ciudad: ciudadSeleccionada })) }}</li>
-        </ul>
-    </nav>
-</header>
+    <header>
+        <h1><a href="{{ path('portada', { ciudad: ciudadSeleccionada }) }}">CUPON</a></h1>
+        <nav>
+            <ul>
+                <li><a href="{{ path('portada', { ciudad: ciudadSeleccionada }) }}">{{ 'Oferta del día'|trans }}</a></li>
+                <li><a href="{{ path('ciudad_recientes', { ciudad: ciudadSeleccionada }) }}">{{ 'Ofertas recientes'|trans }}</a></li>
+                <li><a href="{{ path('usuario_compras') }}">{{ 'Mis ofertas'|trans }}</a></li>
+                <li>{{ render(controller('AppBundle:Ciudad:listaCiudades', { ciudad: ciudadSeleccionada })) }}</li>
+            </ul>
+        </nav>
+    </header>
 
-{% block anuncio %}{% endblock %}
+    {% block anuncio %}{% endblock %}
 
-<article class="{{ block('id') in ['portada', 'oferta'] ? 'oferta' }}">
-    {% block article %}{% endblock %}
-</article>
+    <article class="{{ block('id') in ['portada', 'oferta'] ? 'oferta' }}">
+        {% block article %}{% endblock %}
+    </article>
 
-<aside>
-    {% block aside %}
-    <section id="login">
-        {{ render_esi(controller('AppBundle:Usuario:cajaLogin', { id: block('id') })) }}
-    </section>
-    {% endblock %}
-</aside>
+    <aside>
+        {% block aside %}
+        <section id="login">
+            {{ render_esi(controller('AppBundle:Usuario:cajaLogin', { id: block('id') })) }}
+        </section>
+        {% endblock %}
+    </aside>
 {% endblock %}

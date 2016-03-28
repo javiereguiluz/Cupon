@@ -2,10 +2,10 @@
 {% for ciudad in ciudades %}
     <option value="{{ ciudad.slug }}"
             data-url="{{ is_granted('ROLE_ADMIN')
-                ? url('backend_ciudad_cambiar', { ciudad: ciudad.slug })
-                : url('ciudad_cambiar', { ciudad: ciudad.slug })
+                ? path('backend_ciudad_cambiar', { ciudad: ciudad.slug })
+                : path('ciudad_cambiar', { ciudad: ciudad.slug })
             }}"
-            {{ ciudadActual == ciudad.slug ? 'selected="selected"' : '' }}>
+            {{ ciudadActual == ciudad.slug ? 'selected="selected"' }}>
         {{ ciudad.nombre }}
     </option>
 {% endfor %}

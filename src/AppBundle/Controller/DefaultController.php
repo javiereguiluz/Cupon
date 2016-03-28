@@ -17,8 +17,9 @@ class DefaultController extends Controller
     {
         // Se crea un formulario "in situ", sin clase asociada
         $formulario = $this->createFormBuilder()
-            ->add('remitente', 'Symfony\Component\Form\Extension\Core\Type\EmailType')
+            ->add('remitente', 'Symfony\Component\Form\Extension\Core\Type\EmailType', array('label' => 'Tu dirección de email'))
             ->add('mensaje', 'Symfony\Component\Form\Extension\Core\Type\TextareaType')
+            ->add('enviar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array('label' => 'Enviar mensaje'))
             ->getForm()
         ;
 
