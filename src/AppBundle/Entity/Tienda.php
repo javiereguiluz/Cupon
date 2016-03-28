@@ -239,6 +239,5 @@ class Tienda implements UserInterface
      */
     public function getSalt()
     {
-        return;
     }
 }

@@ -34,13 +34,13 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
         $usuarios = $manager->getRepository('AppBundle:Usuario')->findAll();
 
         foreach ($usuarios as $usuario) {
-            $compras = rand(0, 3);
+            $compras = mt_rand(0, 3);
             $comprado = array();
 
             for ($i = 0; $i < $compras; ++$i) {
                 $venta = new Venta();
 
-                $venta->setFecha(new \DateTime('now - '.rand(0, 250).' hours'));
+                $venta->setFecha(new \DateTime('now - '.mt_rand(0, 250).' hours'));
 
                 // Sólo se añade una venta:
                 //   - si este mismo usuario no ha comprado antes la misma oferta
@@ -48,7 +48,7 @@ class Ventas extends AbstractFixture implements OrderedFixtureInterface
                 //   - si la fecha de publicación de la oferta es posterior a ahora mismo
                 $oferta = $ofertas[array_rand($ofertas)];
                 while (in_array($oferta->getId(), $comprado)
-                       || $oferta->getRevisada() == false
+                       || $oferta->getRevisada() === false
                        || $oferta->getFechaPublicacion() > new \DateTime('now')) {
                     $oferta = $ofertas[array_rand($ofertas)];
                 }

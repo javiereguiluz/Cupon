@@ -43,7 +43,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
         $ciudades = $manager->getRepository('AppBundle:Ciudad')->findAll();
 
         foreach ($ciudades as $i => $ciudad) {
-            $numeroTiendas = rand(2, 5);
+            $numeroTiendas = mt_rand(2, 5);
             for ($j = 1; $j <= $numeroTiendas; ++$j) {
                 $tienda = new Tienda();
 
@@ -83,8 +83,6 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
      */
     private function getDescripcion()
     {
-        $descripcion = '';
-
         $frases = array_flip(array(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
             'Mauris ultricies nunc nec sapien tincidunt facilisis.',
@@ -103,7 +101,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
             'Donec ornare lacus vitae dolor imperdiet vitae ultricies nibh congue.',
         ));
 
-        $numeroFrases = rand(3, 6);
+        $numeroFrases = mt_rand(3, 6);
 
         return implode(' ', array_rand($frases, $numeroFrases));
     }
@@ -124,7 +122,7 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
             'Blandit', 'Ligula', 'Eget', 'Hendrerit', 'Malesuada', 'Enimsit',
         );
 
-        return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)].', '.rand(1, 100)."\n"
+        return $prefijos[array_rand($prefijos)].' '.$nombres[array_rand($nombres)].', '.mt_rand(1, 100)."\n"
                .$this->getCodigoPostal().' '.$ciudad->getNombre();
     }
 
@@ -135,6 +133,6 @@ class Tiendas extends AbstractFixture implements OrderedFixtureInterface, Contai
      */
     private function getCodigoPostal()
     {
-        return sprintf('%02s%03s', rand(1, 52), rand(0, 999));
+        return sprintf('%02s%03s', mt_rand(1, 52), mt_rand(0, 999));
     }
 }

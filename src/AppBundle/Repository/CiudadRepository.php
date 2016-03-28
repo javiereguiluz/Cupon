@@ -34,7 +34,9 @@ class CiudadRepository extends EntityRepository
     /**
      * Encuentra las cinco ciudades más cercanas a la ciudad indicada.
      *
-     * @param string $ciudad_id El id de la ciudad para la que se buscan cercanas
+     * @param $ciudadId
+     * @return array
+     * @internal param string $ciudad_id El id de la ciudad para la que se buscan cercanas
      */
     public function findCercanas($ciudadId)
     {
@@ -57,6 +59,7 @@ class CiudadRepository extends EntityRepository
      * Encuentra todas las ofertas de la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad para la que se buscan sus ofertas
+     * @return array
      */
     public function findTodasLasOfertas($ciudad)
     {
@@ -69,6 +72,7 @@ class CiudadRepository extends EntityRepository
      * Se utiliza para la paginación de resultados.
      *
      * @param string $ciudad El slug de la ciudad
+     * @return \Doctrine\ORM\Query
      */
     public function queryTodasLasOfertas($ciudad)
     {
@@ -90,6 +94,7 @@ class CiudadRepository extends EntityRepository
      * Encuentra todos los usuarios asociados a la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad para la que se buscan sus usuarios
+     * @return array
      */
     public function findTodosLosUsuarios($ciudad)
     {
@@ -102,6 +107,7 @@ class CiudadRepository extends EntityRepository
      * Se utiliza para la paginación de resultados.
      *
      * @param string $ciudad El slug de la ciudad
+     * @return \Doctrine\ORM\Query
      */
     public function queryTodosLosUsuarios($ciudad)
     {
@@ -122,6 +128,7 @@ class CiudadRepository extends EntityRepository
      * Encuentra todas las tiendas asociadas a la ciudad indicada.
      *
      * @param string $ciudad El slug de la ciudad para la que se buscan sus tiendas
+     * @return array
      */
     public function findTodasLasTiendas($ciudad)
     {
@@ -134,6 +141,7 @@ class CiudadRepository extends EntityRepository
      * Se utiliza para la paginación de resultados.
      *
      * @param string $ciudad El slug de la ciudad
+     * @return \Doctrine\ORM\Query
      */
     public function queryTodasLasTiendas($ciudad)
     {

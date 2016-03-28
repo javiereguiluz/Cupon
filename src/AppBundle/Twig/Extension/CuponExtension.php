@@ -29,7 +29,8 @@ class CuponExtension extends \Twig_Extension
      * la lista.
      *
      * @param string $value El texto que se transforma
-     * @param string $tipo  Tipo de lista a generar ('ul', 'ol')
+     * @param string $tipo Tipo de lista a generar ('ul', 'ol')
+     * @return string
      */
     public function mostrarComoLista($value, $tipo = 'ul')
     {
@@ -49,8 +50,9 @@ class CuponExtension extends \Twig_Extension
      * cuentas atrás en la misma página.
      *
      * @param string $fecha Objeto que representa la fecha original
+     * @return string
      */
-    public function cuentaAtras($fecha)
+    public function cuentaAtras(\DateTime $fecha)
     {
         // En JavaScript los meses empiezan a contar en 0 y acaban en 12
         // En PHP los meses van de 1 a 12, por lo que hay que convertir la fecha
@@ -63,7 +65,7 @@ class CuponExtension extends \Twig_Extension
             'segundo' => $fecha->format('s'),
         ));
 
-        $idAleatorio = 'cuenta-atras-'.rand(1, 100000);
+        $idAleatorio = 'cuenta-atras-'.mt_rand(1, 100000);
         $html = <<<EOJ
         <span id="$idAleatorio"></span>
 
@@ -87,9 +89,10 @@ EOJ;
      * Calcula el porcentaje que supone el descuento indicado en euros.
      * El precio no es el precio original sino el precio de venta (también en euros).
      *
-     * @param string $precio    Precio de venta del producto (en euros)
+     * @param string $precio Precio de venta del producto (en euros)
      * @param string $descuento Descuento sobre el precio original (en euros)
-     * @param string $decimales Número de decimales que muestra el descuento
+     * @param int|string $decimales Número de decimales que muestra el descuento
+     * @return string
      */
     public function descuento($precio, $descuento, $decimales = 0)
     {
@@ -97,7 +100,7 @@ EOJ;
             return '-';
         }
 
-        if ($descuento == 0 || $descuento == null) {
+        if ($descuento === 0 || $descuento === null) {
             return '0%';
         }
 

@@ -39,7 +39,7 @@ EOT
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $host = 'dev' == $input->getOption('env') ? 'http://cupon.local' : 'http://cupon.com';
+        $host = 'dev' === $input->getOption('env') ? 'http://cupon.local' : 'http://cupon.com';
         $accion = $input->getOption('accion');
 
         $contenedor = $this->getContainer();
@@ -71,7 +71,7 @@ EOT
             );
 
             // Enviar el email
-            if ('enviar' == $accion) {
+            if ('enviar' === $accion) {
                 $email = \Swift_Message::newInstance()
                     ->setSubject($oferta->getNombre().' en '.$oferta->getTienda()->getNombre())
                     ->setFrom(array('oferta-del-dia@cupon.com' => 'Cupon - Oferta del día'))
@@ -82,7 +82,7 @@ EOT
             }
         }
 
-        if ('enviar' != $accion) {
+        if ('enviar' !== $accion) {
             $output->writeln("\n No se ha enviado ningún email. Para enviar los emails a sus destinatarios,\n ejecuta el comando con la opción <info>accion</info>. Ejemplo:\n <info>./app/console email:oferta-del-dia --accion=enviar</info>\n");
         }
     }

@@ -265,7 +265,7 @@ class Oferta
     }
 
     /**
-     * @return UploadedFile
+     * @return File
      */
     public function getFoto()
     {
