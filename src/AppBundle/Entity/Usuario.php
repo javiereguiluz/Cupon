@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UsuarioRepository")
  * @DoctrineAssert\UniqueEntity("email")
- * @Assert\Callback(methods={"esDniValido"})
+ * @Assert\Callback(callback={"esDniValido"})
  */
 class Usuario implements UserInterface
 {
