@@ -25,8 +25,10 @@ class OfertaController extends Controller
      * Muestra la página de detalle de la oferta indicada.
      *
      * @param string $ciudad El slug de la ciudad a la que pertenece la oferta
-     * @param string $slug El slug de la oferta (es único en cada ciudad)
+     * @param string $slug   El slug de la oferta (es único en cada ciudad)
+     *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function ofertaAction($ciudad, $slug)

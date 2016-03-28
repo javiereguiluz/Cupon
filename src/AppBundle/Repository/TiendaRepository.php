@@ -18,7 +18,8 @@ class TiendaRepository extends EntityRepository
      * Encuentra las ofertas más recientes de la tienda indicada.
      *
      * @param int $tiendaId El id de la tienda
-     * @param int $limite Número de ofertas a devolver (por defecto, cinco)
+     * @param int $limite   Número de ofertas a devolver (por defecto, cinco)
+     *
      * @return array
      */
     public function findOfertasRecientes($tiendaId, $limite = 5)
@@ -43,7 +44,8 @@ class TiendaRepository extends EntityRepository
      * Las ofertas devueltas, además de publicadas, también han sido revisadas.
      *
      * @param int $tiendaId
-     * @param int $limite Número de ofertas a devolver (por defecto, diez)
+     * @param int $limite   Número de ofertas a devolver (por defecto, diez)
+     *
      * @return array
      */
     public function findUltimasOfertasPublicadas($tiendaId, $limite = 10)
@@ -68,6 +70,7 @@ class TiendaRepository extends EntityRepository
      *
      * @param string $tienda El slug de la tienda para la que se buscan tiendas cercanas
      * @param string $ciudad El slug de la ciudad a la que pertenece la tienda
+     *
      * @return array
      */
     public function findCercanas($tienda, $ciudad)

@@ -30,7 +30,7 @@ class OfertaManager
     }
 
     /**
-     * @param Oferta $oferta
+     * @param Oferta  $oferta
      * @param Usuario $usuario
      */
     public function comprar(Oferta $oferta, Usuario $usuario)

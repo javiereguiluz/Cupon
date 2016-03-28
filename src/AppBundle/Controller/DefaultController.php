@@ -19,7 +19,9 @@ class DefaultController extends Controller
      * Muestra la portada del sitio web.
      *
      * @param string $ciudad El slug de la ciudad activa en la aplicación
+     *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function portadaAction($ciudad)
@@ -42,6 +44,7 @@ class DefaultController extends Controller
      * Muestra el formulario de contacto y también procesa el envío de emails.
      *
      * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function contactoAction(Request $request)

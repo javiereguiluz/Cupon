@@ -27,6 +27,7 @@ class CiudadController extends Controller
      * para seleccionar la ciudad activa.
      *
      * @param string $ciudad El slug de la ciudad seleccionada
+     *
      * @return Response
      */
     public function listaCiudadesAction($ciudad = null)
@@ -49,6 +50,7 @@ class CiudadController extends Controller
      * portada de la nueva ciudad seleccionada.
      *
      * @param string $ciudad El slug de la ciudad a la que se cambia
+     *
      * @return RedirectResponse
      */
     public function cambiarAction($ciudad)
@@ -63,8 +65,10 @@ class CiudadController extends Controller
      * Muestra las ofertas más recientes de la ciudad indicada.
      *
      * @param Request $request
-     * @param string $ciudad El slug de la ciudad
+     * @param string  $ciudad  El slug de la ciudad
+     *
      * @return Response
+     *
      * @throws NotFoundHttpException
      */
     public function recientesAction(Request $request, $ciudad)

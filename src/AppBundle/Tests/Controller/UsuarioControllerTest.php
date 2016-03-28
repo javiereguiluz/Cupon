@@ -20,6 +20,7 @@ class UsuarioControllerTest extends BaseTestCase
 {
     /**
      * @dataProvider usuarios
+     *
      * @param $usuario
      */
     public function testRegistroPerfilBaja($usuario)

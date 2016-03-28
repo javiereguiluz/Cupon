@@ -81,6 +81,7 @@ class ExtranetController extends Controller
      * Muestra las ventas registradas para la oferta indicada.
      *
      * @param Oferta $oferta
+     *
      * @return Response
      */
     public function ofertaVentasAction(Oferta $oferta)
@@ -102,6 +103,7 @@ class ExtranetController extends Controller
      * entidades de tipo Oferta.
      *
      * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function ofertaNuevaAction(Request $request)
@@ -133,8 +135,10 @@ class ExtranetController extends Controller
      * datos de las entidades de tipo Oferta.
      *
      * @param Request $request
-     * @param Oferta $oferta
+     * @param Oferta  $oferta
+     *
      * @return RedirectResponse|Response
+     *
      * @throws AccessDeniedException
      */
     public function ofertaEditarAction(Request $request, Oferta $oferta)
@@ -173,6 +177,7 @@ class ExtranetController extends Controller
      * guardar las modificaciones en la base de datos.
      *
      * @param Request $request
+     *
      * @return RedirectResponse|Response
      */
     public function perfilAction(Request $request)
