@@ -13,8 +13,8 @@ services:
         class: AppBundle\Manager\OfertaManager
         arguments: ["@doctrine.orm.entity_manager"]
 
-    app.security.owner_voter:
-        class: AppBundle\Security\OwnerVoter
+    app.security.oferta_voter:
+        class: AppBundle\Security\CreadorOfertaVoter
         tags:
             - { name: security.voter }
 
