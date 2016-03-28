@@ -1,5 +1,5 @@
 _backend:
-    resource: "@EasyAdminBundle/Controller/"
+    resource: '@EasyAdminBundle/Controller/'
     type:     annotation
     prefix:   /admin
 
@@ -9,7 +9,7 @@ _paginas:
     requirements:
         _locale: en|es
     defaults:
-        _locale: %locale%
+        _locale: '%locale%'
         _controller: FrameworkBundle:Template:template
         private: false
         maxAge: 86400
@@ -22,7 +22,7 @@ app:
     requirements:
         _locale: en|es
     defaults:
-        _locale: %locale%
+        _locale: '%locale%'
 
 _extranet:
     resource: '@AppBundle/Controller/ExtranetController.php'

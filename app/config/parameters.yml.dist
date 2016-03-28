@@ -3,7 +3,7 @@
 parameters:
     # Si NO usas SQLite, comenta estas líneas
     database_driver: pdo_sqlite
-    database_path:   "%kernel.root_dir%/data/datos.sqlite"
+    database_path:   '%kernel.root_dir%/data/datos.sqlite'
 
     # Si usas MySQL, descomenta estas líneas
     # database_driver:   pdo_mysql

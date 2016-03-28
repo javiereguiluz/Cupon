@@ -40,6 +40,9 @@ security:
         - { path: ^/admin/*,           roles: ROLE_ADMIN }
 
     encoders:
+        # el coste del algoritmo se ha reducido a 8 para que la carga de los datos
+        # de prueba no sea demasiado lenta (se generan cientos de usuarios). En
+        # una aplicación real, es mejor no cambiar el valor por defecto (que es 12)
         AppBundle\Entity\Usuario: { algorithm: bcrypt, cost: 8 }
         AppBundle\Entity\Tienda: { algorithm: bcrypt, cost: 8 }
         Symfony\Component\Security\Core\User\User: { algorithm: bcrypt, cost: 8 }

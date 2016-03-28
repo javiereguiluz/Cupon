@@ -11,10 +11,10 @@ parameters:
 
 # Configuración general del framework
 framework:
-    default_locale:  %locale%
+    default_locale:  '%locale%'
     esi:             { enabled: true }
     translator:      { fallback: es }
-    secret:          %secret%
+    secret:          '%secret%'
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
     form:            true
     csrf_protection: true
@@ -25,43 +25,43 @@ framework:
     assets:
         packages:
             ofertas:
-                base_path: %app.ruta.fotos_ofertas%
+                base_path: '%app.ruta.fotos_ofertas%'
 
 # Configuración de Twig
 twig:
-    debug:            %kernel.debug%
-    strict_variables: %kernel.debug%
+    debug:            '%kernel.debug%'
+    strict_variables: '%kernel.debug%'
     globals:
-        ciudad_por_defecto:  %app.ciudad_por_defecto%
+        ciudad_por_defecto: '%app.ciudad_por_defecto%'
 
 # Configuración de Doctrine
 doctrine:
     dbal:
-        driver:   %database_driver%
+        driver:   '%database_driver%'
         charset:  UTF8
         # Si NO usas SQLite, comenta esta línea
-        path:     "%database_path%"
+        path:     '%database_path%'
         # Si usas MySQL, descomenta estas líneas
-        # host:     %database_host%
-        # port:     %database_port%
-        # dbname:   %database_name%
-        # user:     %database_user%
-        # password: %database_password%
+        # host:     '%database_host%'
+        # port:     '%database_port%'
+        # dbname:   '%database_name%'
+        # user:     '%database_user%'
+        # password: '%database_password%'
 
     orm:
-        auto_generate_proxy_classes: %kernel.debug%
+        auto_generate_proxy_classes: '%kernel.debug%'
         auto_mapping:                true
 
 # Configuración de Swiftmailer
 swiftmailer:
-    transport: %mailer_transport%
-    host:      %mailer_host%
-    username:  %mailer_user%
-    password:  %mailer_password%
+    transport: '%mailer_transport%'
+    host:      '%mailer_host%'
+    username:  '%mailer_user%'
+    password:  '%mailer_password%'
 
 vich_uploader:
     db_driver: orm
     mappings:
         fotos_ofertas:
-            uri_prefix:         %app.ruta.fotos_ofertas%
-            upload_destination: %kernel.root_dir%/../web/uploads/images/
+            uri_prefix:         '%app.ruta.fotos_ofertas%'
+            upload_destination: '%kernel.root_dir%/../web/uploads/images/'
