@@ -52,6 +52,6 @@ class TiendaType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'cupon_tiendabundle_tiendatype';
+        return 'tienda';
     }
 }

@@ -19,8 +19,7 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Fixtures de la entidad Usuario.
- * Crea 200 usuarios de prueba con información muy realista.
+ * Crea los datos de prueba para la entidad Usuario.
  */
 class Usuarios extends AbstractFixture implements OrderedFixtureInterface, ContainerAwareInterface
 {

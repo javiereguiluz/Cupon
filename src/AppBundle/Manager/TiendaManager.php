@@ -14,9 +14,15 @@ use AppBundle\Entity\Tienda;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 
+/**
+ * Esta clase encapsula algunas operaciones que se realizan habitualmente sobre
+ * las entidades de tipo Tienda.
+ */
 class TiendaManager
 {
+    /** @var ObjectManager */
     private $em;
+    /** @var EncoderFactoryInterface */
     private $encoderFactory;
 
     public function __construct(ObjectManager $entityManager, EncoderFactoryInterface $encoderFactory)
@@ -25,6 +31,9 @@ class TiendaManager
         $this->encoderFactory = $encoderFactory;
     }
 
+    /**
+     * @param Tienda $tienda
+     */
     public function guardar(Tienda $tienda)
     {
         if (null !== $tienda->getPasswordEnClaro()) {
@@ -35,6 +44,9 @@ class TiendaManager
         $this->em->flush();
     }
 
+    /**
+     * @param Tienda $tienda
+     */
     private function codificarPassword(Tienda $tienda)
     {
         $encoder = $this->encoderFactory->getEncoder($tienda);

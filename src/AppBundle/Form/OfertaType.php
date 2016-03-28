@@ -60,6 +60,6 @@ class OfertaType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'oferta_tienda';
+        return 'oferta';
     }
 }

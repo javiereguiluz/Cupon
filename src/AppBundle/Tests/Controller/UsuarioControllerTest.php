@@ -52,8 +52,8 @@ class UsuarioControllerTest extends BaseTestCase
         $crawler = $client->click($perfil);
 
         $this->assertEquals(
-            $usuario['frontend_usuario[email]'],
-            $crawler->filter('form input[name="frontend_usuario[email]"]')->attr('value'),
+            $usuario['usuario[email]'],
+            $crawler->filter('form input[name="usuario[email]"]')->attr('value'),
             'El usuario se ha registrado correctamente y sus datos se han guardado en la base de datos'
         );
     }
@@ -66,16 +66,16 @@ class UsuarioControllerTest extends BaseTestCase
         return array(
             array(
                 array(
-                    'frontend_usuario[nombre]' => 'Anónimo',
-                    'frontend_usuario[apellidos]' => 'Apellido1 Apellido2',
-                    'frontend_usuario[email]' => 'anonimo'.uniqid('', true).'@localhost.localdomain',
-                    'frontend_usuario[passwordEnClaro][first]' => 'anonimo1234',
-                    'frontend_usuario[passwordEnClaro][second]' => 'anonimo1234',
-                    'frontend_usuario[direccion]' => 'Mi calle, Mi ciudad, 01001',
-                    'frontend_usuario[dni]' => '11111111H',
-                    'frontend_usuario[numeroTarjeta]' => '123456789012345',
-                    'frontend_usuario[ciudad]' => '1',
-                    'frontend_usuario[permiteEmail]' => '1',
+                    'usuario[nombre]' => 'Anónimo',
+                    'usuario[apellidos]' => 'Apellido1 Apellido2',
+                    'usuario[email]' => 'anonimo'.uniqid('', true).'@localhost.localdomain',
+                    'usuario[passwordEnClaro][first]' => 'anonimo1234',
+                    'usuario[passwordEnClaro][second]' => 'anonimo1234',
+                    'usuario[direccion]' => 'Mi calle, Mi ciudad, 01001',
+                    'usuario[dni]' => '11111111H',
+                    'usuario[numeroTarjeta]' => '123456789012345',
+                    'usuario[ciudad]' => '1',
+                    'usuario[permiteEmail]' => '1',
                 ),
             ),
         );

@@ -16,8 +16,7 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
 /**
- * Fixtures de la entidad Oferta.
- * Crea para cada ciudad 15 ofertas con información muy realista.
+ * Crea los datos de prueba para la entidad Oferta.
  */
 class Ofertas extends AbstractFixture implements OrderedFixtureInterface
 {

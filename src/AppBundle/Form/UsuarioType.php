@@ -84,6 +84,6 @@ class UsuarioType extends AbstractType
 
     public function getBlockPrefix()
     {
-        return 'frontend_usuario';
+        return 'usuario';
     }
 }
