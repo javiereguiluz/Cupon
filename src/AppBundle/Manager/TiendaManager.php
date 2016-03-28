@@ -11,7 +11,6 @@
 namespace AppBundle\Manager;
 
 use AppBundle\Entity\Tienda;
-use AppBundle\Util\Slugger;
 use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
 

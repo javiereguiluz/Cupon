@@ -11,7 +11,6 @@
 namespace AppBundle\DataFixtures\ORM;
 
 use AppBundle\Entity\Oferta;
-use AppBundle\Util\Slugger;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;

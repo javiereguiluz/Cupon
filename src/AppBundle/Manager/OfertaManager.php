@@ -13,7 +13,6 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Oferta;
 use AppBundle\Entity\Usuario;
 use AppBundle\Entity\Venta;
-use AppBundle\Util\Slugger;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class OfertaManager
