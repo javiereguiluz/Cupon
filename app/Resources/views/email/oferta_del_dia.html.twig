@@ -1,0 +1,47 @@
+<html>
+
+<head>
+    <style>
+        body { font: 13px/1.5 Arial, sans-serif; }
+        ul { margin-left: .5em; padding-left: 0; }
+    </style>
+</head>
+
+<body>
+<table cellpadding="0" cellspacing="0" style="width:100%;" width="100%">
+    <tr style="background: #00154E; color: #FFF;">
+        <td style="padding: 1em;"><a style="color: #FFF; font-size: 21px; text-decoration: none;" href="{{ host ~ path('portada') }}">CUPON</a></td>
+        <td style="text-align: right; padding: 1em;">Oferta del día en <span style="color: #FF3385; display: block; font-size: 18px;">{{ ciudad.nombre }}</span></td>
+    </tr>
+
+    <tr>
+        <td style="padding-top: 5px;">
+            <a style="color: #000; font-size: 21px; font-weight: bold; text-decoration: none;" href="{{ url('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}">{{ oferta.nombre }}</a>
+            <div style="font-size: 16px;">{{ oferta.descripcion|mostrar_como_lista }}</div>
+        </td>
+        <td style="padding-top: 20px;">
+            <img style="margin: 1em 0; max-width: 250px; outline: 2px solid #CCC;" src="{{ host ~ asset(oferta.rutaFoto, 'ofertas') }}" />
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <a style="background: #C06; border-radius: 5px; color: #FFF; font-size: 21px; padding: .5em 1em; text-decoration: none;" href="{{ host ~ path('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}">Ver oferta</a>
+        </td>
+        <td style="font-size: 28px; padding: .5em;">
+            {{ oferta.precio }} &euro; <strong style="color: #C06; padding-left: 1em;">{{ descuento(oferta.precio, oferta.descuento) }}</strong>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="font-size: 18px; padding: 1em .5em;"><strong>¡Date prisa {{ usuario.nombre }}!</strong> Esta oferta caduca el {{ oferta.fechaExpiracion|localizeddate('long', 'none') }} a las {{ oferta.fechaExpiracion|localizeddate('none', 'medium') }}</td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="color: #AAA; font-size: 13px;">
+            &copy; {{ 'now'|date('Y') }} - Has recibido este email porque estás suscrito al servicio de envío de <em>"La oferta del día"</em>. Para darte de baja de este servicio, accede a <a href="{{ host ~ path('usuario_perfil') }}">tu perfil</a> y desactiva la opción de envío de emails.
+        </td>
+    </tr>
+</body>
+
+</html>
