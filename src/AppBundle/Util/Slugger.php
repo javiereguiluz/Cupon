@@ -10,7 +10,7 @@
 
 namespace AppBundle\Util;
 
-class Util
+class Slugger
 {
     public static function getSlug($cadena, $separador = '-')
     {

@@ -7,7 +7,7 @@ imports:
 # Parámetros globales del contenedor de dependencias
 parameters:
     app.ciudad_por_defecto:  'barcelona'
-    app.directorio.imagenes: %kernel.root_dir%/../web/uploads/images/
+    app.ruta.fotos_ofertas:  '/uploads/images/'
 
 # Configuración general del framework
 framework:
@@ -25,7 +25,7 @@ framework:
     assets:
         packages:
             ofertas:
-                base_path: /uploads/images/
+                base_path: %app.ruta.fotos_ofertas%
 
 # Configuración de Twig
 twig:
@@ -58,3 +58,10 @@ swiftmailer:
     host:      %mailer_host%
     username:  %mailer_user%
     password:  %mailer_password%
+
+vich_uploader:
+    db_driver: orm
+    mappings:
+        fotos_ofertas:
+            uri_prefix:         %app.ruta.fotos_ofertas%
+            upload_destination: %kernel.root_dir%/../web/uploads/images/

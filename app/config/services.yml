@@ -11,7 +11,7 @@ services:
 
     app.manager.oferta_manager:
         class: AppBundle\Manager\OfertaManager
-        arguments: ["@doctrine.orm.entity_manager", "%app.directorio.imagenes%"]
+        arguments: ["@doctrine.orm.entity_manager"]
 
     app.security.owner_voter:
         class: AppBundle\Security\OwnerVoter

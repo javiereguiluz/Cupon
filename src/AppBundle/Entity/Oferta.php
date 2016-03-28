@@ -12,11 +12,13 @@ namespace AppBundle\Entity;
 
 use AppBundle\Util\Util;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="AppBundle\Repository\OfertaRepository")
+ * @Vich\Uploadable
  */
 class Oferta
 {
@@ -61,6 +63,7 @@ class Oferta
 
     /**
      * @Assert\Image(maxSize = "500k")
+     * @Vich\UploadableField(mapping="fotos_ofertas", fileNameProperty="rutaFoto")
      */
     protected $foto;
 
@@ -89,6 +92,13 @@ class Oferta
      * @Assert\DateTime
      */
     protected $fechaExpiracion;
+
+    /**
+     * @ORM\Column(type="datetime")
+     *
+     * @Assert\DateTime
+     */
+    protected $fechaActualizacion;
 
     /**
      * @ORM\Column(type="integer")
@@ -129,6 +139,7 @@ class Oferta
     {
         $this->compras = 0;
         $this->revisada = false;
+        $this->fechaActualizacion = new \Datetime();
     }
 
     /**
@@ -164,7 +175,6 @@ class Oferta
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
-        $this->slug = Util::getSlug($nombre);
     }
 
     /**
@@ -240,11 +250,17 @@ class Oferta
     }
 
     /**
-     * @param UploadedFile $foto
+     * @param File $foto
      */
-    public function setFoto(UploadedFile $foto = null)
+    public function setFoto(File $foto = null)
     {
         $this->foto = $foto;
+
+        // para que el "listener" de Doctrine guarde bien los cambios, al menos
+        // una propiedad debe cambiar su valor (además de la propiedad de la foto)
+        if (null !== $foto) {
+            $this->fechaActualizacion = new \Datetime('now');
+        }
     }
 
     /**
@@ -317,6 +333,22 @@ class Oferta
     public function getFechaExpiracion()
     {
         return $this->fechaExpiracion;
+    }
+
+    /**
+     * @param \DateTime $fechaActualizacion
+     */
+    public function setFechaActualizacion($fechaActualizacion)
+    {
+        $this->fechaActualizacion = $fechaActualizacion;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getFechaActualizacion()
+    {
+        return $this->fechaActualizacion;
     }
 
     /**
@@ -409,24 +441,5 @@ class Oferta
         }
 
         return $this->fechaExpiracion > $this->fechaPublicacion;
-    }
-
-    /**
-     * Sube la foto de la oferta copiándola en el directorio que se indica y
-     * guardando en la entidad la ruta hasta la foto.
-     *
-     * @param string $directorioDestino Ruta completa del directorio al que se sube la foto
-     */
-    public function subirFoto($directorioDestino)
-    {
-        if (null === $this->getFoto()) {
-            return;
-        }
-
-        $nombreArchivoFoto = uniqid('cupon-').'-1.'.$this->getFoto()->guessExtension();
-
-        $this->getFoto()->move($directorioDestino, $nombreArchivoFoto);
-
-        $this->setRutaFoto($nombreArchivoFoto);
     }
 }

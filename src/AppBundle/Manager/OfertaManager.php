@@ -13,17 +13,16 @@ namespace AppBundle\Manager;
 use AppBundle\Entity\Oferta;
 use AppBundle\Entity\Usuario;
 use AppBundle\Entity\Venta;
+use AppBundle\Util\Slugger;
 use Doctrine\Common\Persistence\ObjectManager;
 
 class OfertaManager
 {
     private $em;
-    private $directorioImagenes;
 
-    public function __construct(ObjectManager $entityManager, $directorioImagenes)
+    public function __construct(ObjectManager $entityManager)
     {
         $this->em = $entityManager;
-        $this->directorioImagenes = $directorioImagenes;
     }
 
     public function comprar(Oferta $oferta, Usuario $usuario)
@@ -42,7 +41,8 @@ class OfertaManager
 
     public function guardar(Oferta $oferta)
     {
-        $oferta->subirFoto($this->directorioImagenes);
+        $oferta->setSlug(Slugger::getSlug($oferta->getNombre()));
+        $oferta->setFechaActualizacion(new \DateTime('now'));
 
         $this->em->persist($oferta);
         $this->em->flush();

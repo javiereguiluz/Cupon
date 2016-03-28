@@ -10,7 +10,6 @@
 
 namespace AppBundle\Entity;
 
-use AppBundle\Util\Util;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -82,7 +81,6 @@ class Tienda implements UserInterface
     public function setNombre($nombre)
     {
         $this->nombre = $nombre;
-        $this->slug = Util::getSlug($nombre);
     }
 
     /**
