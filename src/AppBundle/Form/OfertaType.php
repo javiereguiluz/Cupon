@@ -8,7 +8,7 @@
  * con toda la información sobre el copyright y la licencia.
  */
 
-namespace AppBundle\Form\Extranet;
+namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -25,13 +25,13 @@ class OfertaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('descripcion')
-            ->add('condiciones')
-            ->add('foto', 'Symfony\Component\Form\Extension\Core\Type\FileType', array('required' => false))
-            ->add('precio', 'Symfony\Component\Form\Extension\Core\Type\MoneyType')
-            ->add('descuento', 'Symfony\Component\Form\Extension\Core\Type\MoneyType')
-            ->add('umbral')
+            ->add('nombre', null, array('attr' => array('class' => 'largo')))
+            ->add('descripcion', null, array('label' => 'Descripción'))
+            ->add('condiciones', null, array('label' => 'Condiciones', 'attr' => array('class' => 'mediana')))
+            ->add('foto', 'Symfony\Component\Form\Extension\Core\Type\FileType', array('label' => 'Fotografía', 'required' => false))
+            ->add('precio', 'Symfony\Component\Form\Extension\Core\Type\MoneyType', array('attr' => array('class' => 'corto')))
+            ->add('descuento', 'Symfony\Component\Form\Extension\Core\Type\MoneyType', array('attr' => array('class' => 'corto')))
+            ->add('umbral', null, array('label' => 'Compras necesarias', 'attr' => array('class' => 'corto')))
             ->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(
                 'label' => 'Guardar cambios',
                 'attr' => array('class' => 'boton'),

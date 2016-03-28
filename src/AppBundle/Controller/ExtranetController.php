@@ -95,7 +95,7 @@ class ExtranetController extends Controller
         $tienda = $this->get('security.token_storage')->getToken()->getUser();
 
         $oferta = Oferta::crearParaTienda($tienda);
-        $formulario = $this->createForm('AppBundle\Form\Extranet\OfertaType', $oferta, array('mostrar_condiciones' => true));
+        $formulario = $this->createForm('AppBundle\Form\OfertaType', $oferta, array('mostrar_condiciones' => true));
         $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
@@ -129,7 +129,7 @@ class ExtranetController extends Controller
             return $this->redirectToRoute('extranet_portada');
         }
 
-        $formulario = $this->createForm('AppBundle\Form\Extranet\OfertaType', $oferta);
+        $formulario = $this->createForm('AppBundle\Form\OfertaType', $oferta);
         $formulario->handleRequest($request);
 
         if ($formulario->isValid()) {
@@ -156,7 +156,7 @@ class ExtranetController extends Controller
     public function perfilAction(Request $request)
     {
         $tienda = $this->get('security.token_storage')->getToken()->getUser();
-        $formulario = $this->createForm('AppBundle\Form\Extranet\TiendaType', $tienda);
+        $formulario = $this->createForm('AppBundle\Form\TiendaType', $tienda);
 
         $formulario->handleRequest($request);
 

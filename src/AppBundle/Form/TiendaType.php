@@ -8,7 +8,7 @@
  * con toda la información sobre el copyright y la licencia.
  */
 
-namespace AppBundle\Form\Extranet;
+namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -24,8 +24,8 @@ class TiendaType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nombre')
-            ->add('login', null, array('attr' => array('readonly' => true)))
+            ->add('nombre', null, array('attr' => array('class' => 'largo')))
+            ->add('login', null, array('label' => 'Nombre de usuario', 'attr' => array('readonly' => true)))
             ->add('passwordEnClaro', 'Symfony\Component\Form\Extension\Core\Type\RepeatedType', array(
                 'type' => 'Symfony\Component\Form\Extension\Core\Type\PasswordType',
                 'invalid_message' => 'Las dos contraseñas deben coincidir',
@@ -33,7 +33,7 @@ class TiendaType extends AbstractType
                 'second_options' => array('label' => 'Repite Contraseña'),
                 'required' => false,
             ))
-            ->add('descripcion')
+            ->add('descripcion', null, array('label' => 'Descripción'))
             ->add('direccion')
             ->add('ciudad')
             ->add('guardar', 'Symfony\Component\Form\Extension\Core\Type\SubmitType', array(

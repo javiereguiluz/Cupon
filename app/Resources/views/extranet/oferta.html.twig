@@ -14,37 +14,29 @@
         {{ form_errors(formulario) }}
 
         <div>
-            {{ form_label(formulario.nombre) }}
-            {{ form_errors(formulario.nombre) }}
-            {{ form_widget(formulario.nombre, { attr: { class: 'largo' } }) }}
+            {{ form_row(formulario.nombre) }}
         </div>
 
         <div>
-            {{ form_label(formulario.descripcion, 'Descripción') }}
-            {{ form_errors(formulario.descripcion) }}
-            {{ form_widget(formulario.descripcion) }}
-
+            {{ form_row(formulario.descripcion) }}
             <p class="ayuda">Escribe cada característica en una línea.</p>
         </div>
 
         <div>
-            {{ form_label(formulario.condiciones, 'Condiciones') }}
-            {{ form_errors(formulario.condiciones) }}
-            {{ form_widget(formulario.condiciones, { attr: { class: 'mediana' } }) }}
-
+            {{ form_row(formulario.condiciones) }}
             <p class="ayuda">Ejemplos: máximo 1 consumición por persona;
                 No acumulable a otras ofertas; Debe consumirse en el propio local; etc.</p>
         </div>
 
         <div>
-            {{ form_label(formulario.foto, 'Fotografía') }}
+            {{ form_label(formulario.foto) }}
             {{ form_errors(formulario.foto) }}
 
             {% if accion == 'editar' %}
-            <img src="{{ asset(oferta.rutaFoto, 'ofertas') }}" />
-            <p class="ayuda">(No se muestra a tamaño real)</p>
+                <img src="{{ asset(oferta.rutaFoto, 'ofertas') }}" />
+                <p class="ayuda">(No se muestra a tamaño real)</p>
 
-            {{ form_label(formulario.foto, 'Modificar foto') }}
+                {{ form_label(formulario.foto, 'Modificar foto') }}
             {% endif %}
 
             {{ form_widget(formulario.foto) }}
@@ -53,28 +45,19 @@
         </div>
 
         <div>
-            {{ form_label(formulario.precio) }}
-            {{ form_errors(formulario.precio) }}
-            {{ form_widget(formulario.precio, { attr: { class: 'corto' } }) }}
-
+            {{ form_row(formulario.precio) }}
             <p class="ayuda">Precio final de venta a los usuarios (en euros).</p>
         </div>
 
         <div>
-            {{ form_label(formulario.descuento) }}
-            {{ form_errors(formulario.descuento) }}
-            {{ form_widget(formulario.descuento, { attr: { class: 'corto' } }) }}
-
+            {{ form_row(formulario.descuento) }}
             <p class="ayuda">Descuento aplicado sobre el precio original (en euros).
                 Si el precio original era 10 euros y el precio de venta en Cupon
                 es de 8 euros, el descuento son 2 euros.</p>
         </div>
 
         <div>
-            {{ form_label(formulario.umbral, 'Compras necesarias') }}
-            {{ form_errors(formulario.umbral) }}
-            {{ form_widget(formulario.umbral, { attr: { class: 'corto' } }) }}
-
+            {{ form_row(formulario.umbral) }}
             <p class="ayuda">Mínimo número de compras para que la oferta se
                 active para todos los usuarios.</p>
         </div>
