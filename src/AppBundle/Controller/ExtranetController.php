@@ -13,14 +13,19 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Oferta;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class ExtranetController extends Controller
 {
     /**
      * @Route("/login", name="extranet_login")
+     *
      * Muestra el formulario de login
-     * @return \Symfony\Component\HttpFoundation\Response
+     *
+     * @return Response
      */
     public function loginAction()
     {
@@ -51,10 +56,12 @@ class ExtranetController extends Controller
     }
 
     /**
+     * @Route("/", name="extranet_portada")
+     *
      * Muestra la portada de la extranet de la tienda que está logueada en
      * la aplicación.
      *
-     * @Route("/", name="extranet_portada")
+     * @return Response
      */
     public function portadaAction()
     {
@@ -69,11 +76,12 @@ class ExtranetController extends Controller
     }
 
     /**
+     * @Route("/oferta/ventas/{id}", name="extranet_oferta_ventas")
+     *
      * Muestra las ventas registradas para la oferta indicada.
      *
-     * @Route("/oferta/ventas/{id}", name="extranet_oferta_ventas")
      * @param Oferta $oferta
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function ofertaVentasAction(Oferta $oferta)
     {
@@ -87,13 +95,14 @@ class ExtranetController extends Controller
     }
 
     /**
+     * @Route("/oferta/nueva", name="extranet_oferta_nueva")
+     *
      * Muestra el formulario para crear una nueva oferta y se encarga del
      * procesamiento de la información recibida y la creación de las nuevas
      * entidades de tipo Oferta.
      *
-     * @Route("/oferta/nueva", name="extranet_oferta_nueva")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function ofertaNuevaAction(Request $request)
     {
@@ -117,15 +126,16 @@ class ExtranetController extends Controller
     }
 
     /**
+     * @Route("/oferta/editar/{id}", requirements={ "ciudad" = ".+" }, name="extranet_oferta_editar")
+     *
      * Muestra el formulario para editar una oferta y se encarga del
      * procesamiento de la información recibida y la modificación de los
      * datos de las entidades de tipo Oferta.
      *
-     * @Route("/oferta/editar/{id}", requirements={ "ciudad" = ".+" }, name="extranet_oferta_editar")
      * @param Request $request
      * @param Oferta $oferta
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @return RedirectResponse|Response
+     * @throws AccessDeniedException
      */
     public function ofertaEditarAction(Request $request, Oferta $oferta)
     {
@@ -156,13 +166,14 @@ class ExtranetController extends Controller
     }
 
     /**
+     * @Route("/perfil", name="extranet_perfil")
+     *
      * Muestra el formulario para editar los datos del perfil de la tienda que está
      * logueada en la aplicación. También se encarga de procesar la información y
      * guardar las modificaciones en la base de datos.
      *
-     * @Route("/perfil", name="extranet_perfil")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     * @return RedirectResponse|Response
      */
     public function perfilAction(Request $request)
     {

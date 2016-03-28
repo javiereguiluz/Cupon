@@ -19,10 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 class OfertaController extends Controller
 {
     /**
-     * Muestra la página de detalle de la oferta indicada.
-     *
      * @Route("/{ciudad}/ofertas/{slug}", name="oferta")
      * @Cache(smaxage="60")
+     *
+     * Muestra la página de detalle de la oferta indicada.
      *
      * @param string $ciudad El slug de la ciudad a la que pertenece la oferta
      * @param string $slug El slug de la oferta (es único en cada ciudad)

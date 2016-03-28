@@ -6,16 +6,17 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class DefaultController extends Controller
 {
     /**
-     * Muestra la portada del sitio web.
-     *
      * @Route("/{ciudad}", defaults={ "ciudad" = "%app.ciudad_por_defecto%" }, name="portada")
      * @Cache(smaxage="60")
+     *
+     * Muestra la portada del sitio web.
      *
      * @param string $ciudad El slug de la ciudad activa en la aplicación
      * @return Response
@@ -36,11 +37,12 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/contacto", defaults={ "_locale"="es" }, name="contacto")
+     *
      * Muestra el formulario de contacto y también procesa el envío de emails.
      *
-     * @Route("/contacto", defaults={ "_locale"="es" }, name="contacto")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return RedirectResponse|Response
      */
     public function contactoAction(Request $request)
     {
