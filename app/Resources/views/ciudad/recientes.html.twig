@@ -11,7 +11,7 @@
     <h1>{{ "Ofertas recientes en %ciudad%"|trans({ '%ciudad%': ciudad.nombre }) }}</h1>
 
     {% for oferta in ofertas %}
-        {{ include('oferta/includes/minioferta.html.twig') }}
+        {{ include('oferta/_oferta_simple.html.twig') }}
     {% endfor %}
 {% endblock %}
 
@@ -27,5 +27,5 @@
         </ul>
     </section>
 
-    {{ include('includes/_sobre_nosotros.html.twig') }}
+    {{ include('comun/_sobre_nosotros.html.twig') }}
 {% endblock %}

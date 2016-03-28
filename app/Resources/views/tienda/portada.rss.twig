@@ -9,5 +9,5 @@
 {% block self %}{{ url('tienda_portada', { ciudad: tienda.ciudad.slug, tienda: tienda.slug, _format: 'rss' }) }}{% endblock %}
 
 {% block items %}
-    {{ include('includes/listado.rss.twig') }}
+    {{ include('comun/_lista_ofertas.rss.twig') }}
 {% endblock %}

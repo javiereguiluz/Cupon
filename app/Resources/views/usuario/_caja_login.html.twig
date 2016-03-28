@@ -1,6 +1,6 @@
 {% if is_granted('ROLE_USUARIO') %} {# el usuario está logueado #}
 
-    {{ include('includes/flashes.html.twig') }}
+    {{ include('comun/_flashes.html.twig') }}
 
     <p>Conectado como <strong>{{ usuario.nombre ~ ' ' ~ usuario.apellidos }}</strong></p>
     {# si has definido un método __toString() en la entidad del usuario, puedes

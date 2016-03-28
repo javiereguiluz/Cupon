@@ -14,10 +14,10 @@
 {% endblock %}
 
 {% block article %}
-    {{ include('oferta/includes/oferta.html.twig') }}
+    {{ include('oferta/_oferta_completa.html.twig') }}
 {% endblock %}
 
 {% block aside %}
     {{ parent() }}
-    {{ include('includes/_sobre_nosotros.html.twig') }}
+    {{ include('comun/_sobre_nosotros.html.twig') }}
 {% endblock %}

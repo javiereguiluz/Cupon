@@ -40,7 +40,7 @@ if (!in_array($command = array_shift($argv), array('install', 'update', 'lock'))
  */
 if (is_dir($vendorDir.'/symfony') && !is_dir($vendorDir.'/symfony/.git') && !in_array('--reinstall', $argv)) {
     exit(<<<EOF
-Your project seems to be based on a Standard Edition that includes vendors.
+Your project seems to be based on a Standard Edition that comun vendors.
 
 Try to run ./bin/vendors install --reinstall
 

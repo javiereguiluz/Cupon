@@ -7,7 +7,7 @@
     <h1>{{ block('title') }}</h1>
 
     {% for compra in compras %}
-        {{ include('oferta/includes/minioferta.html.twig', {
+        {{ include('oferta/_oferta_simple.html.twig', {
             'oferta': compra.oferta,
             'comprada': true,
             'fechaCompra': compra.fecha
@@ -27,5 +27,5 @@
         </ul>
     </section>
 
-    {{ include('includes/_sobre_nosotros.html.twig') }}
+    {{ include('comun/_sobre_nosotros.html.twig') }}
 {% endblock %}
