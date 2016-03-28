@@ -11,10 +11,6 @@
 
 {% else %} {# el usuario todavía no ha hecho login #}
 
-    {% if id != 'portada' %}
-        <a class="boton" href="{{ path('usuario_registro') }}">{{ 'Regístrate'|trans }}</a>
-    {% endif %}
-
     <h2>{{ 'Accede a tu cuenta'|trans }}</h2>
 
     <form action="{{ path('usuario_login_check') }}" method="post">

@@ -19,5 +19,9 @@
 
 {% block aside %}
     {{ parent() }}
+
+    {# bloque vacío para eliminar su contenido y no mostrarlo en la portada #}
+    {% block registrate %}{% endblock %}
+
     {{ include('comun/_sobre_nosotros.html.twig') }}
 {% endblock %}

@@ -62,18 +62,13 @@ class UsuarioController extends Controller
      *
      * @Cache(maxage="30")
      *
-     * @param string $id El valor del bloque `id` de la plantilla,
-     *                   que coincide con el valor del atributo `id` del elemento <body>
-     *
      * @return Response
      */
-    public function cajaLoginAction($id = '')
+    public function cajaLoginAction()
     {
         $usuario = $this->get('security.token_storage')->getToken()->getUser();
 
-        return $this->render(
-            'usuario/_caja_login.html.twig', array(
-            'id' => $id,
+        return $this->render('usuario/_caja_login.html.twig', array(
             'usuario' => $usuario,
         ));
     }

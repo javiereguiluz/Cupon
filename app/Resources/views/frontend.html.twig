@@ -33,9 +33,13 @@
 
     <aside>
         {% block aside %}
-        <section id="login">
-            {{ render_esi(controller('AppBundle:Usuario:cajaLogin', { id: block('id') })) }}
-        </section>
+            {% block registrate %}
+                <a id="registrate" class="boton" href="{{ path('usuario_registro') }}">{{ 'Regístrate'|trans }}</a>
+            {% endblock %}
+
+            <section id="login">
+                {{ render_esi(controller('AppBundle:Usuario:cajaLogin')) }}
+            </section>
         {% endblock %}
     </aside>
 {% endblock %}

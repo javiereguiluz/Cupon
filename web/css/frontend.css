@@ -85,7 +85,7 @@ aside #login h2 {
     margin: -.5em 0 .5em;
     text-align: center;
 }
-aside #login .boton {
+aside #registrate {
     background-color: #008000;
     color: #FFF;
     display: block;
@@ -96,8 +96,8 @@ aside #login .boton {
     text-align: center;
     text-shadow: none;
 }
-aside #login .boton:hover { background: rgba(0,128,0, 0.8); }
-aside:hover #login .boton { text-decoration: none; }
+aside #registrate:hover { background: rgba(0,128,0, 0.8); }
+aside:hover #registrate { text-decoration: none; }
 
 aside #login form {
     background: #DCDCDC;
