@@ -1,10 +1,10 @@
 Aplicación de prueba Cupon para Symfony 2.8
 ===========================================
 
-**Cupon es una aplicación de prueba desarrollada para aprender a programar con
-**Symfony 2.8. Se trata de un clon simplificado de Groupon, de ahí el nombre.
-**Esta aplicación es la base del libro [Desarrollo web ágil con
-**Symfony2](http://www.symfony.es/libro/) publicado por Javier Eguiluz.
+**Cupon** es una aplicación de prueba desarrollada para aprender a programar con
+Symfony 2.8. Se trata de un clon simplificado de Groupon, de ahí el nombre.
+Esta aplicación es la base del libro [Desarrollo web ágil con Symfony](http://www.symfony.es/libro/)
+publicado por Javier Eguiluz.
 
 Si descubres algún error, por favor utiliza [la página de issues de
 Github](https://github.com/javiereguiluz/Cupon/issues) para avisarnos.
@@ -12,8 +12,8 @@ Github](https://github.com/javiereguiluz/Cupon/issues) para avisarnos.
 Instalando la aplicación
 ------------------------
 
-En el libro [Desarrollo web ágil con Symfony2](http://www.symfony.es/libro/) se
-expica detalladamente cómo instalar bien Symfony2 y la aplicación Cupon. A
+En el libro [Desarrollo web ágil con Symfony](http://www.symfony.es/libro/) se
+expica detalladamente cómo instalar bien Symfony y la aplicación Cupon. A
 continuación sólo se indican los principales pasos necesarios.
 
 En **primer lugar** debes tener Composer instalador globalmente. Si utilizas
@@ -36,12 +36,9 @@ instalar la aplicación **Cupon**:
 $ cd proyectos/
 $ git clone git://github.com/javiereguiluz/Cupon.git
 
-# instala las dependencias del proyecot (incluyendo Symfony)
+# instala las dependencias del proyecto (incluyendo Symfony)
 $ cd Cupon/
 $ composer install
-
-# prepara los archivos CSS y JS de la aplicación
-$ php app/console assetic:dump --env=prod
 ```
 
 Probando la aplicación
@@ -87,7 +84,7 @@ $ chmod -R 777 app/cache app/logs
 
 Si no te funciona esta solución, también puedes consultar el artículo [Cómo
 solucionar el problema de los permisos de
-Symfony2](http://symfony.es/documentacion/como-solucionar-el-problema-de-los-
+Symfony](http://symfony.es/documentacion/como-solucionar-el-problema-de-los-
 permisos-de-symfony2/).
 
 **2. Si ves un error relacionado con la base de datos**, es posible que tu
@@ -116,16 +113,7 @@ $ php app/console doctrine:fixtures:load --append
 $ php app/console doctrine:fixtures:load --fixtures=app/Resources
 ```
 
-**3. Si ves la aplicación sin estilos CSS**
-
-Asegúrate de ejecutar el siguiente comando para que Symfony genere los archivos
-CSS y JS de la aplicación:
-
-```bash
-$ php app/console assetic:dump --env=prod
-```
-
-**4. Si no puedes subir imágenes al crear una oferta**
+**3. Si no puedes subir imágenes al crear una oferta**
 
 Asegúrate de que el directorio `web/uploads/images/` tiene permisos de escritura.
 
@@ -145,18 +133,18 @@ Frontend
 --------
 
   * URL:
-    * Entorno de desarrollo: `http://cupon/app_dev.php`
-    * Entorno de producción: `http://cupon/app.php`
+    * Entorno de desarrollo: `http://localhost:8000`
+    * Entorno de producción: `http://localhost:8000/app.php`
   * Credenciales de usuarios:
-    * Nombre de usuario: `usuarioN@localhost` siendo `N` un número entre `1` y `200`
+    * Nombre de usuario: `usuarioN@localhost` siendo `N` un número entre `1` y `100`
     * Contraseña: `usuarioN` siendo `N` el mismo valor que el del nombre de usuario
 
 Extranet
 --------
 
   * URL:
-    * Entorno de desarrollo: `http://cupon/app_dev.php/extranet`
-    * Entorno de producción: `http://cupon/app.php/extranet`
+    * Entorno de desarrollo: `http://localhost:8000/extranet`
+    * Entorno de producción: `http://localhost:8000/app.php/extranet`
   * Credenciales de usuarios:
     * Nombre de usuario: `tiendaN` siendo `N` un número entre `1` y `80` aproximadamente
     (el límite superior es aleatorio)
@@ -166,8 +154,8 @@ Backend
 -------
 
   * URL:
-    * Entorno de desarrollo: `http://cupon/app_dev.php/backend`
-    * Entorno de producción: `http://cupon/app.php/backend`
+    * Entorno de desarrollo: `http://localhost:8000/backend`
+    * Entorno de producción: `http://localhost:8000/app.php/backend`
   * Credenciales de usuarios:
     * Nombre de usuario: `admin`
     * Contraseña: `1234`
