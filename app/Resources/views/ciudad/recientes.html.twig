@@ -1,7 +1,7 @@
 {% extends 'frontend.html.twig' %}
 
-{% block title %}Ofertas recientes en {{ ciudad.nombre }}{% endblock %}
 {% block id 'recientes' %}
+{% block title %}Ofertas recientes en {{ ciudad.nombre }}{% endblock %}
 
 {% block rss %}
     <link rel="alternate" type="application/rss+xml" title="RSS de las ofertas más recientes en {{ ciudad.nombre }}" href="{{ url('ciudad_recientes', { ciudad: ciudad.slug, _format: 'rss' }) }}" />

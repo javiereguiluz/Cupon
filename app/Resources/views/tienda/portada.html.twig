@@ -1,7 +1,7 @@
 {% extends 'frontend.html.twig' %}
 
-{% block title %}Tienda {{ tienda.nombre }}{% endblock %}
 {% block id 'tienda' %}
+{% block title %}Tienda {{ tienda.nombre }}{% endblock %}
 
 {% block rss %}
     <link rel="alternate" type="application/rss+xml" title="RSS de las ofertas más recientes de {{ tienda.nombre }}" href="{{ path('tienda_portada', { ciudad: tienda.ciudad.slug, tienda: tienda.slug, _format: 'rss' }) }}" />
@@ -10,7 +10,6 @@
 {% block article %}
     <section id="descripcion">
         <h1>{{ tienda.nombre }}</h1>
-
         <p>{{ tienda.descripcion }}</p>
     </section>
 
@@ -31,7 +30,7 @@
             <tbody>
                 {% for oferta in ofertas %}
                     <tr>
-                        <td>{{ oferta.fechaPublicacion | fecha() }}</td>
+                        <td>{{ oferta.fechaPublicacion|localizeddate('long', 'none') }}</td>
                         <td><a href="{{ path('oferta', { ciudad: oferta.ciudad.slug, slug: oferta.slug }) }}">{{ oferta.nombre }}</a></td>
                         <td>{{ oferta.precio }} &euro;</td>
                         <td>{{ oferta.descuento }} &euro;</td>
