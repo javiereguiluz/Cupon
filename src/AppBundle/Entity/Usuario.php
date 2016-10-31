@@ -11,7 +11,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Bridge\Doctrine\Validator\Constraints as DoctrineAssert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  *
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UsuarioRepository")
- * @DoctrineAssert\UniqueEntity("email")
+ * @UniqueEntity("email")
  * @Assert\Callback(callback={"esDniValido"})
  */
 class Usuario implements UserInterface

@@ -8,9 +8,9 @@
 
     {% for compra in compras %}
         {{ include('oferta/_oferta_simple.html.twig', {
-            'oferta': compra.oferta,
-            'comprada': true,
-            'fechaCompra': compra.fecha
+            oferta: compra.oferta,
+            comprada: true,
+            fechaCompra: compra.fecha
         }) }}
     {% endfor %}
 {% endblock %}

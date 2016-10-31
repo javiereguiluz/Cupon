@@ -3,18 +3,6 @@ _backend:
     type:     annotation
     prefix:   /admin
 
-_paginas:
-    resource: routing_paginas.yml
-    prefix:   /{_locale}/sitio
-    requirements:
-        _locale: en|es
-    defaults:
-        _locale: '%locale%'
-        _controller: FrameworkBundle:Template:template
-        private: false
-        maxAge: 86400
-        sharedMaxAge: 86400
-
 app:
     resource: '@AppBundle/Controller/'
     type:     annotation

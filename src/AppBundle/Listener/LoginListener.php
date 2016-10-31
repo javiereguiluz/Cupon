@@ -42,17 +42,19 @@ class LoginListener
 
     public function onKernelResponse(FilterResponseEvent $event)
     {
-        if (null !== $this->ciudad) {
-            if ($this->checker->isGranted('ROLE_TIENDA')) {
-                $portada = $this->router->generate('extranet_portada');
-            } else {
-                $portada = $this->router->generate('portada', array(
-                    'ciudad' => $this->ciudad,
-                ));
-            }
-
-            $event->setResponse(new RedirectResponse($portada));
-            $event->stopPropagation();
+        if (null === $this->ciudad) {
+            return;
         }
+
+        if ($this->checker->isGranted('ROLE_TIENDA')) {
+            $urlPortada = $this->router->generate('extranet_portada');
+        } else {
+            $urlPortada = $this->router->generate('portada', array(
+                'ciudad' => $this->ciudad,
+            ));
+        }
+
+        $event->setResponse(new RedirectResponse($urlPortada));
+        $event->stopPropagation();
     }
 }

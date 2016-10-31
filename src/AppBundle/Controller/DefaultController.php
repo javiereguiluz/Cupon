@@ -13,29 +13,22 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/{ciudad}", defaults={ "ciudad" = "%app.ciudad_por_defecto%" }, name="portada")
-     * @Cache(smaxage="60")
+     * @Route(
+     *     "/sitio/{slug}",
+     *     defaults={ "_locale"="%locale%" },
+     *     requirements={ "slug"="ayuda|privacidad|sobre_nosotros" },
+     *     name="pagina"
+     * )
      *
-     * Muestra la portada del sitio web.
+     * Muestra las páginas estáticas con información sobre el sitio (Privacidad, Condiciones, etc.)
      *
-     * @param string $ciudad El slug de la ciudad activa en la aplicación
+     * @param Request $request
      *
      * @return Response
-     *
-     * @throws NotFoundHttpException
      */
-    public function portadaAction($ciudad)
+    public function paginaAction($slug)
     {
-        $em = $this->getDoctrine()->getManager();
-        $oferta = $em->getRepository('AppBundle:Oferta')->findOfertaDelDia($ciudad);
-
-        if (!$oferta) {
-            throw $this->createNotFoundException('No se ha encontrado ninguna oferta del día en la ciudad seleccionada');
-        }
-
-        return $this->render('sitio/portada.html.twig', array(
-            'oferta' => $oferta,
-        ));
+        return $this->render(sprintf('sitio/%s.html.twig', $slug));
     }
 
     /**
@@ -77,13 +70,39 @@ class DefaultController extends Controller
             ;
 
             $this->container->get('mailer')->send($mensaje);
-            $this->get('session')->setFlash('info', 'Tu mensaje se ha enviado correctamente.');
+            $this->addFlash('info', 'Tu mensaje se ha enviado correctamente.');
 
             return $this->redirectToRoute('portada');
         }
 
         return $this->render('sitio/contacto.html.twig', array(
             'formulario' => $formulario->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/{ciudad}", defaults={ "ciudad" = "%app.ciudad_por_defecto%" }, name="portada")
+     * @Cache(smaxage="60")
+     *
+     * Muestra la portada del sitio web.
+     *
+     * @param string $ciudad El slug de la ciudad activa en la aplicación
+     *
+     * @return Response
+     *
+     * @throws NotFoundHttpException
+     */
+    public function portadaAction($ciudad)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $oferta = $em->getRepository('AppBundle:Oferta')->findOfertaDelDia($ciudad);
+
+        if (!$oferta) {
+            throw $this->createNotFoundException('No se ha encontrado ninguna oferta del día en la ciudad seleccionada');
+        }
+
+        return $this->render('portada.html.twig', array(
+            'oferta' => $oferta,
         ));
     }
 }
